@@ -5,10 +5,11 @@
   "license": "ISC",
   "author": "tomislav ljubicic",
   "type": "commonjs",
-  "main": "main.js",
+  "main": "js/main.js",
   "scripts": {
-    "sass": "sass src/styles:public/styles",
-    "sass:watch": "sass --watch --load-path=src/styles src/styles:public/styles --style=expanded",
-    "sass:build": "sass src/styles:public/styles --style=compressed"
+    "sass": "sass --load-path=styles styles/main.scss styles/main.css",
+    "sass:watch": "sass --watch --load-path=styles styles/main.scss:styles/main.css --style=expanded",
+    "sass:build": "sass --load-path=styles styles/main.scss styles/main.css --style=compressed"
   }
 }
+

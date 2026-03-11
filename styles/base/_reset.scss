@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  background-image: url("../../public/assets/images/bg_main.webp");
+  background-image: url("../assets/images/bg_main.webp");
   background-size: cover;
   background-position: center;
   background-attachment: fixed; // optional: keeps background fixed while scrolling
@@ -45,3 +45,4 @@ img {
   max-width: 100%;
   height: auto;
 }
+

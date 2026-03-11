@@ -18,11 +18,13 @@ Website for caspera association.
 
 ## Project Structure
 
-src/ → website source code  
-public/ → static files  
-assets/ → images, icons, fonts  
-design/ → design materials and mockups  
-tasks/ → development tasks for AI / development workflow
+pages/ -> HTML pages
+components/ -> reusable UI partials
+styles/ -> SCSS source and compiled CSS
+js/ -> site JavaScript
+assets/ -> website images and icons
+design/ -> design materials and mockups
+tasks/ -> development tasks for AI / development workflow
 
 ## Development
 
