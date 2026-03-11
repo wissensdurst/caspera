@@ -1,6 +1,47 @@
 $padding-main: 2rem;
+$space-2xs: 0.35rem;
+$space-xs: 0.5rem;
+$space-sm: 1rem;
+$space-md: 2rem;
+$space-lg: 4.5rem;
+$space-xl: 5rem;
+$space-2xl: 7rem;
+$space-3xl: 8.5rem;
+
+$radius-sm: 4px;
+$radius-pill: 999px;
+
+$size-icon-sm: 16px;
+$size-logo: 200px;
+$size-dropdown-min-width: 200px;
+$size-ribbon-max: 33rem;
+$size-ribbon-mobile: 22rem;
+$size-hero-content-max: 42rem;
+$size-hero-text-max: 37rem;
+$size-support-margin-x: 7rem;
+$size-support-gap-x: 20rem;
+$size-support-title: 5rem;
+
 $hero-page-max-width: 1480px;
 $hero-page-gutter: clamp(1.5rem, 4vw, 4.5rem);
 $hero-section-gap: clamp(2rem, 4vw, 5rem);
 $hero-section-padding-top: clamp(7rem, 10vw, 8.5rem);
 $hero-section-padding-bottom: clamp(3rem, 5vw, 5rem);
+$hero-title-size: clamp(3rem, 5vw, 5.15rem);
+$hero-accent-size: clamp(2.35rem, 4.1vw, 4.35rem);
+$hero-text-size: clamp(1rem, 1.3vw, 1.18rem);
+$hero-grid-content: 1.15fr;
+$hero-grid-media: 0.85fr;
+$hero-grid-media-min: 260px;
+$navbar-padding-y: 1rem;
+$navbar-padding-x: 2rem;
+$navbar-link-gap: 2rem;
+$dropdown-offset-y: -10px;
+$dropdown-margin-top: 0.5rem;
+$dropdown-item-padding-y: 0.5rem;
+$dropdown-item-padding-x: 1rem;
+$hero-button-padding-y: 0.95rem;
+$hero-button-padding-x: 2rem;
+$hero-button-hover-lift: -1px;
+$hero-mobile-breakpoint: 900px;
+$hero-mobile-padding-top: 6.5rem;

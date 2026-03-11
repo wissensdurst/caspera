@@ -4,9 +4,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  // padding: 0 $padding-main;
-  gap: 1rem 20rem;
-  margin: 0 7rem;
+  gap: $space-sm $size-support-gap-x;
+  margin: 0 $size-support-margin-x;
 
   &__grid {
     &-1 {
@@ -29,7 +28,7 @@
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: $space-sm;
     list-style: none;
     padding: 0;
   }
@@ -38,7 +37,7 @@
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: $space-xs;
 
     &::before {
       content: url("../assets/icons/heart-bullet.svg");
@@ -46,9 +45,8 @@
   }
 
   &__title {
-    font-size: 5rem;
-    font-weight: 600;
-    color: #672a79;
+    font-size: $size-support-title;
+    font-weight: $font-weight-semibold;
+    color: $brand-purple;
   }
 }
-

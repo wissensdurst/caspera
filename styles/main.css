@@ -7,7 +7,7 @@
 html {
   box-sizing: border-box;
   font-size: 16px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 *,
@@ -89,7 +89,7 @@ img {
 }
 .hero__title-accent {
   color: #e7aac8;
-  font-family: "Inter", sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: clamp(2.35rem, 4.1vw, 4.35rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -104,25 +104,7 @@ img {
   line-height: 1.85;
 }
 .hero__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 2rem;
-  padding: 0.95rem 2rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #d896bf 0%, #f4b6c2 100%);
-  box-shadow: 0 18px 40px rgba(217, 155, 195, 0.28);
-  color: #fffdfb;
-  font-family: "Inter", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-.hero__button:hover, .hero__button:focus-visible {
-  transform: translateY(-1px);
-  background: linear-gradient(135deg, #cb86b0 0%, #d896bf 100%);
-  box-shadow: 0 22px 45px rgba(217, 155, 195, 0.34);
 }
 .hero__media {
   display: flex;
@@ -212,7 +194,7 @@ img {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: white;
+  background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   min-width: 200px;
@@ -242,7 +224,7 @@ img {
   color: #1f1f23;
 }
 .navbar__drop .navbar__list .navbar__item a:hover {
-  color: #666;
+  color: #666666;
 }
 
 .support {
@@ -289,14 +271,30 @@ img {
 /* =====================================================
    4. COMPONENTS (reusable UI blocks)
    ===================================================== */
-/* =====================================================
-   5. PAGES (page-specific overrides)
-   ===================================================== */
-/* =====================================================
-   6. THEMES (optional visual modes)
-   ===================================================== */
-/* =====================================================
-   7. VENDORS (third-party overrides)
-   ===================================================== */
+.hero__button,
+.button__main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 2rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d896bf 0%, #f4b6c2 100%);
+  box-shadow: 0 18px 40px rgba(217, 155, 195, 0.28);
+  color: #fffdfb;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.hero__button:hover, .hero__button:focus-visible,
+.button__main:hover,
+.button__main:focus-visible {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #cb86b0 0%, #d896bf 100%);
+  box-shadow: 0 22px 45px rgba(217, 155, 195, 0.34);
+}
 
 /*# sourceMappingURL=main.css.map */

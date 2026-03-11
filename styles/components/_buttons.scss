@@ -1,0 +1,30 @@
+@use "abstracts" as *;
+
+.hero__button,
+.button__main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $hero-button-padding-y $hero-button-padding-x;
+  border: none;
+  border-radius: $radius-pill;
+  background: linear-gradient(135deg, $hero-button 0%, $powder-pink 100%);
+  box-shadow: $shadow-button;
+  color: $off-white;
+  font-family: $font-ui;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY($hero-button-hover-lift);
+    background: linear-gradient(135deg, $hero-button-hover 0%, $hero-button 100%);
+    box-shadow: $shadow-button-hover;
+  }
+}

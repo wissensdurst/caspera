@@ -4,6 +4,10 @@ $soft-coral: #f28c8c;
 $off-white: #fffdfb;
 $cool-gray: #6f6f73;
 $near-black: #1f1f23;
+$white: #ffffff;
+$border-light: #e0e0e0;
+$text-muted: #666666;
+$brand-purple: #672a79;
 
 $fresh-teal: #4FB6B2;
 $hero-bg-top: #f7eef2;
@@ -15,3 +19,15 @@ $hero-button-hover: #cb86b0;
 $hero-navbar-scrolled: rgba(255, 255, 255, 0.94);
 $hero-shadow-soft: rgba(147, 121, 140, 0.16);
 $hero-shadow-strong: rgba(217, 155, 195, 0.34);
+$hero-page-glow-left: rgba(255, 255, 255, 0.72);
+$hero-page-glow-right: rgba(235, 215, 244, 0.72);
+$navbar-shadow: rgba(31, 31, 35, 0.08);
+$dropdown-shadow: rgba(0, 0, 0, 0.1);
+$hero-ribbon-shadow: rgba(221, 168, 211, 0.28);
+$hero-button-shadow: rgba(217, 155, 195, 0.28);
+
+$shadow-navbar: 0 12px 30px $navbar-shadow;
+$shadow-dropdown: 0 2px 8px $dropdown-shadow;
+$shadow-button: 0 18px 40px $hero-button-shadow;
+$shadow-button-hover: 0 22px 45px $hero-shadow-strong;
+$shadow-ribbon: 0 30px 35px $hero-ribbon-shadow;

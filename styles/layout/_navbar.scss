@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: $navbar-padding-y $navbar-padding-x;
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
@@ -14,12 +14,12 @@
 
   &.scrolled {
     background-color: $hero-navbar-scrolled;
-    box-shadow: 0 12px 30px rgba(31, 31, 35, 0.08);
+    box-shadow: $shadow-navbar;
   }
 
   &__logo {
     display: block;
-    width: 200px;
+    width: $size-logo;
 
     img {
       width: 100%;
@@ -31,17 +31,17 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-left: 0.5rem;
+    margin-left: $space-xs;
 
     img {
-      width: 16px;
-      height: 16px;
+      width: $size-icon-sm;
+      height: $size-icon-sm;
     }
   }
 
   &__list {
     display: flex;
-    gap: 2rem;
+    gap: $navbar-link-gap;
   }
 
   &__item {
@@ -50,10 +50,10 @@
     > button {
       background: none;
       border: none;
-      font-size: 1rem;
+      font-size: $font-size-base;
       cursor: pointer;
       color: $near-black;
-      font-weight: 500;
+      font-weight: $font-weight-medium;
       display: flex;
       align-items: center;
     }
@@ -63,18 +63,18 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    min-width: 200px;
-    margin-top: 0.5rem;
+    background-color: $white;
+    border: 1px solid $border-light;
+    border-radius: $radius-sm;
+    min-width: $size-dropdown-min-width;
+    margin-top: $dropdown-margin-top;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY($dropdown-offset-y);
     transition: all 0.3s ease;
     z-index: 101;
-    padding: 0.5rem 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: $dropdown-item-padding-y 0;
+    box-shadow: $shadow-dropdown;
 
     &.open {
       opacity: 1;
@@ -87,14 +87,14 @@
       gap: 0;
 
       .navbar__item {
-        padding: 0.5rem 1rem;
+        padding: $dropdown-item-padding-y $dropdown-item-padding-x;
 
         a {
           text-decoration: none;
           color: $near-black;
 
           &:hover {
-            color: #666;
+            color: $text-muted;
           }
         }
       }

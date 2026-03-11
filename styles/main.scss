@@ -7,47 +7,16 @@
    2. BASE (global element styles)
    ===================================================== */
 @use "base/reset";
-// @use "base/typography";
-// @use "base/globals";
-// @use "base/accessibility";
 
 /* =====================================================
    3. LAYOUT (structural components)
    ===================================================== */
-// @use "layout/grid";
 @use "layout/header";
 @use "layout/hero";
 @use "layout/navbar";
 @use "layout/support";
-// @use "layout/section";
-// @use "layout/footer";
 
 /* =====================================================
    4. COMPONENTS (reusable UI blocks)
    ===================================================== */
-// @use "components/buttons";
-// @use "components/cards";
-// @use "components/forms";
-// @use "components/alerts";
-// @use "components/modals";
-
-/* =====================================================
-   5. PAGES (page-specific overrides)
-   ===================================================== */
-// @use "pages/home";
-// @use "pages/about";
-// @use "pages/blog";
-// @use "pages/campaign";
-
-/* =====================================================
-   6. THEMES (optional visual modes)
-   ===================================================== */
-// @use "themes/default";
-// @use "themes/dark";        // enable when needed
-// @use "themes/high-contrast";
-
-/* =====================================================
-   7. VENDORS (third-party overrides)
-   ===================================================== */
-// @use "vendors/swiper";
-// @use "vendors/datepicker";
+@use "components/buttons";
