@@ -1,0 +1,254 @@
+/* =====================================================
+   1. ABSTRACTS (design system / logic)
+   ===================================================== */
+/* =====================================================
+   2. BASE (global element styles)
+   ===================================================== */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-image: url("../../public/assets/images/bg_main.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =====================================================
+   3. LAYOUT (structural components)
+   ===================================================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.hero {
+  padding: 2rem;
+}
+.hero__logo {
+  display: block;
+  margin: 0 auto;
+}
+.hero__title {
+  font-size: 7rem;
+  font-weight: 700;
+  text-align: center;
+  color: #672a79;
+}
+.hero__text {
+  color: #1f1f23;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.hero__images {
+  display: flex;
+  justify-content: center;
+  padding: 8rem 2rem 8rem 2rem;
+}
+.hero__images img {
+  width: 400px;
+  box-shadow: 0px 10px 20px -5px rgba(103, 42, 121, 0.5);
+}
+.hero__images img:nth-child(1) {
+  left: 20px;
+  top: 10px;
+  rotate: -15deg;
+}
+.hero__images img:nth-child(2) {
+  left: 150px;
+  top: 60px;
+  rotate: 5deg;
+}
+.hero__images img:nth-child(3) {
+  left: 280px;
+  top: 20px;
+  rotate: 20deg;
+}
+.hero__images img:nth-child(4) {
+  left: 420px;
+  top: 80px;
+  rotate: -8deg;
+}
+@media (max-width: 1700px) {
+  .hero__images {
+    flex-wrap: wrap;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+  width: 100%;
+  z-index: 1000;
+}
+.navbar.scrolled {
+  background-color: white;
+}
+.navbar__logo {
+  display: block;
+  width: 200px;
+}
+.navbar__logo img {
+  width: 100%;
+  height: auto;
+}
+.navbar__arrow {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.navbar__arrow img {
+  width: 16px;
+  height: 16px;
+}
+.navbar__list {
+  display: flex;
+  gap: 2rem;
+}
+.navbar__item {
+  position: relative;
+}
+.navbar__item > button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #1f1f23;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.navbar__drop {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  min-width: 200px;
+  margin-top: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 101;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.navbar__drop.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.navbar__drop .navbar__list {
+  flex-direction: column;
+  gap: 0;
+}
+.navbar__drop .navbar__list .navbar__item {
+  padding: 0.5rem 1rem;
+}
+.navbar__drop .navbar__list .navbar__item a {
+  text-decoration: none;
+  color: #1f1f23;
+}
+.navbar__drop .navbar__list .navbar__item a:hover {
+  color: #666;
+}
+
+.support {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1rem 20rem;
+  margin: 0 7rem;
+}
+.support__grid-1 {
+  grid-area: 1/1/3/2;
+}
+.support__grid-2 {
+  grid-area: 3/1/5/2;
+}
+.support__grid-3 {
+  grid-area: 1/2/3/3;
+}
+.support__grid-4 {
+  grid-area: 3/2/5/3;
+}
+.support__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+.support__item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.support__item::before {
+  content: url("../assets/icons/heart-bullet.svg");
+}
+.support__title {
+  font-size: 5rem;
+  font-weight: 600;
+  color: #672a79;
+}
+
+/* =====================================================
+   4. COMPONENTS (reusable UI blocks)
+   ===================================================== */
+/* =====================================================
+   5. PAGES (page-specific overrides)
+   ===================================================== */
+/* =====================================================
+   6. THEMES (optional visual modes)
+   ===================================================== */
+/* =====================================================
+   7. VENDORS (third-party overrides)
+   ===================================================== */
+
+/*# sourceMappingURL=main.css.map */

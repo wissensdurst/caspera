@@ -1,0 +1,14 @@
+{
+  "name": "caspera",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "tomislav ljubicic",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "sass": "sass src/styles:public/styles",
+    "sass:watch": "sass --watch --load-path=src/styles src/styles:public/styles --style=expanded",
+    "sass:build": "sass src/styles:public/styles --style=compressed"
+  }
+}

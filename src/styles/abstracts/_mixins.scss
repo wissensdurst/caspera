@@ -1,0 +1,20 @@
+// Mixin: padding__main
+// Adds horizontal padding for main content with sensible
+// responsive increases at tablet and desktop breakpoints.
+// Usage: @include padding__main();
+//        @include padding__main(1.5rem); // horizontal only
+//        @include padding__main(1rem, 2rem); // horizontal, vertical
+@mixin padding__main($horizontal: 1rem, $vertical: 0) {
+	padding: $vertical $horizontal;
+
+	@media (min-width: 640px) {
+		padding-left: ($horizontal * 1.5);
+		padding-right: ($horizontal * 1.5);
+	}
+
+	@media (min-width: 1024px) {
+		padding-left: ($horizontal * 2);
+		padding-right: ($horizontal * 2);
+	}
+}
+

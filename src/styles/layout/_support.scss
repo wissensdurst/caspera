@@ -1,0 +1,53 @@
+@use "abstracts" as *;
+
+.support {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  // padding: 0 $padding-main;
+  gap: 1rem 20rem;
+  margin: 0 7rem;
+
+  &__grid {
+    &-1 {
+      grid-area: 1 / 1 / 3 / 2;
+    }
+
+    &-2 {
+      grid-area: 3 / 1 / 5 / 2;
+    }
+
+    &-3 {
+      grid-area: 1 / 2 / 3 / 3;
+    }
+
+    &-4 {
+      grid-area: 3 / 2 / 5 / 3;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: url("../assets/icons/heart-bullet.svg");
+    }
+  }
+
+  &__title {
+    font-size: 5rem;
+    font-weight: 600;
+    color: #672a79;
+  }
+}
