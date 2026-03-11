@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../styles/main.css" />
@@ -97,14 +97,14 @@
       </nav>
     </header>
     <main>
-      <div class="hero__container">
-        <section class="hero">
-          <img src="../assets/images/logo_main.png" alt="" class="hero__logo" />
-          <h1 class="hero__title">
-            U krugu žena koje razumiju, nijedna borba nije usamljena.
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title">
+            <span class="hero__title-main">U krugu žena koje razumiju,</span>
+            <span class="hero__title-accent">nijedna borba nije usamljena</span>
           </h1>
           <p class="hero__text">
-            CASPERA je neprofitna organizacija osnovana 2020.g., kojoj je glavni
+            Caspera je neprofitna organizacija osnovana 2020.g., kojoj je glavni
             cilj pomoći ženama oboljelim i liječenim od karcinoma. Udruga je
             zamišljena kao pomoć svim onim ženama koje se osjećaju usamljene,
             preplašene, paralizirane... Želja nam je da budemo utočište u kojem
@@ -113,14 +113,16 @@
             stvari. Vjerujemo da ćemo biti promjena za koju bismo htjeli da se
             dogodi.
           </p>
-          <div class="hero__images">
-            <img src="../assets/images/hero1.jpg" alt="" class="hero__image" />
-            <img src="../assets/images/hero2.jpg" alt="" class="hero__image" />
-            <img src="../assets/images/hero3.jpg" alt="" class="hero__image" />
-            <img src="../assets/images/hero4.jpg" alt="" class="hero__image" />
-          </div>
-        </section>
-      </div>
+          <a class="hero__button" href="#">Saznaj više</a>
+        </div>
+        <div class="hero__media">
+          <img
+            class="hero__ribbon"
+            src="../assets/images/ribbon_hero.png"
+            alt="Ružičasta vrpca podrške ženama oboljelima od raka dojke"
+          />
+        </div>
+      </section>
       <section class="support">
         <div class="support__grid-1">
           <h1 class="support__title">Trebate savjet?</h1>

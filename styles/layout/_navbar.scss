@@ -1,16 +1,20 @@
+@use "abstracts" as *;
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
   background-color: transparent;
-
   width: 100%;
   z-index: 1000;
 
   &.scrolled {
-    background-color: white;
+    background-color: $hero-navbar-scrolled;
+    box-shadow: 0 12px 30px rgba(31, 31, 35, 0.08);
   }
 
   &__logo {
@@ -48,7 +52,7 @@
       border: none;
       font-size: 1rem;
       cursor: pointer;
-      color: #1f1f23;
+      color: $near-black;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -87,7 +91,7 @@
 
         a {
           text-decoration: none;
-          color: #1f1f23;
+          color: $near-black;
 
           &:hover {
             color: #666;

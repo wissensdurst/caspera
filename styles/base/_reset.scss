@@ -13,12 +13,14 @@ html {
 }
 
 body {
-  background-image: url("../assets/images/bg_main.webp");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; // optional: keeps background fixed while scrolling
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 28%),
+    radial-gradient(circle at top right, rgba(235, 215, 244, 0.72), transparent 32%),
+    linear-gradient(180deg, $hero-bg-top 0%, $hero-bg-bottom 100%);
+  background-attachment: fixed;
   background-repeat: no-repeat;
-  min-height: 100vh; // ensures it covers full viewport
+  color: $near-black;
 }
 
 body,
@@ -45,4 +47,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-

@@ -1,1 +1,6 @@
 $padding-main: 2rem;
+$hero-page-max-width: 1480px;
+$hero-page-gutter: clamp(1.5rem, 4vw, 4.5rem);
+$hero-section-gap: clamp(2rem, 4vw, 5rem);
+$hero-section-padding-top: clamp(7rem, 10vw, 8.5rem);
+$hero-section-padding-bottom: clamp(3rem, 5vw, 5rem);
