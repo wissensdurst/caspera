@@ -20,3 +20,7 @@ $font-weight-bold: 700;
 $line-height-tight: 1.02;
 $line-height-body: 1.85;
 $letter-spacing-tight: -0.03em;
+
+$hero-title-size: clamp(4.4rem, 7vw, 7.4rem);
+$hero-accent-size: clamp(4.4rem, 7vw, 7.4rem);
+$hero-text-size: clamp(1.18rem, 1.7vw, 1.5rem);

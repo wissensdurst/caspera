@@ -1,52 +1,135 @@
 @use "abstracts" as *;
 
 .support {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: $space-sm $size-support-gap-x;
-  margin: 0 $size-support-margin-x;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(2rem, 5vw, 4rem) 0 clamp(4rem, 7vw, 6rem);
 
-  &__grid {
-    &-1 {
-      grid-area: 1 / 1 / 3 / 2;
-    }
-
-    &-2 {
-      grid-area: 3 / 1 / 5 / 2;
-    }
-
-    &-3 {
-      grid-area: 1 / 2 / 3 / 3;
-    }
-
-    &-4 {
-      grid-area: 3 / 2 / 5 / 3;
-    }
-  }
-
-  &__list {
+  &__inner {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: $space-sm;
-    list-style: none;
-    padding: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 4vw, 4rem);
+    width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
+    margin: 0 auto;
   }
 
-  &__item {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: $space-xs;
-
-    &::before {
-      content: url("../assets/icons/heart-bullet.svg");
-    }
+  &__intro {
+    max-width: 56rem;
   }
 
   &__title {
-    font-size: $size-support-title;
-    font-weight: $font-weight-semibold;
-    color: $brand-purple;
+    color: $hero-highlight;
+    font-family: $font-display;
+    font-size: $hero-title-size;
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: $line-height-tight;
+  }
+
+  &__divider {
+    width: min(14rem, 32vw);
+    height: 1px;
+    margin: $space-md 0 0;
+    background: linear-gradient(
+      90deg,
+      rgba($hero-highlight, 0.95) 0%,
+      rgba($hero-highlight, 0.18) 100%
+    );
+  }
+
+  &__text {
+    max-width: $size-hero-text-max;
+    margin-top: $space-md;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: $hero-text-size;
+    font-weight: $font-weight-light;
+    line-height: 1.72;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  &__item {
+    min-width: 0;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: clamp(19rem, 34vw, 28rem);
+    padding: clamp(1.25rem, 2vw, 1.6rem);
+    border: 1px solid rgba($white, 0.72);
+    border-radius: 2rem;
+    background:
+      linear-gradient(
+        180deg,
+        rgba($white, 0.82) 0%,
+        rgba($off-white, 0.94) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba($hero-highlight, 0.08) 0%,
+        rgba($white, 0) 42%
+      );
+    box-shadow:
+      0 22px 40px rgba($hero-shadow-soft, 0.72),
+      inset 0 1px 0 rgba($white, 0.78);
+    overflow: hidden;
+  }
+
+  &__card-icon {
+    width: 100%;
+    height: clamp(13rem, 24vw, 19rem);
+    object-fit: contain;
+    object-position: center;
+    filter: drop-shadow(0 18px 28px rgba($hero-highlight, 0.2));
+  }
+
+  &__card-title {
+    margin-top: $space-md;
+    color: $hero-heading;
+    font-family: $font-ui;
+    font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+    font-weight: $font-weight-medium;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  @media (max-width: 1100px) {
+    &__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    min-height: auto;
+    padding-top: clamp(2rem, 8vw, 4rem);
+
+    &__intro {
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    &__divider {
+      margin-inline: auto;
+    }
+
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+
+    &__card {
+      min-height: auto;
+    }
+
+    &__card-icon {
+      height: clamp(12rem, 52vw, 18rem);
+    }
   }
 }

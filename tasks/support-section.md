@@ -12,7 +12,7 @@ Style:
 
 Layout:
 
-- Heading same style like the hero heading with a subtle separation line before the paragraph below it
+- Heading same style like the hero heading
 - Paragraph for the section description, same style like the hero paragraph
 - 4 card elements
 - Face of the card element contains the appropriate png icon taking most of the card space, the card title on the bottom of the card with the paragraph font and color
