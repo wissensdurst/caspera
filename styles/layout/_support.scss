@@ -19,7 +19,7 @@
   }
 
   &__title {
-    color: $hero-highlight;
+    color: $section-title-accent;
     font-family: $font-display;
     font-size: $hero-title-size;
     font-weight: $font-weight-bold;
@@ -108,7 +108,8 @@
 
   &__card-icon {
     width: 100%;
-    height: clamp(13rem, 24vw, 19rem);
+    max-width: clamp(7.5rem, 14vw, 10.5rem);
+    height: clamp(7.5rem, 14vw, 10.5rem);
     object-fit: contain;
     object-position: center;
     filter: drop-shadow(0 1rem 1.5rem rgba($hero-highlight, 0.16));
@@ -116,11 +117,11 @@
 
   &__card-title {
     margin-top: 1.5rem;
-    color: $hero-heading;
-    font-family: $font-ui;
-    font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 2.1vw, 2rem);
     font-weight: $font-weight-medium;
-    line-height: 1.45;
+    line-height: 1.2;
     text-align: center;
   }
 
@@ -173,7 +174,8 @@
     }
 
     &__card-icon {
-      height: clamp(12rem, 52vw, 18rem);
+      max-width: clamp(7rem, 30vw, 9rem);
+      height: clamp(7rem, 30vw, 9rem);
     }
   }
 }

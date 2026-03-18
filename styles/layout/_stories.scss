@@ -2,7 +2,6 @@
 
 .stories {
   padding: clamp(6rem, 8vw, 7.5rem) 0;
-  background: linear-gradient(180deg, #fbf4f7 0%, #f7eef2 100%);
 
   &__inner {
     width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
@@ -10,49 +9,27 @@
   }
 
   &__header {
-    display: grid;
-    justify-items: center;
-    gap: 1rem;
+    max-width: 56rem;
     margin-bottom: clamp(2.75rem, 4vw, 3.5rem);
-    text-align: center;
   }
 
   &__title {
-    color: #6f4964;
+    color: $section-title-accent;
     font-family: $font-display;
-    font-size: clamp(3.4rem, 5vw, 4.6rem);
+    font-size: $hero-title-size;
     font-weight: $font-weight-bold;
-    letter-spacing: -0.03em;
-    line-height: 0.98;
+    letter-spacing: $letter-spacing-tight;
+    line-height: $line-height-tight;
   }
 
   &__subtitle {
-    max-width: 48rem;
-    color: #8a687d;
+    max-width: $size-hero-text-max;
+    margin-top: $space-md;
+    color: $cool-gray;
     font-family: $font-ui;
-    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-    font-weight: $font-weight-regular;
-    line-height: 1.6;
-  }
-
-  &__ornament {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: min(16.5rem, 100%);
-  }
-
-  &__ornament-line,
-  &__footer-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(225, 170, 196, 0.12), rgba(225, 170, 196, 0.6), rgba(225, 170, 196, 0.12));
-  }
-
-  &__ornament-icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    opacity: 0.8;
+    font-size: $hero-text-size;
+    font-weight: $font-weight-light;
+    line-height: 1.72;
   }
 
   &__grid {
@@ -64,11 +41,30 @@
 
   &__featured,
   &__card {
+    min-height: 100%;
     border-radius: 2rem;
-    background: rgba($white, 0.9);
+    background: linear-gradient(
+      180deg,
+      rgba($white, 0.92) 0%,
+      rgba($off-white, 0.98) 100%
+    );
     box-shadow:
-      0 1.25rem 2.75rem rgba(140, 111, 128, 0.14),
-      0 0.5rem 1rem rgba(140, 111, 128, 0.08);
+      0 0.75rem 1.75rem rgba($hero-shadow-soft, 0.36),
+      0 1.5rem 2.5rem rgba($hero-shadow-soft, 0.18);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease,
+      border-color 220ms ease;
+  }
+
+  &__featured:hover,
+  &__featured:focus-within,
+  &__card:hover,
+  &__card:focus-within {
+    transform: translateY(-0.35rem);
+    box-shadow:
+      0 1rem 2rem rgba($hero-shadow-soft, 0.42),
+      0 1.75rem 3rem rgba($hero-shadow-soft, 0.24);
   }
 
   &__featured-link,
@@ -77,43 +73,21 @@
     height: 100%;
     color: inherit;
     text-decoration: none;
-    border: 1px solid rgba($white, 0.78);
+    border: 1px solid rgba($white, 0.7);
     border-radius: inherit;
-    transition:
-      transform 220ms ease,
-      box-shadow 220ms ease,
-      border-color 220ms ease;
   }
 
   &__featured-link {
     display: grid;
     grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.1fr);
+    border: 0;
     overflow: hidden;
   }
 
-  &__featured-link:hover,
-  &__featured-link:focus-visible,
-  &__card-link:hover,
-  &__card-link:focus-visible,
-  &__footer-link:hover,
-  &__footer-link:focus-visible {
-    transform: translateY(-0.25rem);
-  }
-
-  &__featured-link:hover,
-  &__featured-link:focus-visible,
-  &__card-link:hover,
-  &__card-link:focus-visible {
-    box-shadow:
-      0 1.5rem 3rem rgba(140, 111, 128, 0.18),
-      0 0.75rem 1.25rem rgba(140, 111, 128, 0.1);
-    border-color: rgba(255, 255, 255, 0.94);
-  }
-
   &__featured-link:focus-visible,
   &__card-link:focus-visible,
   &__footer-link:focus-visible {
-    outline: 2px solid rgba($hero-highlight, 0.72);
+    outline: 2px solid rgba($hero-highlight, 0.65);
     outline-offset: 0.28rem;
   }
 
@@ -130,35 +104,16 @@
   &__featured-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 1.5rem;
     padding: clamp(2rem, 3vw, 2.75rem);
   }
 
   &__featured-meta,
-  &__card-meta,
-  &__author {
+  &__card-meta {
     display: flex;
     align-items: center;
-  }
-
-  &__featured-meta {
-    gap: 1.25rem;
     flex-wrap: wrap;
-  }
-
-  &__author,
-  &__card-meta {
-    gap: 0.75rem;
-  }
-
-  &__date,
-  &__author-name {
-    color: #947085;
-    font-family: $font-ui;
-    font-size: 1rem;
-    font-weight: $font-weight-regular;
-    line-height: 1.4;
+    gap: 0.85rem;
   }
 
   &__avatar {
@@ -166,29 +121,102 @@
     height: 3.2rem;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 0.5rem 1rem rgba(140, 111, 128, 0.16);
+    box-shadow: 0 0.5rem 1rem rgba($hero-shadow-soft, 0.24);
     flex-shrink: 0;
   }
 
-  &__featured-title {
-    color: #6b3f60;
+  &__author-name,
+  &__date,
+  &__featured-excerpt {
+    color: $cool-gray;
+  }
+
+  &__author-name,
+  &__date {
+    font-family: $font-ui;
+    font-size: 1rem;
+    font-weight: $font-weight-regular;
+    line-height: 1.4;
+  }
+
+  &__author-name {
+    position: relative;
+    padding-right: 1rem;
+    margin-right: 0.1rem;
+  }
+
+  &__author-name::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 1rem;
+    background: rgba($cool-gray, 0.24);
+    transform: translateY(-50%);
+  }
+
+  &__date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__date::before {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    background: url("../assets/icons/calendar-date.svg") center / contain
+      no-repeat;
+    flex-shrink: 0;
+  }
+
+  &__featured-title,
+  &__card-title {
+    color: $section-title-accent;
     font-family: $font-display;
-    font-size: clamp(2.3rem, 3.2vw, 3.5rem);
     font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  &__featured-title {
+    font-size: clamp(2.3rem, 3.2vw, 3.5rem);
     line-height: 1.12;
-    letter-spacing: -0.03em;
   }
 
   &__featured-excerpt {
     max-width: 30rem;
-    color: #7d6775;
     font-family: $font-ui;
     font-size: clamp(1.1rem, 1.5vw, 1.35rem);
     font-weight: $font-weight-regular;
     line-height: 1.72;
   }
 
-  &__button,
+  &__stack {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__stack-item {
+    min-width: 0;
+  }
+
+  &__card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    min-height: 100%;
+    padding: 1.6rem 1.5rem;
+  }
+
+  &__card-title {
+    font-size: clamp(1.45rem, 1.5vw, 1.75rem);
+    line-height: 1.35;
+  }
+
   &__cta,
   &__footer-link {
     display: inline-flex;
@@ -198,49 +226,20 @@
     font-size: 1.1rem;
     font-weight: $font-weight-medium;
     line-height: 1.2;
-    color: #c46c90;
+    text-decoration: none;
   }
 
-  &__button::after,
+  &__cta {
+    width: fit-content;
+    margin-top: auto;
+    color: $cool-gray;
+  }
+
   &__cta::after,
   &__footer-link::after {
     content: "->";
     font-size: 1.2em;
     line-height: 1;
-  }
-
-  &__button {
-    width: fit-content;
-    padding: 0.95rem 1.45rem;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #cf81a1 0%, #c26b8f 100%);
-    color: $white;
-    box-shadow: 0 1rem 1.75rem rgba(196, 108, 144, 0.22);
-  }
-
-  &__button::after {
-    color: inherit;
-  }
-
-  &__stack {
-    display: grid;
-    gap: 1rem;
-  }
-
-  &__card-link {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    justify-content: space-between;
-    padding: 1.6rem 1.5rem;
-  }
-
-  &__card-title {
-    color: #6f4964;
-    font-family: $font-ui;
-    font-size: clamp(1.45rem, 1.5vw, 1.75rem);
-    font-weight: $font-weight-medium;
-    line-height: 1.35;
   }
 
   &__footer {
@@ -251,13 +250,28 @@
     margin: clamp(2rem, 3vw, 2.75rem) auto 0;
   }
 
+  &__footer-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba($hero-highlight, 0.12),
+      rgba($hero-highlight, 0.6),
+      rgba($hero-highlight, 0.12)
+    );
+  }
+
   &__footer-link {
-    color: #6f4964;
+    color: $section-title-accent;
     font-size: 1.3rem;
     justify-content: center;
     white-space: nowrap;
-    text-decoration: none;
     transition: transform 220ms ease;
+  }
+
+  &__footer-link:hover,
+  &__footer-link:focus-visible {
+    transform: translateY(-0.25rem);
   }
 
   @media (max-width: 1180px) {
@@ -273,6 +287,12 @@
   @media (max-width: $hero-mobile-breakpoint) {
     padding: clamp(4.75rem, 12vw, 6rem) 0;
 
+    &__header {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
     &__featured-link {
       grid-template-columns: 1fr;
     }
@@ -283,6 +303,15 @@
 
     &__stack {
       grid-template-columns: 1fr;
+    }
+
+    &__featured-meta,
+    &__card-meta {
+      gap: 0.75rem;
+    }
+
+    &__author-name {
+      padding-right: 0.85rem;
     }
 
     &__footer {

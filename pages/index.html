@@ -220,15 +220,6 @@
               Pročitajte osobne priče naših članica i njihova iskustva na putu
               prema oporavku.
             </p>
-            <div class="stories__ornament" aria-hidden="true">
-              <span class="stories__ornament-line"></span>
-              <img
-                class="stories__ornament-icon"
-                src="../assets/icons/heart-bullet.svg"
-                alt=""
-              />
-              <span class="stories__ornament-line"></span>
-            </div>
           </header>
 
           <div class="stories__grid">
@@ -243,17 +234,15 @@
                 </div>
                 <div class="stories__featured-content">
                   <div class="stories__featured-meta">
+                    <img
+                      class="stories__avatar"
+                      src="../assets/images/story_avatar.jpeg"
+                      alt="Profilna fotografija članice Ane M."
+                    />
+                    <span class="stories__author-name">Ana M.</span>
                     <time class="stories__date" datetime="2026-03-12"
                       >12. ožujka 2026.</time
                     >
-                    <div class="stories__author">
-                      <img
-                        class="stories__avatar"
-                        src="../assets/images/story_avatar.jpeg"
-                        alt="Profilna fotografija članice Ane M."
-                      />
-                      <span class="stories__author-name">Ana M.</span>
-                    </div>
                   </div>
                   <h3 class="stories__featured-title">
                     Kako sam pronašla svjetlo nakon duge tame
@@ -263,69 +252,78 @@
                     priču dijelim kako sam, uz podršku zajednice i male korake,
                     ponovno pronašla mir, snagu i osmijeh.
                   </p>
-                  <span class="stories__button">Pročitaj priču</span>
+                  <span class="stories__cta">Pročitaj priču</span>
                 </div>
               </a>
             </article>
 
-            <div class="stories__stack" aria-label="Istaknute priče članica">
-              <article class="stories__card">
-                <a class="stories__card-link" href="#">
-                  <div class="stories__card-meta">
-                    <img
-                      class="stories__avatar"
-                      src="../assets/images/story_avatar.jpeg"
-                      alt="Profilna fotografija članice Marije K."
-                    />
-                    <time class="stories__date" datetime="2026-03-05"
-                      >5. ožujka 2026.</time
-                    >
-                  </div>
-                  <h3 class="stories__card-title">
-                    Kako sam ponovno pronašla mir u neizvjesnosti
-                  </h3>
-                  <span class="stories__cta">Pročitaj priču</span>
-                </a>
-              </article>
+            <ul class="stories__stack" aria-label="Istaknute priče članica">
+              <li class="stories__stack-item">
+                <article class="stories__card">
+                  <a class="stories__card-link" href="#">
+                    <div class="stories__card-meta">
+                      <img
+                        class="stories__avatar"
+                        src="../assets/images/story_avatar.jpeg"
+                        alt="Profilna fotografija članice Marije K."
+                      />
+                      <span class="stories__author-name">Marija K.</span>
+                      <time class="stories__date" datetime="2026-03-05"
+                        >5. ožujka 2026.</time
+                      >
+                    </div>
+                    <h3 class="stories__card-title">
+                      Kako sam ponovno pronašla mir u neizvjesnosti
+                    </h3>
+                    <span class="stories__cta">Pročitaj priču</span>
+                  </a>
+                </article>
+              </li>
 
-              <article class="stories__card">
-                <a class="stories__card-link" href="#">
-                  <div class="stories__card-meta">
-                    <img
-                      class="stories__avatar"
-                      src="../assets/images/story_avatar.jpeg"
-                      alt="Profilna fotografija članice Ivane S."
-                    />
-                    <time class="stories__date" datetime="2026-02-28"
-                      >28. veljače 2026.</time
-                    >
-                  </div>
-                  <h3 class="stories__card-title">
-                    Moj put prema samopouzdanju i hrabrosti
-                  </h3>
-                  <span class="stories__cta">Pročitaj priču</span>
-                </a>
-              </article>
+              <li class="stories__stack-item">
+                <article class="stories__card">
+                  <a class="stories__card-link" href="#">
+                    <div class="stories__card-meta">
+                      <img
+                        class="stories__avatar"
+                        src="../assets/images/story_avatar.jpeg"
+                        alt="Profilna fotografija članice Ivane S."
+                      />
+                      <span class="stories__author-name">Ivana S.</span>
+                      <time class="stories__date" datetime="2026-02-28"
+                        >28. veljače 2026.</time
+                      >
+                    </div>
+                    <h3 class="stories__card-title">
+                      Moj put prema samopouzdanju i hrabrosti
+                    </h3>
+                    <span class="stories__cta">Pročitaj priču</span>
+                  </a>
+                </article>
+              </li>
 
-              <article class="stories__card">
-                <a class="stories__card-link" href="#">
-                  <div class="stories__card-meta">
-                    <img
-                      class="stories__avatar"
-                      src="../assets/images/story_avatar.jpeg"
-                      alt="Profilna fotografija članice Katarine L."
-                    />
-                    <time class="stories__date" datetime="2026-02-20"
-                      >20. veljače 2026.</time
-                    >
-                  </div>
-                  <h3 class="stories__card-title">
-                    Mali trenuci sreće u borbi protiv straha
-                  </h3>
-                  <span class="stories__cta">Pročitaj priču</span>
-                </a>
-              </article>
-            </div>
+              <li class="stories__stack-item">
+                <article class="stories__card">
+                  <a class="stories__card-link" href="#">
+                    <div class="stories__card-meta">
+                      <img
+                        class="stories__avatar"
+                        src="../assets/images/story_avatar.jpeg"
+                        alt="Profilna fotografija članice Katarine L."
+                      />
+                      <span class="stories__author-name">Katarina L.</span>
+                      <time class="stories__date" datetime="2026-02-20"
+                        >20. veljače 2026.</time
+                      >
+                    </div>
+                    <h3 class="stories__card-title">
+                      Mali trenuci sreće u borbi protiv straha
+                    </h3>
+                    <span class="stories__cta">Pročitaj priču</span>
+                  </a>
+                </article>
+              </li>
+            </ul>
           </div>
 
           <div class="stories__footer">
