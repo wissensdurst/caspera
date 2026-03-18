@@ -152,13 +152,14 @@ img {
 }
 
 .navbar {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  background-color: transparent;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2rem);
   width: 100%;
+  padding: 1rem clamp(1.5rem, 4vw, 4.5rem);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   z-index: 1000;
 }
 .navbar.scrolled {
@@ -166,75 +167,265 @@ img {
   box-shadow: 0 12px 30px rgba(31, 31, 35, 0.08);
 }
 .navbar__logo {
+  position: relative;
+  z-index: 1002;
   display: block;
-  width: 200px;
+  flex-shrink: 0;
+  width: clamp(9.5rem, 12vw, 200px);
 }
 .navbar__logo img {
+  display: block;
   width: 100%;
   height: auto;
 }
-.navbar__arrow {
+.navbar__menu-toggle {
+  display: none;
+  position: relative;
+  z-index: 1002;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 0.9rem 2rem rgba(147, 121, 140, 0.16);
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.navbar__menu-toggle:hover, .navbar__menu-toggle:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 1rem 2.2rem rgba(147, 121, 140, 0.22);
+  outline: none;
+}
+.navbar__menu-toggle-line {
+  width: 1.15rem;
+  height: 2px;
+  border-radius: 999px;
+  background: #815a79;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.navbar__menu {
   display: flex;
   align-items: center;
-  cursor: pointer;
-  margin-left: 0.5rem;
-}
-.navbar__arrow img {
-  width: 16px;
-  height: 16px;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-left: auto;
 }
 .navbar__list {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: clamp(0.25rem, 1vw, 0.9rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .navbar__item {
   position: relative;
 }
-.navbar__item > button {
-  background: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  color: #1f1f23;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
+.navbar__item--mobile-only {
+  display: none;
 }
-.navbar__drop {
+.navbar__toggle, .navbar__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.85rem;
+  padding: 0.7rem 0.95rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #815a79;
+  font-family: "Inter", sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.navbar__toggle:hover, .navbar__toggle:focus-visible, .navbar__link:hover, .navbar__link:focus-visible, .navbar__item--has-children.is-open > .navbar__toggle {
+  background: rgba(255, 255, 255, 0.72);
+  color: #756a72;
+  box-shadow: 0 0.75rem 1.8rem rgba(147, 121, 140, 0.16);
+  outline: none;
+}
+.navbar__label {
+  pointer-events: none;
+}
+.navbar__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+.navbar__arrow img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+.navbar__item--has-children.is-open .navbar__arrow img {
+  transform: rotate(180deg);
+}
+.navbar__panel {
   position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  min-width: 200px;
-  margin-top: 0.5rem;
+  top: calc(100% + 0.75rem);
+  left: 0;
+  min-width: min(20rem, 80vw);
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 1.35rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 253, 251, 0.98) 100%);
+  box-shadow: 0 1.1rem 2.7rem rgba(147, 121, 140, 0.22), 0 0.2rem 0.7rem rgba(255, 255, 255, 0.56);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 101;
-  padding: 0.5rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(0.5rem);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
 }
-.navbar__drop.open {
+.navbar__item--has-children:hover > .navbar__panel, .navbar__item--has-children:focus-within > .navbar__panel, .navbar__item--has-children.is-open > .navbar__panel {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto;
 }
-.navbar__drop .navbar__list {
-  flex-direction: column;
-  gap: 0;
+.navbar__sublist {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.navbar__drop .navbar__list .navbar__item {
-  padding: 0.5rem 1rem;
-}
-.navbar__drop .navbar__list .navbar__item a {
+.navbar__sublink {
+  display: block;
+  padding: 0.8rem 0.95rem;
+  border-radius: 1rem;
+  color: #756a72;
+  font-family: "Inter", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 400;
+  line-height: 1.45;
   text-decoration: none;
-  color: #1f1f23;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-.navbar__drop .navbar__list .navbar__item a:hover {
-  color: #666666;
+.navbar__sublink:hover, .navbar__sublink:focus-visible {
+  background: rgba(231, 170, 200, 0.14);
+  color: #815a79;
+  outline: none;
+}
+.navbar__cta {
+  position: relative;
+  z-index: 1001;
+  flex-shrink: 0;
+  min-height: 2.85rem;
+  padding: 0.85rem 1.7rem;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0.9rem 0;
+  }
+  .navbar__menu-toggle {
+    display: inline-flex;
+  }
+  .navbar__menu {
+    position: fixed;
+    top: 0.9rem;
+    right: clamp(1.5rem, 4vw, 4.5rem);
+    display: grid;
+    gap: 1rem;
+    width: min(26rem, 100vw - 2 * clamp(1.5rem, 4vw, 4.5rem));
+    max-height: calc(100vh - 1.8rem);
+    padding: 5.6rem 1.2rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.76);
+    border-radius: 1.9rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 238, 242, 0.96) 100%);
+    box-shadow: 0 1.3rem 3rem rgba(147, 121, 140, 0.3);
+    overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(1.25rem);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    pointer-events: none;
+  }
+  .navbar.menu-open .navbar__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .navbar.menu-open .navbar__menu-toggle-line:nth-child(1) {
+    transform: translateY(0.42rem) rotate(45deg);
+  }
+  .navbar.menu-open .navbar__menu-toggle-line:nth-child(2) {
+    opacity: 0;
+  }
+  .navbar.menu-open .navbar__menu-toggle-line:nth-child(3) {
+    transform: translateY(-0.42rem) rotate(-45deg);
+  }
+  .navbar__list {
+    display: grid;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+  .navbar__item {
+    width: 100%;
+    border-radius: 1.35rem;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 0.7rem 1.6rem rgba(147, 121, 140, 0.12);
+  }
+  .navbar__item--mobile-only {
+    display: block;
+  }
+  .navbar__toggle, .navbar__link {
+    justify-content: space-between;
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 1rem 1.1rem;
+    text-align: left;
+    box-shadow: none;
+  }
+  .navbar__panel {
+    position: static;
+    min-width: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0 0.55rem;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: max-height 0.25s ease, padding 0.25s ease;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+  .navbar__item--has-children:hover > .navbar__panel, .navbar__item--has-children:focus-within > .navbar__panel {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .navbar__item--has-children.is-open > .navbar__panel {
+    max-height: 24rem;
+    padding: 0 0.55rem 0.8rem;
+  }
+  .navbar__sublist {
+    gap: 0.15rem;
+  }
+  .navbar__sublink {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.95rem;
+  }
+  .navbar__cta {
+    width: 100%;
+  }
 }
 
 .support {

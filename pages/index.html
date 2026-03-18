@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="hr">
   <head>
     <meta charset="UTF-8" />
@@ -14,86 +14,142 @@
   </head>
   <body>
     <header class="header">
-      <nav class="navbar">
+      <nav class="navbar" aria-label="Glavna navigacija">
         <a class="navbar__logo" href="index.html">
           <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
         </a>
-        <ul class="navbar__list">
-          <li class="navbar__item">
-            <button>
-              <a href="#" class="navbar__link">O nama</a>
-              <span class="navbar__arrow">
-                <img
-                  src="../assets/icons/dropdown-arrow.svg"
-                  alt="strelica izbornika"
-                />
-              </span>
-            </button>
-            <div class="navbar__drop">
-              <ul class="navbar__list">
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Naša priča</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Naše vrijednosti</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Naš tim</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="navbar__item">
-            <button>
-              <a href="#" class="navbar__link">O nama</a>
-              <span class="navbar__arrow">
-                <img
-                  src="../assets/icons/dropdown-arrow.svg"
-                  alt="strelica izbornika"
-                />
-              </span>
-            </button>
-            <div class="navbar__drop">
-              <ul class="navbar__list">
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Test</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Test</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Test</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="navbar__item">
-            <button>
-              <a href="#" class="navbar__link">O nama</a>
-              <span class="navbar__arrow">
-                <img
-                  src="../assets/icons/dropdown-arrow.svg"
-                  alt="strelica izbornika"
-                />
-              </span>
-            </button>
-            <div class="navbar__drop">
-              <ul class="navbar__list">
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Test</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Test</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="#" class="navbar__link">Test</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="index.html">Početna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="#">Naša ekipa</a></li>
+                  <li><a class="navbar__sublink" href="#">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="#">Statut</a></li>
+                  <li><a class="navbar__sublink" href="#">Izvješće o radu</a></li>
+                  <li><a class="navbar__sublink" href="#">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podrška</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Naši savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="#">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink" href="#">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="#">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="#">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="#">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="#">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="#">Putni trošak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="#">Moja prica</a></li>
+                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="#">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="#">Postani clan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Aktualno</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Aktualno</a></li>
+                  <li><a class="navbar__sublink" href="#">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="#">Doniraj</a>
+        </div>
       </nav>
     </header>
     <main>
@@ -107,9 +163,9 @@
           </h1>
           <p class="hero__text">
             Caspera je neprofitna organizacija osnovana 2020. godine s ciljem
-            pružanja podrške ženama oboljelim i liječenim od karcinoma. Želimo
-            biti sigurno mjesto za sve koje se osjećaju usamljeno, preplašeno
-            ili izgubljeno — utočište razumijevanja, podrške i empatije.
+            pružanja podrške ženama oboljelim i lijecenim od karcinoma. Želimo
+            biti sigurno mjesto za sve koje se osjecaju usamljeno, preplašeno
+            ili izgubljeno - utocište razumijevanja, podrške i empatije.
             Vjerujemo da zajedno možemo biti promjena.
           </p>
           <a class="hero__button" href="#">Saznaj više</a>
@@ -118,7 +174,7 @@
           <img
             class="hero__ribbon"
             src="../assets/images/ribbon_hero.png"
-            alt="Ružičasta vrpca podrške ženama oboljelima od raka dojke"
+            alt="Ružicasta vrpca podrške ženama oboljelima od raka dojke"
           />
         </div>
       </section>
@@ -127,12 +183,12 @@
           <div class="support__intro">
             <h2 class="support__title" id="support-title">Tu smo za vas</h2>
             <p class="support__text">
-              Pronađite podršku, savjet i korisne informacije koje vam mogu
-              pomoći na vašem putu
+              Pronadite podršku, savjet i korisne informacije koje vam mogu
+              pomoci na vašem putu
             </p>
           </div>
 
-          <ul class="support__cards" aria-label="Mogućnosti podrške">
+          <ul class="support__cards" aria-label="Mogucnosti podrške">
             <li class="support__item">
               <article class="support__card">
                 <a class="support__card-link" href="#">
@@ -146,7 +202,7 @@
                   <h3 class="support__card-title">Naši savjetodavatelji</h3>
                   <span class="support__card-divider" aria-hidden="true"></span>
                   <p class="support__card-description">
-                    Upoznajte naše stručne savjetodavatelje koji su ovdje kako
+                    Upoznajte naše strucne savjetodavatelje koji su ovdje kako
                     bi vam pružili podršku i razumijevanje.
                   </p>
                 </a>
@@ -159,14 +215,14 @@
                     <img
                       class="support__card-icon"
                       src="../assets/images/podrska_strucni.png"
-                      alt="Ilustracija stručnog savjeta"
+                      alt="Ilustracija strucnog savjeta"
                     />
                   </span>
-                  <h3 class="support__card-title">Stručni savjet</h3>
+                  <h3 class="support__card-title">Strucni savjet</h3>
                   <span class="support__card-divider" aria-hidden="true"></span>
                   <p class="support__card-description">
-                    Stručni medicinski i psihološki savjeti koji vam mogu
-                    pomoći u donošenju važnih odluka.
+                    Strucni medicinski i psihološki savjeti koji vam mogu
+                    pomoci u donošenju važnih odluka.
                   </p>
                 </a>
               </article>
@@ -184,8 +240,8 @@
                   <h3 class="support__card-title">Dobro je znati</h3>
                   <span class="support__card-divider" aria-hidden="true"></span>
                   <p class="support__card-description">
-                    Korisne informacije, vodiči i savjeti za lakše snalaženje
-                    tijekom liječenja i oporavka.
+                    Korisne informacije, vodici i savjeti za lakše snalaženje
+                    tijekom lijecenja i oporavka.
                   </p>
                 </a>
               </article>
@@ -203,8 +259,8 @@
                   <h3 class="support__card-title">Bokun butige</h3>
                   <span class="support__card-divider" aria-hidden="true"></span>
                   <p class="support__card-description">
-                    Mali kutak dobrote gdje članovi daruju predmete koji mogu
-                    olakšati put oporavka i pružiti podršku drugim članovima.
+                    Mali kutak dobrote gdje clanovi daruju predmete koji mogu
+                    olakšati put oporavka i pružiti podršku drugim clanovima.
                   </p>
                 </a>
               </article>
@@ -215,9 +271,9 @@
       <section class="stories" aria-labelledby="stories-title">
         <div class="stories__inner">
           <header class="stories__header">
-            <h2 class="stories__title" id="stories-title">Naše priče</h2>
+            <h2 class="stories__title" id="stories-title">Naše price</h2>
             <p class="stories__subtitle">
-              Pročitajte osobne priče naših članica i njihova iskustva na putu
+              Procitajte osobne price naših clanica i njihova iskustva na putu
               prema oporavku.
             </p>
           </header>
@@ -229,7 +285,7 @@
                   <img
                     class="stories__featured-image"
                     src="../assets/images/story_img.jpeg"
-                    alt="Naslovna fotografija priče članice Caspere"
+                    alt="Naslovna fotografija price clanice Caspere"
                   />
                 </div>
                 <div class="stories__featured-content">
@@ -237,7 +293,7 @@
                     <img
                       class="stories__avatar"
                       src="../assets/images/story_avatar.jpeg"
-                      alt="Profilna fotografija članice Ane M."
+                      alt="Profilna fotografija clanice Ane M."
                     />
                     <span class="stories__author-name">Ana M.</span>
                     <time class="stories__date" datetime="2026-03-12"
@@ -248,16 +304,16 @@
                     Kako sam pronašla svjetlo nakon duge tame
                   </h3>
                   <p class="stories__featured-excerpt">
-                    Moje iskustvo s depresijom bilo je poput duge noći. Kroz
-                    priču dijelim kako sam, uz podršku zajednice i male korake,
+                    Moje iskustvo s depresijom bilo je poput duge noci. Kroz
+                    pricu dijelim kako sam, uz podršku zajednice i male korake,
                     ponovno pronašla mir, snagu i osmijeh.
                   </p>
-                  <span class="stories__cta">Pročitaj priču</span>
+                  <span class="stories__cta">Procitaj pricu</span>
                 </div>
               </a>
             </article>
 
-            <ul class="stories__stack" aria-label="Istaknute priče članica">
+            <ul class="stories__stack" aria-label="Istaknute price clanica">
               <li class="stories__stack-item">
                 <article class="stories__card">
                   <a class="stories__card-link" href="#">
@@ -265,7 +321,7 @@
                       <img
                         class="stories__avatar"
                         src="../assets/images/story_avatar.jpeg"
-                        alt="Profilna fotografija članice Marije K."
+                        alt="Profilna fotografija clanice Marije K."
                       />
                       <span class="stories__author-name">Marija K.</span>
                       <time class="stories__date" datetime="2026-03-05"
@@ -275,7 +331,7 @@
                     <h3 class="stories__card-title">
                       Kako sam ponovno pronašla mir u neizvjesnosti
                     </h3>
-                    <span class="stories__cta">Pročitaj priču</span>
+                    <span class="stories__cta">Procitaj pricu</span>
                   </a>
                 </article>
               </li>
@@ -287,17 +343,17 @@
                       <img
                         class="stories__avatar"
                         src="../assets/images/story_avatar.jpeg"
-                        alt="Profilna fotografija članice Ivane S."
+                        alt="Profilna fotografija clanice Ivane S."
                       />
                       <span class="stories__author-name">Ivana S.</span>
                       <time class="stories__date" datetime="2026-02-28"
-                        >28. veljače 2026.</time
+                        >28. veljace 2026.</time
                       >
                     </div>
                     <h3 class="stories__card-title">
                       Moj put prema samopouzdanju i hrabrosti
                     </h3>
-                    <span class="stories__cta">Pročitaj priču</span>
+                    <span class="stories__cta">Procitaj pricu</span>
                   </a>
                 </article>
               </li>
@@ -309,17 +365,17 @@
                       <img
                         class="stories__avatar"
                         src="../assets/images/story_avatar.jpeg"
-                        alt="Profilna fotografija članice Katarine L."
+                        alt="Profilna fotografija clanice Katarine L."
                       />
                       <span class="stories__author-name">Katarina L.</span>
                       <time class="stories__date" datetime="2026-02-20"
-                        >20. veljače 2026.</time
+                        >20. veljace 2026.</time
                       >
                     </div>
                     <h3 class="stories__card-title">
-                      Mali trenuci sreće u borbi protiv straha
+                      Mali trenuci srece u borbi protiv straha
                     </h3>
-                    <span class="stories__cta">Pročitaj priču</span>
+                    <span class="stories__cta">Procitaj pricu</span>
                   </a>
                 </article>
               </li>
@@ -328,7 +384,7 @@
 
           <div class="stories__footer">
             <span class="stories__footer-line"></span>
-            <a class="stories__footer-link" href="#">Pogledaj sve priče</a>
+            <a class="stories__footer-link" href="#">Pogledaj sve price</a>
             <span class="stories__footer-line"></span>
           </div>
         </div>
