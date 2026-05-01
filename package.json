@@ -11,7 +11,7 @@
     "sass:watch": "sass --watch --load-path=styles styles/main.scss:styles/main.css --style=expanded",
     "sass:build": "sass --load-path=styles styles/main.scss styles/main.css --style=compressed"
   },
-  "dependencies": {
-    "a": "^4.0.8"
+  "devDependencies": {
+    "sass": "^1.93.3"
   }
 }
