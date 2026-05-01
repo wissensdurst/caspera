@@ -17,14 +17,10 @@
   text-decoration: none;
   cursor: pointer;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
     background 0.2s ease;
 
   &:hover,
   &:focus-visible {
-    transform: translateY($hero-button-hover-lift);
     background: linear-gradient(135deg, $hero-button-hover 0%, $hero-button 100%);
-    box-shadow: $shadow-button-hover;
   }
 }

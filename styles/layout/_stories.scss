@@ -1,7 +1,7 @@
 @use "abstracts" as *;
 
 .stories {
-  padding: clamp(6rem, 8vw, 7.5rem) 0;
+  padding: clamp(4.5rem, 6vw, 6rem) 0;
 
   &__inner {
     width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
@@ -51,20 +51,6 @@
     box-shadow:
       0 0.75rem 1.75rem rgba($hero-shadow-soft, 0.36),
       0 1.5rem 2.5rem rgba($hero-shadow-soft, 0.18);
-    transition:
-      transform 220ms ease,
-      box-shadow 220ms ease,
-      border-color 220ms ease;
-  }
-
-  &__featured:hover,
-  &__featured:focus-within,
-  &__card:hover,
-  &__card:focus-within {
-    transform: translateY(-0.35rem);
-    box-shadow:
-      0 1rem 2rem rgba($hero-shadow-soft, 0.42),
-      0 1.75rem 3rem rgba($hero-shadow-soft, 0.24);
   }
 
   &__featured-link,
@@ -75,6 +61,7 @@
     text-decoration: none;
     border: 1px solid rgba($white, 0.7);
     border-radius: inherit;
+    box-shadow: inset 0 1px 0 rgba($white, 0.5);
   }
 
   &__featured-link {
@@ -82,6 +69,7 @@
     grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.1fr);
     border: 0;
     overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba($white, 0.5);
   }
 
   &__featured-link:focus-visible,
@@ -285,7 +273,7 @@
   }
 
   @media (max-width: $hero-mobile-breakpoint) {
-    padding: clamp(4.75rem, 12vw, 6rem) 0;
+    padding: clamp(4rem, 10vw, 5rem) 0;
 
     &__header {
       margin-left: auto;

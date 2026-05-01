@@ -1,0 +1,370 @@
+﻿@use "abstracts" as *;
+
+.stories-page {
+  min-height: 100vh;
+}
+
+.stories-listing {
+  position: relative;
+  padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(5rem, 7vw, 6.75rem);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 24rem;
+    background:
+      radial-gradient(circle at top left, rgba($hero-highlight, 0.16), transparent 54%),
+      linear-gradient(180deg, rgba($white, 0.68) 0%, rgba($off-white, 0) 100%);
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
+    margin: 0 auto;
+  }
+
+  &__intro {
+    max-width: 48rem;
+  }
+
+  &__eyebrow {
+    margin: 0 0 0.9rem;
+    color: rgba($section-title-accent, 0.72);
+    font-family: $font-ui;
+    font-size: 0.88rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(3.25rem, 6vw, 5.25rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: 0.98;
+  }
+
+  &__text {
+    max-width: 42rem;
+    margin-top: 1.25rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.8;
+  }
+
+  &__ornament {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: min(14rem, 100%);
+    margin: 2rem 0 2.25rem;
+  }
+
+  &__ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba($hero-highlight, 0.06), rgba($hero-highlight, 0.52), rgba($hero-highlight, 0.06));
+  }
+
+  &__ornament-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($hero-highlight, 0.8) 0%, rgba($hero-highlight, 0.34) 70%, rgba($hero-highlight, 0) 100%);
+  }
+
+  &__search {
+    margin-bottom: clamp(2rem, 3vw, 2.75rem);
+  }
+
+  &__search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__search-shell {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 4rem;
+    padding: 0.4rem 0.45rem 0.4rem 1.35rem;
+    border: 1px solid rgba($white, 0.76);
+    border-radius: 999px;
+    background: rgba($white, 0.78);
+    box-shadow:
+      0 0.9rem 2rem rgba($hero-shadow-soft, 0.12),
+      inset 0 1px 0 rgba($white, 0.88);
+  }
+
+  &__search-input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: $hero-heading;
+    font-family: $font-ui;
+    font-size: 1rem;
+    line-height: 1.4;
+    outline: none;
+  }
+
+  &__search-input::placeholder {
+    color: rgba($cool-gray, 0.68);
+  }
+
+  &__search-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    border-radius: 50%;
+    background: rgba($hero-highlight, 0.1);
+    color: $section-title-accent;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  &__search-button:hover,
+  &__search-button:focus-visible {
+    background: rgba($hero-highlight, 0.18);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  &__search-button svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: clamp(2.75rem, 5vw, 3.5rem);
+  }
+
+  &__page {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.6rem;
+    height: 2.6rem;
+    padding: 0 0.75rem;
+    border: 1px solid rgba($white, 0.72);
+    border-radius: $radius-pill;
+    background: rgba($white, 0.76);
+    box-shadow: 0 0.6rem 1.4rem rgba($hero-shadow-soft, 0.1);
+    color: $section-title-accent;
+    font-family: $font-ui;
+    font-size: 0.96rem;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  &__page:hover,
+  &__page:focus-visible,
+  &__page--active {
+    background: rgba($hero-highlight, 0.18);
+    box-shadow: 0 0.8rem 1.7rem rgba($hero-shadow-soft, 0.16);
+    outline: none;
+    transform: translateY(-1px);
+  }
+
+  &__page--next {
+    min-width: 3rem;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 960px) {
+    &__grid {
+      gap: 1.2rem;
+    }
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__title {
+      font-size: clamp(2.5rem, 11vw, 3.6rem);
+    }
+  }
+}
+
+.story-tile {
+  border-radius: 2rem;
+  background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
+  box-shadow:
+    0 0.85rem 1.9rem rgba($hero-shadow-soft, 0.16),
+    0 1.5rem 2.7rem rgba($hero-shadow-soft, 0.08);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-0.25rem);
+    box-shadow:
+      0 1rem 2.2rem rgba($hero-shadow-soft, 0.18),
+      0 1.7rem 3rem rgba($hero-shadow-soft, 0.12);
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 1.5rem 1.45rem 1.55rem;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid rgba($white, 0.76);
+    border-radius: inherit;
+  }
+
+  &__link:focus-visible {
+    outline: 2px solid rgba($hero-highlight, 0.65);
+    outline-offset: 0.28rem;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 1.15rem;
+  }
+
+  &__avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 0.5rem 1rem rgba($hero-shadow-soft, 0.2);
+  }
+
+  &__meta-copy {
+    display: grid;
+    gap: 0.18rem;
+    min-width: 0;
+  }
+
+  &__author {
+    color: $section-title-accent;
+    font-family: $font-ui;
+    font-size: 0.98rem;
+    font-weight: $font-weight-semibold;
+    line-height: 1.25;
+  }
+
+  &__date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  &__date::before {
+    content: "";
+    width: 0.95rem;
+    height: 0.95rem;
+    background: url("../assets/icons/calendar-date.svg") center / contain no-repeat;
+    flex-shrink: 0;
+  }
+
+  &__badge {
+    margin-left: auto;
+    padding: 0.35rem 0.75rem;
+    border-radius: $radius-pill;
+    background: rgba($hero-highlight, 0.2);
+    color: $section-title-accent;
+    font-family: $font-ui;
+    font-size: 0.74rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 2vw, 2.2rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: 1.15;
+  }
+
+  &__excerpt {
+    margin-top: 0.85rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1.3rem;
+    color: $hero-button;
+    font-family: $font-ui;
+    font-size: 1rem;
+    font-weight: $font-weight-medium;
+    line-height: 1.2;
+  }
+
+  &__cta::after {
+    content: "→";
+    line-height: 1;
+  }
+
+  @media (max-width: 640px) {
+    &__link {
+      padding: 1.3rem 1.2rem 1.35rem;
+    }
+
+    &__meta {
+      align-items: flex-start;
+    }
+
+    &__badge {
+      margin-left: 0;
+    }
+  }
+}

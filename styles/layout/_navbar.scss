@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+﻿@use "abstracts" as *;
 
 .navbar {
   position: relative;
@@ -124,6 +124,7 @@
   &__toggle:focus-visible,
   &__link:hover,
   &__link:focus-visible,
+  &__link--active,
   &__item--has-children.is-open > &__toggle {
     background: rgba($white, 0.72);
     color: $hero-heading;
@@ -156,7 +157,7 @@
 
   &__panel {
     position: absolute;
-    top: calc(100% + 0.75rem);
+    top: 100%;
     left: 0;
     min-width: min(20rem, 80vw);
     padding: 0.8rem;
@@ -223,6 +224,13 @@
     min-height: 2.85rem;
     padding: 0.85rem 1.7rem;
     white-space: nowrap;
+  }
+
+  @media (min-width: #{$hero-mobile-breakpoint + 1px}) {
+    &__item--has-children {
+      padding-bottom: 0.75rem;
+      margin-bottom: -0.75rem;
+    }
   }
 
   @media (max-width: $hero-mobile-breakpoint) {
@@ -349,3 +357,7 @@
     }
   }
 }
+
+
+
+
