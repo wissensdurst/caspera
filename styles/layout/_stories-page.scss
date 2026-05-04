@@ -1,45 +1,24 @@
-﻿@use "abstracts" as *;
+@use "abstracts" as *;
 
-.stories-page {
+.stranica-moja-prica {
   min-height: 100vh;
 }
 
-.stories-listing {
+.popis-prica {
   position: relative;
   padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(5rem, 7vw, 6.75rem);
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    height: 24rem;
-    background:
-      radial-gradient(circle at top left, rgba($hero-highlight, 0.16), transparent 54%),
-      linear-gradient(180deg, rgba($white, 0.68) 0%, rgba($off-white, 0) 100%);
-    pointer-events: none;
-  }
-
-  &__inner {
+  &__unutarnji {
     position: relative;
     width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
     margin: 0 auto;
   }
 
-  &__intro {
+  &__uvod {
     max-width: 48rem;
   }
 
-  &__eyebrow {
-    margin: 0 0 0.9rem;
-    color: rgba($section-title-accent, 0.72);
-    font-family: $font-ui;
-    font-size: 0.88rem;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  &__title {
+  &__naslov {
     color: $section-title-accent;
     font-family: $font-display;
     font-size: clamp(3.25rem, 6vw, 5.25rem);
@@ -48,41 +27,20 @@
     line-height: 0.98;
   }
 
-  &__text {
+  &__tekst {
     max-width: 42rem;
-    margin-top: 1.25rem;
+    margin: 1.25rem 0 clamp(2rem, 3vw, 2.75rem);
     color: $cool-gray;
     font-family: $font-ui;
     font-size: clamp(1rem, 1.6vw, 1.15rem);
     line-height: 1.8;
   }
 
-  &__ornament {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    width: min(14rem, 100%);
-    margin: 2rem 0 2.25rem;
-  }
-
-  &__ornament-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba($hero-highlight, 0.06), rgba($hero-highlight, 0.52), rgba($hero-highlight, 0.06));
-  }
-
-  &__ornament-dot {
-    width: 0.65rem;
-    height: 0.65rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba($hero-highlight, 0.8) 0%, rgba($hero-highlight, 0.34) 70%, rgba($hero-highlight, 0) 100%);
-  }
-
-  &__search {
+  &__pretraga {
     margin-bottom: clamp(2rem, 3vw, 2.75rem);
   }
 
-  &__search-label {
+  &__oznaka-pretrage {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -94,7 +52,7 @@
     border: 0;
   }
 
-  &__search-shell {
+  &__okvir-pretrage {
     display: flex;
     align-items: center;
     gap: 0.9rem;
@@ -108,7 +66,7 @@
       inset 0 1px 0 rgba($white, 0.88);
   }
 
-  &__search-input {
+  &__polje-pretrage {
     flex: 1;
     min-width: 0;
     border: 0;
@@ -120,11 +78,11 @@
     outline: none;
   }
 
-  &__search-input::placeholder {
+  &__polje-pretrage::placeholder {
     color: rgba($cool-gray, 0.68);
   }
 
-  &__search-button {
+  &__gumb-pretrage {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -140,14 +98,14 @@
       transform 0.2s ease;
   }
 
-  &__search-button:hover,
-  &__search-button:focus-visible {
+  &__gumb-pretrage:hover,
+  &__gumb-pretrage:focus-visible {
     background: rgba($hero-highlight, 0.18);
     transform: translateY(-1px);
     outline: none;
   }
 
-  &__search-button svg {
+  &__gumb-pretrage svg {
     width: 1.1rem;
     height: 1.1rem;
     stroke: currentColor;
@@ -157,13 +115,13 @@
     stroke-linejoin: round;
   }
 
-  &__grid {
+  &__mreza {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.75rem;
   }
 
-  &__pagination {
+  &__paginacija {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,7 +129,7 @@
     margin-top: clamp(2.75rem, 5vw, 3.5rem);
   }
 
-  &__page {
+  &__stranica {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -193,38 +151,38 @@
       box-shadow 0.2s ease;
   }
 
-  &__page:hover,
-  &__page:focus-visible,
-  &__page--active {
+  &__stranica:hover,
+  &__stranica:focus-visible,
+  &__stranica--active {
     background: rgba($hero-highlight, 0.18);
     box-shadow: 0 0.8rem 1.7rem rgba($hero-shadow-soft, 0.16);
     outline: none;
     transform: translateY(-1px);
   }
 
-  &__page--next {
+  &__stranica--next {
     min-width: 3rem;
     font-size: 1.05rem;
   }
 
   @media (max-width: 960px) {
-    &__grid {
+    &__mreza {
       gap: 1.2rem;
     }
   }
 
   @media (max-width: $hero-mobile-breakpoint) {
-    &__grid {
+    &__mreza {
       grid-template-columns: 1fr;
     }
 
-    &__title {
+    &__naslov {
       font-size: clamp(2.5rem, 11vw, 3.6rem);
     }
   }
 }
 
-.story-tile {
+.kartica-price {
   border-radius: 2rem;
   background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
   box-shadow:
@@ -242,7 +200,7 @@
       0 1.7rem 3rem rgba($hero-shadow-soft, 0.12);
   }
 
-  &__link {
+  &__poveznica {
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -253,7 +211,7 @@
     border-radius: inherit;
   }
 
-  &__link:focus-visible {
+  &__poveznica:focus-visible {
     outline: 2px solid rgba($hero-highlight, 0.65);
     outline-offset: 0.28rem;
   }
@@ -274,13 +232,13 @@
     box-shadow: 0 0.5rem 1rem rgba($hero-shadow-soft, 0.2);
   }
 
-  &__meta-copy {
+  &__meta-tekst {
     display: grid;
     gap: 0.18rem;
     min-width: 0;
   }
 
-  &__author {
+  &__autor {
     color: $section-title-accent;
     font-family: $font-ui;
     font-size: 0.98rem;
@@ -288,7 +246,7 @@
     line-height: 1.25;
   }
 
-  &__date {
+  &__datum {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -298,7 +256,7 @@
     line-height: 1.35;
   }
 
-  &__date::before {
+  &__datum::before {
     content: "";
     width: 0.95rem;
     height: 0.95rem;
@@ -306,7 +264,7 @@
     flex-shrink: 0;
   }
 
-  &__badge {
+  &__oznaka {
     margin-left: auto;
     padding: 0.35rem 0.75rem;
     border-radius: $radius-pill;
@@ -319,7 +277,7 @@
     text-transform: uppercase;
   }
 
-  &__title {
+  &__naslov {
     color: $section-title-accent;
     font-family: $font-display;
     font-size: clamp(1.8rem, 2vw, 2.2rem);
@@ -328,7 +286,7 @@
     line-height: 1.15;
   }
 
-  &__excerpt {
+  &__sazetak {
     margin-top: 0.85rem;
     color: $cool-gray;
     font-family: $font-ui;
@@ -336,7 +294,7 @@
     line-height: 1.8;
   }
 
-  &__cta {
+  &__poziv {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -349,13 +307,13 @@
     line-height: 1.2;
   }
 
-  &__cta::after {
-    content: "→";
+  &__poziv::after {
+    content: "\2192";
     line-height: 1;
   }
 
   @media (max-width: 640px) {
-    &__link {
+    &__poveznica {
       padding: 1.3rem 1.2rem 1.35rem;
     }
 
@@ -363,7 +321,7 @@
       align-items: flex-start;
     }
 
-    &__badge {
+    &__oznaka {
       margin-left: 0;
     }
   }

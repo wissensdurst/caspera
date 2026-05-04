@@ -143,3 +143,68 @@ if (navbar) {
     }
   });
 }
+
+const accordions = [...document.querySelectorAll("[data-accordion]")];
+
+accordions.forEach((accordion) => {
+  const buttons = [...accordion.querySelectorAll("[aria-controls]")];
+
+  const openPanel = (button, item, panel) => {
+    button.setAttribute("aria-expanded", "true");
+    item?.classList.add("is-open");
+
+    requestAnimationFrame(() => {
+      panel.style.maxHeight = `${panel.scrollHeight + 48}px`;
+    });
+  };
+
+  const closePanel = (button, item, panel) => {
+    button.setAttribute("aria-expanded", "false");
+
+    if (panel.style.maxHeight === "none") {
+      panel.style.maxHeight = `${panel.scrollHeight}px`;
+      panel.offsetHeight;
+    }
+
+    item?.classList.remove("is-open");
+    panel.style.maxHeight = "0px";
+  };
+
+  buttons.forEach((button) => {
+    const panelId = button.getAttribute("aria-controls");
+    const panel = panelId ? document.getElementById(panelId) : null;
+
+    if (!panel) {
+      return;
+    }
+
+    panel.addEventListener("transitionend", (event) => {
+      if (
+        event.propertyName === "max-height" &&
+        button.getAttribute("aria-expanded") === "true"
+      ) {
+        panel.style.maxHeight = "none";
+      }
+    });
+
+    button.addEventListener("click", () => {
+      const isExpanded = button.getAttribute("aria-expanded") === "true";
+      const item = button.closest("[data-accordion-item]");
+
+      if (isExpanded) {
+        closePanel(button, item, panel);
+        return;
+      }
+
+      openPanel(button, item, panel);
+    });
+  });
+});
+
+window.addEventListener("resize", () => {
+  document
+    .querySelectorAll("[data-accordion-item].is-open [role='region']")
+    .forEach((panel) => {
+      panel.style.maxHeight = "none";
+    });
+});

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Caspera | Pitaj nutricionista</title>
+  </head>
+  <body class="stranica-pitaj-nutricionista">
+    <header class="header">
+      <nav class="navbar" aria-label="Glavna navigacija">
+        <a class="navbar__logo" href="index.html">
+          <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+        </a>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="index.html">Po&ccaron;etna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="#">Na&scaron;a ekipa</a></li>
+                  <li><a class="navbar__sublink" href="#">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="#">Statut</a></li>
+                  <li><a class="navbar__sublink" href="#">Izvje&scaron;&cacute;e o radu</a></li>
+                  <li><a class="navbar__sublink" href="#">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podr&scaron;ka</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink navbar__link--active" href="pitaj-nutricionista.html" aria-current="page">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-patologa.html">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="socijalna-prava.html">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="ortopedska-pomagala.html">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="putni-trosak.html">Putni tro&scaron;ak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="moja-prica.html">Moja pri&ccaron;a</a></li>
+                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="#">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="#">Postani clan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Aktualno</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Aktualno</a></li>
+                  <li><a class="navbar__sublink" href="#">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="#">Doniraj</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="pitaj-strucnjaka" aria-labelledby="naslov-pitaj-nutricionista">
+        <div class="pitaj-strucnjaka__unutarnji">
+          <header class="pitaj-strucnjaka__uvod">
+            <h1 class="pitaj-strucnjaka__naslov" id="naslov-pitaj-nutricionista">Pitaj nutricionista</h1>
+            <p class="pitaj-strucnjaka__tekst">
+              Ova podstranica namijenjena je &zcaron;enama koje &zcaron;ele jasnije razumjeti
+              prehranu tijekom lije&ccaron;enja, oporavka i svakodnevnog &zcaron;ivota.
+              Odgovori slu&zcaron;e kao stru&ccaron;na orijentacija za razgovor s nutricionistom
+              i lije&ccaron;ni&ccaron;kim timom koji prati va&scaron;e lije&ccaron;enje.
+            </p>
+          </header>
+
+          <section class="strucna-pitanja" aria-label="Naj&ccaron;e&scaron;&cacute;a pitanja za nutricionista">
+            <div class="strucna-pitanja__popis" data-accordion>
+              <article class="strucna-pitanja__stavka" data-accordion-item>
+                <h3 class="strucna-pitanja__pitanje">
+                  <button
+                    class="strucna-pitanja__gumb"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="odgovor-nutricionista-1"
+                    id="pitanje-nutricionista-1"
+                  >
+                    &Scaron;to jesti kada terapija smanjuje apetit?
+                  </button>
+                </h3>
+                <div
+                  class="strucna-pitanja__odgovor"
+                  id="odgovor-nutricionista-1"
+                  role="region"
+                  aria-labelledby="pitanje-nutricionista-1"
+                >
+                  <p>
+                    Birajte manje, &ccaron;e&scaron;&cacute;e obroke i namirnice koje u malom volumenu
+                    daju dovoljno energije i proteina. Ako gubite na te&zcaron;ini ili
+                    nekoliko dana ne mo&zcaron;ete jesti dovoljno, javite se svom timu.
+                  </p>
+                </div>
+              </article>
+
+              <article class="strucna-pitanja__stavka" data-accordion-item>
+                <h3 class="strucna-pitanja__pitanje">
+                  <button
+                    class="strucna-pitanja__gumb"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="odgovor-nutricionista-2"
+                    id="pitanje-nutricionista-2"
+                  >
+                    Kako ubla&zcaron;iti mu&ccaron;ninu kroz prehranu?
+                  </button>
+                </h3>
+                <div
+                  class="strucna-pitanja__odgovor"
+                  id="odgovor-nutricionista-2"
+                  role="region"
+                  aria-labelledby="pitanje-nutricionista-2"
+                >
+                  <p>
+                    Nekima poma&zcaron;u hladniji, jednostavni obroci, suhi krekeri,
+                    tost, ri&zcaron;a ili banane te izbjegavanje masne i jako za&ccaron;injene
+                    hrane. Teku&cacute;inu pijte u malim gutljajima.
+                  </p>
+                </div>
+              </article>
+
+              <article class="strucna-pitanja__stavka" data-accordion-item>
+                <h3 class="strucna-pitanja__pitanje">
+                  <button
+                    class="strucna-pitanja__gumb"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="odgovor-nutricionista-3"
+                    id="pitanje-nutricionista-3"
+                  >
+                    Trebam li izbjegavati &scaron;e&cacute;er tijekom lije&ccaron;enja?
+                  </button>
+                </h3>
+                <div
+                  class="strucna-pitanja__odgovor"
+                  id="odgovor-nutricionista-3"
+                  role="region"
+                  aria-labelledby="pitanje-nutricionista-3"
+                >
+                  <p>
+                    Nije potrebno uvoditi stroge zabrane bez stru&ccaron;nog razloga.
+                    Cilj je uravnote&zcaron;ena prehrana koja podr&zcaron;ava snagu, oporavak
+                    i stabilnu tjelesnu te&zcaron;inu.
+                  </p>
+                </div>
+              </article>
+
+              <article class="strucna-pitanja__stavka" data-accordion-item>
+                <h3 class="strucna-pitanja__pitanje">
+                  <button
+                    class="strucna-pitanja__gumb"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="odgovor-nutricionista-4"
+                    id="pitanje-nutricionista-4"
+                  >
+                    Jesu li dodaci prehrani sigurni uz onkolo&scaron;ku terapiju?
+                  </button>
+                </h3>
+                <div
+                  class="strucna-pitanja__odgovor"
+                  id="odgovor-nutricionista-4"
+                  role="region"
+                  aria-labelledby="pitanje-nutricionista-4"
+                >
+                  <p>
+                    Dodatke prehrani, vitamine i biljne pripravke treba provjeriti
+                    s lije&ccaron;nikom, ljekarnikom ili nutricionistom jer neki pripravci
+                    mogu utjecati na terapiju ili laboratorijske nalaze.
+                  </p>
+                </div>
+              </article>
+
+              <article class="strucna-pitanja__stavka" data-accordion-item>
+                <h3 class="strucna-pitanja__pitanje">
+                  <button
+                    class="strucna-pitanja__gumb"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="odgovor-nutricionista-5"
+                    id="pitanje-nutricionista-5"
+                  >
+                    Kada je potreban individualni plan prehrane?
+                  </button>
+                </h3>
+                <div
+                  class="strucna-pitanja__odgovor"
+                  id="odgovor-nutricionista-5"
+                  role="region"
+                  aria-labelledby="pitanje-nutricionista-5"
+                >
+                  <p>
+                    Individualni plan koristan je kod zna&ccaron;ajnog gubitka te&zcaron;ine,
+                    probavnih tegoba, dijabetesa, problema s gutanjem ili kada
+                    niste sigurni unosite li dovoljno energije i proteina.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact-footer">
+      <div class="site-footer__inner">
+        <section class="site-footer__brand" aria-label="O Casperi">
+          <a class="site-footer__logo" href="index.html">
+            <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+          </a>
+          <p class="site-footer__eyebrow">Podr&scaron;ka koja ostaje blizu</p>
+          <p class="site-footer__description">
+            Podr&scaron;ka, razumijevanje i zajedni&scaron;tvo na putu prema oporavku.
+          </p>
+          <a class="site-footer__cta button__main" href="#">Kontaktirajte nas</a>
+        </section>
+
+        <nav class="site-footer__column" aria-label="Glavna navigacija u podno&zcaron;ju">
+          <h2 class="site-footer__heading">Navigacija</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="index.html">Po&ccaron;etna</a></li>
+            <li><a class="site-footer__link" href="moja-prica.html">Moja pri&ccaron;a</a></li>
+            <li><a class="site-footer__link" href="#support-links">Podr&scaron;ka</a></li>
+            <li><a class="site-footer__link" href="#contact-footer">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__column" id="support-links" aria-label="Podr&scaron;ka i sadr&zcaron;aj">
+          <h2 class="site-footer__heading">Podr&scaron;ka</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
+            <li><a class="site-footer__link" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-nutricionista.html" aria-current="page">Pitaj nutricionista</a></li>
+            <li><a class="site-footer__link" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-patologa.html">Pitaj patologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+            <li><a class="site-footer__link" href="#">Casperin kalendar</a></li>
+          </ul>
+        </nav>
+
+        <section class="site-footer__column" aria-label="Kontakt i dru&scaron;tvene mre&zcaron;e">
+          <h2 class="site-footer__heading">Kontakt</h2>
+          <ul class="site-footer__contact-list">
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">E-po&scaron;ta</span>
+              <a class="site-footer__contact-link" href="mailto:kontakt@caspera.hr">kontakt@caspera.hr</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Telefon</span>
+              <a class="site-footer__contact-link" href="tel:+385000000000">+385 (0)00 000 000</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Lokacija</span>
+              <p class="site-footer__contact-text">Hrvatska</p>
+            </li>
+          </ul>
+          <div>
+            <h2 class="site-footer__heading">Pratite nas</h2>
+            <ul class="site-footer__social-list">
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Facebooku">Fb</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Instagramu">Ig</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na YouTubeu">Yt</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na LinkedInu">In</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">&copy; 2026 Caspera. Sva prava pridr&zcaron;ana.</p>
+        <nav aria-label="Pravni linkovi u podno&zcaron;ju">
+          <ul class="site-footer__legal-list">
+            <li><a class="site-footer__legal-link" href="#">Pravila privatnosti</a></li>
+            <li><a class="site-footer__legal-link" href="#">Uvjeti kori&scaron;tenja</a></li>
+            <li><a class="site-footer__legal-link" href="#">Kolacici</a></li>
+            <li><a class="site-footer__legal-link" href="#">Pristupacnost</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

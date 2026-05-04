@@ -1,0 +1,236 @@
+@use "abstracts" as *;
+
+.stranica-pitaj-onkologa,
+.stranica-pitaj-nutricionista,
+.stranica-pitaj-dermatologa,
+.stranica-pitaj-patologa,
+.stranica-pitaj-fizioterapeuta,
+.stranica-socijalna-prava,
+.stranica-putni-trosak,
+.stranica-ortopedska-pomagala {
+  min-height: 100vh;
+}
+
+.pitaj-strucnjaka,
+.informativna-stranica {
+  padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(5rem, 7vw, 6.75rem);
+
+  &__unutarnji {
+    width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
+    margin: 0 auto;
+  }
+
+  &__uvod {
+    max-width: 54rem;
+    margin-bottom: clamp(2.25rem, 4vw, 3.5rem);
+  }
+
+  &__naslov {
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(3.1rem, 6vw, 5.25rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: 0.98;
+  }
+
+  &__tekst {
+    max-width: 48rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.8;
+  }
+
+  &__tekst {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    &__naslov {
+      font-size: clamp(2.5rem, 11vw, 3.6rem);
+    }
+  }
+}
+
+.informativni-sadrzaj {
+  display: grid;
+  gap: 1.25rem;
+
+  &__blok {
+    padding: clamp(1.35rem, 3vw, 2rem);
+    border: 1px solid rgba($white, 0.76);
+    border-radius: 1.45rem;
+    background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
+    box-shadow:
+      0 0.75rem 1.65rem rgba($hero-shadow-soft, 0.12),
+      0 1.15rem 2.1rem rgba($hero-shadow-soft, 0.07);
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  &__podnaslov {
+    margin-bottom: 0.9rem;
+    color: $section-title-accent;
+    font-family: $font-ui;
+    font-size: clamp(1.08rem, 1.4vw, 1.22rem);
+    font-weight: $font-weight-semibold;
+    line-height: 1.4;
+  }
+
+  &__blok p + p,
+  &__blok p + ul,
+  &__blok ul + p {
+    margin-top: 0.85rem;
+  }
+
+  &__blok ul {
+    display: grid;
+    gap: 0.45rem;
+    padding-left: 1.15rem;
+    list-style: disc;
+  }
+
+  &__blok a {
+    color: $section-title-accent;
+    font-weight: $font-weight-semibold;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  &__blok a:focus-visible {
+    outline: 2px solid rgba($hero-highlight, 0.65);
+    outline-offset: 0.18rem;
+  }
+}
+
+.strucna-pitanja {
+  &__popis {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  &__stavka {
+    border: 1px solid rgba($white, 0.76);
+    border-radius: 1.45rem;
+    background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
+    box-shadow:
+      0 0.75rem 1.65rem rgba($hero-shadow-soft, 0.12),
+      0 1.15rem 2.1rem rgba($hero-shadow-soft, 0.07);
+    overflow: hidden;
+  }
+
+  &__pitanje {
+    color: inherit;
+    font: inherit;
+  }
+
+  &__gumb {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 100%;
+    min-height: 4.25rem;
+    padding: 1.15rem 4rem 1.15rem 1.35rem;
+    border: 0;
+    background: transparent;
+    color: $section-title-accent;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
+    font-weight: $font-weight-semibold;
+    line-height: 1.45;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  &__gumb::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 1.35rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background:
+      linear-gradient($hero-button, $hero-button) center / 0.9rem 2px no-repeat,
+      rgba($hero-highlight, 0.16);
+    transform: translateY(-50%);
+  }
+
+  &__gumb::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(1.35rem + 0.95rem);
+    z-index: 1;
+    width: 2px;
+    height: 0.9rem;
+    border-radius: $radius-pill;
+    background: $hero-button;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.24s ease;
+    transform-origin: center;
+  }
+
+  &__gumb[aria-expanded="true"]::before {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  &__gumb:focus-visible {
+    outline: 2px solid rgba($hero-highlight, 0.65);
+    outline-offset: -0.35rem;
+  }
+
+  &__odgovor {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 1.35rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0;
+    transition:
+      max-height 0.35s ease,
+      opacity 0.2s ease,
+      padding-top 0.3s ease,
+      padding-bottom 0.3s ease;
+  }
+
+  &__odgovor p + p,
+  &__odgovor p + ul,
+  &__odgovor ul + p {
+    margin-top: 0.85rem;
+  }
+
+  &__odgovor ul {
+    display: grid;
+    gap: 0.45rem;
+    padding-left: 1.15rem;
+    list-style: disc;
+  }
+
+  &__odgovor a {
+    color: $section-title-accent;
+    font-weight: $font-weight-semibold;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  &__odgovor a:focus-visible {
+    outline: 2px solid rgba($hero-highlight, 0.65);
+    outline-offset: 0.18rem;
+  }
+
+  &__stavka.is-open &__odgovor {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    opacity: 1;
+  }
+}
