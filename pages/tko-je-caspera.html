@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Caspera | Tko je Caspera</title>
+  </head>
+  <body class="stranica-nasa-ekipa">
+    <header class="header">
+      <nav class="navbar" aria-label="Glavna navigacija">
+        <a class="navbar__logo" href="../index.html">
+          <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+        </a>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="../index.html">Početna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li>
+                    <a class="navbar__sublink" href="tko-je-caspera.html"
+                      >Tko je Caspera</a
+                    >
+                  </li>
+                  <li><a class="navbar__sublink" href="nasa-ekipa.html">Naša ekipa</a></li>
+                  <li><a class="navbar__sublink" href="caspera-u-medijima.html">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="statut.html">Statut</a></li>
+                  <li><a class="navbar__sublink" href="izvjesce-o-radu.html">Izvješće o radu</a></li>
+                  <li><a class="navbar__sublink" href="plan-rada-i-financijski-plan.html">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podrška</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Naši savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-patologa.html">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="socijalna-prava.html">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="ortopedska-pomagala.html">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="putni-trosak.html">Putni trošak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="moja-prica.html">Moja priča</a></li>
+                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="#">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="postani-clan.html">Postani clan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Aktualno</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Aktualno</a></li>
+                  <li><a class="navbar__sublink" href="#">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="doniraj.html">Doniraj</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="tim tim--centred-cards" aria-label="Tko je Caspera">
+        <div class="tim__unutarnji">
+          <header class="tim__uvod">
+            <h1 class="tim__naslov">Tko je Caspera</h1>
+            <div class="tim__tekstovi">
+              <p class="tim__tekst">
+                Udruga kao takva ne znači ništa, jer je to samo mrtvo slovo na papiru.
+              </p>
+              <p class="tim__tekst">
+                Kada tom slovu dodate prave ljude koji će potom sve začiniti ljubavlju, iskustvom, dobrom voljom i
+                najboljim idejama dobit ćemo nešto što se zove udruga CASPERA.
+              </p>
+              <p class="tim__tekst">
+                Svaka osoba u našoj priči, itekako, doprinosi radu udruge.
+              </p>
+              <p class="tim__tekst">Stoga, dopustite da vam predstavimo uzdanice Udruge:</p>
+            </div>
+          </header>
+
+          <section class="tim__mreza" aria-label="Profili uzdanica udruge Caspera">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Sonja Grgat"
+              data-role="Predsjednica"
+              data-image="../assets/images/sonja_grgat.jpg"
+              data-image-alt="Profilna fotografija Sonje Grgat"
+              data-bio-html="<p>Upoznajte našu predsjednicu, Sonju.</p><p>Mnogi već poznaju Sonju, jer otkada se razboljela intenzivno piše, priča i širi svijest o karcinomu. Njene priče pročitali su mnogi, što na portalima dnevnih novina, što na portalu udruge &bdquo;Nismo same&ldquo;, a osobito na njenom blogu. Sonja je dakle, autor, svoj blog piše upravo otkada se razboljela, jer joj je, kako kaže, pisanje psihoterapija. Ohrabrena prvom pričom &bdquo;S perikom ili bez perike, s dojkom ili bez - ja sam žena&ldquo; nastavila je pisati.</p><p>No, osim što je autor, Sonja je i supruga i majka troje divne djece, koji su joj oduvijek bili ogromna podrška. Stoga ne čudi da su njenom projektu i ideji da osnuje Udrugu bili vjetar u leđa i pomogli joj da isto i ostvari.</p><p>Svoju dijagnozu raka dojke dobila je kada je imala 41 godinu, prošla je mastektomiju (operaciju odstranjenja dojke), 16 kemoterapija, preventivnu operaciju odstranjenja jajnika, 6 aplikacija lijeka za zaštitu kostiju (Zometa), a trenutno je i na terapiji održavanja - hormonskoj terapiji lijekovima Nolvadex/Letrozol.</p><p>Otada se mnogo toga promijenilo, kako je i sama rekla:</p><p>&bdquo;Cijeli jedan život stane u ovih šest godina, strahova i olakšanja, uspona i padova, tuge i sreće. Djeca su porasla, još jedan pubertet treba izgurati. Ostala sam bez posla u kemoterapiji, to je bio dodatan udarac za ionako poljuljan život. Danas sam skupila mrvice sebe i pronašla novu snagu.&ldquo;</p><p>Mnogo toga je naučila, a svoje iskustvo, znanje i &bdquo;skupljene mrvice&ldquo; odlučila je iskoristiti tako da promijeni svijet, ili barem jedan njegov dio, s dragim ljudima osnovala je Udrugu Caspera.</p>"
+              aria-label="Otvori profil Sonje Grgat"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/sonja_grgat.jpg"
+                  alt="Profilna fotografija Sonje Grgat"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Sonja Grgat</h2>
+                <p class="kartica-tima__uloga">Predsjednica</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Ivana Frapporti"
+              data-role="Suosnivačica"
+              data-image="../assets/images/ivana_frapporti.jpg"
+              data-image-alt="Profilna fotografija Ivane Frapporti"
+              data-bio-html="<p>Upoznajte Ivanu, vlasnicu ogromnog optimizma, neiscrpne energije, praktičarku i sistematičarku Caspere.</p><p>Po godinama mlada, iskustvom zrela. Ivana Frapporti je spremna za promjene, a energijom koju posjeduje pokreće svih nas. Kao planinarka naučila je kako je važno pratiti stazu pa nas svojim jasnim smjernicama vodi, i priznajemo, bez njenih uputa ponekad bismo bili pomalo izgubljeni.</p><p>Ivana je prošla, kako sama kaže, uzbudljiv put zadnjih nekoliko godina, a koji su joj olakšali njena obitelj i bliski prijatelji.</p><p>Kada je imala 36 godina, 2017. godine tijekom planirane operacije benigne ciste, dijagnosticiran joj je karcinom jajnika/jajovoda te su joj odmah na istoj operaciji odstranjeni jajnici, jajovodi, maternica i dio potrbušne maramice. Primila je tada 24 kemoterapije, oporavila se, vratila na posao i planini. U ovom periodu borbe Ivana je između svih ostalih aktivnosti napisala priču pod nazivom &bdquo;Neki novi svijet&ldquo; za portal &bdquo;Nismo Same&ldquo;.</p><p>2020. dogodio se povrat bolesti, stoga je ponovo primila kemoterapiju u obliku 6 ciklusa, a trenutno prima i terapiju održavanja i oporavlja se uz šetnje i dobro društvo.</p><p>Ivanina upornost i dosljednost su joj pomogli tijekom njenih oporavaka pa ju kemoterapije i posljedice nisu uspjele zaustaviti u šetanju, bicikliranju, šivanju, čitanju i ostalim hobijima. Samo su je malo usporile. Zasada usporile, sigurno bi ona dodala.</p><p>Ivana je od onih ljudi što kažu i naprave.</p>"
+              aria-label="Otvori profil Ivane Frapporti"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/ivana_frapporti.jpg"
+                  alt="Profilna fotografija Ivane Frapporti"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Ivana Frapporti</h2>
+                <p class="kartica-tima__uloga">Suosnivačica</p>
+              </div>
+            </button>
+          </section>
+
+          <div class="modal-clan-tima" data-team-modal hidden>
+            <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+            <section
+              class="modal-clan-tima__prozor"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-clan-tima-naslov"
+            >
+              <button
+                class="modal-clan-tima__zatvori"
+                type="button"
+                data-team-modal-close
+                aria-label="Zatvori prozor"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-clan-tima__raspored">
+                <div class="modal-clan-tima__slika-okvir">
+                  <img
+                    class="modal-clan-tima__slika"
+                    data-team-modal-image
+                    src="../assets/images/story_avatar.jpeg"
+                    alt="Profilna fotografija člana tima"
+                  />
+                </div>
+                <div class="modal-clan-tima__sadrzaj">
+                  <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>
+                    Ime člana tima
+                  </h2>
+                  <p class="modal-clan-tima__uloga" data-team-modal-role>Uloga</p>
+                  <div class="modal-clan-tima__opis" data-team-modal-bio>
+                    <p>Opis člana tima.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact-footer">
+      <div class="site-footer__inner">
+        <section class="site-footer__brand" aria-label="O Casperi">
+          <a class="site-footer__logo" href="../index.html">
+            <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+          </a>
+          <p class="site-footer__eyebrow">Podrška koja ostaje blizu</p>
+          <p class="site-footer__description">
+            Podrška, razumijevanje i zajedništvo na putu prema oporavku.
+          </p>
+          <a class="site-footer__cta button__main" href="#">Kontaktirajte nas</a>
+        </section>
+
+        <nav class="site-footer__column" aria-label="Glavna navigacija u podnožju">
+          <h2 class="site-footer__heading">Navigacija</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="../index.html">Početna</a></li>
+            <li><a class="site-footer__link" href="tko-je-caspera.html" aria-current="page">Tko je Caspera</a></li>
+            <li><a class="site-footer__link" href="nasa-ekipa.html">Naša ekipa</a></li>
+            <li><a class="site-footer__link" href="moja-prica.html">Moja priča</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__column" id="support-links" aria-label="Podrška i sadržaj">
+          <h2 class="site-footer__heading">Podrška</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="savjetodavatelji.html">Naši savjetodavatelji</a></li>
+            <li><a class="site-footer__link" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+            <li><a class="site-footer__link" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-patologa.html">Pitaj patologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+            <li><a class="site-footer__link" href="#">Casperin kalendar</a></li>
+          </ul>
+        </nav>
+
+        <section class="site-footer__column" aria-label="Kontakt i društvene mreže">
+          <h2 class="site-footer__heading">Kontakt</h2>
+          <ul class="site-footer__contact-list">
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">E-pošta</span>
+              <a class="site-footer__contact-link" href="mailto:kontakt@caspera.hr">kontakt@caspera.hr</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Telefon</span>
+              <a class="site-footer__contact-link" href="tel:+385000000000">+385 (0)00 000 000</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Lokacija</span>
+              <p class="site-footer__contact-text">Hrvatska</p>
+            </li>
+          </ul>
+          <div>
+            <h2 class="site-footer__heading">Pratite nas</h2>
+            <ul class="site-footer__social-list">
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Facebooku">Fb</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Instagramu">Ig</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na YouTubeu">Yt</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na LinkedInu">In</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">&copy; 2026 Caspera. Sva prava pridržana.</p>
+        <nav aria-label="Pravni linkovi u podnožju">
+          <ul class="site-footer__legal-list">
+            <li><a class="site-footer__legal-link" href="#">Pravila privatnosti</a></li>
+            <li><a class="site-footer__legal-link" href="#">Uvjeti korištenja</a></li>
+            <li><a class="site-footer__legal-link" href="#">Kolacici</a></li>
+            <li><a class="site-footer__legal-link" href="#">Pristupacnost</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

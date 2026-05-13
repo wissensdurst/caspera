@@ -15,7 +15,7 @@
   <body class="stranica-savjetodavatelji">
     <header class="header">
       <nav class="navbar" aria-label="Glavna navigacija">
-        <a class="navbar__logo" href="index.html">
+        <a class="navbar__logo" href="../index.html">
           <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
         </a>
         <button
@@ -32,7 +32,7 @@
         <div class="navbar__menu" id="navbar-menu">
           <ul class="navbar__list">
             <li class="navbar__item navbar__item--mobile-only">
-              <a class="navbar__link" href="index.html">Po&ccaron;etna</a>
+              <a class="navbar__link" href="../index.html">Po&ccaron;etna</a>
             </li>
             <li class="navbar__item navbar__item--has-children">
               <button
@@ -49,12 +49,12 @@
               </button>
               <div class="navbar__panel" id="navbar-panel-about">
                 <ul class="navbar__sublist">
-                  <li><a class="navbar__sublink" href="#">Tko je Caspera</a></li>
-                  <li><a class="navbar__sublink" href="#">Na&scaron;a ekipa</a></li>
-                  <li><a class="navbar__sublink" href="#">Caspera u medijima</a></li>
-                  <li><a class="navbar__sublink" href="#">Statut</a></li>
-                  <li><a class="navbar__sublink" href="#">Izvje&scaron;&cacute;e o radu</a></li>
-                  <li><a class="navbar__sublink" href="#">Plan rada i financijski plan</a></li>
+                  <li><a class="navbar__sublink" href="tko-je-caspera.html">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="nasa-ekipa.html">Na&scaron;a ekipa</a></li>
+                  <li><a class="navbar__sublink" href="caspera-u-medijima.html">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="statut.html">Statut</a></li>
+                  <li><a class="navbar__sublink" href="izvjesce-o-radu.html">Izvje&scaron;&cacute;e o radu</a></li>
+                  <li><a class="navbar__sublink" href="plan-rada-i-financijski-plan.html">Plan rada i financijski plan</a></li>
                 </ul>
               </div>
             </li>
@@ -73,7 +73,7 @@
               </button>
               <div class="navbar__panel" id="navbar-panel-support">
                 <ul class="navbar__sublist">
-                  <li><a class="navbar__sublink navbar__link--active" href="savjetodavatelji.html" aria-current="page">Na&scaron;i savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
                   <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
                   <li><a class="navbar__sublink" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
                   <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
@@ -123,7 +123,7 @@
                   <li><a class="navbar__sublink" href="#">Galerija</a></li>
                   <li><a class="navbar__sublink" href="#">O autoricama</a></li>
                   <li><a class="navbar__sublink" href="#">Bokun butige</a></li>
-                  <li><a class="navbar__sublink" href="#">Postani clan</a></li>
+                  <li><a class="navbar__sublink" href="postani-clan.html">Postani clan</a></li>
                 </ul>
               </div>
             </li>
@@ -148,124 +148,286 @@
               </div>
             </li>
           </ul>
-          <a class="navbar__cta button__main" href="#">Doniraj</a>
+          <a class="navbar__cta button__main" href="doniraj.html">Doniraj</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="popis-savjetodavatelja" aria-labelledby="naslov-popisa-savjetodavatelja">
-        <div class="popis-savjetodavatelja__unutarnji">
-          <header class="popis-savjetodavatelja__uvod">
-            <h1 class="popis-savjetodavatelja__naslov" id="naslov-popisa-savjetodavatelja">Na&scaron;i savjetodavatelji</h1>
-            <p class="popis-savjetodavatelja__tekst">
-              Strucnjaci i suradnici udruge Caspera pru&zcaron;aju odgovore,
-              usmjerenje i podr&scaron;ku &zcaron;enama koje prolaze kroz lijecenje i oporavak.
-            </p>
+      <section class="tim tim--centred-cards" aria-labelledby="naslov-popisa-savjetodavatelja">
+        <div class="tim__unutarnji">
+          <header class="tim__uvod">
+            <h1 class="tim__naslov" id="naslov-popisa-savjetodavatelja">Na&scaron;i savjetodavatelji</h1>
+            <div class="tim__tekstovi">
+              <p class="tim__tekst">
+                Stru&ccaron;njaci i suradnici udruge Caspera pru&zcaron;aju odgovore, usmjerenje i podr&scaron;ku
+                &zcaron;enama koje prolaze kroz lije&ccaron;enje i oporavak.
+              </p>
+            </div>
           </header>
 
-          <section class="popis-savjetodavatelja__mreza" aria-label="Popis savjetodavatelja udruge Caspera">
-            <article class="kartica-savjetodavatelja">
-              <div class="kartica-savjetodavatelja__profil">
+          <section class="tim__mreza" aria-label="Popis savjetodavatelja udruge Caspera">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Nikolina Zore"
+              data-role=""
+              data-image="../assets/images/placeholder.png"
+              data-image-alt="Profilna fotografija Nikoline Zore"
+              data-bio-html='<p>Nikolina je Gestalt savjetodavna terapeutkinja, a diplomu je stekla pri Institutu Psihika EAPTI - Europski akreditirani psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar. Ujedno je i diplomirana profesorica sociologije i filozofije. Niz godina radi u civilnom sektoru bave&cacute;i se podru&ccaron;jem mladih, kulture, volontiranja i pobolj&scaron;anja kvalitete &zcaron;ivota gra&dstrok;ana. Od 2015. educira se i bavi gestalt psihoterapijom. &Zcaron;ivi i radi u Dubrovniku.</p><p>&bdquo;Vode&cacute;i se umije&cacute;em i umjetno&scaron;&cacute;u gestalta, kroz terapijski odnos dviju osoba, mo&zcaron;emo vidjeti, osjetiti i prihvatiti druk&ccaron;iju perspektivu na ono &scaron;to nam &zcaron;ivot nosi.&ldquo;, poru&ccaron;uje Nikolina.</p>'
+              aria-label="Otvori profil Nikoline Zore"
+            >
+              <div class="kartica-tima__slika-okvir">
                 <img
-                  class="kartica-savjetodavatelja__slika"
-                  src="../assets/images/story_avatar.jpeg"
-                  alt="Profilna fotografija savjetodavateljice dr. Ane Maric"
+                  class="kartica-tima__slika"
+                  src="../assets/images/placeholder.png"
+                  alt="Profilna fotografija Nikoline Zore"
                 />
-                <h2 class="kartica-savjetodavatelja__ime">dr. Ana Maric</h2>
               </div>
-              <div class="kartica-savjetodavatelja__sadrzaj">
-                <p class="kartica-savjetodavatelja__opis">
-                  Nikolina je Gestalt savjetodavna terapeutkinja, a diplomu je stekla pri Institutu Psihika EAPTI - Europski akreditirani psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar. Ujedno je i diplomirana profesorica sociologije i filozofije.
-                </p>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Nikolina Zore</h2>
               </div>
-            </article>
+            </button>
 
-            <article class="kartica-savjetodavatelja">
-              <div class="kartica-savjetodavatelja__profil">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Ana Kralj"
+              data-role=""
+              data-image="../assets/images/placeholder.png"
+              data-image-alt="Profilna fotografija Ane Kralj"
+              data-bio-html='<p>Ana je savjetodavni terapeut tjelesno-orijentirane metode psihoterapije i prof. mentor flaute.</p><p>Diplomirala je na Muzi&ccaron;koj akademiji u Zagrebu 2005., a zavr&scaron;ila je &ccaron;etverogodi&scaron;nji studij za tjelesno-orijentiranog integrativnog psihoterapeuta 2018. pri CIR-u (Centar za integrativan razvoj). Nakon toga zavr&scaron;ila je i dvogodi&scaron;nje usavr&scaron;avanje/poslijediplomski za tjelesno-orijentiranog integrativnog psihoterapeuta 2020.</p><p>Kako cijeli &zcaron;ivot u&ccaron;i, napreduje i raste, tako i sada aktivno sudjeluje u edukacijama, radionicama i seminarima.</p><p>Ana &zcaron;ivi i radi u Zagrebu, voli glazbu, ali posebno voli humanitaran rad pa stoga rado i puno volontira. Upravo zato ne &ccaron;udi da ju daljina i kilometri nisu obeshrabrili da se javi Casperi, dapa&ccaron;e.</p><p>Obzirom da smo u Splitu, s Anom &cacute;ete razgovarati na &bdquo;daljinu&ldquo;, ali vjerujemo da &cacute;e vas Ana ipak jako dobro &ccaron;uti.</p><p>Mo&zcaron;da vam i zasvira.</p>'
+              aria-label="Otvori profil Ane Kralj"
+            >
+              <div class="kartica-tima__slika-okvir">
                 <img
-                  class="kartica-savjetodavatelja__slika"
-                  src="../assets/images/story_avatar.jpeg"
-                  alt="Profilna fotografija savjetodavateljice Ivane Kovac"
+                  class="kartica-tima__slika"
+                  src="../assets/images/placeholder.png"
+                  alt="Profilna fotografija Ane Kralj"
                 />
-                <h2 class="kartica-savjetodavatelja__ime">Ivana Kovac, mag. nutr.</h2>
               </div>
-              <div class="kartica-savjetodavatelja__sadrzaj">
-                <p class="kartica-savjetodavatelja__opis">
-                  Savjetuje o prehrani tijekom lijecenja, oporavka i povratka
-                  svakodnevnim navikama, uz naglasak na izvedive male korake.
-                </p>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Ana Kralj</h2>
               </div>
-            </article>
+            </button>
 
-            <article class="kartica-savjetodavatelja">
-              <div class="kartica-savjetodavatelja__profil">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Lucija Jurin"
+              data-role=""
+              data-image="../assets/images/Lucija_Jurin_cut.jpg"
+              data-image-alt="Profilna fotografija Lucije Jurin"
+              data-bio-html='<p>Nakon zavr&scaron;enog sveu&ccaron;ili&scaron;nog diplomskog studija upisala je specijalizirano &scaron;kolovanje iz ge&scaron;talt psihoterapije pri Institutu Psihika EAPTI - Europski akreditirani psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar, te je stekla diplomu iz ge&scaron;talt psihoterapije 02. travnja 2023. godine. Tako&dstrok;er, radi potrebe dodatnog usavr&scaron;avanja za poziv terapeuta, Lucija je uspje&scaron;no zavr&scaron;ila i Program propedeutike psihoterapije u Amigdala Centru, Zagreb. Upisom u Hrvatsku komoru psihoterapeuta stekla je pravo na obavljanje djelatnosti psihoterapije kao ovla&scaron;tena savjetodavna terapeutkinja.</p><p>Lucija &zcaron;ivi i radi u Splitu, gdje zajedno s An&dstrok;elkom Begom, dr. med., psihijatrom, subspecijalistom iz alkoholizma i drugih ovisnosti, vodi terapijske grupe podr&scaron;ke koje su dio programa Kluba lije&ccaron;enih ovisnika o kockanju &bdquo;Descartes&ldquo; (KLOK &bdquo;Descartes&ldquo;). Volontira u Udruzi &bdquo;Caspera&ldquo; - udruga &zcaron;ena oboljelih i lije&ccaron;enih od karcinoma.</p><p>Kao pravom introvertu Luciji je najdra&zcaron;e dru&scaron;tvo knjiga, ali kad se za&zcaron;eli i malo socijalnog kontakta tada posegne za u&zcaron;ivanjem u dobrom koncertu, sportskom doga&dstrok;aju, &scaron;etnji i ve&ccaron;eri s prijateljima. Obo&zcaron;ava putovanja i &zcaron;eli &scaron;to vi&scaron;e upoznavati razli&ccaron;ite kulture i obi&ccaron;aje, jer ljepota zaista i jest u razli&ccaron;itosti, ali pritom je zahvalna na svemu &scaron;to je do sada obogatilo njezin svjetonazor. &Ccaron;ini joj se da je glad za znanjem neuta&zcaron;iva, to je ono &scaron;to ju gura naprijed i daje joj smisao, a u isto vrijeme ju tjera na poniznost i shva&cacute;anje da je sam proces &zcaron;ivota cjelo&zcaron;ivotno u&ccaron;enje, a na koji na&ccaron;in &cacute;emo nau&ccaron;eno primijeniti ovisi o nama samima. Svestrana je i empati&ccaron;na, dobrobit drugih joj je jako va&zcaron;na, ali pri tome pazi na postavljanje zdravih granica. Kao terapeut se vodi sljede&cacute;im putokazom: &bdquo;Ako je eti&ccaron;ar onaj &ccaron;ovjek koji duboko promi&scaron;lja o &zcaron;ivotu, koji stvara i ima svoje vrijednosti i &zcaron;ivi po svojim vrijednostima i utje&ccaron;e na druge, onda je psihoterapeut kao takav - eti&ccaron;ar. Ako mi samo propovijedamo, a ne pona&scaron;amo se u skladu s tim, mi zapravo na&scaron;im klijentima onemogu&cacute;avamo oporavak.&ldquo; - dr.sc. Lidija Pecoti&cacute;, bilje&scaron;ka s predavanja &bdquo;Estetika i etika terapijskog kontakta&ldquo;, 2019. Zadar.</p>'
+              aria-label="Otvori profil Lucije Jurin"
+            >
+              <div class="kartica-tima__slika-okvir">
                 <img
-                  class="kartica-savjetodavatelja__slika"
-                  src="../assets/images/story_avatar.jpeg"
-                  alt="Profilna fotografija savjetodavatelja Marka Radica"
+                  class="kartica-tima__slika"
+                  src="../assets/images/Lucija_Jurin_cut.jpg"
+                  alt="Profilna fotografija Lucije Jurin"
                 />
-                <h2 class="kartica-savjetodavatelja__ime">Marko Radic, bacc. physioth.</h2>
               </div>
-              <div class="kartica-savjetodavatelja__sadrzaj">
-                <p class="kartica-savjetodavatelja__opis">
-                  Usmjerava clanice kroz sigurno kretanje, vje&zcaron;be mobilnosti i
-                  postupni povratak snazi nakon operacije ili terapije.
-                </p>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Lucija Jurin</h2>
               </div>
-            </article>
+            </button>
 
-            <article class="kartica-savjetodavatelja">
-              <div class="kartica-savjetodavatelja__profil">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Lara Rado&scaron;evi&cacute; Puhari&cacute;"
+              data-role=""
+              data-image="../assets/images/Lara Radošević.jpg"
+              data-image-alt="Profilna fotografija Lare Rado&scaron;evi&cacute; Puhari&cacute;"
+              data-bio-html='<p>Lara je certificirana ge&scaron;talt psihoterapeutkinja. U psihoterapiju je u&scaron;la 2017. godine, a diplomu je stekla 2023. godine pri Europskom akreditiranom psihoterapijskom Institutu (EAPTI) Psihika. Njeno bazi&ccaron;no obrazovanje pripada polju biomedicine te javnog zdravstva i zdravstvene za&scaron;tite, a titulu magistre organizacije, planiranja i upravljanja u zdravstvu stekla je 2012. godine pri Medicinskom fakultetu Sveu&ccaron;ili&scaron;ta u Rijeci. &Ccaron;lanica je Hrvatske komore psihoterapeuta i European Association of Psychotherapy.</p><p>Svoj radni vijek provela je u zdravstvenim sustavima i sustavima blisko povezanim sa zdravstvom, ve&cacute;inom u privatnom i korporativnom okru&zcaron;enju, a psihoterapijsko iskustvo stjecala je kroz Udrugu &zcaron;ena oboljelih od karcinoma (Caspera), Dru&scaron;tvo za istra&zcaron;ivanje i potporu Rijeka (DIP) i individualnu praksu. Njeno podru&ccaron;je interesa je &scaron;iroko, a naj&ccaron;e&scaron;&cacute;e se bavi prilagodbama na &zcaron;ivotne promjene (uklju&ccaron;iv&scaron;i i suo&ccaron;avanje s bolesti), upravljanjem stresom, gubicima i tugovanjima, pote&scaron;ko&cacute;ama u odnosima (partnerskim, obiteljskim, poslovnim), anksioznim i depresivnim te&scaron;ko&cacute;ama, traumama, niskim samopouzdanjem, sramom te osobnim rastom i razvojem.</p><p>Smatra kako znanje treba do&zcaron;ivotno njegovati, stoga osim &scaron;to redovito poha&dstrok;a edukacije i te&ccaron;ajeve od interesa za njene klijente i psihoterapijsku praksu, 2024. upisuje Diploma in Gestalt Psychotherapy to Masters in Gestalt Psychotherapy Upgrade Program pri Europski akreditiranom psihoterapijskom Gestalt Psychotherapy Training Institute Malta (EAPTI-GPTIM).</p><p>Oduvijek zna kako svoj &zcaron;ivot &zcaron;eli provesti poma&zcaron;u&cacute;i drugima, a psihoterapija joj se pokazala kao put u kojem mo&zcaron;e dati najvi&scaron;e od sebe. Zaljubljenik je u glazbu, dobre knjige, tihe &scaron;etnje, fina vina, ljetne topline, ali sve &ccaron;e&scaron;&cacute;e i zimski smiraj, prava prijateljstva i ljubav.</p><p>Danas je samozaposlena u svom obrtu Psihoforma (psihoforma.hr) gdje radi individualnu, partnersku i grupnu psihoterapiju za odrasle te odr&zcaron;ava razne edukacije vezane uz mentalno zdravlje. Dostupna je za online rad, te rad u&zcaron;ivo u Rijeci. LGBTQ+ friendly :)</p>'
+              aria-label="Otvori profil Lare Rado&scaron;evi&cacute; Puhari&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
                 <img
-                  class="kartica-savjetodavatelja__slika"
-                  src="../assets/images/story_avatar.jpeg"
-                  alt="Profilna fotografija savjetodavateljice dr. Petre Lukic"
+                  class="kartica-tima__slika"
+                  src="../assets/images/Lara Radošević.jpg"
+                  alt="Profilna fotografija Lare Rado&scaron;evi&cacute; Puhari&cacute;"
                 />
-                <h2 class="kartica-savjetodavatelja__ime">dr. Petra Lukic</h2>
               </div>
-              <div class="kartica-savjetodavatelja__sadrzaj">
-                <p class="kartica-savjetodavatelja__opis">
-                  Odgovara na pitanja o njezi ko&zcaron;e, promjenama tijekom terapije
-                  i prakticnim nacinima ubla&zcaron;avanja svakodnevnih tegoba.
-                </p>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Lara Rado&scaron;evi&cacute; Puhari&cacute;</h2>
               </div>
-            </article>
+            </button>
 
-            <article class="kartica-savjetodavatelja">
-              <div class="kartica-savjetodavatelja__profil">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Ana Katalini&cacute; Bach"
+              data-role=""
+              data-image="../assets/images/AnaKatalinicBach.jpeg"
+              data-image-alt="Profilna fotografija Ane Katalini&cacute; Bach"
+              data-bio-html='<p>Ana Katalini&cacute; Bach je savjetodavni gestalt terapeut s diplomom gestalt psihoterapije, koju je stekla 2021. godine pri Institutu Psihika EAPTI - Europski akreditirani psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar. Po osnovnoj struci je u&ccaron;itelj biologije i radi u osnovnoj &scaron;koli. Rad sa &scaron;kolskom djecom i osobni razvojni put probudili su ljubav prema pomaganju i razumijevanju su&scaron;tine ljudskog iskustva. U ge&scaron;talt terapiji nalazi cjeloviti, ekolo&scaron;ki pogled na ljudsko bi&cacute;e: &ccaron;ovjek nije samo svoj simptom niti samo svoja dijagnoza.</p><p>2022. zavr&scaron;ila je nadogradnju za Master program iz gestalt psihoterapije pri Gestalt Psychotherapy Training Institute Malta i stekla titulu magistre gestalt psihoterapije. &Ccaron;lanica je Hrvatske komore psihoterapeuta, aktivno radi s klijentima i pod redovitom je supervizijom.</p>'
+              aria-label="Otvori profil Ane Katalini&cacute; Bach"
+            >
+              <div class="kartica-tima__slika-okvir">
                 <img
-                  class="kartica-savjetodavatelja__slika"
-                  src="../assets/images/story_avatar.jpeg"
-                  alt="Profilna fotografija savjetodavateljice dr. Maje Horvat"
+                  class="kartica-tima__slika"
+                  src="../assets/images/AnaKatalinicBach.jpeg"
+                  alt="Profilna fotografija Ane Katalini&cacute; Bach"
                 />
-                <h2 class="kartica-savjetodavatelja__ime">dr. Maja Horvat</h2>
               </div>
-              <div class="kartica-savjetodavatelja__sadrzaj">
-                <p class="kartica-savjetodavatelja__opis">
-                  Poma&zcaron;e pojasniti patohistolo&scaron;ke nalaze i strucne pojmove kako
-                  bi clanice lak&scaron;e pratile tijek dijagnostike i lijecenja.
-                </p>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Ana Katalini&cacute; Bach</h2>
               </div>
-            </article>
+            </button>
 
-            <article class="kartica-savjetodavatelja">
-              <div class="kartica-savjetodavatelja__profil">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Nikoleta Klai&cacute;"
+              data-role=""
+              data-image="../assets/images/placeholder.png"
+              data-image-alt="Profilna fotografija Nikolete Klai&cacute;"
+              data-bio-html='<p>Ro&dstrok;ena je te &zcaron;ivi i radi u Zagrebu. Udana je i vlasnica jednog ma&ccaron;ka.</p><p>Ima zvanje savjetodavnog ge&scaron;talt psihoterapeuta &scaron;to je zavr&scaron;ila pri Institutu PSIHIKA d.o.o. (EAPTI) - Europski psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar. Tako&dstrok;er je zavr&scaron;ila i program propedeutike psihoterapije pri Amigdala centar d.o.o. odobren od strane Saveza psihoterapijskih udruga Hrvatske te je &ccaron;lan Hrvatske komore psihoterapeuta.</p><p>Osim toga, po primarnom zanimanju je magistar ekonomije te ima dugogodi&scaron;nji sta&zcaron; u radu u velikim korporacijama.</p><p>Privatno, sebe bi opisala kao zaljubljenika u knjige, prirodu, ljude, &zcaron;ivotinje, dobro dru&scaron;tvo, iskren osmijeh i nekoga tko vjeruje da ljubav pokre&cacute;e svijet.</p><p>U ge&scaron;talt put je doveo sasvim slu&ccaron;ajno, ali kako vjerojatno ni&scaron;ta nije slu&ccaron;ajno, tako je kroz svoje osobno iskustvo prvo krenula na terapiju, zaljubila se i po&ccaron;etkom 2020. godine pristupila edukaciji. Ono &scaron;to je u edukaciji zadr&zcaron;alo je dubina koju ge&scaron;talt donosi te ljubav prema ljudima, ali i samoj sebi koju ranije nije imala kapaciteta osjetiti u punini. Tako&dstrok;er zadr&zcaron;alo je veliko prijateljstvo i zajedni&scaron;tvo prvenstveno divnih &zcaron;ena punih podr&scaron;ke za nju uz koje je mogla biti autenti&ccaron;na.</p><p>Put do psihoterapije za nju je bio izazovan, no otvorio joj je jedan potpuno novi svijet i od prve minute kako je upoznala ge&scaron;talt znala je da nema nazad i da vi&scaron;e ni&scaron;ta ne&cacute;e biti isto ve&cacute; puno iskrenije i emotivnije. Kroz zacjeljivanje osobnih rana i svoj osobni rast i razvoj dobila je motivaciju i odlu&ccaron;ila pru&zcaron;ati podr&scaron;ku kroz pomaganje drugima. Kroz edukaciju i rad sa klijentima nau&ccaron;ila je usporiti, disati, biti strpljivija te u kontaktu sa svojom du&scaron;om. Kako cijeli &zcaron;ivot u&ccaron;i, napreduje i raste, tako i dalje aktivno sudjeluje u raznim edukacijama, radionicama i seminarima.</p>'
+              aria-label="Otvori profil Nikolete Klai&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
                 <img
-                  class="kartica-savjetodavatelja__slika"
-                  src="../assets/images/story_avatar.jpeg"
-                  alt="Profilna fotografija savjetodavateljice Sare Babic"
+                  class="kartica-tima__slika"
+                  src="../assets/images/placeholder.png"
+                  alt="Profilna fotografija Nikolete Klai&cacute;"
                 />
-                <h2 class="kartica-savjetodavatelja__ime">Sara Babic, mag. psych.</h2>
               </div>
-              <div class="kartica-savjetodavatelja__sadrzaj">
-                <p class="kartica-savjetodavatelja__opis">
-                  Pru&zcaron;a podr&scaron;ku u no&scaron;enju sa strahom, neizvjesno&scaron;cu i promjenama
-                  koje bolest donosi u obitelj, posao i svakodnevni ritam.
-                </p>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Nikoleta Klai&cacute;</h2>
               </div>
-            </article>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Tomislava Gregov" data-role="" data-image="../assets/images/Tomislava Gregov.jpg" data-image-alt="Profilna fotografija Tomislave Gregov" data-bio-html='<p>Magistra je Ge&scaron;talt psihoterapije, M.Psych (Gest) pri Gestalt Psychotherapy Training Institute Malta (EAPTI-GPTIM) i certificirana je Ge&scaron;talt savjetodavna terapeutkinja (Institut Psihika EAPTI). Posjeduje Europski certifikat iz psihoterapije (ECP). &Ccaron;lanica je Hrvatske komore psihoterapeuta, Dru&scaron;tva ge&scaron;talt i integrativnih psihoterapeuta Hrvatske. Tako&dstrok;er je &ccaron;lanica Ureda Tajnika SPUH-a (Saveza psihoterapijskih udruga Hrvatske) i vlasnica savjetodavnog i edukacijskog Centra LUMEN VITAE.</p><p>Zavr&scaron;ila je edukaciju iz Terapije igrom: vje&scaron;tine i intervencije u radu s djecom pri Centru Proventus i trenutno je u edukaciji iz integrativne psihoterapije igrom pri Ama Dablam Institutu za relacijsku psihoterapiju i edukaciju.</p><p>Ima vi&scaron;egodi&scaron;nje iskustvo volontiranja s udrugama putem pru&zcaron;anja razli&ccaron;itih oblika podr&scaron;ke, psihoterapije i savjetovanja. Radno iskustvo u psihoterapiji usmjereno je na rad s djecom, adolescentima i odraslim osobama s naglaskom na holisti&ccaron;ki pristup klijentima u svrhu poticanja osobnog rasta i razvoja.</p><p>Tomislava je osvijestila ulogu pomaga&ccaron;a u najranijoj dobi, tako da je put ka psihoterapijskom radu, kojeg smatra prije svega pozivom, za nju do&scaron;ao potpuno prirodno i spontano.</p><p>Voli sun&ccaron;ane dane i hladnu buru, ples, glazbu i kreativni izri&ccaron;aj kroz umjetnost. Svoju obitelj i prijatelje.</p><p>Teme s kojima se susre&cacute;e u svom psihoterapijskom radu su osobni razvoj i samoostvarenje, roditeljstvo i komunikacija s djecom, anksioznost, stres, sagorijevanje i perfekcionizam, poreme&cacute;aji hranjenja, obiteljska dinamika i suo&ccaron;avanje s gubicima, &zcaron;alovanje, trauma, no&scaron;enje sa stresom i izazovima te suo&ccaron;avanje s promjenama, kao i izazovi na radnom mjestu uklju&ccaron;uju&cacute;i mobbing i krize karijere.</p><p>&Zcaron;ivi u Zadru, sa suprugom i dvoje djece. U&zcaron;iva u putovanjima i istra&zcaron;ivanju kulturne raznolikosti.</p>' aria-label="Otvori profil Tomislave Gregov">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Tomislava Gregov.jpg" alt="Profilna fotografija Tomislave Gregov" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Tomislava Gregov</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Mariela Markovi&cacute;" data-role="" data-image="../assets/images/Mariela Marković.jpg" data-image-alt="Profilna fotografija Mariele Markovi&cacute;" data-bio-html='<p>Studentica sam napredne edukacije za ge&scaron;talt psihoterapeuta pri Institutu Psihika EAPTI - Europskog akreditiranog psihoterapijskog trening Instituta - Centra za psihoterapiju, edukaciju i savjetovanje Zadar. Radim s klijentima i pod redovitom sam supervizijom.</p><p>Diplomirala sam na Filozofskom fakultetu Sveu&ccaron;ili&scaron;ta u Zagrebu, kroatistiku i hungarologiju i ve&cacute; gotovo 20 godina radim kao profesorica Hrvatskoga jezika u srednjoj &scaron;koli. Osim u &scaron;koli radim i aktivna sam u brojnim dru&scaron;tvima, institucijama i udrugama koje se bave knji&zcaron;evno&scaron;&cacute;u, kulturom, radom s mladima, aktivnim gra&dstrok;anstvom i drugim temama koje u fokusu imaju dobrobit pojedinca i zajednice.</p><p>Oduvijek sam bila zaljubljena u istra&zcaron;ivanje du&scaron;e, kroz umjetnost, filozofiju ili psihologiju, &scaron;to me je i dovelo do psihoterapije, prvo iz potrebe da istra&zcaron;im sebe, a onda i da, u zajedni&ccaron;kom traganju, u&ccaron;enju i odnosu, poku&scaron;am biti podr&scaron;ka drugima.</p>' aria-label="Otvori profil Mariele Markovi&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Mariela Marković.jpg" alt="Profilna fotografija Mariele Markovi&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Mariela Markovi&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Ivana Radmilo" data-role="" data-image="../assets/images/Ivana Radmilo_fotografija_edited.jpg" data-image-alt="Profilna fotografija Ivane Radmilo" data-bio-html='<p>U protekle dvije godine svoje dotada&scaron;nje profesionalno usmjerenje odlu&ccaron;ila je zamijeniti primarnim interesom te napraviti apsolutni zaokret u karijeri. Trenutno se nalazi u edukaciji za Ge&scaron;talt psihoterapeutkinju pri IGW institutu u Zagrebu, te je u procesu finaliziranja Propedeutike psihoterapije (Petar Zrinski, Zagreb).</p><p>Primarno je po struci magistra in&zcaron;enjerka pomorstva te magistra forenzike. Zavr&scaron;etkom navedenih studija na&scaron;la se u vrtlogu poslova koji su u fokusu imali &ccaron;ovjeka i kreiranje njegovog poslovnog okru&zcaron;enja s ciljem razumijevanja potreba i o&ccaron;ekivanja.</p><p>Rad s djecom &scaron;kolskog uzrasta ili planiranje poslovanja za ve&cacute;u skupinu ljudi u organizaciji jednako je izazovan posao te zahtijeva razli&ccaron;ite vje&scaron;tine i znanja. Godine iskustva u navedenom dovele su je do preispitivanja vlastite profesionalne odluke, &scaron;to je u kona&ccaron;nici dovelo do povratka sebi, slu&scaron;anja vlastitih &zcaron;elja i potreba. Kao prvi korak zavr&scaron;ava po&ccaron;etnu edukaciju iz transakcijske analize te je primjenjuje u radu s djecom.</p><p>Misao vodilja jo&scaron; od srednje &scaron;kole bila joj je &bdquo;rad s ljudima, rad za njih i za njihovo dobro u okviru mentalnog zdravlja&ldquo;.</p><p>Sna&zcaron;na potreba za pru&zcaron;anjem podr&scaron;ke, empatija s kojom je ponekad te&scaron;ko iza&cacute;i na kraj, dovela ju je u pri&ccaron;u zvanu Ge&scaron;talt.</p><p>Holisti&ccaron;ki pristup &ccaron;ovjeku, usmjerenje na &ccaron;ovjeka kao cjelinu te ideja kako kao klijent i terapeut imamo samo ono &scaron;to je &bdquo;ovdje i sada&ldquo;, je ne&scaron;to &scaron;to ju je najvi&scaron;e privuklo Ge&scaron;taltu. Vjeruje kako edukacijom i razumijevanjem lije&ccaron;imo sebe i pru&zcaron;amo zdraviju podr&scaron;ku onima kojima je potrebna.</p>' aria-label="Otvori profil Ivane Radmilo">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Ivana Radmilo_fotografija_edited.jpg" alt="Profilna fotografija Ivane Radmilo" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Ivana Radmilo</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Mia Radosti&cacute;" data-role="" data-image="../assets/images/Mia Radostić_edited.jpg" data-image-alt="Profilna fotografija Mie Radosti&cacute;" data-bio-html='<p>Na kraju osnovne &scaron;kole, dok su sva djeca razmi&scaron;ljala o tome koju &cacute;e srednju &scaron;kolu upisati, ja sam mami rekla da ja &zcaron;elim i&cacute;i u onu &scaron;kolu nakon koje &cacute;u mo&cacute;i studirati psihologiju.</p><p>Za mene je psihologija, prije svega, ljubav. Osim &scaron;to sam magistra psihologije, trenutno poha&dstrok;am ge&scaron;talt psihoterapiju u okviru Centra IGW Zagreb. Oduvijek sam voljela razgovarati s ljudima, slu&scaron;ati njihove pri&ccaron;e i upijati njihove brige kako bi im na neki na&ccaron;in mogla pru&zcaron;iti podr&scaron;ku, utje&scaron;iti ih ili im pomo&cacute;i u pronalasku rje&scaron;enja odre&dstrok;enih problema.</p><p>Jedva &ccaron;ekam &ccaron;uti glas &zcaron;ena kojima je potreban razgovor te im pru&zcaron;iti razumijevanje i podr&scaron;ku za ono kroz &scaron;to prolaze ili su pro&scaron;le. Uvijek spremna na dru&zcaron;enje, nova iskustva i ljude te ne&scaron;to novo nau&ccaron;iti o drugima i &zcaron;ivotu.</p>' aria-label="Otvori profil Mie Radosti&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Mia Radostić_edited.jpg" alt="Profilna fotografija Mie Radosti&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Mia Radosti&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Snje&zcaron;ana Pu&scaron;&cacute;enik" data-role="" data-image="../assets/images/Snježana Pušćenik_edited.jpg" data-image-alt="Profilna fotografija Snje&zcaron;ane Pu&scaron;&cacute;enik" data-bio-html='<p>Snje&zcaron;ana je magistra Gestalt psihoterapije, mag.psych (Gest), diplomu je stekla pri Institutu Psihika EAPTI, Zadar.</p><p>Po struci profesorica Francuskog jezika i knji&zcaron;evnosti i profesorica Povijesti, a ve&cacute; du&zcaron;i niz godina radi u me&dstrok;unarodnoj firmi, od kojih sedam kao manager za klju&ccaron;ne kupce sa fokusom na francusko tr&zcaron;i&scaron;te.</p><p>Zaljubljenica u prirodu, strane jezike i knjige, 2019. otkriva Ge&scaron;talt i poput djeteta otvoreno upija svaku novinu i polako uvi&dstrok;a novi, druga&ccaron;iji na&ccaron;in &zcaron;ivljenja. Magi&ccaron;niji. Tako Ge&scaron;talt ulazi u svaku poru njene svakodnevice te ga integrira i kroz posao i u sve odnose kroz svakodnevni &zcaron;ivot.</p><p>Ljubav prema Ge&scaron;taltu kompenzira sve gubitke, u zadnje vrijeme postaje njen moto i misao vodilja. Radi sa klijentima redovito pod supervizijom, aktivna je i volonterski, uvijek no&scaron;ena &zcaron;eljom da dio ljubavi koju nosi u sebi prenese i osobi ispred sebe i tako toj istoj omogu&cacute;i ljepotu &zcaron;ivljenja i u najte&zcaron;im i u najljep&scaron;im trenucima.</p><p>C&apos;est le temps que tu as perdu pour ta rose qui fait ta rose si importante. - Le Petit Prince.</p>' aria-label="Otvori profil Snje&zcaron;ane Pu&scaron;&cacute;enik">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Snježana Pušćenik_edited.jpg" alt="Profilna fotografija Snje&zcaron;ane Pu&scaron;&cacute;enik" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Snje&zcaron;ana Pu&scaron;&cacute;enik</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Ina Deli&cacute;" data-role="" data-image="../assets/images/Ina Delić_edited.jpg" data-image-alt="Profilna fotografija Ine Deli&cacute;" data-bio-html='<p>Diplomirana ge&scaron;talt terapeutkinja, profesorica hrvatskog jezika i knji&zcaron;evnosti i povijesti, edukantica hipnoterapije pri ameri&ccaron;kom IACT-u i strastvena pripovjeda&ccaron;ica. &Ccaron;lanica je Hrvatske komore psihoterapeuta. Nakon vi&scaron;egodi&scaron;njeg rada u &scaron;koli u&ccaron;ionicu zamjenjuje terapijskim uredom.</p><p>U terapijskom radu va&zcaron;no joj je njegovati podr&scaron;ku i prisutnost duboko ukorijenjenu u razumijevanju da svi mi imamo svoje va&zcaron;ne i zadivljuju&cacute;e pri&ccaron;e i svima nam, u odre&dstrok;enom trenutku, treba sna&zcaron;nija podr&scaron;ka. Va&zcaron;no joj je da osobe s kojima radi osjete unutarnji impuls i &zcaron;elju za promjenom i djeluju u skladu s njom, jer jedino tako terapijski proces mo&zcaron;e posti&cacute;i svoj puni smisao.</p><p>Smatra kako je terapijski proces poput svjetiljke koja nam poma&zcaron;e osvijetliti na&scaron;e dubine i slojeve na&scaron;eg bi&cacute;a pa je, u skladu s time, i obrt nazvala Feral :)</p><p>Pripovijedanje, kojim se strastveno bavi, za nju nije samo na&ccaron;in razumijevanja ljudskih pri&ccaron;a i psihe, ve&cacute; i alat kojim otvara vrata prema univerzalnim, transpersonalnim temama - povezanosti, svrsi i unutarnjem rastu.</p><p>U svom radu susretala se s klijentima koji imaju anksiozne i depresivne pote&scaron;ko&cacute;e, LGBTQ populacijom, onkolo&scaron;kim pacijentima, ljudima u boli i tugovanju i onima koji &zcaron;ele rije&scaron;iti odre&dstrok;ene pote&scaron;ko&cacute;e i bolje razumjeti sebe.</p>' aria-label="Otvori profil Ine Deli&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Ina Delić_edited.jpg" alt="Profilna fotografija Ine Deli&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Ina Deli&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Andrijana &Scaron;vajce" data-role="" data-image="../assets/images/Andrijana Švajcer.jpeg" data-image-alt="Profilna fotografija Andrijane &Scaron;vajce" data-bio-html='<p>Edukantica je &ccaron;etvrte godine ge&scaron;talt terapije pod supervizijom na Institutu Psihika. Zavr&scaron;ila je i program propedeutike psihoterapije na Veleu&ccaron;ili&scaron;tu Bernays. Do edukacije za psihoterapeuta do&scaron;la je neuobi&ccaron;ajenim putem. Od (elektro)tehni&ccaron;kog obrazovanja i 15 godina vo&dstrok;enja timova i projekata u IT industriji u UK, preko 10 godina ugo&scaron;&cacute;avanja gostiju na romanti&ccaron;nom imanju u Istri. Usmjerena je onim &scaron;to je oduvijek najvi&scaron;e zanimalo: ljudi i njihova subjektivna iskustva te do&zcaron;ivljaji i na&ccaron;ini na koje stvaramo smisao na&scaron;ih vlastitih &zcaron;ivota i svijeta oko nas.</p><p>&Zcaron;ivi i radi na relaciji Zagreb - Istra s mu&zcaron;em, psom i macom. U&zcaron;iva u kombinaciji &zcaron;ivota u gradu i na selu koji pokrivaju njenu potrebu za kulturom i dru&zcaron;enjem s jedne te prirodom i mirom s druge strane.</p><p>Vjeruje da njeno bogato &zcaron;ivotno iskustvo i razli&ccaron;iti interesi puno zna&ccaron;e u radu s klijentima. Nema unaprijed i napamet nau&ccaron;en odgovor - tu je da saslu&scaron;a, shvati i podr&zcaron;i. Vjeruje da njeni klijenti i ona, u terapeutskom susretu, zajedno kreiraju promjenu koja je uvijek mogu&cacute;a.</p>' aria-label="Otvori profil Andrijane &Scaron;vajce">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Andrijana Švajcer.jpeg" alt="Profilna fotografija Andrijane &Scaron;vajce" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Andrijana &Scaron;vajce</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Nikolina Drago&scaron;evi&cacute;" data-role="" data-image="../assets/images/Nikolina Dragošević.jpg" data-image-alt="Profilna fotografija Nikoline Drago&scaron;evi&cacute;" data-bio-html='<p>Studentica je ge&scaron;talt psihoterapije pri Institutu PSIHIKA d.o.o. (EAPTI) - Europski psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar. Na zavr&scaron;noj godini edukacije aktivno po&ccaron;inje raditi s klijentima pod supervizijom. Tako&dstrok;er, zavr&scaron;ila je i program propedeutike psihoterapije na Veleu&ccaron;ili&scaron;tu Edward Bernays. Po primarnom zanimanju je diplomirani novinar, s preko 20 godina rada u struci.</p><p>&Ccaron;etverogodi&scaron;nja edukacija nije joj samo omogu&cacute;ila usavr&scaron;avanje na profesionalnoj razini, ve&cacute; joj je pomogla pri osobnom putu rasta i razvoja. Iskustveno mo&zcaron;e potvrditi jednu od temeljnih ge&scaron;taltisti&ccaron;kih postavki da svaki &ccaron;ovjek ima potencijale za samoostvarenje i samoregulaciju, dok su terapeuti na tom putovanju va&scaron;a podr&scaron;ka i vodilja. Smatra kako svatko zaslu&zcaron;uje psihoterapiju.</p><p>&Zcaron;ivi i radi u Zagrebu, a kao Dalmatinka u srcu &ccaron;esto je na autocesti A1. Ponosna je majka jednog devetnaestogodi&scaron;njaka. Opu&scaron;ta je priroda, planinarenje, film, glazba i dobro dru&scaron;tvo.</p>' aria-label="Otvori profil Nikoline Drago&scaron;evi&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Nikolina Dragošević.jpg" alt="Profilna fotografija Nikoline Drago&scaron;evi&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Nikolina Drago&scaron;evi&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Petar Novak" data-role="" data-image="../assets/images/Petar Novak_edited_edited.jpg" data-image-alt="Profilna fotografija Petra Novaka" data-bio-html='<p>Petar Novak je na tre&cacute;oj godini edukacije ge&scaron;talt psihoterapije pri Institutu Psihika EAPTI - Europski akreditirani psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar. Psihoterapijsku praksu obavlja pod supervizijom, a trenutno isto tako poha&dstrok;a i propedeutiku psihoterapije kako bi se dodatno educirao za zanimanje terapeuta.</p><p>Radi u Centru za pru&zcaron;anje usluga u zajednici Maestral u Splitu kao odgojitelj. &Zcaron;ivot ga je vodio od ro&dstrok;enja u Osijeku preko aktivne vojne slu&zcaron;be sve do rada s djecom bez adekvatne socijalne skrbi. Vjeruje u dobrobiti psihoterapije, mogu&cacute;nosti za promjenu, osobni rast i razvoj te ljubav kao fundamentalnu silu koja otvara vrata pred nama.</p><p>Petar je na raspolaganju za susret u&zcaron;ivo. Vodi se izrekom &bdquo;&Ccaron;ovjek koji ima Za&scaron;to za &zcaron;ivjeti, mo&zcaron;e se boriti s bilo kojim Kako. &Zcaron;ivot je jedan i dragocjen. Vrijedi se boriti. I voljeti.&ldquo;</p>' aria-label="Otvori profil Petra Novaka">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Petar Novak_edited_edited.jpg" alt="Profilna fotografija Petra Novaka" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Petar Novak</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Tamara Klasan Brn&ccaron;i&cacute;" data-role="" data-image="../assets/images/Tamara Klasan.jpg" data-image-alt="Profilna fotografija Tamare Klasan Brn&ccaron;i&cacute;" data-bio-html='<p>Ro&dstrok;ena u Rijeci gdje i danas &zcaron;ivi. Udana i majka troje djece. Svoje obrazovanje zavr&scaron;ila je na Filozofskom fakultetu u Rijeci te stekla zvanje baccalarea engleskog jezika i knji&zcaron;evnosti i pedagogije, nakon &ccaron;ega je zavr&scaron;ila magisterij i stekla zvanje magistra pedagogije.</p><p>Svjesna &ccaron;injenice koliko je va&zcaron;no raditi na sebi i koliko je bitna sposobnost za kontakt s drugima, motiviralo ju je da svoj osobni i profesionalni razvoj unaprijedi, a sna&zcaron;na potreba za pru&zcaron;anjem podr&scaron;ke dovodi je do ge&scaron;talt psihoterapije. Polaznica je tre&cacute;e godine edukacije iz ge&scaron;talt psihoterapije pri Institutu PSIHIKA d.o.o. (EAPTI) - Europski psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar, te aktivno po&ccaron;inje raditi s klijentima pod supervizijom.</p><p>Kao pedagog, kroz rad u pred&scaron;kolskoj ustanovi, jedan aspekt rada kojem pridaje veliku va&zcaron;nost je savjetodavni rad. Prilikom savjetodavnog rada aktivno slu&scaron;anje, empati&ccaron;nost i tolerancija su vje&scaron;tine na kojima svakodnevno radi kako bi unaprijedila komunikaciju na individualnoj razini. Zainteresirana je za druge ljude i vlastitu samospoznaju kao i za otkrivanje nesvjesnih obrazaca pona&scaron;anja. &Zcaron;eljna znanja i novih metoda koje joj mogu pomo&cacute;i u otkrivanju sebe i drugih smatra kako je upravo ge&scaron;talt psihoterapija pozitivan pristup koji joj to omogu&cacute;uje.</p>' aria-label="Otvori profil Tamare Klasan Brn&ccaron;i&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Tamara Klasan.jpg" alt="Profilna fotografija Tamare Klasan Brn&ccaron;i&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Tamara Klasan Brn&ccaron;i&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Nikica Gotovac" data-role="" data-image="../assets/images/Nikica Gotovac_edited.jpg" data-image-alt="Profilna fotografija Nikice Gotovca" data-bio-html='<p>Student je tre&cacute;e godine integrativne ge&scaron;talt psihoterapije pri CITIS - Centar za integrativnu ge&scaron;talt terapiju i savjetovanje u Zagrebu. Kako je po struci diplomirani ekonomist, prije upisa studija psihoterapije zavr&scaron;io je propedeutiku psihoterapije u roku. Posljednjih deset godina vodi obiteljski obrt koji ima tradiciju dugu 26 godina, a prije toga je devet godina radio u velikoj kompaniji u financijama.</p><p>Rodom je iz Bosne i Hercegovine, devedesetih se s obitelji doseljava u Trogir te zatim odlazi na fakultet u Zagreb, da bi nakon diplome ostao i raditi u Zagrebu. Kako je &ccaron;esto posje&cacute;ivao obitelj u Dalmaciji i sve vi&scaron;e po&ccaron;eo cijeniti vrijeme provedeno u blizini obitelji, a i sve vi&scaron;e se zaljubljivati u stil &zcaron;ivljenja uz obalu, prije deset godina se vra&cacute;a u Trogir.</p><p>Psihoterapija mu je donijela mir u &zcaron;ivot, prisutnost i bivanje u trenutku, snagu da promijeni dijelove sebe koji mu se nisu svi&dstrok;ali, ali i da neke prihvati. Rad na sebi ga je nau&ccaron;io da je svako &zcaron;ivo bi&cacute;e savr&scaron;eno u svojoj nesavr&scaron;enosti i da uz prihva&cacute;anje, suosje&cacute;anje i ljubav mo&zcaron;emo uspjeti hoditi zadovoljni i svjesni kroz &zcaron;ivot.</p><p>Nikica je na raspolaganju za susrete u&zcaron;ivo.</p><p>Nikicin pogled na &zcaron;ivot je: ma koliko &zcaron;ivot nekad bio surov i nepravedan prema nama, u svima nama postoji ta iskra koja nam mo&zcaron;e pokazati da smo prisutni i da smo spremni prihvatiti sve &scaron;to nam donosi i uz pomo&cacute; ljubavi ga nau&ccaron;iti da bude nje&zcaron;niji prema nama.</p>' aria-label="Otvori profil Nikice Gotovca">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Nikica Gotovac_edited.jpg" alt="Profilna fotografija Nikice Gotovca" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Nikica Gotovac</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Petra Lozan&ccaron;i&cacute;" data-role="" data-image="../assets/images/Petra Lozančić_edited.jpg" data-image-alt="Profilna fotografija Petre Lozan&ccaron;i&cacute;" data-bio-html='<p>Po struci je magistra pedagogije te apsolventica ge&scaron;talt psihoterapije pri Institutu Psihika EAPTI. Zadnjih deset godina radi kao pedagog u sportskom klubu kao podr&scaron;ka mladim sporta&scaron;ima u razvoju i rastu. Taj posao ju je dosta oblikovao kao osobu. Nau&ccaron;ila je kako funkcionirati u velikom sustavu, a i dalje zadr&zcaron;ati i njegovati svoje vrijednosti u odnosima.</p><p>Nekoliko godina nakon upisuje edukaciju iz ge&scaron;talt psihoterapije s namjerom da dobije jo&scaron; vi&scaron;e smjernica za rad s ljudima i u kona&ccaron;nici diplomu, ali ono bitnije &scaron;to je dobila su dublji uvidi o sebi.</p><p>Shvatila je koliko su svjesnost i samopodr&scaron;ka dva temeljna stupa svake osobe. Ge&scaron;talt joj je bio i jest jedan veliki dar.</p><p>Susre&cacute;e se s klijentima zadnje tri godine i zajedno bivaju kroz razne izazove. Puno su je toga nau&ccaron;ili i puno je toga u&ccaron;e. Zahvalna im je na tom.</p><p>Njene uloge mame, pedagoga i psihoterapeuta ju ispunjavaju i &scaron;ire njene kapacitete. Nevjerojatan su joj izvor zahvalnosti i inspiracije.</p><p>Svoje vrijeme provodi u tim ulogama, a ono &scaron;to ju tako&dstrok;er ispunjava su &ccaron;itanje dobre knjige, trening i glazba.</p><p>Jedan od najdra&zcaron;ih citata prema kojem nastoji &zcaron;ivjeti je: &quot;In a world where you can be anything be kind.&quot;</p>' aria-label="Otvori profil Petre Lozan&ccaron;i&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Petra Lozančić_edited.jpg" alt="Profilna fotografija Petre Lozan&ccaron;i&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Petra Lozan&ccaron;i&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Marija Morovi&cacute;" data-role="" data-image="../assets/images/placeholder.png" data-image-alt="Profilna fotografija Marije Morovi&cacute;" data-bio-html='<p>Marija je pedagoginja i psihoterapeutkinja pod supervizijom. 2020. godine je zavr&scaron;ila naprednu edukaciju iz transakcijske analize - smjer psihoterapija, trenutno priprema ispit za certifikat. Dugi niz godina je radila u Volonterskom centru Zadar, od 2018. usporedno i psihoterapiju, a od po&ccaron;etka 2024. godine isklju&ccaron;ivo radi psihoterapiju za odrasle, partnersku terapiju, savjetovanje i edukacije u sklopu svog obrta &bdquo;Kalma&ldquo;.</p><p>Kalma ozna&ccaron;ava mir - mir koji &zcaron;eli dati svojim klijentima onda kad njihov &zcaron;ivot izgleda poprili&ccaron;no nemirno, ali mir &zcaron;eli dati i sebi jer vjeruje da upravo iz tog mjesta mo&zcaron;e dati najvi&scaron;e, sebi i drugima.</p><p>Kroz osobnu psihoterapiju, a potom i edukaciju psihoterapije je otkrila neki novi svijet, po&ccaron;ela jasnije i dublje vidjeti - sebe i druge, vidjeti svijet i sebe u njemu. To je ono &scaron;to joj i danas poma&zcaron;e - biti u ovdje i sada, preispitati svoje uloge, svoje &zcaron;elje i mogu&cacute;nosti.</p><p>Upravo to nudi svojim klijentima, kora&ccaron;aju&cacute;i pored njih, u&ccaron;i ih kako pogledati u njihov svijet i kako da vide sebe u njemu, ali bez osude, ve&cacute; s puno po&scaron;tovanja prema iskustvima koje su do&zcaron;ivjeli i s nadom da se mogu mijenjati i &zcaron;ivjeti &zcaron;ivot kakav &zcaron;ele. Psihoterapija za nju predstavlja siguran prostor u kojem mo&zcaron;da po prvi put ispri&ccaron;ate svoju pri&ccaron;u sa svim njenim dijelovima, &ccaron;ak i onima koje i sebi preska&ccaron;ete, a da vas pritom netko vidi i &ccaron;uje.</p><p>Marija je ujedno i onkolo&scaron;ki pacijent, kroz to iskustvo prolazila je sve faze prihva&cacute;anja, lije&ccaron;enja i oporavka. Na tom putu joj je puno zna&ccaron;ila psihoterapija, kao i podr&scaron;ka koju je dobivala, izme&dstrok;u ostalog i od Caspere i ba&scaron; zato ima &zcaron;elju pomo&cacute;i nekom tko trenutno prolazi isto. S Marijom mo&zcaron;ete raditi u&zcaron;ivo u Zadru ili online.</p><p>Na svom putu u&ccaron;i puno i rado pa osim zavr&scaron;ene napredne edukacije iz transakcijske analize - smjer psihoterapija, se dodatno educirala za pitanja tugovanja i gubitka voljenih osoba, osnova palijativne medicine, partnerskog odnosa, seksualnosti, depresije, anksioznosti, mindfulnessa, rada s traumom itd.</p><p>Ponosna je &ccaron;lanica Caspere, Udruge transakcijske analize Hrvatske (UTA), kao i europske krovne organizacije transakcijske analize EATA-e.</p><p>U slobodno vrijeme voli provoditi vrijeme sa svojim suprugom, psom Pablom koji je va&zcaron;an protagonist njena lije&ccaron;enja, te s macom po imenu Peligro. Isto tako, u&zcaron;iva u istra&zcaron;ivanju &zcaron;ivota u punini sa svojim prijateljima i obitelji, te u novije vrijeme u izradi keramike :)</p>' aria-label="Otvori profil Marije Morovi&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/placeholder.png" alt="Profilna fotografija Marije Morovi&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Marija Morovi&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Silvana Vitez" data-role="" data-image="../assets/images/Silvana Vitez 1.png" data-image-alt="Profilna fotografija Silvane Vitez" data-bio-html='<p>&Zcaron;ivi u Zadru gdje zavr&scaron;ava Filozofski fakultet, te na odsjeku za psihologiju stje&ccaron;e zvanje dipl. psiholog. &Ccaron;lanica je Hrvatske psiholo&scaron;ke komore.</p><p>Njena strast za psihologijom i ljudskim pona&scaron;anjem oblikovala je njezinu profesionalnu karijeru, kroz koju je stekla bogato iskustvo u radu s adolescentima i mladima kroz srednjo&scaron;kolski sustav.</p><p>Kao edukant tre&cacute;e godine ge&scaron;talt psihoterapije pri Institutu Psihika EAPTI - Europski akreditirani psihoterapijski trening Institut - Centar za psihoterapiju, edukaciju i savjetovanje Zadar, pro&scaron;iruje svoje znanje i vje&scaron;tine, usmjeravaju&cacute;i se na prakti&ccaron;an rad s klijentima pod supervizijom.</p><p>Duboko vjeruje u ge&scaron;talt princip psihoterapije kako se svaka osoba ra&dstrok;a kao zdrava s kapacitetom za promjenu, rast i razvoj, a terapeut je tu da kroz prisutnost, podr&scaron;ku i uklju&ccaron;enost pomogne klijentu na tom putu.</p><p>U braku je i majka je troje odrasle djece. &Zcaron;ivotni balans i osobni razvoj va&zcaron;ni su joj na svakom koraku, a obitelj je osnovna podr&scaron;ka u njenoj misiji pru&zcaron;anja podr&scaron;ke drugima.</p><p>Voli opu&scaron;tena dru&zcaron;enja, aktivnosti na otvorenom ali i vrijeme provedeno uz dobru knjigu.</p>' aria-label="Otvori profil Silvane Vitez">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Silvana Vitez 1.png" alt="Profilna fotografija Silvane Vitez" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Silvana Vitez</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Lada Lepeti&cacute;" data-role="" data-image="../assets/images/placeholder.png" data-image-alt="Profilna fotografija Lade Lepeti&cacute;" data-bio-html='<p>Diplomirala je glazbenu kulturu na Umjetni&ccaron;koj akademiji Sveu&ccaron;ili&scaron;ta u Splitu, a trenutno je u procesu dodatne edukacije iz ge&scaron;talt psihoterapije. Uz to, pro&scaron;la je i specijaliziranu edukaciju iz sistemskih konstelacija, koja joj je omogu&cacute;ila dublje razumijevanje odnosa, nesvjesnih obrazaca i sistemskih dinamika koje oblikuju &zcaron;ivot pojedinca.</p><p>Konstelacijski rad joj pru&zcaron;a &scaron;iroku perspektivu i alate za sagledavanje problema iz druga&ccaron;ijeg kuta, omogu&cacute;avaju&cacute;i klijentima da prepoznaju i razrije&scaron;e unutarnje blokade, prona&dstrok;u snagu i naprave promjene u svom &zcaron;ivotu. Kroz vlastito dugogodi&scaron;nje terapijsko iskustvo nau&ccaron;ila je koliko je podr&scaron;ka u klju&ccaron;nim trenucima va&zcaron;na i kako mo&zcaron;e donijeti duboke i transformativne promjene. Upravo zato se posvetila radu s ljudima, poma&zcaron;u&cacute;i im da steknu jasniji uvid u sebe, pove&zcaron;u se sa svojim autenti&ccaron;nim potencijalom i &zcaron;ive ispunjenije.</p>' aria-label="Otvori profil Lade Lepeti&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/placeholder.png" alt="Profilna fotografija Lade Lepeti&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Lada Lepeti&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Marija Kosti&cacute;" data-role="" data-image="../assets/images/Marija Kostić_edited.jpg" data-image-alt="Profilna fotografija Marije Kosti&cacute;" data-bio-html='<p>Edukantica je psihoterapije tre&cacute;e godine pri Centru Budi svoj u Zagrebu. Zavr&scaron;ila je studij arheologije i engleskog jezika u Zadru 2001. godine te se neko vrijeme bavila arheologijom, a zatim prevo&dstrok;enjem, ali i na iskopavanjima i za tipkovnicom uvijek je ostala fascinirana ljudima, njihovim pri&ccaron;ama, odnosima, osje&cacute;ajima. Psihoterapijski pravac koji ju je privukao je transakcijska analiza zbog fokusa na slo&zcaron;enost i va&zcaron;nost ljudskih odnosa, u kojima se oblikujemo i kalimo, i prepoznajemo &scaron;to jesmo, a &scaron;to nikako nismo. Mo&zcaron;da je ono &scaron;to ju je najvi&scaron;e zainteresiralo &ccaron;vrsta vjera u mogu&cacute;nost promjene, bez obzira kako daleko odlutali s na&scaron;eg pravog puta.</p><p>Voli &ccaron;itati, osobito poeziju koju pomalo i pi&scaron;e, i vjeruje u ljekovitu mo&cacute; rije&ccaron;i, &scaron;to je bitno i u psihoterapiji, iako je to samo jedan od aspekata pomaganja. Ono &scaron;to joj osobno poma&zcaron;e da se redovito osje&cacute;a bolje su planine, me&dstrok;u kojima se zasad Velebit pokazao kao osobito uspje&scaron;an terapeut i lije&ccaron;nik, ali vjerojatno samo zato &scaron;to ga naj&ccaron;e&scaron;&cacute;e posje&cacute;uje. Ples joj je tako&dstrok;er od pomo&cacute;i, u zadnje vrijeme naro&ccaron;ito salsa, ali i sve druge vrste kretanja uz glazbu.</p><p>Majka je 19-godi&scaron;njakinje i maj&ccaron;instvo je za nju bilo (i ostalo) najve&cacute;e i najbolje transformativno iskustvo. Jo&scaron; jedno transformativno i oboga&cacute;uju&cacute;e iskustvo za nju bio je volonterski anga&zcaron;man u stara&ccaron;kom domu gdje ve&cacute; godinama vodi &ccaron;itateljsku grupu. Koliko god se trudila pru&zcaron;iti njenim damama, od njih je uvijek dobivala vi&scaron;e.</p><p>Osim u ljekovitu mo&cacute; rije&ccaron;i vjeruje i u ljekovitost iskrenog susreta dvoje ljudi. Veseli se susretu s vama!</p>' aria-label="Otvori profil Marije Kosti&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/Marija Kostić_edited.jpg" alt="Profilna fotografija Marije Kosti&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Marija Kosti&cacute;</h2></div>
+            </button>
+
+            <button class="kartica-tima" type="button" data-team-card data-name="Ana Marija &Ccaron;ikoti&cacute;" data-role="" data-image="../assets/images/placeholder.png" data-image-alt="Profilna fotografija Ane Marije &Ccaron;ikoti&cacute;" data-bio-html='<p>Ana Marija je edukantica logoterapije u superviziji pri Institutu za logoterapiju i transakcijsku analizu u Splitu.</p><p>Diplomirala je na Katoli&ccaron;ko bogoslovnom fakultetu Sveu&ccaron;ili&scaron;ta u Splitu 2020. godine na teolo&scaron;ko-katehetskom studiju, a 2021. je zavr&scaron;ila i preddiplomski studij ranog i pred&scaron;kolskog odgoja i obrazovanja.</p><p>Voljna je biti podr&scaron;ka drugome, &ccaron;uti drugoga i suosje&cacute;ati s njim. Logoterapiju izabire upravo radi cjelovitog pristupa osobi i &ccaron;injenice da svatko ima slobodu izabrati svoj stav prema odre&dstrok;enoj situaciji, ma koliko te&scaron;ka ona bila.</p>' aria-label="Otvori profil Ane Marije &Ccaron;ikoti&cacute;">
+              <div class="kartica-tima__slika-okvir"><img class="kartica-tima__slika" src="../assets/images/placeholder.png" alt="Profilna fotografija Ane Marije &Ccaron;ikoti&cacute;" /></div>
+              <div class="kartica-tima__sadrzaj"><h2 class="kartica-tima__ime">Ana Marija &Ccaron;ikoti&cacute;</h2></div>
+            </button>
           </section>
+
+          <div class="modal-clan-tima" data-team-modal hidden>
+            <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+            <section
+              class="modal-clan-tima__prozor"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-clan-tima-naslov"
+            >
+              <button
+                class="modal-clan-tima__zatvori"
+                type="button"
+                data-team-modal-close
+                aria-label="Zatvori prozor"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-clan-tima__raspored">
+                <div class="modal-clan-tima__slika-okvir">
+                  <img
+                    class="modal-clan-tima__slika"
+                    data-team-modal-image
+                    src="../assets/images/story_avatar.jpeg"
+                    alt="Profilna fotografija savjetodavatelja"
+                  />
+                </div>
+                <div class="modal-clan-tima__sadrzaj">
+                  <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>
+                    Ime savjetodavatelja
+                  </h2>
+                  <p class="modal-clan-tima__uloga" data-team-modal-role>Uloga</p>
+                  <div class="modal-clan-tima__opis" data-team-modal-bio>
+                    <p>Opis savjetodavatelja.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </section>
     </main>
@@ -273,7 +435,7 @@
     <footer class="site-footer" id="contact-footer">
       <div class="site-footer__inner">
         <section class="site-footer__brand" aria-label="O Casperi">
-          <a class="site-footer__logo" href="index.html">
+          <a class="site-footer__logo" href="../index.html">
             <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
           </a>
           <p class="site-footer__eyebrow">Podr&scaron;ka koja ostaje blizu</p>
@@ -286,7 +448,7 @@
         <nav class="site-footer__column" aria-label="Glavna navigacija u podno&zcaron;ju">
           <h2 class="site-footer__heading">Navigacija</h2>
           <ul class="site-footer__link-list">
-            <li><a class="site-footer__link" href="index.html">Po&ccaron;etna</a></li>
+            <li><a class="site-footer__link" href="../index.html">Po&ccaron;etna</a></li>
             <li><a class="site-footer__link" href="moja-prica.html">Moja pri&ccaron;a</a></li>
             <li><a class="site-footer__link" href="#support-links">Podr&scaron;ka</a></li>
             <li><a class="site-footer__link" href="#contact-footer">Kontakt</a></li>

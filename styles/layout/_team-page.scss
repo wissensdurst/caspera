@@ -1,0 +1,435 @@
+@use "abstracts" as *;
+
+.stranica-nasa-ekipa {
+  min-height: 100vh;
+
+  &.modal-open {
+    overflow: hidden;
+  }
+}
+
+.stranica-savjetodavatelji {
+  min-height: 100vh;
+
+  &.modal-open {
+    overflow: hidden;
+  }
+}
+
+.tim {
+  position: relative;
+  padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(5rem, 7vw, 6.75rem);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: clamp(1rem, 2vw, 3rem) auto auto clamp(-7rem, -3vw, -2rem);
+    width: clamp(14rem, 24vw, 22rem);
+    height: clamp(14rem, 24vw, 22rem);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($hero-highlight, 0.16) 0%, rgba($hero-highlight, 0) 72%);
+    pointer-events: none;
+  }
+
+  &__unutarnji {
+    position: relative;
+    width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
+    margin: 0 auto;
+  }
+
+  &__uvod {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 58rem;
+    margin-bottom: clamp(5rem, 7vw, 6.5rem);
+  }
+
+  &__naslov {
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(3.25rem, 6vw, 5.25rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: 0.98;
+  }
+
+  &__tekstovi {
+    display: grid;
+    gap: 0.7rem;
+    max-width: 46rem;
+  }
+
+  &__tekst {
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.45vw, 1.12rem);
+    line-height: 1.8;
+  }
+
+  &__mreza {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(5rem, 7vw, 6.5rem);
+  }
+
+  @media (max-width: 1280px) {
+    &__mreza {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 1080px) {
+    &__mreza {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    &__naslov {
+      font-size: clamp(2.5rem, 11vw, 3.6rem);
+    }
+
+    &__mreza {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.tim--centred-cards {
+  .tim__mreza {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .kartica-tima {
+    flex: 0 1 20rem;
+    width: min(100%, 20rem);
+  }
+}
+
+.kartica-tima {
+  --kartica-tima-padding: clamp(0.45rem, 0.8vw, 0.6rem);
+  --kartica-tima-radius: clamp(1.5rem, 2vw, 1.9rem);
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: clamp(24rem, 34vw, 31rem);
+  max-width: 20rem;
+  margin: 0 auto;
+  padding: var(--kartica-tima-padding);
+  border: 1px solid rgba($white, 0.72);
+  border-radius: var(--kartica-tima-radius);
+  background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
+  box-shadow:
+    0 0.75rem 1.75rem rgba($hero-shadow-soft, 0.36),
+    0 1.5rem 2.5rem rgba($hero-shadow-soft, 0.18);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: visible;
+  transition:
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
+    box-shadow:
+      0 0 0 1px rgba($hero-highlight, 0.34),
+      0 0 1.2rem rgba($hero-highlight, 0.3),
+      0 1.1rem 2.4rem rgba($hero-highlight, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+    z-index: -1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -1.15rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: radial-gradient(
+      50% 100% at 50% 50%,
+      rgba($hero-highlight, 0.48) 0%,
+      rgba(255, 182, 219, 0.26) 46%,
+      rgba(255, 182, 219, 0) 78%
+    );
+    filter: blur(14px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+    transform: translateY(0.2rem);
+    z-index: -2;
+  }
+
+  &:hover,
+  &:focus-visible {
+    box-shadow:
+      0 0.55rem 1.4rem rgba($hero-shadow-soft, 0.24),
+      0 1rem 2rem rgba($hero-shadow-soft, 0.14);
+  }
+
+  &:hover::before,
+  &:focus-visible::before,
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    box-shadow:
+      0 0 0 0.22rem rgba($hero-highlight, 0.34),
+      0 0.55rem 1.4rem rgba($hero-shadow-soft, 0.24),
+      0 1rem 2rem rgba($hero-shadow-soft, 0.14);
+    outline: none;
+  }
+
+  &__slika-okvir {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 0.76;
+    border-radius:
+      calc(var(--kartica-tima-radius) - var(--kartica-tima-padding))
+      calc(var(--kartica-tima-radius) - var(--kartica-tima-padding))
+      0.22rem
+      0.22rem;
+    overflow: hidden;
+  }
+
+  &__slika-okvir::before {
+    content: none;
+  }
+
+  &__slika-okvir::after {
+    content: none;
+  }
+
+  &__slika {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius:
+      calc(var(--kartica-tima-radius) - var(--kartica-tima-padding))
+      calc(var(--kartica-tima-radius) - var(--kartica-tima-padding))
+      0.22rem
+      0.22rem;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  &__sadrzaj {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.08rem;
+    padding: 0.32rem 0.32rem 0.08rem;
+    text-align: center;
+  }
+
+  &__ime {
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(1.45rem, 1.6vw, 1.7rem);
+    font-weight: $font-weight-medium;
+    line-height: 1.08;
+    text-align: center;
+  }
+
+  &__uloga {
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 0.94rem;
+    font-weight: $font-weight-regular;
+    line-height: 1.18;
+    text-align: center;
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    min-height: clamp(22rem, 82vw, 28rem);
+
+    &__ime {
+      font-size: clamp(1.7rem, 7vw, 1.95rem);
+    }
+  }
+}
+
+.modal-clan-tima {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__pozadina {
+    position: absolute;
+    inset: 0;
+    background: rgba($near-black, 0.42);
+    backdrop-filter: blur(8px);
+  }
+
+  &__prozor {
+    position: relative;
+    z-index: 1;
+    width: min(70rem, 100%);
+    border: 1px solid rgba($white, 0.74);
+    border-radius: clamp(2rem, 3vw, 2.4rem);
+    background:
+      linear-gradient(180deg, rgba($white, 0.96) 0%, rgba($off-white, 0.99) 100%);
+    box-shadow:
+      0 2rem 4rem rgba($hero-shadow-soft, 0.22),
+      0 1rem 2rem rgba($hero-shadow-soft, 0.12);
+    overflow: hidden;
+  }
+
+  &__zatvori {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.15rem;
+    height: 4.15rem;
+    border: 0;
+    border-radius: 1.65rem;
+    background: linear-gradient(180deg, $hero-button 0%, $hero-button-hover 100%);
+    box-shadow: 0 1rem 1.8rem rgba($hero-shadow-strong, 0.24);
+    color: $white;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  &__zatvori:hover,
+  &__zatvori:focus-visible {
+    background: linear-gradient(180deg, $section-title-accent 0%, $section-title-accent 100%);
+    box-shadow: 0 1.25rem 2rem rgba($hero-shadow-strong, 0.3);
+    outline: none;
+  }
+
+  &__zatvori span {
+    font-size: 2.4rem;
+    line-height: 1;
+    transform: translateY(-0.1rem);
+  }
+
+  &__raspored {
+    display: grid;
+    grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.25rem);
+    align-items: start;
+    padding: clamp(2.25rem, 4vw, 3rem);
+  }
+
+  &__slika-okvir {
+    padding: 0.5rem;
+    border-radius: 2rem;
+    background: rgba($white, 0.94);
+    box-shadow: 0 1rem 2rem rgba($hero-shadow-soft, 0.12);
+  }
+
+  &__slika {
+    display: block;
+    width: 100%;
+    aspect-ratio: 0.86;
+    border-radius: 1.6rem;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  &__sadrzaj {
+    padding-top: 0;
+  }
+
+  &__ime {
+    color: $hero-button-hover;
+    font-family: $font-display;
+    font-size: clamp(2.2rem, 3.2vw, 3.15rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.04;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  &__uloga {
+    margin-top: 0.6rem;
+    color: $section-title-accent;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    font-weight: $font-weight-semibold;
+    line-height: 1.4;
+  }
+
+  &__opis {
+    margin-top: 1.5rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
+    line-height: 1.8;
+  }
+
+  &__opis p {
+    margin: 0;
+  }
+
+  &__opis p + p {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    &__prozor {
+      border-radius: 1.6rem;
+    }
+
+    &__zatvori {
+      top: 0.8rem;
+      right: 0.8rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1.2rem;
+    }
+
+    &__zatvori span {
+      font-size: 2rem;
+    }
+
+    &__raspored {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1.35rem 1.2rem 1.4rem;
+    }
+
+    &__slika-okvir {
+      max-width: 14rem;
+    }
+
+    &__sadrzaj {
+      padding-top: 0;
+    }
+  }
+}

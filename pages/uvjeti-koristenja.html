@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Caspera | Uvjeti kori&scaron;tenja</title>
+  </head>
+  <body class="stranica-uvjeti-koristenja">
+    <header class="header">
+      <nav class="navbar" aria-label="Glavna navigacija">
+        <a class="navbar__logo" href="../index.html">
+          <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+        </a>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="../index.html">Po&ccaron;etna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="tko-je-caspera.html">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="nasa-ekipa.html">Na&scaron;a ekipa</a></li>
+                  <li><a class="navbar__sublink" href="caspera-u-medijima.html">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="statut.html">Statut</a></li>
+                  <li><a class="navbar__sublink" href="izvjesce-o-radu.html">Izvje&scaron;&cacute;e o radu</a></li>
+                  <li><a class="navbar__sublink" href="plan-rada-i-financijski-plan.html">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podr&scaron;ka</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-patologa.html">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="socijalna-prava.html">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="ortopedska-pomagala.html">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="putni-trosak.html">Putni tro&scaron;ak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="moja-prica.html">Moja pri&ccaron;a</a></li>
+                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="#">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="postani-clan.html">Postani clan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Aktualno</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Aktualno</a></li>
+                  <li><a class="navbar__sublink" href="#">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="doniraj.html">Doniraj</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="informativna-stranica" aria-labelledby="naslov-uvjeti">
+        <div class="informativna-stranica__unutarnji">
+          <header class="informativna-stranica__uvod">
+            <h1 class="informativna-stranica__naslov" id="naslov-uvjeti">Uvjeti kori&scaron;tenja</h1>
+            <p class="informativna-stranica__tekst">
+              Kori&scaron;tenjem web stranice udruge Caspera prihva&cacute;ate ove osnovne uvjete
+              kori&scaron;tenja. Sadr&zcaron;aj stranice namijenjen je informiranju, podr&scaron;ci i
+              predstavljanju rada udruge.
+            </p>
+          </header>
+
+          <div class="informativni-sadrzaj" aria-label="Sadrzaj uvjeta koristenja">
+            <section class="informativni-sadrzaj__blok" aria-labelledby="uvjeti-sadrzaj">
+              <h2 class="informativni-sadrzaj__podnaslov" id="uvjeti-sadrzaj">Kori&scaron;tenje sadr&zcaron;aja</h2>
+              <p>
+                Sadr&zcaron;aji objavljeni na ovoj stranici slu&zcaron;e za op&cacute;e informiranje o radu
+                udruge, podr&scaron;ci korisnicima i aktivnostima zajednice. Nastojimo da svi
+                podaci budu to&ccaron;ni i korisni, ali ne jam&ccaron;imo da su svi sadr&zcaron;aji u svakom
+                trenutku potpuni, bez pogre&scaron;ke ili prilago&dstrok;eni svakoj pojedina&ccaron;noj situaciji.
+              </p>
+            </section>
+
+            <section class="informativni-sadrzaj__blok" aria-labelledby="uvjeti-autorska">
+              <h2 class="informativni-sadrzaj__podnaslov" id="uvjeti-autorska">Autorska prava</h2>
+              <p>
+                Tekstovi, fotografije, vizuali, logotipi i drugi materijali na stranici
+                vlasni&scaron;tvo su udruge Caspera ili se koriste uz odgovaraju&cacute;e dopu&scaron;tenje.
+                Nije dopu&scaron;teno neovla&scaron;teno kopiranje, distribuiranje, izmjena ili druga
+                uporaba sadr&zcaron;aja bez prethodnog odobrenja.
+              </p>
+              <p>
+                Za zahtjeve vezane uz preuzimanje ili kori&scaron;tenje izvornog sadr&zcaron;aja javite
+                se na <a href="mailto:info@caspera.hr">info@caspera.hr</a>.
+              </p>
+            </section>
+
+            <section class="informativni-sadrzaj__blok" aria-labelledby="uvjeti-odgovornost">
+              <h2 class="informativni-sadrzaj__podnaslov" id="uvjeti-odgovornost">Ograni&ccaron;enje odgovornosti</h2>
+              <p>
+                Informacije na stranici ne predstavljaju individualni medicinski, pravni ili
+                financijski savjet. Za odluke koje mogu imati zna&ccaron;ajne posljedice potrebno je
+                obratiti se odgovaraju&cacute;em stru&ccaron;njaku ili nadle&zcaron;noj instituciji.
+              </p>
+              <p>
+                Udruga Caspera ne odgovara za eventualnu &scaron;tetu nastalu oslanjanjem isklju&ccaron;ivo
+                na informacije objavljene na ovoj stranici niti za sadr&zcaron;aj vanjskih poveznica
+                koje vode na druge web stranice.
+              </p>
+            </section>
+
+            <section class="informativni-sadrzaj__blok" aria-labelledby="uvjeti-izmjene">
+              <h2 class="informativni-sadrzaj__podnaslov" id="uvjeti-izmjene">Izmjene i dostupnost</h2>
+              <p>
+                Zadr&zcaron;avamo pravo izmjene, dopune ili uklanjanja dijela sadr&zcaron;aja i ovih uvjeta
+                kori&scaron;tenja bez prethodne najave, kada je to potrebno radi uskla&dstrok;ivanja sa
+                zakonskim obvezama, promjenama u radu udruge ili tehni&ccaron;kim unaprje&dstrok;enjima.
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact-footer">
+      <div class="site-footer__inner">
+        <section class="site-footer__brand" aria-label="O Casperi">
+          <a class="site-footer__logo" href="../index.html">
+            <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+          </a>
+          <p class="site-footer__eyebrow">Podr&scaron;ka koja ostaje blizu</p>
+          <p class="site-footer__description">
+            Podr&scaron;ka, razumijevanje i zajedni&scaron;tvo na putu prema oporavku.
+          </p>
+          <a class="site-footer__cta button__main" href="mailto:info@caspera.hr">Kontaktirajte nas</a>
+        </section>
+
+        <nav class="site-footer__links" aria-label="Casperini linkovi">
+          <h2 class="site-footer__heading">Casperini linkovi</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="../index.html">Po&ccaron;etna</a></li>
+            <li><a class="site-footer__link" href="tko-je-caspera.html">Tko je Caspera</a></li>
+            <li><a class="site-footer__link" href="nasa-ekipa.html">Na&scaron;a ekipa</a></li>
+            <li><a class="site-footer__link" href="moja-prica.html">Moja pri&ccaron;a</a></li>
+            <li><a class="site-footer__link" href="savjetodavatelji.html">Savjetodavatelji</a></li>
+            <li><a class="site-footer__link" href="doniraj.html">Doniraj</a></li>
+          </ul>
+        </nav>
+
+        <section class="site-footer__column" aria-label="Kontakt i dru&scaron;tvene mre&zcaron;e">
+          <h2 class="site-footer__heading">Kontakt</h2>
+          <ul class="site-footer__contact-list">
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Lokacija</span>
+              <address class="site-footer__contact-text site-footer__contact-text--address">
+                Udruga Caspera<br />
+                Pujanke 85<br />
+                21000 Split
+              </address>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">E-po&scaron;ta</span>
+              <a class="site-footer__contact-link" href="mailto:info@caspera.hr">info@caspera.hr</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Telefon</span>
+              <a class="site-footer__contact-link" href="tel:+385919534358">091 953 43 58</a>
+            </li>
+          </ul>
+          <div>
+            <h2 class="site-footer__heading">Pratite nas</h2>
+            <ul class="site-footer__social-list">
+              <li><a class="site-footer__social-link" href="https://www.facebook.com/Udruga-Caspera-104972824456568/" target="_blank" rel="noopener noreferrer" aria-label="Caspera na Facebooku">Fb</a></li>
+              <li><a class="site-footer__social-link" href="https://instagram.com/udrugacaspera?igshid=vqim766bhoye" target="_blank" rel="noopener noreferrer" aria-label="Caspera na Instagramu">Ig</a></li>
+              <li><a class="site-footer__social-link" href="https://www.youtube.com/channel/UCcRRrG5DapvCEfMuQHb0riw" target="_blank" rel="noopener noreferrer" aria-label="Caspera na YouTubeu">Yt</a></li>
+              <li><a class="site-footer__social-link" href="https://www.linkedin.com/in/udruga-caspera-672248205" target="_blank" rel="noopener noreferrer" aria-label="Caspera na LinkedInu">In</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="site-footer__notice" aria-label="Autorska prava i sponzori">
+          <div>
+            <h2 class="site-footer__heading">Napomena</h2>
+            <p class="site-footer__notice-text">
+              Svi sadr&zcaron;aji na stranici www.caspera.hr su autorski. Molimo sve zainteresirane
+              za preuzimanje originalnog sadr&zcaron;aja da nas kontaktiraju na
+              <a class="site-footer__contact-link" href="mailto:info@caspera.hr">info@caspera.hr</a>.
+            </p>
+          </div>
+          <div>
+            <h2 class="site-footer__heading">Sponzori</h2>
+            <ul class="site-footer__sponsor-list">
+              <li class="site-footer__sponsor-item">
+                <div class="site-footer__sponsor-link">
+                  <img
+                    class="site-footer__sponsor-logo site-footer__sponsor-logo--dalmacija"
+                    src="../assets/images/dalmacija_danas_logo.png"
+                    alt="Logo sponzora Dalmacija Danas"
+                  />
+                </div>
+              </li>
+              <li class="site-footer__sponsor-item">
+                <div class="site-footer__sponsor-link">
+                  <img
+                    class="site-footer__sponsor-logo site-footer__sponsor-logo--milenij"
+                    src="../assets/images/milenij_logo.svg"
+                    alt="Logo sponzora Milenij"
+                  />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">&copy; 2026 Caspera. Sva prava pridr&zcaron;ana.</p>
+        <nav aria-label="Pravni linkovi u podno&zcaron;ju">
+          <ul class="site-footer__legal-list">
+            <li><a class="site-footer__legal-link" href="pravila-privatnosti.html">Pravila privatnosti</a></li>
+            <li><a class="site-footer__legal-link" href="uvjeti-koristenja.html">Uvjeti kori&scaron;tenja</a></li>
+            <li><a class="site-footer__legal-link" href="kolacici.html">Kola&ccaron;i&cacute;i</a></li>
+            <li><a class="site-footer__legal-link" href="pristupacnost.html">Pristupa&ccaron;nost</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

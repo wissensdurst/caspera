@@ -124,7 +124,6 @@
   &__toggle:focus-visible,
   &__link:hover,
   &__link:focus-visible,
-  &__link--active,
   &__item--has-children.is-open > &__toggle {
     background: rgba($white, 0.72);
     color: $hero-heading;

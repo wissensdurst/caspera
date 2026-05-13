@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Caspera | Na&scaron;a ekipa</title>
+  </head>
+  <body class="stranica-nasa-ekipa">
+    <header class="header">
+      <nav class="navbar" aria-label="Glavna navigacija">
+        <a class="navbar__logo" href="../index.html">
+          <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+        </a>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="../index.html">Po&ccaron;etna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="tko-je-caspera.html">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="nasa-ekipa.html">Na&scaron;a ekipa</a></li>
+                  <li><a class="navbar__sublink" href="caspera-u-medijima.html">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="statut.html">Statut</a></li>
+                  <li><a class="navbar__sublink" href="izvjesce-o-radu.html">Izvje&scaron;&cacute;e o radu</a></li>
+                  <li><a class="navbar__sublink" href="plan-rada-i-financijski-plan.html">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podr&scaron;ka</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-patologa.html">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="socijalna-prava.html">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="ortopedska-pomagala.html">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="putni-trosak.html">Putni tro&scaron;ak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="moja-prica.html">Moja pri&ccaron;a</a></li>
+                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="#">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="postani-clan.html">Postani clan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Aktualno</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Aktualno</a></li>
+                  <li><a class="navbar__sublink" href="#">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="doniraj.html">Doniraj</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="tim tim--centred-cards" aria-label="Naša ekipa">
+        <div class="tim__unutarnji">
+          <header class="tim__uvod">
+            <h1 class="tim__naslov">Na&scaron;a ekipa</h1>
+            <div class="tim__tekstovi">
+              <p class="tim__tekst">Na&scaron;a ekipa je u najmanju ruku &ccaron;udesna.</p>
+              <p class="tim__tekst">
+                Okupili smo tim mladih, stru&ccaron;nih i nadasve empati&ccaron;nih ljudi.
+              </p>
+              <p class="tim__tekst">
+                Oni koji su uz sve svoje obaveze odlu&ccaron;ili odvojiti dio svog vremena i pokloniti ga nama.
+              </p>
+              <p class="tim__tekst">
+                Njihova ljubav i energija prema poslu kojeg rade je naprosto zarazna.
+              </p>
+              <p class="tim__tekst">
+                Nas su osvojili velikim srcem i &zcaron;eljom da pomognu.
+              </p>
+              <p class="tim__tekst">Upoznajte ih i vi!</p>
+            </div>
+          </header>
+
+          <section class="tim__mreza" aria-label="Profili &ccaron;lanova Casperine ekipe">
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Dora Bu&ccaron;an Nenadi&cacute;"
+              data-role="mag. nutr."
+              data-image="../assets/images/dora_bucan.jpg"
+              data-image-alt="Profilna fotografija Dore Bu&ccaron;an Nenadi&cacute;"
+              data-bio-html='<p>Diplomirala je na Prehrambeno-biotehnolo&scaron;kom fakultetu u Zagrebu, smjer Nutricionizam.</p><p>Od 2015. godine zaposlena je u Klini&ccaron;kom bolni&ccaron;kom centru Split te je fokus njenog rada i budu&cacute;ih istra&zcaron;ivanja klini&ccaron;ka prehrana i dijetoterapija.</p><p>Jedna je od osniva&ccaron;ica ideje i provedbe europskog projekta "Digitalizacija i unaprje&dstrok;enje nutritivne skrbi oboljelih od kroni&ccaron;nih bolesti" pri Klinici za unutarnje bolesti KBC-a Split te trenutno radi pri Ambulanti za klini&ccaron;ku prehranu.</p><p>Asistent je na Prirodoslovno-matemati&ccaron;kom fakultetu u Splitu te vanjska suradnica Medicinskog fakulteta u Splitu.</p><p>2015. godine pridru&zcaron;uje se Hrvatskom zboru nutricionista, a 2016. godine postaje i &ccaron;lan Organizacijskog odbora Me&dstrok;unarodnog kongresa nutricionista. Iste godine izabrana je za predsjednicu Hrvatskog zbora nutricionista te je na toj funkciji do 2020. godine. Trenutna je dopredsjednica Hrvatskog zbora nutricionista.</p><p>&Ccaron;lanica je i Europskog dru&scaron;tva za klini&ccaron;ku prehranu i metabolizam (ESPEN) na kojem je trenutno uklju&ccaron;ena u LLL program edukacije u klini&ccaron;koj prehrani. Tako&dstrok;er je i &ccaron;lanica Nadzornog odbora Hrvatskog saveza nutricionista.</p><p>Voditeljica je vi&scaron;e europskih i hrvatskih projekata u podru&ccaron;ju prehrane te je aktivna sudionica brojnih me&dstrok;unarodnih i doma&cacute;ih kongresa.</p><p>Ako imate pitanje za Doru, kliknite na <a href="pitaj-nutricionista.html">sljede&cacute;i link</a>, gdje &cacute;ete prona&cacute;i detaljne upute, kao i odgovore na ranije postavljena pitanja.</p>'
+              aria-label="Otvori profil Dore Bu&ccaron;an Nenadi&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/dora_bucan.jpg"
+                  alt="Profilna fotografija Dore Bu&ccaron;an Nenadi&cacute;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Dora Bu&ccaron;an Nenadi&cacute;</h2>
+                <p class="kartica-tima__uloga">nutricionistica</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Marija Selak"
+              data-role="mag. nutr."
+              data-image="../assets/images/Marija Selak.jpg"
+              data-image-alt="Profilna fotografija Marije Selak"
+              data-bio-html='<p>Diplomirala je nutricionizam na Prehrambeno-tehnolo&scaron;kom fakultetu u Osijeku 2017. godine. Po zavr&scaron;etku studija bila je pripravnica u privatnoj nutricionisti&ccaron;koj tvrtki, a nakon toga i predava&ccaron;ica stru&ccaron;nih predmeta u Zdravstvenoj &scaron;koli u Splitu.</p><p>Od 2019. zaposlena je u Klini&ccaron;kom bolni&ccaron;kom centru Split, a naredne godine otvorila je i vlastito nutricionisti&ccaron;ko savjetovali&scaron;te.</p><p>Vanjski je suradnik Medicinskog fakulteta u Splitu te sudjeluje u nekoliko europskih i hrvatskih projekata.</p><p>Tako&dstrok;er odr&zcaron;ava i edukativna predavanja, dok se istovremeno redovito dodatno usavr&scaron;ava na doma&cacute;im i stranim znanstvenim i stru&ccaron;nim skupovima.</p>'
+              aria-label="Otvori profil Marije Selak"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Marija Selak.jpg"
+                  alt="Profilna fotografija Marije Selak"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Marija Selak</h2>
+                <p class="kartica-tima__uloga">nutricionistica</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Marija Ban"
+              data-role="dr. med., specijalist onkologije i radioterapije"
+              data-image="../assets/images/Marja Ban.jpg"
+              data-image-alt="Profilna fotografija Marije Ban"
+              data-bio-html='<p>Predstavljamo vam na&scaron;u onkologinju, jo&scaron; jednu iznimnu &zcaron;enu koja se odlu&ccaron;ila priklju&ccaron;iti na&scaron;em timu.</p><p>Marijina opu&scaron;tenost i jednostavnost kojima zra&ccaron;i, a osobito njeno znanje i povjerenje pokazali su nam da smo u sigurnim rukama.</p><p>Zaposlena je na Klinici za onkologiju i radioterapiju KBC Split. Naslovni je docent na Katedri klini&ccaron;ka onkologija, MEF Split.</p><p>Podru&ccaron;je u&zcaron;eg interesa su rak dojke i rak probavnog sustava.</p>'
+              aria-label="Otvori profil Marije Ban"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Marja Ban.jpg"
+                  alt="Profilna fotografija Marije Ban"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Marija Ban</h2>
+                <p class="kartica-tima__uloga">onkologinja</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Dubravka Vukovi&cacute;"
+              data-role="dr. med., specijalist dermatovenerologije"
+              data-image="../assets/images/Dubravka Vuković.jpg"
+              data-image-alt="Profilna fotografija Dubravke Vukovi&cacute;"
+              data-bio-html='<p>Na&scaron;em stru&ccaron;nom timu se pridru&zcaron;ila jo&scaron; jedna iznimna osoba. Osvojila nas je ne samo svojim znanjem i stru&ccaron;no&scaron;&cacute;u, ve&cacute; i svojom energijom i voljom za pomo&cacute;i. Dubravka Vukovi&cacute; je specijalistica dermatovenerologije i radi u KBC Split na Klinici za ko&zcaron;ne i spolne bolesti.</p><p>Podru&ccaron;je kojim se najvi&scaron;e bavi je pedijatrijska dermatovenerologija i &ccaron;lan je Udruge sveu&ccaron;ili&scaron;nih &zcaron;ena pri Medicinskom fakultetu u Splitu kao i asistent na Katedri za dermatovenerologiju Medicinskog fakulteta u Splitu.</p><p>Vrlo je aktivna kao volonter, a mi smo zahvalni &scaron;to se odlu&ccaron;ila priklju&ccaron;iti na&scaron;oj ekipi i pomo&cacute;i nam u rubrici pitaj dermatologa.</p>'
+              aria-label="Otvori profil Dubravke Vukovi&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Dubravka Vuković.jpg"
+                  alt="Profilna fotografija Dubravke Vukovi&cacute;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Dubravka Vukovi&cacute;</h2>
+                <p class="kartica-tima__uloga">dermatologinja</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Zlata Benzia Glavinovi&cacute;"
+              data-role="bodyflow"
+              data-image="../assets/images/Zlata Benzia.jpg"
+              data-image-alt="Profilna fotografija Zlate Benzia Glavinovi&cacute;"
+              data-bio-html='<p>Oduvijek zaljubljena u pokret i vje&zcaron;banje, Zlata ulazi u svijet fitnesa 2006. godine. Bodybuilding, bicikliranje i tr&ccaron;anje bili su sastavni dio njene svakodnevnice.</p><p>U&zcaron;ivaju&cacute;i u radu s ljudima i potaknuta &zcaron;eljom da ljudima pomogne u odr&zcaron;avanju zdravog na&ccaron;ina &zcaron;ivota kroz tjelovje&zcaron;bu, postaje osobni trener. Nedugo nakon toga, upoznaje jogu. Odu&scaron;evljena smireno&scaron;&cacute;u uma koji bi nastupio nakon vje&zcaron;banja joge, odlu&ccaron;ila je posvetiti vi&scaron;e vremena ovoj disciplini.</p><p>Nakon ro&dstrok;enja k&cacute;eri 2018. godine, upisuje BODYFLOW &scaron;kolu joge znaju&cacute;i da je postati u&ccaron;iteljicom joge njen pravi put. Iste godine po&ccaron;inje voditi Find Your Flow grupu u BODYFLOW studiju, a njena ljubav prema jogi raste iz dana u dan. Vje&zcaron;baju&cacute;i u BODYFLOW studiju, upoznala je predivne ljude i stekla nova prijateljstva na &ccaron;emu je iznimno zahvalna.</p><p>Uz jogu, u&zcaron;iva u planinarenju, putovanjima te &scaron;etnjama s k&cacute;erkicom, sin&ccaron;i&cacute;em i psom.</p>'
+              aria-label="Otvori profil Zlate Benzia Glavinovi&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Zlata Benzia.jpg"
+                  alt="Profilna fotografija Zlate Benzia Glavinovi&cacute;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Zlata Benzia Glavinovi&cacute;</h2>
+                <p class="kartica-tima__uloga">u&ccaron;iteljica joge</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Sandra Zeki&cacute; Toma&scaron;"
+              data-role="dr. med."
+              data-image="../assets/images/sandra_zekic_tomas.jpg"
+              data-image-alt="Profilna fotografija Sandre Zeki&cacute; Toma&scaron;"
+              data-bio-html='<p>Od 2015. godine zaposlena je kao specijalist patologije na Klini&ccaron;kom zavodu za patologiju, sudsku medicinu i citologiju KBC Split. U&zcaron;a podru&ccaron;ja njenog interesa su ginekolo&scaron;ka, genito urinarna i pedijatrijska patologija.</p><p>Njena velika ljubav je edukacija mla&dstrok;ih kolega, te od 2007. predaje na Medicinskom fakultetu Sveu&ccaron;ili&scaron;ta u Splitu za &scaron;to je vi&scaron;estruko nagra&dstrok;ivana kao najbolji asistent prema izboru studenata.</p><p>Dobitnica je Giordano Fellowship stipendije od strane Europskog dru&scaron;tva patologa, koja joj je omogu&cacute;ila usavr&scaron;avanje na polju perinatalne i pedijatrijske patologije u Engleskoj. Od 2018. je istra&zcaron;iva&ccaron; na projektu "Karakterizacija kandidat gena za kongenitalne anomalije bubrega i urotrakta tijekom razvoja u mi&scaron;a i &ccaron;ovjeka (CAKUT)" financiranom od strane HRZZ-a. Od 2019. je voditeljica stru&ccaron;nog poslijediplomskog studija "Patologija i citologija" pri KBC Split.</p>'
+              aria-label="Otvori profil Sandre Zeki&cacute; Toma&scaron;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/sandra_zekic_tomas.jpg"
+                  alt="Profilna fotografija Sandre Zeki&cacute; Toma&scaron;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Sandra Zeki&cacute; Toma&scaron;</h2>
+                <p class="kartica-tima__uloga">patologinja</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Ivana Juri&cacute;"
+              data-role="mag. physioth."
+              data-image="../assets/images/ivana_juric.jpg"
+              data-image-alt="Profilna fotografija Ivane Juri&cacute;"
+              data-bio-html='<p>Magistrirala je fizioterapiju na Sveu&ccaron;ili&scaron;nom odjelu zdravstvenih studija u Splitu 2020. godine. Po zavr&scaron;etku preddiplomskog studija 2016. godine odradila je pripravni&scaron;tvo u KBC-u Split i u ustanovi za starije i nemo&cacute;ne "Vita".</p><p>2018. godine postaje licencirani Schroth terapeut po ISST &scaron;koli za skolioze i kifoze, a do 2021. godine zavr&scaron;ava edukacije za DNS vje&zcaron;be.</p><p>Osim raznih terapija vje&zcaron;bom probudila se i druga ljubav prema limfi. Zavr&scaron;ila je edukaciju za limfnu drena&zcaron;u i za kompletnu dekongestivnu terapiju limfedema pod palicom Mire Biondi&cacute; u Zagrebu.</p>'
+              aria-label="Otvori profil Ivane Juri&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/ivana_juric.jpg"
+                  alt="Profilna fotografija Ivane Juri&cacute;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Ivana Juri&cacute;</h2>
+                <p class="kartica-tima__uloga">fizioterapeut</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Klara Perica"
+              data-role="mag. nutr."
+              data-image="../assets/images/Klara Perica.jpg"
+              data-image-alt="Profilna fotografija Klare Perica"
+              data-bio-html='<p>Magistrirala je na znanstvenom fakultetu u Kopenhagenu 2020. godine, smjer "Human Nutrition". Zbog vlastite autoimune bolesti zainteresirala se za funkcionalnu medicinu.</p><p>Sa &zcaron;eljom da pro&scaron;iri svoje znanje, zavr&scaron;ila je stru&ccaron;no usavr&scaron;avanje na Galbanum u&ccaron;ili&scaron;tu u Zagrebu 2021. godine, smjer Fitoaromaterapija. 2021. godine pridru&zcaron;uje se Hrvatskom zboru nutricionista te je sudjelovala na Internacionalnom kongresu zdravlja kao predava&ccaron;.</p><p>Velika &zcaron;elja joj je pomagati ljudima u lije&ccaron;enju ali i prevenciji bolesti putem prehrane, &zcaron;ivotnog stila i komplementarnog lije&ccaron;enja.</p>'
+              aria-label="Otvori profil Klare Perica"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Klara Perica.jpg"
+                  alt="Profilna fotografija Klare Perica"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Klara Perica</h2>
+                <p class="kartica-tima__uloga">nutricionistica</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Helena Bjelakovi&cacute;"
+              data-role="aromaterapeut"
+              data-image="../assets/images/Helena Bjelokavović.jpg"
+              data-image-alt="Profilna fotografija Helene Bjelakovi&cacute;"
+              data-bio-html='<p>Helena je aromaterapeut te stazom aromaterapije kora&ccaron;a ve&cacute; 20 godina tako da je aromaterapija postala njezin stil &zcaron;ivota. Iskustvo je stekla dugogodi&scaron;njim radom s klijentima, ali i kao predava&ccaron; na raznim radionicama. Dugi niz godina izra&dstrok;uje prirodnu kozmetiku.</p><p>Jako puno ula&zcaron;e u svoje znanje kroz te&ccaron;ajeve, radionice i knjige na temu holisti&ccaron;kog zdravlja &ccaron;ovjeka. Znanje koje je stekla prenosi na jedinstven na&ccaron;in i aromaterapiji pristupa izvan poznatih okvira.</p><p>Zala&zcaron;e se za povratak ljudi prirodi, edukaciji, o&ccaron;uvanju prirode i nenasilnom na&ccaron;inu &zcaron;ivota kroz svoj vlastiti primjer. Predsjednica je udruge ACT Hrvatska u kojoj aktivno volontira i na taj na&ccaron;in daje doprinos dru&scaron;tvu. ACT Hrvatska je dio globalne fondacije koja promovira nenasilje, toleranciju i bezuvjetnu ljubav prema svim &zcaron;ivim bi&cacute;ima.</p>'
+              aria-label="Otvori profil Helene Bjelakovi&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Helena Bjelokavović.jpg"
+                  alt="Profilna fotografija Helene Bjelakovi&cacute;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Helena Bjelakovi&cacute;</h2>
+                <p class="kartica-tima__uloga">aromaterapeut</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Ana Glavina"
+              data-role="specijalist dentalne medicine"
+              data-image="../assets/images/ana_glavina.jpg"
+              data-image-alt="Profilna fotografija Ane Glavina"
+              data-bio-html='<p>Diplomirala je na Stomatolo&scaron;kom fakultetu Sveu&ccaron;ili&scaron;ta u Zagrebu 2012. godine. Zaposlena je kao specijalist oralne medicine u Stomatolo&scaron;koj poliklinici Split te je naslovni asistent na Katedri za oralnu medicinu i parodontologiju Medicinskog fakulteta Sveu&ccaron;ili&scaron;ta u Splitu. Dobitnica je Rektorove nagrade "Stanje usne &scaron;upljine u osoba s transplantiranim solidnim organom" za vrijeme studija.</p><p>U&zcaron;e podru&ccaron;je njenog interesa je stomatolo&scaron;ka skrb medicinski kompleksnih bolesnika, uklju&ccaron;uju&cacute;i pacijente na radioterapiji i kemoterapiji, pacijente sa transplantiranom ko&scaron;tanom sr&zcaron;i, bubre&zcaron;ne bolesnike i pacijente sa transplantiranim organima.</p><p>Autorica je i koautorica vi&scaron;e znanstveno-istra&zcaron;iva&ccaron;kih i stru&ccaron;nih radova, kongresnih priop&cacute;enja i poglavlja u knjigama. Aktivno sudjeluje u znanstvenom, klini&ccaron;kom i nastavnom radu te na vi&scaron;e kongresa i simpozija u zemlji i inozemstvu.</p><p>&Ccaron;lanica je Radne skupine za razvoj i promicanje multidisciplinarne suradnje u podru&ccaron;ju oralnog i op&cacute;eg zdravlja Ministarstva zdravstva RH, Hrvatske stomatolo&scaron;ke komore, Hrvatskog dru&scaron;tva za oralnu medicinu i patologiju, Hrvatskog dru&scaron;tva za multidisciplinarnu suradnju u dentalnoj medicini Hrvatskog lije&ccaron;ni&ccaron;kog zbora te European Association of Oral Medicine (EAOM).</p>'
+              aria-label="Otvori profil Ane Glavina"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/ana_glavina.jpg"
+                  alt="Profilna fotografija Ane Glavina"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Ana Glavina</h2>
+                <p class="kartica-tima__uloga">specijalist dentalne medicine</p>
+              </div>
+            </button>
+
+            <button
+              class="kartica-tima"
+              type="button"
+              data-team-card
+              data-name="Iva Tekli&cacute;"
+              data-role="mag. iur."
+              data-image="../assets/images/Iva Teklić.jpg"
+              data-image-alt="Profilna fotografija Ive Tekli&cacute;"
+              data-bio-html='<p>6 godina iskustva rada s osobama s invaliditetom, pravno savjetovanje za ostvarivanje prava.</p>'
+              aria-label="Otvori profil Ive Tekli&cacute;"
+            >
+              <div class="kartica-tima__slika-okvir">
+                <img
+                  class="kartica-tima__slika"
+                  src="../assets/images/Iva Teklić.jpg"
+                  alt="Profilna fotografija Ive Tekli&cacute;"
+                />
+              </div>
+              <div class="kartica-tima__sadrzaj">
+                <h2 class="kartica-tima__ime">Iva Tekli&cacute;</h2>
+                <p class="kartica-tima__uloga">pravnica</p>
+              </div>
+            </button>
+          </section>
+
+          <div class="modal-clan-tima" data-team-modal hidden>
+            <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+            <section
+              class="modal-clan-tima__prozor"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-clan-tima-naslov"
+            >
+              <button
+                class="modal-clan-tima__zatvori"
+                type="button"
+                data-team-modal-close
+                aria-label="Zatvori prozor"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-clan-tima__raspored">
+                <div class="modal-clan-tima__slika-okvir">
+                  <img
+                    class="modal-clan-tima__slika"
+                    data-team-modal-image
+                    src="../assets/images/story_avatar.jpeg"
+                    alt="Profilna fotografija člana tima"
+                  />
+                </div>
+                <div class="modal-clan-tima__sadrzaj">
+                  <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>
+                    Ime člana tima
+                  </h2>
+                  <p class="modal-clan-tima__uloga" data-team-modal-role>Uloga</p>
+                  <div class="modal-clan-tima__opis" data-team-modal-bio>
+                    Opis karijere člana tima.
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact-footer">
+      <div class="site-footer__inner">
+        <section class="site-footer__brand" aria-label="O Casperi">
+          <a class="site-footer__logo" href="../index.html">
+            <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+          </a>
+          <p class="site-footer__eyebrow">Podr&scaron;ka koja ostaje blizu</p>
+          <p class="site-footer__description">
+            Podr&scaron;ka, razumijevanje i zajedni&scaron;tvo na putu prema oporavku.
+          </p>
+          <a class="site-footer__cta button__main" href="#">Kontaktirajte nas</a>
+        </section>
+
+        <nav class="site-footer__column" aria-label="Glavna navigacija u podno&zcaron;ju">
+          <h2 class="site-footer__heading">Navigacija</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="../index.html">Po&ccaron;etna</a></li>
+            <li><a class="site-footer__link" href="nasa-ekipa.html" aria-current="page">Na&scaron;a ekipa</a></li>
+            <li><a class="site-footer__link" href="moja-prica.html">Moja pri&ccaron;a</a></li>
+            <li><a class="site-footer__link" href="#support-links">Podr&scaron;ka</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__column" id="support-links" aria-label="Podr&scaron;ka i sadr&zcaron;aj">
+          <h2 class="site-footer__heading">Podr&scaron;ka</h2>
+          <ul class="site-footer__link-list">
+            <li><a class="site-footer__link" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
+            <li><a class="site-footer__link" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+            <li><a class="site-footer__link" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-patologa.html">Pitaj patologa</a></li>
+            <li><a class="site-footer__link" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+            <li><a class="site-footer__link" href="#">Casperin kalendar</a></li>
+          </ul>
+        </nav>
+
+        <section class="site-footer__column" aria-label="Kontakt i dru&scaron;tvene mre&zcaron;e">
+          <h2 class="site-footer__heading">Kontakt</h2>
+          <ul class="site-footer__contact-list">
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">E-po&scaron;ta</span>
+              <a class="site-footer__contact-link" href="mailto:kontakt@caspera.hr">kontakt@caspera.hr</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Telefon</span>
+              <a class="site-footer__contact-link" href="tel:+385000000000">+385 (0)00 000 000</a>
+            </li>
+            <li class="site-footer__contact-item">
+              <span class="site-footer__contact-label">Lokacija</span>
+              <p class="site-footer__contact-text">Hrvatska</p>
+            </li>
+          </ul>
+          <div>
+            <h2 class="site-footer__heading">Pratite nas</h2>
+            <ul class="site-footer__social-list">
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Facebooku">Fb</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Instagramu">Ig</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na YouTubeu">Yt</a></li>
+              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na LinkedInu">In</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">&copy; 2026 Caspera. Sva prava pridr&zcaron;ana.</p>
+        <nav aria-label="Pravni linkovi u podno&zcaron;ju">
+          <ul class="site-footer__legal-list">
+            <li><a class="site-footer__legal-link" href="#">Pravila privatnosti</a></li>
+            <li><a class="site-footer__legal-link" href="#">Uvjeti kori&scaron;tenja</a></li>
+            <li><a class="site-footer__legal-link" href="#">Kolacici</a></li>
+            <li><a class="site-footer__legal-link" href="#">Pristupacnost</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

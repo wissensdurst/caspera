@@ -1,0 +1,157 @@
+@use "abstracts" as *;
+
+.stranica-caspera-mediji {
+  min-height: 100vh;
+}
+
+.mediji {
+  position: relative;
+  padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(5rem, 7vw, 6.75rem);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: clamp(1rem, 2vw, 3rem) auto auto clamp(-7rem, -3vw, -2rem);
+    width: clamp(14rem, 24vw, 22rem);
+    height: clamp(14rem, 24vw, 22rem);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($hero-highlight, 0.14) 0%, rgba($hero-highlight, 0) 72%);
+    pointer-events: none;
+  }
+
+  &__unutarnji {
+    position: relative;
+    width: min($hero-page-max-width, calc(100% - 2 * $hero-page-gutter));
+    margin: 0 auto;
+  }
+
+  &__uvod {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 64rem;
+    margin-bottom: clamp(4rem, 6vw, 5.5rem);
+  }
+
+  &__naslov {
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(3.25rem, 6vw, 5.25rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: 0.98;
+  }
+
+  &__tekst {
+    max-width: 50rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.45vw, 1.12rem);
+    line-height: 1.8;
+  }
+
+  &__timeline {
+    display: grid;
+    gap: clamp(2rem, 3vw, 2.75rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__kartica {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid rgba($white, 0.76);
+    border-radius: 2rem;
+    background: linear-gradient(180deg, rgba($white, 0.94) 0%, rgba($off-white, 0.99) 100%);
+    box-shadow:
+      0 0.75rem 1.75rem rgba($hero-shadow-soft, 0.16),
+      0 1.25rem 2.25rem rgba($hero-shadow-soft, 0.08);
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.9rem;
+    margin: 0;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 0.95rem;
+    font-weight: $font-weight-medium;
+    line-height: 1.5;
+  }
+
+  &__datum {
+    color: $hero-button-hover;
+  }
+
+  &__izvor {
+    position: relative;
+    padding-left: 0.9rem;
+  }
+
+  &__izvor::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.32rem;
+    height: 0.32rem;
+    border-radius: 50%;
+    background: rgba($hero-highlight, 0.6);
+    transform: translateY(-50%);
+  }
+
+  &__naslov-stavke {
+    margin: 0.5rem 0 0;
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(1.65rem, 2vw, 2.1rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    line-height: 1.16;
+  }
+
+  &__sadrzaj {
+    margin-top: 1rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    line-height: 1.82;
+  }
+
+  &__sadrzaj p {
+    margin: 0;
+  }
+
+  &__sadrzaj p + p,
+  &__sadrzaj ul,
+  &__sadrzaj ol {
+    margin-top: 1rem;
+  }
+
+  &__sadrzaj ul {
+    padding-left: 1.2rem;
+  }
+
+  &__sadrzaj li + li {
+    margin-top: 0.65rem;
+  }
+
+  &__sadrzaj a {
+    color: $section-title-accent;
+    font-weight: $font-weight-semibold;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.16em;
+  }
+
+  &__sadrzaj a:hover,
+  &__sadrzaj a:focus-visible {
+    color: $hero-button-hover;
+    outline: none;
+  }
+
+  @media (max-width: $hero-mobile-breakpoint) {
+    &__naslov {
+      font-size: clamp(2.5rem, 11vw, 3.6rem);
+    }
+  }
+}

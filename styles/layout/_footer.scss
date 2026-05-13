@@ -3,25 +3,8 @@
 .site-footer {
   position: relative;
   margin-top: 0;
-  padding: clamp(4.5rem, 6vw, 6rem) 0 1.5rem;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: min(90%, 82rem);
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      rgba($section-title-accent, 0) 0%,
-      rgba($section-title-accent, 0.18) 18%,
-      rgba($section-title-accent, 0.38) 50%,
-      rgba($section-title-accent, 0.18) 82%,
-      rgba($section-title-accent, 0) 100%
-    );
-    transform: translateX(-50%);
-  }
+  padding: 0 0 1.5rem;
+  overflow: hidden;
 
   &__inner,
   &__bottom {
@@ -30,21 +13,26 @@
   }
 
   &__inner {
+    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr));
-    gap: clamp(2rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr) minmax(0, 1.05fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 2.8vw, 2.6rem);
     align-items: start;
+    padding-top: clamp(2rem, 3vw, 2.6rem);
+    padding-bottom: clamp(2rem, 3vw, 2.6rem);
+    border-top: 1px solid rgba($hero-highlight, 0.42);
+    border-bottom: 1px solid rgba($hero-highlight, 0.42);
   }
 
   &__brand {
     display: grid;
-    gap: 1.15rem;
+    gap: 1.4rem;
     max-width: 24rem;
   }
 
   &__logo {
     display: inline-block;
-    width: clamp(10rem, 12vw, 12.5rem);
+    width: clamp(11rem, 13vw, 13.5rem);
 
     img {
       display: block;
@@ -55,11 +43,12 @@
 
   &__description,
   &__contact-text,
+  &__notice-text,
   &__copyright {
     color: $cool-gray;
     font-family: $font-ui;
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: $font-size-base;
+    line-height: $line-height-body;
   }
 
   &__eyebrow,
@@ -69,17 +58,18 @@
 
   &__eyebrow {
     font-family: $font-ui;
-    font-size: 0.82rem;
+    font-size: $font-size-base;
     font-weight: $font-weight-semibold;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
   &__heading {
     font-family: $font-ui;
-    font-size: 1rem;
+    font-size: $font-size-base;
     font-weight: $font-weight-semibold;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   &__link-list,
@@ -95,7 +85,10 @@
 
   &__column {
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
+    min-height: 100%;
+    padding-left: clamp(1.25rem, 2vw, 1.9rem);
+    border-left: 1px solid rgba($hero-highlight, 0.28);
   }
 
   &__link,
@@ -104,7 +97,7 @@
   &__legal-link {
     color: $hero-heading;
     font-family: $font-ui;
-    font-size: 1rem;
+    font-size: $font-size-base;
     line-height: 1.5;
     text-decoration: none;
     transition:
@@ -145,22 +138,23 @@
 
   &__social-list {
     grid-template-columns: repeat(4, minmax(0, max-content));
-    gap: 0.75rem;
-    margin-top: 0.25rem;
+    gap: 0.9rem;
   }
 
   &__social-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 2.7rem;
-    min-height: 2.7rem;
-    padding: 0 0.85rem;
-    border: 1px solid rgba($white, 0.75);
+    width: 3.2rem;
+    min-width: 3.2rem;
+    height: 3.2rem;
+    min-height: 3.2rem;
+    padding: 0;
+    border: 1px solid rgba($white, 0.92);
     border-radius: $radius-pill;
-    background: rgba($white, 0.68);
-    box-shadow: 0 0.55rem 1.3rem rgba($hero-shadow-soft, 0.14);
-    font-size: 0.92rem;
+    background: rgba($white, 0.94);
+    box-shadow: 0 0.55rem 1.3rem rgba($hero-shadow-soft, 0.09);
+    font-size: $font-size-base;
     font-weight: $font-weight-medium;
   }
 
@@ -175,42 +169,138 @@
 
   &__contact-item {
     display: grid;
-    gap: 0.18rem;
+    gap: 0.3rem;
+  }
+
+  &__contact-text {
+    margin: 0;
+  }
+
+  &__contact-text--address {
+    font-style: normal;
   }
 
   &__contact-label {
     color: $section-title-accent;
     font-family: $font-ui;
-    font-size: 0.82rem;
+    font-size: $font-size-base;
     font-weight: $font-weight-semibold;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+
+  &__notice {
+    display: grid;
+    gap: 2rem;
+    min-height: 100%;
+    padding-left: clamp(1.25rem, 2vw, 1.9rem);
+    border-left: 1px solid rgba($hero-highlight, 0.28);
+  }
+
+  &__notice > div {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  &__partners {
+    display: grid;
+    gap: 1.25rem;
+    min-height: 100%;
+    padding-left: clamp(1.25rem, 2vw, 1.9rem);
+    border-left: 1px solid rgba($hero-highlight, 0.28);
+  }
+
+  &__notice-text {
+    max-width: 26rem;
+  }
+
+  &__sponsor-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__sponsor-item {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  &__sponsor-logo {
+    display: block;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+  }
+
+  &__sponsor-item:hover &__sponsor-logo,
+  &__sponsor-item:focus-within &__sponsor-logo {
+    opacity: 1;
+  }
+
+  &__sponsor-logo--dalmacija {
+    max-width: 10.5rem;
+  }
+
+  &__sponsor-logo--milenij {
+    max-width: 8.5rem;
   }
 
   &__bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    padding-top: 1.35rem;
-    border-top: 1px solid rgba($section-title-accent, 0.12);
+    gap: 1.5rem;
+    margin-top: clamp(1.4rem, 2.2vw, 1.9rem);
   }
 
   &__legal-list {
-    grid-auto-flow: column;
-    gap: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+  }
+
+  &__legal-list li + li::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 2.3rem;
+    margin: 0 1.75rem;
+    vertical-align: middle;
+    background: rgba($hero-highlight, 0.58);
+  }
+
+  &__copyright {
+    display: inline-flex;
+    align-items: center;
   }
 
   @media (max-width: 1100px) {
     &__inner {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+    }
+
+    &__brand {
+      max-width: none;
+      grid-column: 1 / -1;
+    }
+
+    &__column,
+    &__notice,
+    &__partners {
+      padding-left: 1.5rem;
     }
   }
 
   @media (max-width: $hero-mobile-breakpoint) {
-    padding-top: clamp(4rem, 10vw, 5rem);
-
     &__inner {
       grid-template-columns: 1fr;
       gap: 1.85rem;
@@ -220,14 +310,38 @@
       max-width: none;
     }
 
+    &__column,
+    &__notice,
+    &__partners {
+      padding-left: 0;
+      border-left: 0;
+    }
+
     &__social-list,
     &__legal-list {
-      grid-auto-flow: row;
       grid-template-columns: 1fr;
+    }
+
+    &__sponsor-list {
+      gap: 1.25rem;
     }
 
     &__social-list {
       justify-items: start;
+    }
+
+    &__cta {
+      width: 100%;
+      justify-content: center;
+    }
+
+    &__legal-list {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    &__legal-list li + li::before {
+      display: none;
     }
 
     &__bottom {
