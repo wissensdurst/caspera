@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../styles/main.css" />
     <title>Caspera | Moja pri&ccaron;a</title>
   </head>
-  <body class="stranica-moja-prica">
+  <body class="stranica-moja-prica" data-stories-page>
     <header class="header">
       <nav class="navbar" aria-label="Glavna navigacija">
         <a class="navbar__logo" href="../index.html">
@@ -153,238 +153,107 @@
       </nav>
     </header>
 
-    <main>
-      <section class="popis-prica" aria-labelledby="naslov-popisa-prica">
-        <div class="popis-prica__unutarnji">
-          <header class="popis-prica__uvod">
-            <h1 class="popis-prica__naslov" id="naslov-popisa-prica">Moja pri&ccaron;a</h1>
-            <p class="popis-prica__tekst">
-              Procitajte osobne price na&scaron;ih clanica, njihova iskustva i male
-              korake na putu prema oporavku.
+    <main class="stories-page">
+      <section class="stories-page__hero" aria-labelledby="stories-page-title">
+        <div class="stories-page__inner stories-page__hero-layout">
+          <div class="stories-page__hero-copy">
+            <nav class="stories-page__breadcrumbs" aria-label="Breadcrumb">
+              <ol class="stories-page__breadcrumb-list">
+                <li class="stories-page__breadcrumb-item"><a href="../index.html">Po&ccaron;etna</a></li>
+                <li class="stories-page__breadcrumb-item"><a href="#">Pri&ccaron;e</a></li>
+                <li class="stories-page__breadcrumb-item" aria-current="page">Moja pri&ccaron;a</li>
+              </ol>
+            </nav>
+            <h1 class="stories-page__title" id="stories-page-title">Moja pri&ccaron;a</h1>
+            <p class="stories-page__intro">
+              Mjesto gdje dijelimo osobna iskustva, izazove, pobjede i korake koji nas vode prema oporavku i novom &zcaron;ivotu.
             </p>
-          </header>
+          </div>
+        </div>
+      </section>
 
-          <form class="popis-prica__pretraga" role="search" aria-label="Pretra&zcaron;i price">
-            <label class="popis-prica__oznaka-pretrage" for="pretraga-prica">Pretra&zcaron;i price</label>
-            <div class="popis-prica__okvir-pretrage">
-              <input
-                class="popis-prica__polje-pretrage"
-                id="pretraga-prica"
-                name="q"
-                type="search"
-                placeholder="Pretra&zcaron;i price..."
-              />
-              <button class="popis-prica__gumb-pretrage" type="submit" aria-label="Pokreni pretragu">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <circle cx="11" cy="11" r="6.25"></circle>
-                  <path d="M16 16 21 21"></path>
-                </svg>
-              </button>
+      <section class="stories-page__directory">
+        <div class="stories-page__inner">
+          <div class="stories-page__author-slider" data-author-slider>
+            <div class="stories-page__author-track" data-author-track role="tablist" aria-label="Autorice priča"></div>
+          </div>
+
+          <div class="stories-page__author-scrollbar" data-author-scrollbar hidden>
+            <input
+              class="stories-page__author-scrollbar-input"
+              type="range"
+              min="0"
+              max="0"
+              value="0"
+              step="1"
+              aria-label="Pomak author slidera"
+              data-author-scrollbar-input
+            />
+          </div>
+
+          <p class="stories-page__authors-helper" data-authors-helper hidden>Povucite za vi&scaron;e autorica</p>
+
+          <div class="stories-page__toolbar">
+            <div class="stories-page__sort" data-stories-sort-dropdown>
+              <span class="stories-page__sort-label">Prikaži:</span>
+              <div class="stories-page__sort-dropdown">
+                <button
+                  class="stories-page__sort-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-controls="stories-sort-options"
+                  data-stories-sort-toggle
+                >
+                  <span data-stories-sort-label>Najnovije</span>
+                  <span class="stories-page__sort-arrow" aria-hidden="true">
+                    <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                  </span>
+                </button>
+                <ul
+                  class="stories-page__sort-menu"
+                  id="stories-sort-options"
+                  role="listbox"
+                  aria-label="Sortiranje priča"
+                  data-stories-sort-menu
+                >
+                  <li>
+                    <button
+                      class="stories-page__sort-option"
+                      type="button"
+                      role="option"
+                      data-sort-value="newest"
+                      aria-selected="true"
+                    >
+                      <span>Najnovije</span>
+                      <span class="stories-page__sort-check" aria-hidden="true">✓</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="stories-page__sort-option"
+                      type="button"
+                      role="option"
+                      data-sort-value="oldest"
+                      aria-selected="false"
+                    >
+                      <span>Najstarije</span>
+                      <span class="stories-page__sort-check" aria-hidden="true">✓</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </form>
+          </div>
 
-          <section class="popis-prica__mreza" aria-label="Popis prica clanica">
-            <article class="kartica-price kartica-price--new">
-              <a class="kartica-price__poveznica" href="#">
-                <div class="kartica-price__meta">
-                  <img class="kartica-price__avatar" src="../assets/images/story_avatar.jpeg" alt="Profilna fotografija clanice Nikoline Juric" />
-                  <div class="kartica-price__meta-tekst">
-                    <span class="kartica-price__autor">Nikolina Juric</span>
-                    <time class="kartica-price__datum" datetime="2024-04-16">16. travnja 2024.</time>
-                  </div>
-                  <span class="kartica-price__oznaka">Novo</span>
-                </div>
-                <h2 class="kartica-price__naslov">Kako sam prona&scaron;la svjetlo nakon duge tame</h2>
-                <p class="kartica-price__sazetak">
-                  Nakon dijagnoze najvi&scaron;e me pla&scaron;ila ti&scaron;ina. U ovoj prici dijelim
-                  kako su razgovori, podr&scaron;ka zajednice i mali dnevni rituali
-                  vratili osjecaj sigurnosti i nade.
-                </p>
-                <span class="kartica-price__poziv">Procitaj vi&scaron;e</span>
-              </a>
-            </article>
+          <div class="stories-page__list" data-stories-list></div>
 
-            <article class="kartica-price">
-              <a class="kartica-price__poveznica" href="#">
-                <div class="kartica-price__meta">
-                  <img class="kartica-price__avatar" src="../assets/images/story_avatar.jpeg" alt="Profilna fotografija clanice Marije Kovacic" />
-                  <div class="kartica-price__meta-tekst">
-                    <span class="kartica-price__autor">Marija Kovacic</span>
-                    <time class="kartica-price__datum" datetime="2024-04-08">8. travnja 2024.</time>
-                  </div>
-                </div>
-                <h2 class="kartica-price__naslov">Moj novi &zcaron;ivot nakon operacije i kemoterapije</h2>
-                <p class="kartica-price__sazetak">
-                  Oporavak nije do&scaron;ao odjednom, nego kroz sitne pobjede, prve
-                  &scaron;etnje i povratak povjerenja u vlastito tijelo. Upravo ti mali
-                  pomaci promijenili su sve.
-                </p>
-                <span class="kartica-price__poziv">Procitaj vi&scaron;e</span>
-              </a>
-            </article>
-
-            <article class="kartica-price">
-              <a class="kartica-price__poveznica" href="#">
-                <div class="kartica-price__meta">
-                  <img class="kartica-price__avatar" src="../assets/images/story_avatar.jpeg" alt="Profilna fotografija clanice Ane Petrovic" />
-                  <div class="kartica-price__meta-tekst">
-                    <span class="kartica-price__autor">Ana Petrovic</span>
-                    <time class="kartica-price__datum" datetime="2024-04-04">4. travnja 2024.</time>
-                  </div>
-                </div>
-                <h2 class="kartica-price__naslov">Kako su promjene spasile moj &zcaron;ivot</h2>
-                <p class="kartica-price__sazetak">
-                  Promjena ritma, prehrane i nacina na koji sam tra&zcaron;ila pomoc nije
-                  bila laka, ali pokazala se presudnom za povratak snage i mira.
-                </p>
-                <span class="kartica-price__poziv">Procitaj vi&scaron;e</span>
-              </a>
-            </article>
-
-            <article class="kartica-price">
-              <a class="kartica-price__poveznica" href="#">
-                <div class="kartica-price__meta">
-                  <img class="kartica-price__avatar" src="../assets/images/story_avatar.jpeg" alt="Profilna fotografija clanice Ivane Radic" />
-                  <div class="kartica-price__meta-tekst">
-                    <span class="kartica-price__autor">Ivana Radic</span>
-                    <time class="kartica-price__datum" datetime="2024-03-20">20. o&zcaron;ujka 2024.</time>
-                  </div>
-                </div>
-                <h2 class="kartica-price__naslov">Putovanje kroz onkolo&scaron;ki labirint: moje iskustvo i savjeti</h2>
-                <p class="kartica-price__sazetak">
-                  Kad se lijecenje pretvori u niz nepoznatih koraka, najvi&scaron;e znace
-                  tuda iskustva. Ovdje bilje&zcaron;im ono &scaron;to bih voljela da je netko
-                  rekao meni na pocetku.
-                </p>
-                <span class="kartica-price__poziv">Procitaj vi&scaron;e</span>
-              </a>
-            </article>
-
-            <article class="kartica-price">
-              <a class="kartica-price__poveznica" href="#">
-                <div class="kartica-price__meta">
-                  <img class="kartica-price__avatar" src="../assets/images/story_avatar.jpeg" alt="Profilna fotografija clanice Mirele Markovic" />
-                  <div class="kartica-price__meta-tekst">
-                    <span class="kartica-price__autor">Mirela Markovic</span>
-                    <time class="kartica-price__datum" datetime="2024-03-28">28. o&zcaron;ujka 2024.</time>
-                  </div>
-                </div>
-                <h2 class="kartica-price__naslov">Mali trenuci srece u borbi protiv straha</h2>
-                <p class="kartica-price__sazetak">
-                  Naucila sam da oporavak ne dolazi samo kroz velike odluke nego i
-                  kroz svakodnevne male rituale koji vracaju osjecaj mira,
-                  pripadnosti i topline.
-                </p>
-                <span class="kartica-price__poziv">Procitaj vi&scaron;e</span>
-              </a>
-            </article>
-
-            <article class="kartica-price">
-              <a class="kartica-price__poveznica" href="#">
-                <div class="kartica-price__meta">
-                  <img class="kartica-price__avatar" src="../assets/images/story_avatar.jpeg" alt="Profilna fotografija clanice Tanje Horvat" />
-                  <div class="kartica-price__meta-tekst">
-                    <span class="kartica-price__autor">Tanja Horvat</span>
-                    <time class="kartica-price__datum" datetime="2024-03-14">14. o&zcaron;ujka 2024.</time>
-                  </div>
-                </div>
-                <h2 class="kartica-price__naslov">Kako sam se nosila s dijagnozom i prona&scaron;la unutarnju snagu</h2>
-                <p class="kartica-price__sazetak">
-                  Nije postojalo jedno rje&scaron;enje, ali postojali su ljudi, pitanja i
-                  navike koje su mi pomogle da iz dana u dan ponovno gradim
-                  osjecaj oslonca.
-                </p>
-                <span class="kartica-price__poziv">Procitaj vi&scaron;e</span>
-              </a>
-            </article>
-          </section>
-
-          <nav class="popis-prica__paginacija" aria-label="Paginacija prica">
-            <a class="popis-prica__stranica popis-prica__stranica--active" href="#" aria-current="page">1</a>
-            <a class="popis-prica__stranica" href="#">2</a>
-            <a class="popis-prica__stranica" href="#">3</a>
-            <a class="popis-prica__stranica popis-prica__stranica--next" href="#" aria-label="Sljede&cacute;a stranica">&rarr;</a>
-          </nav>
+          <nav class="stories-page__pagination" aria-label="Paginacija priča" data-stories-pagination></nav>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer" id="contact-footer">
-      <div class="site-footer__inner">
-        <section class="site-footer__brand" aria-label="O Casperi">
-          <a class="site-footer__logo" href="../index.html">
-            <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
-          </a>
-          <p class="site-footer__eyebrow">Podr&scaron;ka koja ostaje blizu</p>
-          <p class="site-footer__description">
-            Podr&scaron;ka, razumijevanje i zajedni&scaron;tvo na putu prema oporavku.
-          </p>
-          <a class="site-footer__cta button__main" href="#">Kontaktirajte nas</a>
-        </section>
-
-        <nav class="site-footer__column" aria-label="Glavna navigacija u podno&zcaron;ju">
-          <h2 class="site-footer__heading">Navigacija</h2>
-          <ul class="site-footer__link-list">
-            <li><a class="site-footer__link" href="../index.html">Po&ccaron;etna</a></li>
-            <li><a class="site-footer__link" href="moja-prica.html">Moja pri&ccaron;a</a></li>
-            <li><a class="site-footer__link" href="#support-links">Podr&scaron;ka</a></li>
-            <li><a class="site-footer__link" href="#contact-footer">Kontakt</a></li>
-          </ul>
-        </nav>
-
-        <nav class="site-footer__column" id="support-links" aria-label="Podr&scaron;ka i sadr&zcaron;aj">
-          <h2 class="site-footer__heading">Podr&scaron;ka</h2>
-          <ul class="site-footer__link-list">
-            <li><a class="site-footer__link" href="savjetodavatelji.html">Na&scaron;i savjetodavatelji</a></li>
-            <li><a class="site-footer__link" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
-            <li><a class="site-footer__link" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
-            <li><a class="site-footer__link" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
-            <li><a class="site-footer__link" href="pitaj-patologa.html">Pitaj patologa</a></li>
-            <li><a class="site-footer__link" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
-            <li><a class="site-footer__link" href="#">Casperin kalendar</a></li>
-          </ul>
-        </nav>
-
-        <section class="site-footer__column" aria-label="Kontakt i dru&scaron;tvene mre&zcaron;e">
-          <h2 class="site-footer__heading">Kontakt</h2>
-          <ul class="site-footer__contact-list">
-            <li class="site-footer__contact-item">
-              <span class="site-footer__contact-label">E-po&scaron;ta</span>
-              <a class="site-footer__contact-link" href="mailto:kontakt@caspera.hr">kontakt@caspera.hr</a>
-            </li>
-            <li class="site-footer__contact-item">
-              <span class="site-footer__contact-label">Telefon</span>
-              <a class="site-footer__contact-link" href="tel:+385000000000">+385 (0)00 000 000</a>
-            </li>
-            <li class="site-footer__contact-item">
-              <span class="site-footer__contact-label">Lokacija</span>
-              <p class="site-footer__contact-text">Hrvatska</p>
-            </li>
-          </ul>
-          <div>
-            <h2 class="site-footer__heading">Pratite nas</h2>
-            <ul class="site-footer__social-list">
-              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Facebooku">Fb</a></li>
-              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na Instagramu">Ig</a></li>
-              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na YouTubeu">Yt</a></li>
-              <li><a class="site-footer__social-link" href="#" aria-label="Caspera na LinkedInu">In</a></li>
-            </ul>
-          </div>
-        </section>
-      </div>
-
-      <div class="site-footer__bottom">
-        <p class="site-footer__copyright">&copy; 2026 Caspera. Sva prava pridr&zcaron;ana.</p>
-        <nav aria-label="Pravni linkovi u podno&zcaron;ju">
-          <ul class="site-footer__legal-list">
-            <li><a class="site-footer__legal-link" href="#">Pravila privatnosti</a></li>
-            <li><a class="site-footer__legal-link" href="#">Uvjeti kori&scaron;tenja</a></li>
-            <li><a class="site-footer__legal-link" href="#">Kolacici</a></li>
-            <li><a class="site-footer__legal-link" href="#">Pristupacnost</a></li>
-          </ul>
-        </nav>
-      </div>
-    </footer>
+    <footer class="site-footer" id="contact-footer"></footer>
 
     <script src="../js/main.js"></script>
   </body>

@@ -381,3 +381,626 @@ if (teamModal) {
     }
   });
 }
+
+const storiesPage = document.querySelector("[data-stories-page]");
+
+if (storiesPage) {
+  const authors = [
+    {
+      slug: "ana-m",
+      name: "Ana M.",
+      image: "../assets/images/ana_glavina.jpg",
+      bio: "Piše o malim koracima i povratku svakodnevici.",
+    },
+    {
+      slug: "ivana-k",
+      name: "Ivana K.",
+      image: "../assets/images/ivana_juric.jpg",
+      bio: "Dijeli iskustva o postavljanju granica i slušanju sebe.",
+    },
+    {
+      slug: "petra-l",
+      name: "Petra L.",
+      image: "../assets/images/Petra Lozančić_edited.jpg",
+      bio: "Bilježi put prihvaćanja i ozdravljenja.",
+    },
+    {
+      slug: "maja-h",
+      name: "Maja H.",
+      image: "../assets/images/Marja Ban.jpg",
+      bio: "Otvara teme straha, tišine i ponovnog pronalaska nade.",
+    },
+    {
+      slug: "marija-b",
+      name: "Marija B.",
+      image: "../assets/images/Marija Selak.jpg",
+      bio: "Piše o odnosima, podršci i povratku povjerenja.",
+    },
+    {
+      slug: "jelena-r",
+      name: "Jelena R.",
+      image: "../assets/images/Lara Radošević.jpg",
+      bio: "Dijeli iskustva o tijelu, identitetu i hrabrosti.",
+    },
+    {
+      slug: "katarina-p",
+      name: "Katarina P.",
+      image: "../assets/images/Nikolina Dragošević.jpg",
+      bio: "Piše o nježnosti, rutini i pronalasku mira u malim stvarima.",
+    },
+    {
+      slug: "lucija-v",
+      name: "Lucija V.",
+      image: "../assets/images/Lucija Jurin_edited.jpg",
+      bio: "Placeholder autorica za testiranje slidera.",
+    },
+    {
+      slug: "tamara-s",
+      name: "Tamara S.",
+      image: "../assets/images/Tamara Klasan.jpg",
+      bio: "Placeholder autorica za testiranje slidera.",
+    },
+    {
+      slug: "barbara-n",
+      name: "Barbara N.",
+      image: "../assets/images/Barbara Matijević_edited.jpg",
+      bio: "Placeholder autorica za testiranje slidera.",
+    },
+    {
+      slug: "iva-d",
+      name: "Iva D.",
+      image: "../assets/images/Iva Teklić.jpg",
+      bio: "Placeholder autorica za testiranje slidera.",
+    },
+    {
+      slug: "snjezana-r",
+      name: "Snježana R.",
+      image: "../assets/images/Snježana Pušćenik_edited.jpg",
+      bio: "Placeholder autorica za testiranje slidera.",
+    },
+    {
+      slug: "zlata-t",
+      name: "Zlata T.",
+      image: "../assets/images/Zlata Benzia.jpg",
+      bio: "Placeholder autorica za testiranje slidera.",
+    },
+  ];
+
+  const stories = [
+    {
+      title: "Kad sam sebe ponovno stavila na prvo mjesto",
+      slug: "#",
+      excerpt:
+        "Dugo sam brinula o svima, osim o sebi. Tek kad sam naučila reći 'ne', počela sam ponovno čuti svoj glas.",
+      coverImage: "../assets/images/story_img.jpeg",
+      publishDate: "2024-04-12",
+      authorSlug: "ivana-k",
+    },
+    {
+      title: "Iz tame prema svjetlu",
+      slug: "#",
+      excerpt:
+        "Nekad sam mislila da se iz najtežih trenutaka ne može izaći. Danas znam da je svaki korak, ma koliko malen, korak prema slobodi.",
+      coverImage: "../assets/images/sandra_zekic_tomas.jpg",
+      publishDate: "2024-04-09",
+      authorSlug: "maja-h",
+    },
+    {
+      title: "Prihvaćanje je bio moj početak",
+      slug: "#",
+      excerpt:
+        "Prihvatiti ono što se dogodilo nije značilo odustati. Za mene je to bio početak ozdravljenja.",
+      coverImage: "../assets/images/placeholder.png",
+      publishDate: "2024-04-05",
+      authorSlug: "petra-l",
+    },
+    {
+      title: "Mali koraci, velike promjene",
+      slug: "#",
+      excerpt:
+        "Nisam preko noći postala jača. Dan po dan, korak po korak, gradila sam svoju novu priču.",
+      coverImage: "../assets/images/tu_smo2D.png",
+      publishDate: "2024-04-01",
+      authorSlug: "ana-m",
+    },
+    {
+      title: "Kad sam naučila tražiti pomoć",
+      slug: "#",
+      excerpt:
+        "Najveća promjena dogodila se kad sam priznala da ne mogu sve sama i dopustila drugima da mi budu oslonac.",
+      coverImage: "../assets/images/podrska_upoznaj.png",
+      publishDate: "2024-03-28",
+      authorSlug: "marija-b",
+    },
+    {
+      title: "Tijelo koje ponovno učim voljeti",
+      slug: "#",
+      excerpt:
+        "Pogled u ogledalo dugo mi je bio težak. S vremenom sam naučila gledati sebe s više nježnosti i manje straha.",
+      coverImage: "../assets/images/tu_smo_3D.png",
+      publishDate: "2024-03-24",
+      authorSlug: "jelena-r",
+    },
+    {
+      title: "Rituali koji su mi vratili mir",
+      slug: "#",
+      excerpt:
+        "Čaj ujutro, kratka šetnja i nekoliko dubokih udaha postali su moje sidro u danima kada je sve bilo previše.",
+      coverImage: "../assets/images/bg_main.webp",
+      publishDate: "2024-03-18",
+      authorSlug: "katarina-p",
+    },
+    {
+      title: "Kad sam prestala skrivati emocije",
+      slug: "#",
+      excerpt:
+        "Godinama sam glumila snagu. Prava snaga došla je tek kada sam si dopustila ranjivost i suze.",
+      coverImage: "../assets/images/tu_smo.png",
+      publishDate: "2024-03-11",
+      authorSlug: "ivana-k",
+    },
+    {
+      title: "Ponovno vjerujem svom tijelu",
+      slug: "#",
+      excerpt:
+        "Nakon liječenja trebalo mi je vrijeme da prestanem tijelo doživljavati kao neprijatelja i počnem ga slušati.",
+      coverImage: "../assets/images/podrska_strucni.png",
+      publishDate: "2024-03-04",
+      authorSlug: "maja-h",
+    },
+    {
+      title: "Moja obitelj i ja učile smo zajedno",
+      slug: "#",
+      excerpt:
+        "Nitko od nas nije znao kako će izgledati oporavak, ali upravo nas je to zajedničko neznanje zbližilo više nego ikad.",
+      coverImage: "../assets/images/podrska_info.png",
+      publishDate: "2024-02-25",
+      authorSlug: "marija-b",
+    },
+    {
+      title: "Snaga nježnih dana",
+      slug: "#",
+      excerpt:
+        "Nekada su najhrabriji dani bili upravo oni najtiši, kada sam birala odmor umjesto forsiranja.",
+      coverImage: "../assets/images/clanarina.png",
+      publishDate: "2024-02-17",
+      authorSlug: "ana-m",
+    },
+    {
+      title: "Kad sam ponovno poželjela planirati budućnost",
+      slug: "#",
+      excerpt:
+        "Dugo nisam mogla gledati dalje od sljedećeg pregleda. Onda su se polako vratili želje, planovi i radoznalost.",
+      coverImage: "../assets/images/doniraj.png",
+      publishDate: "2024-02-08",
+      authorSlug: "petra-l",
+    },
+  ];
+
+  const storiesPerPage = 4;
+  const authorTrack = storiesPage.querySelector("[data-author-track]");
+  const authorScrollbar = storiesPage.querySelector("[data-author-scrollbar]");
+  const authorScrollbarInput = storiesPage.querySelector(
+    "[data-author-scrollbar-input]"
+  );
+  const storiesList = storiesPage.querySelector("[data-stories-list]");
+  const pagination = storiesPage.querySelector("[data-stories-pagination]");
+  const authorsHelper = storiesPage.querySelector("[data-authors-helper]");
+  const sortDropdown = storiesPage.querySelector("[data-stories-sort-dropdown]");
+  const sortDropdownRoot = storiesPage.querySelector(".stories-page__sort-dropdown");
+  const sortToggle = storiesPage.querySelector("[data-stories-sort-toggle]");
+  const sortMenu = storiesPage.querySelector("[data-stories-sort-menu]");
+  const sortLabel = storiesPage.querySelector("[data-stories-sort-label]");
+  const sortOptions = [
+    ...storiesPage.querySelectorAll("[data-sort-value]"),
+  ];
+
+  let selectedAuthor = "all";
+  let selectedSort = "newest";
+  let currentPage = 1;
+  let isDraggingAuthorScrollbar = false;
+  let pendingAuthorScrollbarValue = null;
+  let authorScrollbarTarget = null;
+  let authorScrollbarAnimationFrame = null;
+
+  const authorLookup = new Map(authors.map((author) => [author.slug, author]));
+  const sortLabels = {
+    newest: "Najnovije",
+    oldest: "Najstarije",
+  };
+
+  const closeSortDropdown = () => {
+    sortDropdownRoot?.classList.remove("is-open");
+    sortToggle?.setAttribute("aria-expanded", "false");
+  };
+
+  const openSortDropdown = () => {
+    sortDropdownRoot?.classList.add("is-open");
+    sortToggle?.setAttribute("aria-expanded", "true");
+  };
+
+  const formatStoryCount = (count) => {
+    const ending =
+      count % 10 === 1 && count % 100 !== 11
+        ? "priča pronađena"
+        : "priče pronađene";
+
+    return `${count} ${ending}`;
+  };
+
+  const formatDate = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(dateValue));
+
+  const getFilteredStories = () => {
+    const filteredStories =
+      selectedAuthor === "all"
+        ? [...stories]
+        : stories.filter((story) => story.authorSlug === selectedAuthor);
+
+    filteredStories.sort((firstStory, secondStory) => {
+      const firstDate = new Date(firstStory.publishDate).getTime();
+      const secondDate = new Date(secondStory.publishDate).getTime();
+
+      return selectedSort === "oldest" ? firstDate - secondDate : secondDate - firstDate;
+    });
+
+    return filteredStories;
+  };
+
+  const createAuthorChip = (author) => {
+    const isAllStories = author.slug === "all";
+    const button = document.createElement("button");
+
+    button.className = "stories-page__author-chip";
+    button.type = "button";
+    button.role = "tab";
+    button.dataset.author = author.slug;
+    button.setAttribute("aria-selected", String(author.slug === selectedAuthor));
+    button.tabIndex = author.slug === selectedAuthor ? 0 : -1;
+
+    button.innerHTML = `
+      <span class="stories-page__author-chip-circle">
+        ${
+          isAllStories
+            ? '<img class="stories-page__author-chip-avatar" src="../assets/images/sve_price.png" alt="Prikaz svih priča" />'
+            : `<img class="stories-page__author-chip-avatar" src="${author.image}" alt="Profilna fotografija autorice ${author.name}" />`
+        }
+      </span>
+      <span class="stories-page__author-chip-label">${author.name}</span>
+    `;
+
+    button.addEventListener("click", () => {
+      selectedAuthor = author.slug;
+      currentPage = 1;
+      renderStoriesPage();
+
+      const activeChip = authorTrack?.querySelector(`[data-author="${author.slug}"]`);
+      activeChip?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    });
+
+    return button;
+  };
+
+  const renderAuthors = () => {
+    if (!authorTrack) {
+      return;
+    }
+
+    const authorItems = [{ slug: "all", name: "Sve priče" }, ...authors];
+    authorTrack.innerHTML = "";
+    authorItems.forEach((author) => {
+      authorTrack.append(createAuthorChip(author));
+    });
+  };
+
+  const getPaginationItems = (page, totalPages) => {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+
+    if (page <= 3) {
+      return [1, 2, 3, null, totalPages];
+    }
+
+    if (page >= totalPages - 2) {
+      return [1, null, totalPages - 2, totalPages - 1, totalPages];
+    }
+
+    return [1, null, page, null, totalPages];
+  };
+
+  const renderPagination = (totalPages) => {
+    if (!pagination) {
+      return;
+    }
+
+    pagination.innerHTML = "";
+
+    if (totalPages <= 1) {
+      return;
+    }
+
+    const previousButton = document.createElement("button");
+    previousButton.className = "stories-page__page-button";
+    previousButton.type = "button";
+    previousButton.textContent = "‹";
+    previousButton.setAttribute("aria-label", "Prethodna stranica");
+    previousButton.disabled = currentPage === 1;
+    previousButton.addEventListener("click", () => {
+      currentPage -= 1;
+      renderStoriesPage();
+    });
+    pagination.append(previousButton);
+
+    getPaginationItems(currentPage, totalPages).forEach((item) => {
+      if (item === null) {
+        const ellipsis = document.createElement("span");
+        ellipsis.className = "stories-page__page-ellipsis";
+        ellipsis.textContent = "…";
+        pagination.append(ellipsis);
+        return;
+      }
+
+      const pageButton = document.createElement("button");
+      pageButton.className = "stories-page__page-button";
+      pageButton.type = "button";
+      pageButton.textContent = String(item);
+
+      if (item === currentPage) {
+        pageButton.setAttribute("aria-current", "page");
+      } else {
+        pageButton.addEventListener("click", () => {
+          currentPage = item;
+          renderStoriesPage();
+        });
+      }
+
+      pagination.append(pageButton);
+    });
+
+    const nextButton = document.createElement("button");
+    nextButton.className = "stories-page__page-button";
+    nextButton.type = "button";
+    nextButton.textContent = "›";
+    nextButton.setAttribute("aria-label", "Sljedeća stranica");
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener("click", () => {
+      currentPage += 1;
+      renderStoriesPage();
+    });
+    pagination.append(nextButton);
+  };
+
+  const renderStories = (pageStories) => {
+    if (!storiesList) {
+      return;
+    }
+
+    if (!pageStories.length) {
+      storiesList.innerHTML =
+        '<p class="stories-page__empty">Trenutačno nema priča za odabranu autoricu. Pokušajte s drugim odabirom.</p>';
+      return;
+    }
+
+    storiesList.innerHTML = pageStories
+      .map((story) => {
+        const author = authorLookup.get(story.authorSlug);
+
+        if (!author) {
+          return "";
+        }
+
+        return `
+          <article class="stories-page__story-card">
+            <a class="stories-page__story-link" href="${story.slug}">
+              <div class="stories-page__story-media">
+                <img class="stories-page__story-image" src="${story.coverImage}" alt="Naslovna fotografija priče ${story.title}" />
+              </div>
+              <div class="stories-page__story-content">
+                <div class="stories-page__story-meta">
+                  <img class="stories-page__story-avatar" src="${author.image}" alt="Profilna fotografija autorice ${author.name}" />
+                  <span class="stories-page__story-author">${author.name}</span>
+                  <time class="stories-page__story-date" datetime="${story.publishDate}">${formatDate(story.publishDate)}</time>
+                </div>
+                <h2 class="stories-page__story-title">${story.title}</h2>
+                <p class="stories-page__story-excerpt">${story.excerpt}</p>
+                <span class="stories-page__story-cta">Čitaj više</span>
+              </div>
+            </a>
+          </article>
+        `;
+      })
+      .join("");
+  };
+
+  const updateAuthorSliderState = () => {
+    if (!authorTrack || !authorScrollbar || !authorScrollbarInput) {
+      return;
+    }
+
+    const maxScrollLeft = authorTrack.scrollWidth - authorTrack.clientWidth;
+    const hasOverflow = maxScrollLeft > 4;
+
+    if (authorsHelper) {
+      authorsHelper.hidden = !hasOverflow;
+    }
+
+    authorScrollbar.hidden = !hasOverflow;
+    authorScrollbarInput.max = String(Math.max(0, Math.round(maxScrollLeft)));
+
+    if (!isDraggingAuthorScrollbar && authorScrollbarTarget === null) {
+      authorScrollbarInput.value = String(Math.round(authorTrack.scrollLeft));
+    }
+  };
+
+  const stopAuthorScrollbarAnimation = () => {
+    if (authorScrollbarAnimationFrame !== null) {
+      window.cancelAnimationFrame(authorScrollbarAnimationFrame);
+      authorScrollbarAnimationFrame = null;
+    }
+  };
+
+  const animateAuthorTrackToTarget = () => {
+    if (!authorTrack || authorScrollbarTarget === null) {
+      authorScrollbarAnimationFrame = null;
+      return;
+    }
+
+    const distance = authorScrollbarTarget - authorTrack.scrollLeft;
+
+    if (Math.abs(distance) <= 1) {
+      authorTrack.scrollLeft = authorScrollbarTarget;
+      authorScrollbarTarget = null;
+      authorScrollbarAnimationFrame = null;
+      updateAuthorSliderState();
+      return;
+    }
+
+    authorTrack.scrollLeft = authorScrollbarTarget;
+    authorScrollbarAnimationFrame = window.requestAnimationFrame(
+      animateAuthorTrackToTarget
+    );
+  };
+
+  const setAuthorScrollbarTarget = (nextValue) => {
+    if (!authorTrack || !authorScrollbarInput) {
+      return;
+    }
+
+    const maxScrollLeft = Math.max(
+      authorTrack.scrollWidth - authorTrack.clientWidth,
+      0
+    );
+    const clampedValue = Math.min(Math.max(nextValue, 0), maxScrollLeft);
+
+    pendingAuthorScrollbarValue = clampedValue;
+    authorScrollbarTarget = clampedValue;
+    authorScrollbarInput.value = String(Math.round(clampedValue));
+
+    if (isDraggingAuthorScrollbar) {
+      authorTrack.scrollLeft = clampedValue;
+      return;
+    }
+
+    if (authorScrollbarAnimationFrame === null) {
+      authorScrollbarAnimationFrame = window.requestAnimationFrame(
+        animateAuthorTrackToTarget
+      );
+    }
+  };
+
+  const renderStoriesPage = () => {
+    const filteredStories = getFilteredStories();
+    const totalPages = Math.max(1, Math.ceil(filteredStories.length / storiesPerPage));
+
+    currentPage = Math.min(currentPage, totalPages);
+
+    const startIndex = (currentPage - 1) * storiesPerPage;
+    const pageStories = filteredStories.slice(startIndex, startIndex + storiesPerPage);
+
+    if (sortLabel) {
+      sortLabel.textContent = sortLabels[selectedSort];
+    }
+
+    sortOptions.forEach((option) => {
+      option.setAttribute(
+        "aria-selected",
+        String(option.dataset.sortValue === selectedSort)
+      );
+    });
+
+    renderAuthors();
+    renderStories(pageStories);
+    renderPagination(totalPages);
+    requestAnimationFrame(() => {
+      updateAuthorSliderState();
+    });
+  };
+
+  sortToggle?.addEventListener("click", () => {
+    const isOpen = sortDropdownRoot?.classList.contains("is-open");
+
+    if (isOpen) {
+      closeSortDropdown();
+      return;
+    }
+
+    openSortDropdown();
+  });
+
+  sortOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+      selectedSort = option.dataset.sortValue ?? "newest";
+      currentPage = 1;
+      closeSortDropdown();
+      renderStoriesPage();
+      sortToggle?.focus();
+    });
+  });
+
+  authorTrack?.addEventListener("scroll", () => {
+    if (isDraggingAuthorScrollbar || authorScrollbarTarget !== null) {
+      return;
+    }
+
+    updateAuthorSliderState();
+  });
+
+  window.addEventListener("resize", () => {
+    updateAuthorSliderState();
+  });
+
+  authorScrollbarInput?.addEventListener("pointerdown", () => {
+    isDraggingAuthorScrollbar = true;
+    pendingAuthorScrollbarValue = null;
+    authorScrollbarTarget = null;
+    stopAuthorScrollbarAnimation();
+  });
+
+  const stopAuthorScrollbarDrag = () => {
+    if (!authorTrack || !authorScrollbarInput) {
+      isDraggingAuthorScrollbar = false;
+      pendingAuthorScrollbarValue = null;
+      return;
+    }
+
+    const finalValue = Number(
+      pendingAuthorScrollbarValue ?? authorScrollbarInput.value
+    );
+
+    isDraggingAuthorScrollbar = false;
+    setAuthorScrollbarTarget(finalValue);
+  };
+
+  authorScrollbarInput?.addEventListener("pointerup", stopAuthorScrollbarDrag);
+  authorScrollbarInput?.addEventListener("pointercancel", stopAuthorScrollbarDrag);
+  authorScrollbarInput?.addEventListener("change", stopAuthorScrollbarDrag);
+
+  authorScrollbarInput?.addEventListener("input", () => {
+    if (!authorTrack || !authorScrollbarInput) {
+      return;
+    }
+
+    const nextValue = Number(authorScrollbarInput.value);
+
+    setAuthorScrollbarTarget(nextValue);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!sortDropdown?.contains(event.target)) {
+      closeSortDropdown();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeSortDropdown();
+    }
+  });
+
+  renderStoriesPage();
+}
