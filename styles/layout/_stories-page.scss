@@ -9,6 +9,14 @@
     linear-gradient(180deg, $hero-bg-top 0%, $hero-bg-bottom 56%, #fffafc 100%);
 }
 
+.stranica-sonjin-blog {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba($white, 0.92), transparent 34%),
+    radial-gradient(circle at top right, rgba($hero-page-glow-right, 0.78), transparent 28%),
+    linear-gradient(180deg, $hero-bg-top 0%, $hero-bg-bottom 56%, #fffafc 100%);
+}
+
 .stories-page {
   position: relative;
   padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(4.5rem, 7vw, 6rem);
@@ -97,6 +105,69 @@
 
   &__directory {
     padding-top: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  &__featured-author {
+    display: grid;
+    grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    align-items: center;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid rgba($white, 0.82);
+    border-radius: 2rem;
+    background: linear-gradient(135deg, rgba($white, 0.94) 0%, rgba($off-white, 0.98) 100%);
+    box-shadow:
+      0 0.95rem 2.2rem rgba($hero-shadow-soft, 0.14),
+      inset 0 1px 0 rgba($white, 0.65);
+  }
+
+  &__featured-author-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 1.7rem;
+    object-fit: cover;
+    box-shadow: 0 1rem 2rem rgba($hero-shadow-soft, 0.16);
+  }
+
+  &__featured-author-content {
+    max-width: 42rem;
+  }
+
+  &__featured-author-eyebrow {
+    margin: 0 0 0.75rem;
+    color: rgba($cool-gray, 0.84);
+    font-family: $font-ui;
+    font-size: 0.88rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__featured-author-name {
+    margin: 0;
+    color: $section-title-accent;
+    font-family: $font-display;
+    font-size: clamp(2.2rem, 3vw, 3rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.02;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  &__featured-author-role {
+    margin: 0.9rem 0 1rem;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 1rem;
+    font-weight: $font-weight-medium;
+    line-height: 1.5;
+  }
+
+  &__featured-author-text {
+    margin: 0;
+    color: $cool-gray;
+    font-family: $font-ui;
+    font-size: 1rem;
+    line-height: 1.8;
   }
 
   &__author-slider {
@@ -429,7 +500,8 @@
 
   &__list {
     display: grid;
-    gap: 1.25rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
     margin-top: 1.6rem;
   }
 
@@ -519,8 +591,8 @@
   }
 
   &__story-link {
-    display: grid;
-    grid-template-columns: minmax(14rem, 20rem) minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
     border-radius: inherit;
     overflow: hidden;
@@ -535,49 +607,39 @@
 
   &__story-media {
     position: relative;
-    min-height: 100%;
     overflow: hidden;
   }
 
   &__story-image {
     width: 100%;
-    height: 100%;
-    min-height: 18rem;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
   }
 
   &__story-content {
     display: flex;
     flex-direction: column;
-    gap: 1.35rem;
-    padding: clamp(1.75rem, 2.8vw, 2.5rem);
+    gap: 1rem;
+    flex: 1;
+    padding: clamp(1.35rem, 2vw, 1.8rem);
   }
 
   &__story-meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.85rem;
+    gap: 0.75rem;
     min-width: 0;
-  }
-
-  &__story-avatar {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 0 0.5rem 1rem rgba($hero-shadow-soft, 0.24);
   }
 
   &__story-author {
     position: relative;
-    padding-right: 1rem;
+    padding-right: 0.8rem;
     margin-right: 0.1rem;
     color: $cool-gray;
     font-family: $font-ui;
-    font-size: 1rem;
-    font-weight: $font-weight-regular;
+    font-size: 0.98rem;
+    font-weight: $font-weight-medium;
     line-height: 1.4;
   }
 
@@ -595,19 +657,18 @@
   &__story-title {
     color: $section-title-accent;
     font-family: $font-display;
-    font-size: clamp(2.15rem, 3vw, 3rem);
+    font-size: clamp(1.55rem, 1.8vw, 2rem);
     font-weight: $font-weight-bold;
     letter-spacing: $letter-spacing-tight;
-    line-height: 1.12;
+    line-height: 1.2;
   }
 
   &__story-excerpt {
-    max-width: 37rem;
     color: $cool-gray;
     font-family: $font-ui;
-    font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+    font-size: 1rem;
     font-weight: $font-weight-regular;
-    line-height: 1.72;
+    line-height: 1.7;
   }
 
   &__story-date {
@@ -616,7 +677,7 @@
     gap: 0.5rem;
     color: $cool-gray;
     font-family: $font-ui;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: $font-weight-regular;
     line-height: 1.4;
   }
@@ -635,15 +696,15 @@
     gap: 0.7rem;
     width: fit-content;
     margin-top: auto;
-    color: $cool-gray;
+    color: $section-title-accent;
     font-family: $font-ui;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: $font-weight-medium;
     line-height: 1.2;
   }
 
   &__story-cta::after {
-    content: "->";
+    content: "→";
   }
 
   &__pagination {
@@ -708,11 +769,13 @@
     font-family: $font-ui;
   }
 
-  @media (max-width: 800px) {
-    &__story-link {
-      grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+  @media (max-width: 1200px) {
+    &__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
 
+  @media (max-width: 800px) {
     &__story-title {
       font-size: clamp(1.8rem, 4vw, 2.25rem);
     }
@@ -744,6 +807,15 @@
       width: 100%;
     }
 
+    &__featured-author {
+      grid-template-columns: 1fr;
+      align-items: flex-start;
+    }
+
+    &__featured-author-image {
+      max-width: 14rem;
+    }
+
     &__toolbar {
       flex-direction: column;
       align-items: flex-start;
@@ -769,12 +841,12 @@
       min-width: 100%;
     }
 
-    &__story-link {
+    &__list {
       grid-template-columns: 1fr;
     }
 
     &__story-image {
-      min-height: 13.5rem;
+      aspect-ratio: 16 / 11;
     }
 
   }

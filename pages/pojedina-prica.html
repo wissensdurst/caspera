@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Caspera | Pojedinačna priča</title>
+  </head>
+  <body class="stranica-pojedina-prica" data-story-detail-page>
+    <header class="header">
+      <nav class="navbar" aria-label="Glavna navigacija">
+        <a class="navbar__logo" href="../index.html">
+          <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+        </a>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="../index.html">Početna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="tko-je-caspera.html">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="nasa-ekipa.html">Naša ekipa</a></li>
+                  <li><a class="navbar__sublink" href="caspera-u-medijima.html">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="statut.html">Statut</a></li>
+                  <li><a class="navbar__sublink" href="izvjesce-o-radu.html">Izvješće o radu</a></li>
+                  <li><a class="navbar__sublink" href="plan-rada-i-financijski-plan.html">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podrška</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Naši savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-patologa.html">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="socijalna-prava.html">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="ortopedska-pomagala.html">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="putni-trosak.html">Putni trošak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="sonjin-blog.html">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="moja-prica.html">Moja priča</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="bokun-butige.html">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="postani-clan.html">Postani član</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Caspera u akciji</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Naši projekti</a></li>
+                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="#">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="doniraj.html">Doniraj</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="story-detail">
+      <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
+        <ol class="story-detail__breadcrumb-list">
+          <li class="story-detail__breadcrumb-item"><a href="../index.html">Početna</a></li>
+          <li class="story-detail__breadcrumb-item"><a href="moja-prica.html" data-story-breadcrumb-section-link>Moja priča</a></li>
+          <li class="story-detail__breadcrumb-item" aria-current="page" data-story-breadcrumb-current>Pojedinačna priča</li>
+        </ol>
+      </nav>
+
+      <article class="story-article">
+        <figure class="story-article__media">
+          <img class="story-hero-image" src="../assets/images/story_img.jpeg" alt="" data-story-hero-image />
+          <figcaption class="story-article__caption" data-story-image-caption></figcaption>
+        </figure>
+
+        <div class="story-content">
+          <header class="story-content__header">
+            <h1 class="story-title" data-story-title></h1>
+
+            <div class="story-meta">
+              <span class="story-meta__author">
+                <span class="story-meta__avatar" aria-hidden="true"></span>
+                <span data-story-author-name></span>
+              </span>
+              <time class="story-meta__date" datetime="" data-story-publish-date></time>
+            </div>
+          </header>
+
+          <div class="story-body" data-story-body></div>
+
+          <blockquote class="story-quote" data-story-quote></blockquote>
+
+          <section class="story-share" aria-labelledby="story-share-title">
+            <h2 class="story-share__title" id="story-share-title">Podijeli priču</h2>
+            <div class="story-share__actions">
+              <a
+                class="story-share__link"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Podijeli priču na Facebooku"
+                data-share-facebook
+              >
+                Fb
+              </a>
+              <a class="story-share__link" href="#" aria-label="Otvori poveznicu priče" data-share-link>
+                Link
+              </a>
+              <a class="story-share__link" href="#" aria-label="Pošalji priču e-poštom" data-share-email>
+                Mail
+              </a>
+            </div>
+          </section>
+
+          <section class="author-card" aria-labelledby="author-card-title">
+            <img src="../assets/images/ivana_juric.jpg" alt="" data-story-author-image />
+            <div class="author-card__content">
+              <p class="author-card__eyebrow" id="author-card-title">O autorici</p>
+              <h2 class="author-card__name" data-story-author-card-name></h2>
+              <p class="author-card__role">Članica udruge Caspera</p>
+              <p class="author-card__bio" data-story-author-card-bio></p>
+            </div>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer" id="contact-footer"></footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

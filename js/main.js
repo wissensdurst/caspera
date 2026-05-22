@@ -1,5 +1,77 @@
-const navbar = document.querySelector(".navbar");
+﻿const navbar = document.querySelector(".navbar");
 const siteFooter = document.querySelector(".site-footer");
+
+const normalizeMojibakeText = (value) =>
+  value
+    .replace(/Å¡/g, "š")
+    .replace(/Å¾/g, "ž")
+    .replace(/Ä/g, "č")
+    .replace(/Ä‡/g, "ć")
+    .replace(/Ä‘/g, "đ")
+    .replace(/Å /g, "Š")
+    .replace(/Å½/g, "Ž")
+    .replace(/ÄŒ/g, "Č")
+    .replace(/Ä†/g, "Ć")
+    .replace(/Ä/g, "Đ")
+    .replace(/â€¹/g, "‹")
+    .replace(/â€º/g, "›")
+    .replace(/â€¦/g, "…")
+    .replace(/â†’/g, "→")
+    .replace(/CasperÐµ/g, "Caspere");
+
+const normalizeMojibakeData = (value) => {
+  if (typeof value === "string") {
+    return normalizeMojibakeText(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeMojibakeData(item));
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entryValue]) => [
+        key,
+        normalizeMojibakeData(entryValue),
+      ])
+    );
+  }
+
+  return value;
+};
+
+const normalizeRenderedDomText = (root = document.body) => {
+  if (!root) {
+    return;
+  }
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+
+  while (walker.nextNode()) {
+    const currentNode = walker.currentNode;
+    const normalizedValue = normalizeMojibakeText(currentNode.nodeValue ?? "");
+
+    if (normalizedValue !== currentNode.nodeValue) {
+      currentNode.nodeValue = normalizedValue;
+    }
+  }
+
+  root.querySelectorAll("[alt], [aria-label], [title], [placeholder]").forEach((element) => {
+    ["alt", "aria-label", "title", "placeholder"].forEach((attributeName) => {
+      const attributeValue = element.getAttribute(attributeName);
+
+      if (!attributeValue) {
+        return;
+      }
+
+      const normalizedValue = normalizeMojibakeText(attributeValue);
+
+      if (normalizedValue !== attributeValue) {
+        element.setAttribute(attributeName, normalizedValue);
+      }
+    });
+  });
+};
 
 if (siteFooter) {
   const isNestedPage = document.querySelector('script[src="../js/main.js"]') !== null;
@@ -102,6 +174,21 @@ if (siteFooter) {
       </div>
     `;
 }
+
+const isNestedPage = document.querySelector('script[src="../js/main.js"]') !== null;
+const pagePrefix = isNestedPage ? "" : "pages/";
+
+document.querySelectorAll(".navbar__sublink").forEach((link) => {
+  const linkLabel = link.textContent?.trim();
+
+  if (linkLabel === "Casperin kalendar" && link.getAttribute("href") === "#") {
+    link.setAttribute("href", `${pagePrefix}casperin-kalendar.html`);
+  }
+
+  if (linkLabel === "Sonjin blog" && link.getAttribute("href") === "#") {
+    link.setAttribute("href", `${pagePrefix}sonjin-blog.html`);
+  }
+});
 
 if (navbar) {
   const menuToggle = navbar.querySelector(".navbar__menu-toggle");
@@ -385,48 +472,48 @@ if (teamModal) {
 const storiesPage = document.querySelector("[data-stories-page]");
 
 if (storiesPage) {
-  const authors = [
+  const authors = normalizeMojibakeData([
     {
       slug: "ana-m",
       name: "Ana M.",
       image: "../assets/images/ana_glavina.jpg",
-      bio: "Piše o malim koracima i povratku svakodnevici.",
+      bio: "PiÅ¡e o malim koracima i povratku svakodnevici.",
     },
     {
       slug: "ivana-k",
       name: "Ivana K.",
       image: "../assets/images/ivana_juric.jpg",
-      bio: "Dijeli iskustva o postavljanju granica i slušanju sebe.",
+      bio: "Dijeli iskustva o postavljanju granica i sluÅ¡anju sebe.",
     },
     {
       slug: "petra-l",
       name: "Petra L.",
-      image: "../assets/images/Petra Lozančić_edited.jpg",
-      bio: "Bilježi put prihvaćanja i ozdravljenja.",
+      image: "../assets/images/Petra LozanÄiÄ‡_edited.jpg",
+      bio: "BiljeÅ¾i put prihvaÄ‡anja i ozdravljenja.",
     },
     {
       slug: "maja-h",
       name: "Maja H.",
       image: "../assets/images/Marja Ban.jpg",
-      bio: "Otvara teme straha, tišine i ponovnog pronalaska nade.",
+      bio: "Otvara teme straha, tiÅ¡ine i ponovnog pronalaska nade.",
     },
     {
       slug: "marija-b",
       name: "Marija B.",
       image: "../assets/images/Marija Selak.jpg",
-      bio: "Piše o odnosima, podršci i povratku povjerenja.",
+      bio: "PiÅ¡e o odnosima, podrÅ¡ci i povratku povjerenja.",
     },
     {
       slug: "jelena-r",
       name: "Jelena R.",
-      image: "../assets/images/Lara Radošević.jpg",
+      image: "../assets/images/Lara RadoÅ¡eviÄ‡.jpg",
       bio: "Dijeli iskustva o tijelu, identitetu i hrabrosti.",
     },
     {
       slug: "katarina-p",
       name: "Katarina P.",
-      image: "../assets/images/Nikolina Dragošević.jpg",
-      bio: "Piše o nježnosti, rutini i pronalasku mira u malim stvarima.",
+      image: "../assets/images/Nikolina DragoÅ¡eviÄ‡.jpg",
+      bio: "PiÅ¡e o njeÅ¾nosti, rutini i pronalasku mira u malim stvarima.",
     },
     {
       slug: "lucija-v",
@@ -443,19 +530,19 @@ if (storiesPage) {
     {
       slug: "barbara-n",
       name: "Barbara N.",
-      image: "../assets/images/Barbara Matijević_edited.jpg",
+      image: "../assets/images/Barbara MatijeviÄ‡_edited.jpg",
       bio: "Placeholder autorica za testiranje slidera.",
     },
     {
       slug: "iva-d",
       name: "Iva D.",
-      image: "../assets/images/Iva Teklić.jpg",
+      image: "../assets/images/Iva TekliÄ‡.jpg",
       bio: "Placeholder autorica za testiranje slidera.",
     },
     {
       slug: "snjezana-r",
-      name: "Snježana R.",
-      image: "../assets/images/Snježana Pušćenik_edited.jpg",
+      name: "SnjeÅ¾ana R.",
+      image: "../assets/images/SnjeÅ¾ana PuÅ¡Ä‡enik_edited.jpg",
       bio: "Placeholder autorica za testiranje slidera.",
     },
     {
@@ -464,120 +551,120 @@ if (storiesPage) {
       image: "../assets/images/Zlata Benzia.jpg",
       bio: "Placeholder autorica za testiranje slidera.",
     },
-  ];
+  ]);
 
-  const stories = [
+  const stories = normalizeMojibakeData([
     {
       title: "Kad sam sebe ponovno stavila na prvo mjesto",
-      slug: "#",
+      slug: "pojedina-prica.html?story=kad-sam-sebe-ponovno-stavila-na-prvo-mjesto",
       excerpt:
-        "Dugo sam brinula o svima, osim o sebi. Tek kad sam naučila reći 'ne', počela sam ponovno čuti svoj glas.",
+        "Dugo sam brinula o svima, osim o sebi. Tek kad sam nauÄila reÄ‡i 'ne', poÄela sam ponovno Äuti svoj glas.",
       coverImage: "../assets/images/story_img.jpeg",
       publishDate: "2024-04-12",
       authorSlug: "ivana-k",
     },
     {
       title: "Iz tame prema svjetlu",
-      slug: "#",
+      slug: "pojedina-prica.html?story=iz-tame-prema-svjetlu",
       excerpt:
-        "Nekad sam mislila da se iz najtežih trenutaka ne može izaći. Danas znam da je svaki korak, ma koliko malen, korak prema slobodi.",
+        "Nekad sam mislila da se iz najteÅ¾ih trenutaka ne moÅ¾e izaÄ‡i. Danas znam da je svaki korak, ma koliko malen, korak prema slobodi.",
       coverImage: "../assets/images/sandra_zekic_tomas.jpg",
       publishDate: "2024-04-09",
       authorSlug: "maja-h",
     },
     {
-      title: "Prihvaćanje je bio moj početak",
-      slug: "#",
+      title: "PrihvaÄ‡anje je bio moj poÄetak",
+      slug: "pojedina-prica.html?story=prihvacanje-je-bio-moj-pocetak",
       excerpt:
-        "Prihvatiti ono što se dogodilo nije značilo odustati. Za mene je to bio početak ozdravljenja.",
+        "Prihvatiti ono Å¡to se dogodilo nije znaÄilo odustati. Za mene je to bio poÄetak ozdravljenja.",
       coverImage: "../assets/images/placeholder.png",
       publishDate: "2024-04-05",
       authorSlug: "petra-l",
     },
     {
       title: "Mali koraci, velike promjene",
-      slug: "#",
+      slug: "pojedina-prica.html?story=mali-koraci-velike-promjene",
       excerpt:
-        "Nisam preko noći postala jača. Dan po dan, korak po korak, gradila sam svoju novu priču.",
+        "Nisam preko noÄ‡i postala jaÄa. Dan po dan, korak po korak, gradila sam svoju novu priÄu.",
       coverImage: "../assets/images/tu_smo2D.png",
       publishDate: "2024-04-01",
       authorSlug: "ana-m",
     },
     {
-      title: "Kad sam naučila tražiti pomoć",
-      slug: "#",
+      title: "Kad sam nauÄila traÅ¾iti pomoÄ‡",
+      slug: "pojedina-prica.html?story=kad-sam-naucila-traziti-pomoc",
       excerpt:
-        "Najveća promjena dogodila se kad sam priznala da ne mogu sve sama i dopustila drugima da mi budu oslonac.",
+        "NajveÄ‡a promjena dogodila se kad sam priznala da ne mogu sve sama i dopustila drugima da mi budu oslonac.",
       coverImage: "../assets/images/podrska_upoznaj.png",
       publishDate: "2024-03-28",
       authorSlug: "marija-b",
     },
     {
-      title: "Tijelo koje ponovno učim voljeti",
-      slug: "#",
+      title: "Tijelo koje ponovno uÄim voljeti",
+      slug: "pojedina-prica.html?story=tijelo-koje-ponovno-ucim-voljeti",
       excerpt:
-        "Pogled u ogledalo dugo mi je bio težak. S vremenom sam naučila gledati sebe s više nježnosti i manje straha.",
+        "Pogled u ogledalo dugo mi je bio teÅ¾ak. S vremenom sam nauÄila gledati sebe s viÅ¡e njeÅ¾nosti i manje straha.",
       coverImage: "../assets/images/tu_smo_3D.png",
       publishDate: "2024-03-24",
       authorSlug: "jelena-r",
     },
     {
       title: "Rituali koji su mi vratili mir",
-      slug: "#",
+      slug: "pojedina-prica.html?story=rituali-koji-su-mi-vratili-mir",
       excerpt:
-        "Čaj ujutro, kratka šetnja i nekoliko dubokih udaha postali su moje sidro u danima kada je sve bilo previše.",
+        "ÄŒaj ujutro, kratka Å¡etnja i nekoliko dubokih udaha postali su moje sidro u danima kada je sve bilo previÅ¡e.",
       coverImage: "../assets/images/bg_main.webp",
       publishDate: "2024-03-18",
       authorSlug: "katarina-p",
     },
     {
       title: "Kad sam prestala skrivati emocije",
-      slug: "#",
+      slug: "pojedina-prica.html?story=kad-sam-prestala-skrivati-emocije",
       excerpt:
-        "Godinama sam glumila snagu. Prava snaga došla je tek kada sam si dopustila ranjivost i suze.",
+        "Godinama sam glumila snagu. Prava snaga doÅ¡la je tek kada sam si dopustila ranjivost i suze.",
       coverImage: "../assets/images/tu_smo.png",
       publishDate: "2024-03-11",
       authorSlug: "ivana-k",
     },
     {
       title: "Ponovno vjerujem svom tijelu",
-      slug: "#",
+      slug: "pojedina-prica.html?story=ponovno-vjerujem-svom-tijelu",
       excerpt:
-        "Nakon liječenja trebalo mi je vrijeme da prestanem tijelo doživljavati kao neprijatelja i počnem ga slušati.",
+        "Nakon lijeÄenja trebalo mi je vrijeme da prestanem tijelo doÅ¾ivljavati kao neprijatelja i poÄnem ga sluÅ¡ati.",
       coverImage: "../assets/images/podrska_strucni.png",
       publishDate: "2024-03-04",
       authorSlug: "maja-h",
     },
     {
-      title: "Moja obitelj i ja učile smo zajedno",
-      slug: "#",
+      title: "Moja obitelj i ja uÄile smo zajedno",
+      slug: "pojedina-prica.html?story=moja-obitelj-i-ja-ucile-smo-zajedno",
       excerpt:
-        "Nitko od nas nije znao kako će izgledati oporavak, ali upravo nas je to zajedničko neznanje zbližilo više nego ikad.",
+        "Nitko od nas nije znao kako Ä‡e izgledati oporavak, ali upravo nas je to zajedniÄko neznanje zbliÅ¾ilo viÅ¡e nego ikad.",
       coverImage: "../assets/images/podrska_info.png",
       publishDate: "2024-02-25",
       authorSlug: "marija-b",
     },
     {
-      title: "Snaga nježnih dana",
-      slug: "#",
+      title: "Snaga njeÅ¾nih dana",
+      slug: "pojedina-prica.html?story=snaga-njeznih-dana",
       excerpt:
-        "Nekada su najhrabriji dani bili upravo oni najtiši, kada sam birala odmor umjesto forsiranja.",
+        "Nekada su najhrabriji dani bili upravo oni najtiÅ¡i, kada sam birala odmor umjesto forsiranja.",
       coverImage: "../assets/images/clanarina.png",
       publishDate: "2024-02-17",
       authorSlug: "ana-m",
     },
     {
-      title: "Kad sam ponovno poželjela planirati budućnost",
-      slug: "#",
+      title: "Kad sam ponovno poÅ¾eljela planirati buduÄ‡nost",
+      slug: "pojedina-prica.html?story=kad-sam-ponovno-pozeljela-planirati-buducnost",
       excerpt:
-        "Dugo nisam mogla gledati dalje od sljedećeg pregleda. Onda su se polako vratili želje, planovi i radoznalost.",
+        "Dugo nisam mogla gledati dalje od sljedeÄ‡eg pregleda. Onda su se polako vratili Å¾elje, planovi i radoznalost.",
       coverImage: "../assets/images/doniraj.png",
       publishDate: "2024-02-08",
       authorSlug: "petra-l",
     },
-  ];
+  ]);
 
-  const storiesPerPage = 4;
+  const storyRowsPerPage = 3;
   const authorTrack = storiesPage.querySelector("[data-author-track]");
   const authorScrollbar = storiesPage.querySelector("[data-author-scrollbar]");
   const authorScrollbarInput = storiesPage.querySelector(
@@ -598,6 +685,7 @@ if (storiesPage) {
   let selectedAuthor = "all";
   let selectedSort = "newest";
   let currentPage = 1;
+  let currentStoriesPerPage = storyRowsPerPage;
   let isDraggingAuthorScrollbar = false;
   let pendingAuthorScrollbarValue = null;
   let authorScrollbarTarget = null;
@@ -622,10 +710,10 @@ if (storiesPage) {
   const formatStoryCount = (count) => {
     const ending =
       count % 10 === 1 && count % 100 !== 11
-        ? "priča pronađena"
-        : "priče pronađene";
+        ? "priÄa pronaÄ‘ena"
+        : "priÄe pronaÄ‘ene";
 
-    return `${count} ${ending}`;
+    return normalizeMojibakeText(`${count} ${ending}`);
   };
 
   const formatDate = (dateValue) =>
@@ -634,6 +722,22 @@ if (storiesPage) {
       month: "long",
       year: "numeric",
     }).format(new Date(dateValue));
+
+  const getStoriesColumns = () => {
+    if (window.innerWidth <= 900) {
+      return 1;
+    }
+
+    if (window.innerWidth <= 1200) {
+      return 2;
+    }
+
+    return 3;
+  };
+
+  const getStoriesPerPage = () => getStoriesColumns() * storyRowsPerPage;
+
+  currentStoriesPerPage = getStoriesPerPage();
 
   const getFilteredStories = () => {
     const filteredStories =
@@ -662,16 +766,16 @@ if (storiesPage) {
     button.setAttribute("aria-selected", String(author.slug === selectedAuthor));
     button.tabIndex = author.slug === selectedAuthor ? 0 : -1;
 
-    button.innerHTML = `
+    button.innerHTML = normalizeMojibakeText(`
       <span class="stories-page__author-chip-circle">
         ${
           isAllStories
-            ? '<img class="stories-page__author-chip-avatar" src="../assets/images/sve_price.png" alt="Prikaz svih priča" />'
+            ? '<img class="stories-page__author-chip-avatar" src="../assets/images/sve_price.png" alt="Prikaz svih priÄa" />'
             : `<img class="stories-page__author-chip-avatar" src="${author.image}" alt="Profilna fotografija autorice ${author.name}" />`
         }
       </span>
       <span class="stories-page__author-chip-label">${author.name}</span>
-    `;
+    `);
 
     button.addEventListener("click", () => {
       selectedAuthor = author.slug;
@@ -690,7 +794,10 @@ if (storiesPage) {
       return;
     }
 
-    const authorItems = [{ slug: "all", name: "Sve priče" }, ...authors];
+    const authorItems = [
+      normalizeMojibakeData({ slug: "all", name: "Sve priÄe" }),
+      ...authors,
+    ];
     authorTrack.innerHTML = "";
     authorItems.forEach((author) => {
       authorTrack.append(createAuthorChip(author));
@@ -727,8 +834,11 @@ if (storiesPage) {
     const previousButton = document.createElement("button");
     previousButton.className = "stories-page__page-button";
     previousButton.type = "button";
-    previousButton.textContent = "‹";
-    previousButton.setAttribute("aria-label", "Prethodna stranica");
+    previousButton.textContent = normalizeMojibakeText("â€¹");
+    previousButton.setAttribute(
+      "aria-label",
+      normalizeMojibakeText("Prethodna stranica")
+    );
     previousButton.disabled = currentPage === 1;
     previousButton.addEventListener("click", () => {
       currentPage -= 1;
@@ -740,7 +850,7 @@ if (storiesPage) {
       if (item === null) {
         const ellipsis = document.createElement("span");
         ellipsis.className = "stories-page__page-ellipsis";
-        ellipsis.textContent = "…";
+        ellipsis.textContent = normalizeMojibakeText("â€¦");
         pagination.append(ellipsis);
         return;
       }
@@ -765,8 +875,11 @@ if (storiesPage) {
     const nextButton = document.createElement("button");
     nextButton.className = "stories-page__page-button";
     nextButton.type = "button";
-    nextButton.textContent = "›";
-    nextButton.setAttribute("aria-label", "Sljedeća stranica");
+    nextButton.textContent = normalizeMojibakeText("â€º");
+    nextButton.setAttribute(
+      "aria-label",
+      normalizeMojibakeText("SljedeÄ‡a stranica")
+    );
     nextButton.disabled = currentPage === totalPages;
     nextButton.addEventListener("click", () => {
       currentPage += 1;
@@ -781,40 +894,42 @@ if (storiesPage) {
     }
 
     if (!pageStories.length) {
-      storiesList.innerHTML =
-        '<p class="stories-page__empty">Trenutačno nema priča za odabranu autoricu. Pokušajte s drugim odabirom.</p>';
+      storiesList.innerHTML = normalizeMojibakeText(
+        '<p class="stories-page__empty">TrenutaÄno nema priÄa za odabranu autoricu. PokuÅ¡ajte s drugim odabirom.</p>'
+      );
       return;
     }
 
-    storiesList.innerHTML = pageStories
-      .map((story) => {
+    storiesList.innerHTML = normalizeMojibakeText(
+      pageStories
+        .map((story) => {
         const author = authorLookup.get(story.authorSlug);
 
         if (!author) {
           return "";
         }
 
-        return `
+          return `
           <article class="stories-page__story-card">
             <a class="stories-page__story-link" href="${story.slug}">
               <div class="stories-page__story-media">
-                <img class="stories-page__story-image" src="${story.coverImage}" alt="Naslovna fotografija priče ${story.title}" />
+                <img class="stories-page__story-image" src="${story.coverImage}" alt="Naslovna fotografija priÄe ${story.title}" />
               </div>
               <div class="stories-page__story-content">
                 <div class="stories-page__story-meta">
-                  <img class="stories-page__story-avatar" src="${author.image}" alt="Profilna fotografija autorice ${author.name}" />
                   <span class="stories-page__story-author">${author.name}</span>
                   <time class="stories-page__story-date" datetime="${story.publishDate}">${formatDate(story.publishDate)}</time>
                 </div>
                 <h2 class="stories-page__story-title">${story.title}</h2>
                 <p class="stories-page__story-excerpt">${story.excerpt}</p>
-                <span class="stories-page__story-cta">Čitaj više</span>
+                <span class="stories-page__story-cta">ProÄitaj priÄu</span>
               </div>
             </a>
           </article>
         `;
-      })
-      .join("");
+        })
+        .join("")
+    );
   };
 
   const updateAuthorSliderState = () => {
@@ -895,6 +1010,8 @@ if (storiesPage) {
 
   const renderStoriesPage = () => {
     const filteredStories = getFilteredStories();
+    const storiesPerPage = getStoriesPerPage();
+    currentStoriesPerPage = storiesPerPage;
     const totalPages = Math.max(1, Math.ceil(filteredStories.length / storiesPerPage));
 
     currentPage = Math.min(currentPage, totalPages);
@@ -952,6 +1069,11 @@ if (storiesPage) {
 
   window.addEventListener("resize", () => {
     updateAuthorSliderState();
+    const nextStoriesPerPage = getStoriesPerPage();
+
+    if (nextStoriesPerPage !== currentStoriesPerPage) {
+      renderStoriesPage();
+    }
   });
 
   authorScrollbarInput?.addEventListener("pointerdown", () => {
@@ -1004,3 +1126,939 @@ if (storiesPage) {
 
   renderStoriesPage();
 }
+
+const calendarPage = document.querySelector("[data-calendar-page]");
+
+if (calendarPage) {
+  const calendarEvents = normalizeMojibakeData([
+    {
+      title: "Radionica: Ljubav prema sebi",
+      excerpt:
+        "Radionica usmjerena na jaÄanje samopouzdanja i briÅ¾nije svakodnevice kroz praktiÄne vjeÅ¾be, razgovor i prostor za predah.",
+      image: "../assets/images/story_img.jpeg",
+      startDate: "2026-06-04T10:00:00+02:00",
+      location: "Split, Udruga Caspera",
+    },
+    {
+      title: "Grupa podrÅ¡ke za Älanice",
+      excerpt:
+        "MjeseÄni susret u sigurnom krugu Älanica udruge uz voÄ‘eni razgovor, razmjenu iskustava i teme koje se otvaraju iz stvarnog Å¾ivota.",
+      image: "../assets/images/tu_smo.png",
+      startDate: "2026-06-12T18:00:00+02:00",
+      location: "Split, gradska knjiÅ¾nica",
+    },
+    {
+      title: "Javna akcija: Dan ruÅ¾iÄaste vrpce",
+      excerpt:
+        "Informativni punkt i susret s graÄ‘anima posveÄ‡en vaÅ¾nosti ranog otkrivanja, podrÅ¡ke i zajedniÄkog zagovaranja zdravlja Å¾ena.",
+      image: "../assets/images/podrska_info.png",
+      startDate: "2026-10-03T09:30:00+02:00",
+      location: "Split, Marmontova ulica",
+    },
+    {
+      title: "Predavanje: Prehrana tijekom oporavka",
+      excerpt:
+        "StruÄno predavanje nutricionistice o malim, odrÅ¾ivim navikama koje mogu pomoÄ‡i u razdoblju lijeÄenja i oporavka.",
+      image: "../assets/images/podrska_strucni.png",
+      startDate: "2026-05-08T17:30:00+02:00",
+      location: "Online prijenos",
+    },
+    {
+      title: "Caspera na Rivi",
+      excerpt:
+        "Proljetno okupljanje zajednice uz razgovor, informativne materijale i predstavljanje programa podrÅ¡ke dostupnih Älanicama.",
+      image: "../assets/images/tu_smo2D.png",
+      startDate: "2026-04-19T11:00:00+02:00",
+      location: "Split, Riva",
+    },
+    {
+      title: "VeÄer iskustava i pitanja",
+      excerpt:
+        "Neformalni susret na kojem Älanice i struÄni suradnici otvaraju pitanja koja Äesto ostaju izmeÄ‘u pregleda, papira i svakodnevice.",
+      image: "../assets/images/podrska_upoznaj.png",
+      startDate: "2026-03-27T19:00:00+01:00",
+      location: "Split, Dom mladih",
+    },
+  ]);
+
+  const calendarList = calendarPage.querySelector("[data-calendar-list]");
+  const filterDropdown = calendarPage.querySelector("[data-calendar-filter-dropdown]");
+  const filterDropdownRoot = calendarPage.querySelector(
+    ".calendar-page__filter-dropdown"
+  );
+  const filterToggle = calendarPage.querySelector("[data-calendar-filter-toggle]");
+  const filterLabel = calendarPage.querySelector("[data-calendar-filter-label]");
+  const filterOptions = [
+    ...calendarPage.querySelectorAll("[data-calendar-filter-value]"),
+  ];
+  let selectedFilter = "all";
+
+  const filterLabels = normalizeMojibakeData({
+    all: "Svi",
+    upcoming: "NadolazeÄ‡i",
+    past: "ProÅ¡li",
+  });
+
+  const closeFilterDropdown = () => {
+    filterDropdownRoot?.classList.remove("is-open");
+    filterToggle?.setAttribute("aria-expanded", "false");
+  };
+
+  const openFilterDropdown = () => {
+    filterDropdownRoot?.classList.add("is-open");
+    filterToggle?.setAttribute("aria-expanded", "true");
+  };
+
+  const formatEventDate = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(dateValue));
+
+  const formatEventTime = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(new Date(dateValue));
+
+  const formatBadgeMonth = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", { month: "short" })
+      .format(new Date(dateValue))
+      .replace(".", "")
+      .toUpperCase();
+
+  const formatBadgeDay = (dateValue) =>
+    String(new Date(dateValue).getDate()).padStart(2, "0");
+
+  const isUpcomingEvent = (eventDate) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return new Date(eventDate).getTime() >= today.getTime();
+  };
+
+  const getFilteredEvents = () => {
+    const upcomingEvents = [];
+    const pastEvents = [];
+
+    calendarEvents.forEach((event) => {
+      if (isUpcomingEvent(event.startDate)) {
+        upcomingEvents.push(event);
+        return;
+      }
+
+      pastEvents.push(event);
+    });
+
+    upcomingEvents.sort(
+      (firstEvent, secondEvent) =>
+        new Date(firstEvent.startDate).getTime() -
+        new Date(secondEvent.startDate).getTime()
+    );
+    pastEvents.sort(
+      (firstEvent, secondEvent) =>
+        new Date(secondEvent.startDate).getTime() -
+        new Date(firstEvent.startDate).getTime()
+    );
+
+    if (selectedFilter === "upcoming") {
+      return upcomingEvents;
+    }
+
+    if (selectedFilter === "past") {
+      return pastEvents;
+    }
+
+    return [...upcomingEvents, ...pastEvents];
+  };
+
+  const renderEvents = () => {
+    if (!calendarList) {
+      return;
+    }
+
+    const events = getFilteredEvents();
+
+    if (filterLabel) {
+      filterLabel.textContent = filterLabels[selectedFilter];
+    }
+
+    filterOptions.forEach((option) => {
+      option.setAttribute(
+        "aria-selected",
+        String(option.dataset.calendarFilterValue === selectedFilter)
+      );
+    });
+
+    if (!events.length) {
+      calendarList.innerHTML = normalizeMojibakeText(
+        '<p class="calendar-page__empty">TrenutaÄno nema dogaÄ‘aja u odabranoj skupini. PokuÅ¡ajte s drugim filtrom.</p>'
+      );
+      return;
+    }
+
+    calendarList.innerHTML = normalizeMojibakeText(
+      events
+        .map((event) => {
+        const eventDate = new Date(event.startDate);
+        const eventMailSubject = encodeURIComponent(
+          `Upit za dogaÄ‘aj: ${event.title}`
+        );
+        const eventMailBody = encodeURIComponent(
+          `Pozdrav,%0D%0A%0D%0AZanima me viÅ¡e informacija o dogaÄ‘aju "${event.title}" (${formatEventDate(
+            event.startDate
+          )}).`
+        );
+
+          return `
+          <article class="calendar-page__card">
+            <a class="calendar-page__card-link" href="mailto:info@caspera.hr?subject=${eventMailSubject}&body=${eventMailBody}">
+              <div class="calendar-page__card-media">
+                <img class="calendar-page__card-image" src="${event.image}" alt="Vizual dogaÄ‘aja ${event.title}" />
+                <div class="calendar-page__date-badge" aria-label="${formatEventDate(event.startDate)}">
+                  <span class="calendar-page__date-day">${formatBadgeDay(event.startDate)}</span>
+                  <span class="calendar-page__date-month">${formatBadgeMonth(event.startDate)}</span>
+                  <span class="calendar-page__date-divider" aria-hidden="true"></span>
+                  <span class="calendar-page__date-year">${eventDate.getFullYear()}.</span>
+                </div>
+              </div>
+              <div class="calendar-page__card-content">
+                <div class="calendar-page__card-meta">
+                  <span class="calendar-page__meta-item calendar-page__meta-item--time">
+                    ${formatEventTime(event.startDate)}
+                  </span>
+                  <span class="calendar-page__meta-item calendar-page__meta-item--location">
+                    ${event.location}
+                  </span>
+                </div>
+                <h2 class="calendar-page__card-title">${event.title}</h2>
+                <p class="calendar-page__card-excerpt">${event.excerpt}</p>
+                <span class="calendar-page__card-cta">Saznaj viÅ¡e</span>
+              </div>
+            </a>
+          </article>
+        `;
+        })
+        .join("")
+    );
+  };
+
+  filterToggle?.addEventListener("click", () => {
+    const isOpen = filterDropdownRoot?.classList.contains("is-open");
+
+    if (isOpen) {
+      closeFilterDropdown();
+      return;
+    }
+
+    openFilterDropdown();
+  });
+
+  filterOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+      selectedFilter = option.dataset.calendarFilterValue ?? "all";
+      closeFilterDropdown();
+      renderEvents();
+      filterToggle?.focus();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!filterDropdown?.contains(event.target)) {
+      closeFilterDropdown();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeFilterDropdown();
+    }
+  });
+
+  renderEvents();
+}
+
+const storyDetailPage = document.querySelector("[data-story-detail-page]");
+const blogPage = document.querySelector("[data-blog-page]");
+
+if (blogPage) {
+  const blogAuthor = normalizeMojibakeData({
+    slug: "sonja",
+    name: "Sonja",
+    image: "../assets/images/ivana_juric.jpg",
+    bio: "Predsjednica udruge Caspera, posveÄ‡ena podrÅ¡ci, zagovaranju i osnaÅ¾ivanju Å¾ena kroz zajednicu, iskustvo i razgovor.",
+  });
+
+  const blogPosts = normalizeMojibakeData([
+    {
+      title: "ZaÅ¡to piÅ¡em ovaj blog",
+      slug: "pojedina-prica.html?story=zasto-pisem-ovaj-blog",
+      excerpt:
+        "Htjela sam otvoriti prostor za iskren pogled iznutra: o radu udruge, Å¾enama koje susreÄ‡emo i trenucima koji nas mijenjaju.",
+      coverImage: "../assets/images/story_img.jpeg",
+      publishDate: "2024-05-06",
+    },
+    {
+      title: "Kad podrÅ¡ka nije velika gesta nego tiha prisutnost",
+      slug: "pojedina-prica.html?story=kad-podrska-nije-velika-gesta",
+      excerpt:
+        "Najdublju razliku Äesto naprave male stvari: poruka u pravo vrijeme, odlazak na pregled zajedno i osjeÄ‡aj da nisi sama.",
+      coverImage: "../assets/images/podrska_upoznaj.png",
+      publishDate: "2024-04-24",
+    },
+    {
+      title: "Å to me Å¾ene iz CasperÐµ uÄe o hrabrosti",
+      slug: "pojedina-prica.html?story=sto-me-zene-iz-caspere-uce-o-hrabrosti",
+      excerpt:
+        "Hrabrost rijetko izgleda glasno. NajÄeÅ¡Ä‡e je vidim u strpljenju, ranjivosti i odluci da se ide dalje korak po korak.",
+      coverImage: "../assets/images/tu_smo.png",
+      publishDate: "2024-04-16",
+    },
+    {
+      title: "ZaÅ¡to zajednica mijenja iskustvo bolesti",
+      slug: "pojedina-prica.html?story=zasto-zajednica-mijenja-iskustvo-bolesti",
+      excerpt:
+        "Kad postoji mjesto na kojem te netko razumije bez puno objaÅ¡njavanja, teret postaje lakÅ¡i, a oporavak manje usamljen.",
+      coverImage: "../assets/images/tu_smo_3D.png",
+      publishDate: "2024-04-03",
+    },
+    {
+      title: "IzmeÄ‘u administracije i emocija: stvarni rad udruge",
+      slug: "pojedina-prica.html?story=izmedju-administracije-i-emocija",
+      excerpt:
+        "VoÄ‘enje udruge nije samo organizacija i planiranje. To je i stalno balansiranje izmeÄ‘u praktiÄne pomoÄ‡i i ljudske blizine.",
+      coverImage: "../assets/images/podrska_info.png",
+      publishDate: "2024-03-21",
+    },
+    {
+      title: "Kako saÄuvati njeÅ¾nost kad je svakodnevica teÅ¡ka",
+      slug: "pojedina-prica.html?story=kako-sacuvati-njeznost-kad-je-svakodnevica-teska",
+      excerpt:
+        "NjeÅ¾nost nije slabost. Ona je naÄin da ostanemo prisutne, briÅ¾ne i povezane sa sobom i drugima i onda kad je najteÅ¾e.",
+      coverImage: "../assets/images/bg_main.webp",
+      publishDate: "2024-03-08",
+    },
+  ]);
+
+  const storyRowsPerPage = 3;
+  const storiesList = blogPage.querySelector("[data-blog-list]");
+  const pagination = blogPage.querySelector("[data-blog-pagination]");
+  const sortDropdown = blogPage.querySelector("[data-blog-sort-dropdown]");
+  const sortDropdownRoot = blogPage.querySelector(".stories-page__sort-dropdown");
+  const sortToggle = blogPage.querySelector("[data-blog-sort-toggle]");
+  const sortLabel = blogPage.querySelector("[data-blog-sort-label]");
+  const sortOptions = [...blogPage.querySelectorAll("[data-blog-sort-value]")];
+  let selectedSort = "newest";
+  let currentPage = 1;
+  let currentStoriesPerPage = storyRowsPerPage;
+
+  const sortLabels = {
+    newest: "Najnovije",
+    oldest: "Najstarije",
+  };
+
+  const closeSortDropdown = () => {
+    sortDropdownRoot?.classList.remove("is-open");
+    sortToggle?.setAttribute("aria-expanded", "false");
+  };
+
+  const openSortDropdown = () => {
+    sortDropdownRoot?.classList.add("is-open");
+    sortToggle?.setAttribute("aria-expanded", "true");
+  };
+
+  const formatDate = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(dateValue));
+
+  const getStoriesColumns = () => {
+    if (window.innerWidth <= 900) {
+      return 1;
+    }
+
+    if (window.innerWidth <= 1200) {
+      return 2;
+    }
+
+    return 3;
+  };
+
+  const getStoriesPerPage = () => getStoriesColumns() * storyRowsPerPage;
+
+  currentStoriesPerPage = getStoriesPerPage();
+
+  const getSortedPosts = () => {
+    const posts = [...blogPosts];
+
+    posts.sort((firstPost, secondPost) => {
+      const firstDate = new Date(firstPost.publishDate).getTime();
+      const secondDate = new Date(secondPost.publishDate).getTime();
+
+      return selectedSort === "oldest" ? firstDate - secondDate : secondDate - firstDate;
+    });
+
+    return posts;
+  };
+
+  const getPaginationItems = (page, totalPages) => {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+
+    if (page <= 3) {
+      return [1, 2, 3, null, totalPages];
+    }
+
+    if (page >= totalPages - 2) {
+      return [1, null, totalPages - 2, totalPages - 1, totalPages];
+    }
+
+    return [1, null, page, null, totalPages];
+  };
+
+  const renderPagination = (totalPages) => {
+    if (!pagination) {
+      return;
+    }
+
+    pagination.innerHTML = "";
+
+    if (totalPages <= 1) {
+      return;
+    }
+
+    const previousButton = document.createElement("button");
+    previousButton.className = "stories-page__page-button";
+    previousButton.type = "button";
+    previousButton.textContent = normalizeMojibakeText("â€¹");
+    previousButton.setAttribute(
+      "aria-label",
+      normalizeMojibakeText("Prethodna stranica")
+    );
+    previousButton.disabled = currentPage === 1;
+    previousButton.addEventListener("click", () => {
+      currentPage -= 1;
+      renderBlogPage();
+    });
+    pagination.append(previousButton);
+
+    getPaginationItems(currentPage, totalPages).forEach((item) => {
+      if (item === null) {
+        const ellipsis = document.createElement("span");
+        ellipsis.className = "stories-page__page-ellipsis";
+        ellipsis.textContent = normalizeMojibakeText("â€¦");
+        pagination.append(ellipsis);
+        return;
+      }
+
+      const pageButton = document.createElement("button");
+      pageButton.className = "stories-page__page-button";
+      pageButton.type = "button";
+      pageButton.textContent = String(item);
+
+      if (item === currentPage) {
+        pageButton.setAttribute("aria-current", "page");
+      } else {
+        pageButton.addEventListener("click", () => {
+          currentPage = item;
+          renderBlogPage();
+        });
+      }
+
+      pagination.append(pageButton);
+    });
+
+    const nextButton = document.createElement("button");
+    nextButton.className = "stories-page__page-button";
+    nextButton.type = "button";
+    nextButton.textContent = normalizeMojibakeText("â€º");
+    nextButton.setAttribute(
+      "aria-label",
+      normalizeMojibakeText("SljedeÄ‡a stranica")
+    );
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener("click", () => {
+      currentPage += 1;
+      renderBlogPage();
+    });
+    pagination.append(nextButton);
+  };
+
+  const renderPosts = (pagePosts) => {
+    if (!storiesList) {
+      return;
+    }
+
+    storiesList.innerHTML = normalizeMojibakeText(
+      pagePosts
+        .map(
+          (post) => `
+          <article class="stories-page__story-card">
+            <a class="stories-page__story-link" href="${post.slug}">
+              <div class="stories-page__story-media">
+                <img class="stories-page__story-image" src="${post.coverImage}" alt="Naslovna fotografija blog objave ${post.title}" />
+              </div>
+              <div class="stories-page__story-content">
+                <div class="stories-page__story-meta">
+                  <span class="stories-page__story-author">${blogAuthor.name}</span>
+                  <time class="stories-page__story-date" datetime="${post.publishDate}">${formatDate(post.publishDate)}</time>
+                </div>
+                <h2 class="stories-page__story-title">${post.title}</h2>
+                <p class="stories-page__story-excerpt">${post.excerpt}</p>
+                <span class="stories-page__story-cta">ProÄitaj objavu</span>
+              </div>
+            </a>
+          </article>
+        `
+        )
+        .join("")
+    );
+  };
+
+  function renderBlogPage() {
+    const sortedPosts = getSortedPosts();
+    const storiesPerPage = getStoriesPerPage();
+    currentStoriesPerPage = storiesPerPage;
+    const totalPages = Math.max(1, Math.ceil(sortedPosts.length / storiesPerPage));
+
+    currentPage = Math.min(currentPage, totalPages);
+
+    const startIndex = (currentPage - 1) * storiesPerPage;
+    const pagePosts = sortedPosts.slice(startIndex, startIndex + storiesPerPage);
+
+    if (sortLabel) {
+      sortLabel.textContent = sortLabels[selectedSort];
+    }
+
+    sortOptions.forEach((option) => {
+      option.setAttribute(
+        "aria-selected",
+        String(option.dataset.blogSortValue === selectedSort)
+      );
+    });
+
+    renderPosts(pagePosts);
+    renderPagination(totalPages);
+  }
+
+  sortToggle?.addEventListener("click", () => {
+    const isOpen = sortDropdownRoot?.classList.contains("is-open");
+
+    if (isOpen) {
+      closeSortDropdown();
+      return;
+    }
+
+    openSortDropdown();
+  });
+
+  sortOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+      selectedSort = option.dataset.blogSortValue ?? "newest";
+      currentPage = 1;
+      closeSortDropdown();
+      renderBlogPage();
+      sortToggle?.focus();
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    const nextStoriesPerPage = getStoriesPerPage();
+
+    if (nextStoriesPerPage !== currentStoriesPerPage) {
+      renderBlogPage();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!sortDropdown?.contains(event.target)) {
+      closeSortDropdown();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeSortDropdown();
+    }
+  });
+
+  renderBlogPage();
+}
+
+if (storyDetailPage) {
+  const storyAuthors = normalizeMojibakeData([
+    {
+      slug: "ana-m",
+      name: "Ana M.",
+      image: "../assets/images/ana_glavina.jpg",
+      bio: "PiÅ¡e o malim koracima i povratku svakodnevici.",
+    },
+    {
+      slug: "ivana-k",
+      name: "Ivana K.",
+      image: "../assets/images/ivana_juric.jpg",
+      bio: "Dijeli iskustva o postavljanju granica i sluÅ¡anju sebe.",
+    },
+    {
+      slug: "petra-l",
+      name: "Petra L.",
+      image: "../assets/images/Petra LozanÄiÄ‡_edited.jpg",
+      bio: "BiljeÅ¾i put prihvaÄ‡anja i ozdravljenja.",
+    },
+    {
+      slug: "maja-h",
+      name: "Maja H.",
+      image: "../assets/images/Marja Ban.jpg",
+      bio: "Otvara teme straha, tiÅ¡ine i ponovnog pronalaska nade.",
+    },
+    {
+      slug: "marija-b",
+      name: "Marija B.",
+      image: "../assets/images/Marija Selak.jpg",
+      bio: "PiÅ¡e o odnosima, podrÅ¡ci i povratku povjerenja.",
+    },
+    {
+      slug: "jelena-r",
+      name: "Jelena R.",
+      image: "../assets/images/Lara RadoÅ¡eviÄ‡.jpg",
+      bio: "Dijeli iskustva o tijelu, identitetu i hrabrosti.",
+    },
+    {
+      slug: "katarina-p",
+      name: "Katarina P.",
+      image: "../assets/images/Nikolina DragoÅ¡eviÄ‡.jpg",
+      bio: "PiÅ¡e o njeÅ¾nosti, rutini i pronalasku mira u malim stvarima.",
+    },
+    {
+      slug: "sonja",
+      name: "Sonja",
+      image: "../assets/images/ivana_juric.jpg",
+      bio: "Predsjednica udruge Caspera, posveÄ‡ena podrÅ¡ci, zagovaranju i osnaÅ¾ivanju Å¾ena kroz zajednicu, iskustvo i razgovor.",
+    },
+  ]);
+
+  const storyArticles = normalizeMojibakeData([
+    {
+      title: "Kad sam sebe ponovno stavila na prvo mjesto",
+      slug: "kad-sam-sebe-ponovno-stavila-na-prvo-mjesto",
+      excerpt:
+        "Dugo sam brinula o svima, osim o sebi. Tek kad sam nauÄila reÄ‡i 'ne', poÄela sam ponovno Äuti svoj glas.",
+      coverImage: "../assets/images/story_img.jpeg",
+      publishDate: "2024-04-12",
+      authorSlug: "ivana-k",
+      quote:
+        "Ako sam to uspjela ja, moÅ¾eÅ¡ i ti. Ti si vaÅ¾na. Ti si dovoljna. Ti zasluÅ¾ujeÅ¡.",
+      body: [
+        "Godinama sam bila osoba koja Ä‡e sve stiÄ‡i, sve zapamtiti i svakome biti oslonac. U toj ulozi bilo je neÄega poznatog i sigurnog, ali i neÄega Å¡to me polako udaljavalo od mene same. Kad je tijelo poÄelo traÅ¾iti predah, shvatila sam koliko dugo ignoriram vlastite granice.",
+        "Prvo sam uÄila zastati bez osjeÄ‡aja krivnje. To nije doÅ¡lo preko noÄ‡i. Bilo je potrebno puno malih odluka: odmoriti kad sam umorna, odbiti ono Å¡to ne mogu nositi i priznati da mi treba pomoÄ‡. Svaki put kada sam izabrala sebe, Äinilo mi se da radim neÅ¡to neobiÄno. S vremenom je taj izbor postao njeÅ¾niji i prirodniji.",
+        "NajveÄ‡a promjena nije bila izvana nego iznutra. PoÄela sam jasnije Äuti Å¡to mi treba, Å¡to me umiruje i uz koga mogu ostati svoja. Danas i dalje uÄim, ali viÅ¡e ne mislim da ljubav prema drugima mora znaÄiti odustajanje od sebe. Upravo suprotno: kada sebe stavim na prvo mjesto, imam viÅ¡e snage za sve koje volim.",
+      ],
+    },
+    {
+      title: "Iz tame prema svjetlu",
+      slug: "iz-tame-prema-svjetlu",
+      excerpt:
+        "Nekad sam mislila da se iz najteÅ¾ih trenutaka ne moÅ¾e izaÄ‡i. Danas znam da je svaki korak, ma koliko malen, korak prema slobodi.",
+      coverImage: "../assets/images/sandra_zekic_tomas.jpg",
+      publishDate: "2024-04-09",
+      authorSlug: "maja-h",
+    },
+    {
+      title: "PrihvaÄ‡anje je bio moj poÄetak",
+      slug: "prihvacanje-je-bio-moj-pocetak",
+      excerpt:
+        "Prihvatiti ono Å¡to se dogodilo nije znaÄilo odustati. Za mene je to bio poÄetak ozdravljenja.",
+      coverImage: "../assets/images/placeholder.png",
+      publishDate: "2024-04-05",
+      authorSlug: "petra-l",
+    },
+    {
+      title: "Mali koraci, velike promjene",
+      slug: "mali-koraci-velike-promjene",
+      excerpt:
+        "Nisam preko noÄ‡i postala jaÄa. Dan po dan, korak po korak, gradila sam svoju novu priÄu.",
+      coverImage: "../assets/images/tu_smo2D.png",
+      publishDate: "2024-04-01",
+      authorSlug: "ana-m",
+    },
+    {
+      title: "Kad sam nauÄila traÅ¾iti pomoÄ‡",
+      slug: "kad-sam-naucila-traziti-pomoc",
+      excerpt:
+        "NajveÄ‡a promjena dogodila se kad sam priznala da ne mogu sve sama i dopustila drugima da mi budu oslonac.",
+      coverImage: "../assets/images/podrska_upoznaj.png",
+      publishDate: "2024-03-28",
+      authorSlug: "marija-b",
+    },
+    {
+      title: "Tijelo koje ponovno uÄim voljeti",
+      slug: "tijelo-koje-ponovno-ucim-voljeti",
+      excerpt:
+        "Pogled u ogledalo dugo mi je bio teÅ¾ak. S vremenom sam nauÄila gledati sebe s viÅ¡e njeÅ¾nosti i manje straha.",
+      coverImage: "../assets/images/tu_smo_3D.png",
+      publishDate: "2024-03-24",
+      authorSlug: "jelena-r",
+    },
+    {
+      title: "Rituali koji su mi vratili mir",
+      slug: "rituali-koji-su-mi-vratili-mir",
+      excerpt:
+        "ÄŒaj ujutro, kratka Å¡etnja i nekoliko dubokih udaha postali su moje sidro u danima kada je sve bilo previÅ¡e.",
+      coverImage: "../assets/images/bg_main.webp",
+      publishDate: "2024-03-18",
+      authorSlug: "katarina-p",
+    },
+    {
+      title: "Kad sam prestala skrivati emocije",
+      slug: "kad-sam-prestala-skrivati-emocije",
+      excerpt:
+        "Godinama sam glumila snagu. Prava snaga doÅ¡la je tek kada sam si dopustila ranjivost i suze.",
+      coverImage: "../assets/images/tu_smo.png",
+      publishDate: "2024-03-11",
+      authorSlug: "ivana-k",
+    },
+    {
+      title: "Ponovno vjerujem svom tijelu",
+      slug: "ponovno-vjerujem-svom-tijelu",
+      excerpt:
+        "Nakon lijeÄenja trebalo mi je vrijeme da prestanem tijelo doÅ¾ivljavati kao neprijatelja i poÄnem ga sluÅ¡ati.",
+      coverImage: "../assets/images/podrska_strucni.png",
+      publishDate: "2024-03-04",
+      authorSlug: "maja-h",
+    },
+    {
+      title: "Moja obitelj i ja uÄile smo zajedno",
+      slug: "moja-obitelj-i-ja-ucile-smo-zajedno",
+      excerpt:
+        "Nitko od nas nije znao kako Ä‡e izgledati oporavak, ali upravo nas je to zajedniÄko neznanje zbliÅ¾ilo viÅ¡e nego ikad.",
+      coverImage: "../assets/images/podrska_info.png",
+      publishDate: "2024-02-25",
+      authorSlug: "marija-b",
+    },
+    {
+      title: "Snaga njeÅ¾nih dana",
+      slug: "snaga-njeznih-dana",
+      excerpt:
+        "Nekada su najhrabriji dani bili upravo oni najtiÅ¡i, kada sam birala odmor umjesto forsiranja.",
+      coverImage: "../assets/images/clanarina.png",
+      publishDate: "2024-02-17",
+      authorSlug: "ana-m",
+    },
+    {
+      title: "Kad sam ponovno poÅ¾eljela planirati buduÄ‡nost",
+      slug: "kad-sam-ponovno-pozeljela-planirati-buducnost",
+      excerpt:
+        "Dugo nisam mogla gledati dalje od sljedeÄ‡eg pregleda. Onda su se polako vratili Å¾elje, planovi i radoznalost.",
+      coverImage: "../assets/images/doniraj.png",
+      publishDate: "2024-02-08",
+      authorSlug: "petra-l",
+    },
+    {
+      title: "ZaÅ¡to piÅ¡em ovaj blog",
+      slug: "zasto-pisem-ovaj-blog",
+      excerpt:
+        "Htjela sam otvoriti prostor za iskren pogled iznutra: o radu udruge, Å¾enama koje susreÄ‡emo i trenucima koji nas mijenjaju.",
+      coverImage: "../assets/images/story_img.jpeg",
+      publishDate: "2024-05-06",
+      authorSlug: "sonja",
+      sectionLabel: "Sonjin blog",
+      sectionHref: "sonjin-blog.html",
+      quote:
+        "Pisati znaÄi ostaviti trag iskustva koji nekome drugome moÅ¾e postati oslonac baÅ¡ onda kada mu je najpotrebniji.",
+      body: [
+        "Ovaj blog nastao je iz potrebe da uz sluÅ¾bene informacije postoji i prostor za osobniji glas. U radu udruge svakodnevno susreÄ‡em priÄe koje nose hrabrost, umor, nadu i neizgovorena pitanja. Å½eljela sam mjesto na kojem se o tome moÅ¾e govoriti mirno, iskreno i bez Å¾urbe.",
+        "Kada vodite udrugu, Äesto ste izmeÄ‘u svijeta organizacije i svijeta emocija. Jedan dan pripremate sastanak, drugi dan nekome odgovarate na poruku koja dolazi usred straha ili neizvjesnosti. Oboje je vaÅ¾no. Oboje traÅ¾i prisutnost. Upravo zato ovaj blog nije samo pregled aktivnosti, nego i zapis o ljudima, odnosima i onome Å¡to uÄimo jedni od drugih.",
+        "Ako ove objave nekome pomognu da se osjeti viÄ‘enom, razumljenom ili barem malo manje samom, onda je ovaj prostor ispunio svoju svrhu. To je i razlog zaÅ¡to piÅ¡em: da iskustvo ne ostane zatvoreno, nego postane most prema drugima.",
+      ],
+    },
+    {
+      title: "Kad podrÅ¡ka nije velika gesta nego tiha prisutnost",
+      slug: "kad-podrska-nije-velika-gesta",
+      excerpt:
+        "Najdublju razliku Äesto naprave male stvari: poruka u pravo vrijeme, odlazak na pregled zajedno i osjeÄ‡aj da nisi sama.",
+      coverImage: "../assets/images/podrska_upoznaj.png",
+      publishDate: "2024-04-24",
+      authorSlug: "sonja",
+      sectionLabel: "Sonjin blog",
+      sectionHref: "sonjin-blog.html",
+    },
+    {
+      title: "Å to me Å¾ene iz CasperÐµ uÄe o hrabrosti",
+      slug: "sto-me-zene-iz-caspere-uce-o-hrabrosti",
+      excerpt:
+        "Hrabrost rijetko izgleda glasno. NajÄeÅ¡Ä‡e je vidim u strpljenju, ranjivosti i odluci da se ide dalje korak po korak.",
+      coverImage: "../assets/images/tu_smo.png",
+      publishDate: "2024-04-16",
+      authorSlug: "sonja",
+      sectionLabel: "Sonjin blog",
+      sectionHref: "sonjin-blog.html",
+    },
+    {
+      title: "ZaÅ¡to zajednica mijenja iskustvo bolesti",
+      slug: "zasto-zajednica-mijenja-iskustvo-bolesti",
+      excerpt:
+        "Kad postoji mjesto na kojem te netko razumije bez puno objaÅ¡njavanja, teret postaje lakÅ¡i, a oporavak manje usamljen.",
+      coverImage: "../assets/images/tu_smo_3D.png",
+      publishDate: "2024-04-03",
+      authorSlug: "sonja",
+      sectionLabel: "Sonjin blog",
+      sectionHref: "sonjin-blog.html",
+    },
+    {
+      title: "IzmeÄ‘u administracije i emocija: stvarni rad udruge",
+      slug: "izmedju-administracije-i-emocija",
+      excerpt:
+        "VoÄ‘enje udruge nije samo organizacija i planiranje. To je i stalno balansiranje izmeÄ‘u praktiÄne pomoÄ‡i i ljudske blizine.",
+      coverImage: "../assets/images/podrska_info.png",
+      publishDate: "2024-03-21",
+      authorSlug: "sonja",
+      sectionLabel: "Sonjin blog",
+      sectionHref: "sonjin-blog.html",
+    },
+    {
+      title: "Kako saÄuvati njeÅ¾nost kad je svakodnevica teÅ¡ka",
+      slug: "kako-sacuvati-njeznost-kad-je-svakodnevica-teska",
+      excerpt:
+        "NjeÅ¾nost nije slabost. Ona je naÄin da ostanemo prisutne, briÅ¾ne i povezane sa sobom i drugima i onda kad je najteÅ¾e.",
+      coverImage: "../assets/images/bg_main.webp",
+      publishDate: "2024-03-08",
+      authorSlug: "sonja",
+      sectionLabel: "Sonjin blog",
+      sectionHref: "sonjin-blog.html",
+    },
+  ]);
+
+  const authorLookup = new Map(storyAuthors.map((author) => [author.slug, author]));
+  const formatDate = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(dateValue));
+
+  const getStoryContent = (story, author) => {
+    if (story.body && story.quote) {
+      return normalizeMojibakeData(story);
+    }
+
+    return normalizeMojibakeData({
+      ...story,
+      quote:
+        "Svaki mali korak prema sebi vrijedi viÅ¡e nego Å¡to mislimo dok ga tek uÄimo napraviti.",
+      body: [
+        `${story.excerpt} Trebalo mi je vremena da prihvatim da oporavak nema ravnu liniju i da se snaga Äesto krije u tihim, svakodnevnim odlukama.`,
+        `${author.name} svoju je priÄu gradila polako, uz podrÅ¡ku ljudi kojima vjeruje i uz sve viÅ¡e prostora za odmor, njeÅ¾nost i iskrenost prema sebi.`,
+        "Danas znam da se promjena ne dogaÄ‘a odjednom. DogaÄ‘a se u malim pomacima, u naÄinu na koji razgovaramo sa sobom i u tome koliko si dopuÅ¡tamo traÅ¾iti mir kada nam je najpotrebniji.",
+      ],
+    });
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const selectedSlug = params.get("story");
+  const selectedStory =
+    storyArticles.find((story) => story.slug === selectedSlug) ?? storyArticles[0];
+  const author = authorLookup.get(selectedStory.authorSlug);
+  const story = getStoryContent(selectedStory, author);
+  const currentUrl = window.location.href;
+
+  const breadcrumbCurrent = storyDetailPage.querySelector(
+    "[data-story-breadcrumb-current]"
+  );
+  const breadcrumbSectionLink = storyDetailPage.querySelector(
+    "[data-story-breadcrumb-section-link]"
+  );
+  const heroImage = storyDetailPage.querySelector("[data-story-hero-image]");
+  const imageCaption = storyDetailPage.querySelector("[data-story-image-caption]");
+  const title = storyDetailPage.querySelector("[data-story-title]");
+  const authorName = storyDetailPage.querySelector("[data-story-author-name]");
+  const publishDate = storyDetailPage.querySelector("[data-story-publish-date]");
+  const body = storyDetailPage.querySelector("[data-story-body]");
+  const quote = storyDetailPage.querySelector("[data-story-quote]");
+  const shareFacebook = storyDetailPage.querySelector("[data-share-facebook]");
+  const shareLink = storyDetailPage.querySelector("[data-share-link]");
+  const shareEmail = storyDetailPage.querySelector("[data-share-email]");
+  const authorCardImage = storyDetailPage.querySelector("[data-story-author-image]");
+  const authorCardName = storyDetailPage.querySelector("[data-story-author-card-name]");
+  const authorCardBio = storyDetailPage.querySelector("[data-story-author-card-bio]");
+
+  if (breadcrumbCurrent) {
+    breadcrumbCurrent.textContent = story.title;
+  }
+
+  if (breadcrumbSectionLink) {
+    breadcrumbSectionLink.textContent = normalizeMojibakeText(
+      story.sectionLabel ?? "Moja priÄa"
+    );
+    breadcrumbSectionLink.href = story.sectionHref ?? "moja-prica.html";
+  }
+
+  if (heroImage) {
+    heroImage.src = story.coverImage;
+    heroImage.alt = normalizeMojibakeText(
+      `Naslovna fotografija priÄe ${story.title}`
+    );
+  }
+
+  if (imageCaption && author) {
+    imageCaption.textContent = normalizeMojibakeText(
+      `Osobna priÄa autorice ${author.name}`
+    );
+  }
+
+  if (title) {
+    title.textContent = story.title;
+  }
+
+  if (authorName && author) {
+    authorName.textContent = author.name;
+  }
+
+  if (publishDate) {
+    publishDate.dateTime = story.publishDate;
+    publishDate.textContent = formatDate(story.publishDate);
+  }
+
+  if (body) {
+    body.innerHTML = normalizeMojibakeText(
+      story.body.map((paragraph) => `<p>${paragraph}</p>`).join("")
+    );
+  }
+
+  if (quote) {
+    quote.textContent = story.quote;
+  }
+
+  if (shareFacebook) {
+    shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+  }
+
+  if (shareLink) {
+    shareLink.href = currentUrl;
+  }
+
+  if (shareEmail) {
+    shareEmail.href = `mailto:?subject=${encodeURIComponent(`Caspera | ${story.title}`)}&body=${encodeURIComponent(currentUrl)}`;
+  }
+
+  if (authorCardImage && author) {
+    authorCardImage.src = author.image;
+    authorCardImage.alt = `Portret autorice ${author.name}`;
+  }
+
+  if (authorCardName && author) {
+    authorCardName.textContent = author.name;
+  }
+
+  if (authorCardBio && author) {
+    authorCardBio.textContent = normalizeMojibakeText(
+      `${author.bio} ${author.name} svoju priÄu dijeli kako bi podrÅ¾ala druge Å¾ene koje prolaze kroz sliÄan put.`
+    );
+  }
+
+  document.title = `Caspera | ${story.title}`;
+}
+
+normalizeRenderedDomText();
