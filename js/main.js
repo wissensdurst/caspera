@@ -185,6 +185,10 @@ document.querySelectorAll(".navbar__sublink").forEach((link) => {
     link.setAttribute("href", `${pagePrefix}casperin-kalendar.html`);
   }
 
+  if (linkLabel === "Galerija" && link.getAttribute("href") === "#") {
+    link.setAttribute("href", `${pagePrefix}galerija.html`);
+  }
+
   if (linkLabel === "Sonjin blog" && link.getAttribute("href") === "#") {
     link.setAttribute("href", `${pagePrefix}sonjin-blog.html`);
   }
@@ -1380,6 +1384,87 @@ if (calendarPage) {
 
 const storyDetailPage = document.querySelector("[data-story-detail-page]");
 const blogPage = document.querySelector("[data-blog-page]");
+const galleryPage = document.querySelector("[data-gallery-page]");
+
+if (galleryPage) {
+  const galleryModal = document.querySelector("[data-gallery-modal]");
+  const galleryModalTitle = galleryModal?.querySelector("[data-gallery-modal-title]");
+  const galleryModalDate = galleryModal?.querySelector("[data-gallery-modal-date]");
+  const galleryModalGrid = galleryModal?.querySelector("[data-gallery-modal-grid]");
+  const galleryTriggers = [...galleryPage.querySelectorAll("[data-gallery-trigger]")];
+  const galleryCloseControls = [...(galleryModal?.querySelectorAll("[data-gallery-close]") ?? [])];
+  const formatDate = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(dateValue));
+
+  let lastGalleryTrigger = null;
+
+  const closeGalleryModal = () => {
+    if (!galleryModal || galleryModal.hidden) {
+      return;
+    }
+
+    galleryModal.hidden = true;
+    galleryPage.classList.remove("modal-open");
+    lastGalleryTrigger?.focus();
+  };
+
+  const openGalleryModal = (trigger) => {
+    if (!galleryModal || !galleryModalGrid) {
+      return;
+    }
+
+    const title = trigger.dataset.galleryTitle ?? "";
+    const date = trigger.dataset.galleryDate ?? "";
+    const images = (trigger.dataset.galleryImages ?? "")
+      .split("|")
+      .map((image) => image.trim())
+      .filter(Boolean);
+
+    if (galleryModalTitle) {
+      galleryModalTitle.textContent = title;
+    }
+
+    if (galleryModalDate) {
+      galleryModalDate.dateTime = date;
+      galleryModalDate.textContent = formatDate(date);
+    }
+
+    galleryModalGrid.innerHTML = images
+      .map(
+        (imagePath, index) => `
+          <figure class="gallery-modal__photo">
+            <img src="${imagePath}" alt="Fotografija ${index + 1} iz albuma ${title}" />
+          </figure>
+        `
+      )
+      .join("");
+
+    lastGalleryTrigger = trigger;
+    galleryPage.classList.add("modal-open");
+    galleryModal.hidden = false;
+    galleryModal.querySelector("[data-gallery-close]")?.focus();
+  };
+
+  galleryTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      openGalleryModal(trigger);
+    });
+  });
+
+  galleryCloseControls.forEach((control) => {
+    control.addEventListener("click", closeGalleryModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeGalleryModal();
+    }
+  });
+}
 
 if (blogPage) {
   const blogAuthor = normalizeMojibakeData({

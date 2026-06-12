@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Caspera | Galerija</title>
+  </head>
+  <body class="stranica-galerija" data-gallery-page>
+    <header class="header">
+      <nav class="navbar" aria-label="Glavna navigacija">
+        <a class="navbar__logo" href="../index.html">
+          <img src="../assets/images/logo_main.png" alt="Logo udruge Caspera" />
+        </a>
+        <button
+          class="navbar__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navbar-menu"
+          aria-label="Otvori navigaciju"
+        >
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+          <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+        </button>
+        <div class="navbar__menu" id="navbar-menu">
+          <ul class="navbar__list">
+            <li class="navbar__item navbar__item--mobile-only">
+              <a class="navbar__link" href="../index.html">Početna</a>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-about"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">O nama</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-about">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="tko-je-caspera.html">Tko je Caspera</a></li>
+                  <li><a class="navbar__sublink" href="nasa-ekipa.html">Naša ekipa</a></li>
+                  <li><a class="navbar__sublink" href="caspera-u-medijima.html">Caspera u medijima</a></li>
+                  <li><a class="navbar__sublink" href="statut.html">Statut</a></li>
+                  <li><a class="navbar__sublink" href="izvjesce-o-radu.html">Izvješće o radu</a></li>
+                  <li><a class="navbar__sublink" href="plan-rada-i-financijski-plan.html">Plan rada i financijski plan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-support"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Podrška</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-support">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="savjetodavatelji.html">Naši savjetodavatelji</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-onkologa.html">Pitaj onkologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-nutricionista.html">Pitaj nutricionista</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-dermatologa.html">Pitaj dermatologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-patologa.html">Pitaj patologa</a></li>
+                  <li><a class="navbar__sublink" href="pitaj-fizioterapeuta.html">Pitaj fizioterapeuta</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-info"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Informacije</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-info">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="socijalna-prava.html">Socijalna prava</a></li>
+                  <li><a class="navbar__sublink" href="ortopedska-pomagala.html">Ortopedska pomagala</a></li>
+                  <li><a class="navbar__sublink" href="putni-trosak.html">Putni trošak</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-community"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Zajednica</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-community">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="sonjin-blog.html">Sonjin blog</a></li>
+                  <li><a class="navbar__sublink" href="moja-prica.html">Moja priča</a></li>
+                  <li><a class="navbar__sublink" href="#">O autoricama</a></li>
+                  <li><a class="navbar__sublink" href="bokun-butige.html">Bokun butige</a></li>
+                  <li><a class="navbar__sublink" href="postani-clan.html">Postani član</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="navbar-panel-news"
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">Caspera u akciji</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="../assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id="navbar-panel-news">
+                <ul class="navbar__sublist">
+                  <li><a class="navbar__sublink" href="#">Naši projekti</a></li>
+                  <li><a class="navbar__sublink" href="galerija.html">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="casperin-kalendar.html">Casperin kalendar</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <a class="navbar__cta button__main" href="doniraj.html">Doniraj</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="gallery-page">
+      <div class="gallery-page__inner">
+        <section class="gallery-page__hero" aria-labelledby="gallery-page-title">
+          <div class="gallery-page__hero-copy">
+            <nav class="gallery-page__breadcrumbs" aria-label="Breadcrumb">
+              <ol class="gallery-page__breadcrumb-list">
+                <li class="gallery-page__breadcrumb-item"><a href="../index.html">Početna</a></li>
+                <li class="gallery-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
+                <li class="gallery-page__breadcrumb-item" aria-current="page">Galerija</li>
+              </ol>
+            </nav>
+            <h1 class="gallery-page__title" id="gallery-page-title">Galerija</h1>
+            <p class="gallery-page__intro">
+              Pogledajte djelić susreta, druženja i trenutaka zajedništva koje Caspera stvara kroz svoje aktivnosti i događanja.
+            </p>
+          </div>
+        </section>
+
+        <div class="gallery-page__album-grid">
+          <article class="stories-page__story-card gallery-page__album-card">
+            <button
+              class="stories-page__story-link gallery-page__album-button"
+              type="button"
+              data-gallery-trigger
+              data-gallery-title="Katić"
+              data-gallery-date="2024-04-03"
+              data-gallery-images="../assets/images/album/katich_01.jpeg|../assets/images/album/katich_02.jpeg|../assets/images/album/katich_03.jpeg|../assets/images/album/katich_04.jpeg|../assets/images/album/katich_05.jpg|../assets/images/album/katich_06.jpg|../assets/images/album/katich_07.jpg|../assets/images/album/katich_08.jpg|../assets/images/album/katich_09.jpg"
+            >
+              <div class="stories-page__story-media">
+                <img
+                  class="stories-page__story-image"
+                  src="../assets/images/album/katich_01.jpeg"
+                  alt="Naslovna fotografija albuma Katić"
+                />
+              </div>
+              <div class="stories-page__story-content gallery-page__album-content">
+                <h2 class="stories-page__story-title gallery-page__album-title">Katić</h2>
+                <time class="stories-page__story-date gallery-page__album-date" datetime="2024-04-03">3. travnja 2024.</time>
+              </div>
+            </button>
+          </article>
+
+          <article class="stories-page__story-card gallery-page__album-card">
+            <button
+              class="stories-page__story-link gallery-page__album-button"
+              type="button"
+              data-gallery-trigger
+              data-gallery-title="Hoba"
+              data-gallery-date="2024-04-03"
+              data-gallery-images="../assets/images/album/hoba_01.jpg|../assets/images/album/hoba_02.jpg|../assets/images/album/hoba_03.jpg|../assets/images/album/hoba_04.jpg|../assets/images/album/hoba_05.jpg|../assets/images/album/hoba_06.jpg|../assets/images/album/hoba_07.jpg|../assets/images/album/hoba_08.jpg|../assets/images/album/hoba_09.jpg|../assets/images/album/hoba_10.jpg|../assets/images/album/hoba_11.jpg|../assets/images/album/hoba_12.jpg|../assets/images/album/hoba_13.jpg|../assets/images/album/hoba_14.jpg|../assets/images/album/hoba_15.jpg|../assets/images/album/hoba_16.jpg"
+            >
+              <div class="stories-page__story-media">
+                <img
+                  class="stories-page__story-image"
+                  src="../assets/images/album/hoba_01.jpg"
+                  alt="Naslovna fotografija albuma Hoba"
+                />
+              </div>
+              <div class="stories-page__story-content gallery-page__album-content">
+                <h2 class="stories-page__story-title gallery-page__album-title">Hoba</h2>
+                <time class="stories-page__story-date gallery-page__album-date" datetime="2024-04-03">3. travnja 2024.</time>
+              </div>
+            </button>
+          </article>
+
+          <article class="stories-page__story-card gallery-page__album-card">
+            <button
+              class="stories-page__story-link gallery-page__album-button"
+              type="button"
+              data-gallery-trigger
+              data-gallery-title="Bajamonti"
+              data-gallery-date="2024-04-03"
+              data-gallery-images="../assets/images/album/bajamonti_02.jpg|../assets/images/album/bajamonti_03.jpg|../assets/images/album/bajamonti_04.jpg|../assets/images/album/bajamonti_05.jpg|../assets/images/album/bajamonti_06.jpg|../assets/images/album/bajamonti_07.jpg|../assets/images/album/bajamonti_08.jpg|../assets/images/album/bajamonti_09.jpg"
+            >
+              <div class="stories-page__story-media">
+                <img
+                  class="stories-page__story-image"
+                  src="../assets/images/album/bajamonti_02.jpg"
+                  alt="Naslovna fotografija albuma Bajamonti"
+                />
+              </div>
+              <div class="stories-page__story-content gallery-page__album-content">
+                <h2 class="stories-page__story-title gallery-page__album-title">Bajamonti</h2>
+                <time class="stories-page__story-date gallery-page__album-date" datetime="2024-04-03">3. travnja 2024.</time>
+              </div>
+            </button>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <div class="gallery-modal" data-gallery-modal hidden>
+      <div class="gallery-modal__backdrop" data-gallery-close></div>
+      <div
+        class="gallery-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gallery-modal-title"
+      >
+        <button class="gallery-modal__close" type="button" aria-label="Zatvori galeriju" data-gallery-close>
+          <span aria-hidden="true">×</span>
+        </button>
+        <div class="gallery-modal__header">
+          <h2 class="gallery-modal__title" id="gallery-modal-title" data-gallery-modal-title></h2>
+          <time class="gallery-modal__date" data-gallery-modal-date></time>
+        </div>
+        <div class="gallery-modal__grid" data-gallery-modal-grid></div>
+      </div>
+    </div>
+
+    <footer class="site-footer" id="contact-footer"></footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>
