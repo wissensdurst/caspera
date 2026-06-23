@@ -179,10 +179,14 @@ const isNestedPage = document.querySelector('script[src="../js/main.js"]') !== n
 const pagePrefix = isNestedPage ? "" : "pages/";
 
 document.querySelectorAll(".navbar__sublink").forEach((link) => {
-  const linkLabel = link.textContent?.trim();
+  const linkLabel = normalizeMojibakeText(link.textContent?.trim() ?? "");
 
   if (linkLabel === "Casperin kalendar" && link.getAttribute("href") === "#") {
     link.setAttribute("href", `${pagePrefix}casperin-kalendar.html`);
+  }
+
+  if (linkLabel === "Naši projekti" && link.getAttribute("href") === "#") {
+    link.setAttribute("href", `${pagePrefix}nasi-projekti.html`);
   }
 
   if (linkLabel === "Galerija" && link.getAttribute("href") === "#") {
@@ -1132,53 +1136,90 @@ if (storiesPage) {
 }
 
 const calendarPage = document.querySelector("[data-calendar-page]");
+const projectsPage = document.querySelector("[data-projects-page]");
 
 if (calendarPage) {
   const calendarEvents = normalizeMojibakeData([
     {
       title: "Radionica: Ljubav prema sebi",
+      slug: "radionica-ljubav-prema-sebi",
       excerpt:
         "Radionica usmjerena na jaÄanje samopouzdanja i briÅ¾nije svakodnevice kroz praktiÄne vjeÅ¾be, razgovor i prostor za predah.",
+      body: [
+        "Radionica otvara prostor za njeÅ¾an, praktiÄan razgovor o odnosu prema sebi nakon bolesti, lijeÄenja ili razdoblja velikog umora.",
+        "Kroz voÄ‘ene vjeÅ¾be, kratke refleksije i razmjenu iskustava sudionice Ä‡e istraÅ¾iti male navike koje vraÄ‡aju osjeÄ‡aj sigurnosti, povjerenja u tijelo i svakodnevne brige o sebi.",
+      ],
+      quote: "Briga o sebi ne mora biti velika odluka. ÄŒesto poÄinje jednim mirnim trenutkom.",
       image: "../assets/images/story_img.jpeg",
       startDate: "2026-06-04T10:00:00+02:00",
       location: "Split, Udruga Caspera",
     },
     {
       title: "Grupa podrÅ¡ke za Älanice",
+      slug: "grupa-podrske-za-clanice",
       excerpt:
         "MjeseÄni susret u sigurnom krugu Älanica udruge uz voÄ‘eni razgovor, razmjenu iskustava i teme koje se otvaraju iz stvarnog Å¾ivota.",
+      body: [
+        "Grupa podrÅ¡ke okuplja Älanice koje Å¾ele razgovarati bez pritiska, dijeliti ono Å¡to trenutno prolaze i Äuti iskustva drugih Å¾ena.",
+        "Susret vodi struÄna suradnica, a teme se oblikuju prema potrebama grupe: od svakodnevnih pitanja do emocionalnih promjena, odnosa i povratka vlastitom ritmu.",
+      ],
+      quote: "U krugu podrÅ¡ke nema potrebe za objaÅ¡njavanjem onoga Å¡to drugi veÄ‡ razumiju.",
       image: "../assets/images/tu_smo.png",
       startDate: "2026-06-12T18:00:00+02:00",
       location: "Split, gradska knjiÅ¾nica",
     },
     {
       title: "Javna akcija: Dan ruÅ¾iÄaste vrpce",
+      slug: "javna-akcija-dan-ruzicaste-vrpce",
       excerpt:
         "Informativni punkt i susret s graÄ‘anima posveÄ‡en vaÅ¾nosti ranog otkrivanja, podrÅ¡ke i zajedniÄkog zagovaranja zdravlja Å¾ena.",
+      body: [
+        "Javna akcija posveÄ‡ena je ranom otkrivanju raka dojke, dostupnim oblicima podrÅ¡ke i razgovoru s graÄ‘anima o zdravlju Å¾ena.",
+        "Volonterke i Älanice Caspere dijelit Ä‡e informativne materijale, odgovarati na pitanja i podsjetiti koliko su redoviti pregledi i pravovremena podrÅ¡ka vaÅ¾ni.",
+      ],
+      quote: "Svaki razgovor koji potakne pregled ili ohrabri Å¾enu da potraÅ¾i podrÅ¡ku ima stvarnu vrijednost.",
       image: "../assets/images/podrska_info.png",
       startDate: "2026-10-03T09:30:00+02:00",
       location: "Split, Marmontova ulica",
     },
     {
       title: "Predavanje: Prehrana tijekom oporavka",
+      slug: "predavanje-prehrana-tijekom-oporavka",
       excerpt:
         "StruÄno predavanje nutricionistice o malim, odrÅ¾ivim navikama koje mogu pomoÄ‡i u razdoblju lijeÄenja i oporavka.",
+      body: [
+        "Predavanje donosi struÄan, ali razumljiv pregled prehrambenih navika koje mogu podrÅ¾ati tijelo tijekom lijeÄenja i oporavka.",
+        "Naglasak je na jednostavnim odabirima, realnim obrocima i pitanjima koja se Äesto pojave kada se svakodnevica promijeni zbog terapije, umora ili novih potreba organizma.",
+      ],
+      quote: "OdrÅ¾ive navike vrijede viÅ¡e od savrÅ¡enog plana kojeg je teÅ¡ko zadrÅ¾ati.",
       image: "../assets/images/podrska_strucni.png",
       startDate: "2026-05-08T17:30:00+02:00",
       location: "Online prijenos",
     },
     {
       title: "Caspera na Rivi",
+      slug: "caspera-na-rivi",
       excerpt:
         "Proljetno okupljanje zajednice uz razgovor, informativne materijale i predstavljanje programa podrÅ¡ke dostupnih Älanicama.",
+      body: [
+        "Caspera na Rivi zamiÅ¡ljena je kao otvoreno okupljanje zajednice, mjesto susreta za Älanice, obitelji, volonterke i sve koji Å¾ele saznati viÅ¡e o radu udruge.",
+        "Uz razgovor i informativne materijale predstavit Ä‡e se programi podrÅ¡ke, aktivnosti i naÄini ukljuÄivanja u zajednicu koja ostaje blizu.",
+      ],
+      quote: "Zajednica se najlakÅ¡e prepozna ondje gdje je otvorena, dostupna i spremna sasluÅ¡ati.",
       image: "../assets/images/tu_smo2D.png",
       startDate: "2026-04-19T11:00:00+02:00",
       location: "Split, Riva",
     },
     {
       title: "VeÄer iskustava i pitanja",
+      slug: "vecer-iskustava-i-pitanja",
       excerpt:
         "Neformalni susret na kojem Älanice i struÄni suradnici otvaraju pitanja koja Äesto ostaju izmeÄ‘u pregleda, papira i svakodnevice.",
+      body: [
+        "VeÄer iskustava i pitanja namijenjena je otvorenom razgovoru o temama koje se Äesto pojave tek nakon pregleda, u obitelji ili u miru vlastitog doma.",
+        "Susret spaja iskustvo Älanica i znanje struÄnih suradnika kako bi odgovori bili jasniji, a osjeÄ‡aj samoÄ‡e manji.",
+      ],
+      quote: "Nijedno pitanje nije premalo kada nosi brigu koju je vaÅ¾no izgovoriti.",
       image: "../assets/images/podrska_upoznaj.png",
       startDate: "2026-03-27T19:00:00+01:00",
       location: "Split, Dom mladih",
@@ -1186,6 +1227,19 @@ if (calendarPage) {
   ]);
 
   const calendarList = calendarPage.querySelector("[data-calendar-list]");
+  const calendarListSections = [
+    ...calendarPage.querySelectorAll("[data-calendar-list-section]"),
+  ];
+  const eventDetail = calendarPage.querySelector("[data-event-detail]");
+  const eventTitle = calendarPage.querySelector("[data-event-title]");
+  const eventHeroImage = calendarPage.querySelector("[data-event-hero-image]");
+  const eventDate = calendarPage.querySelector("[data-event-date]");
+  const eventLocation = calendarPage.querySelector("[data-event-location]");
+  const eventBody = calendarPage.querySelector("[data-event-body]");
+  const eventQuote = calendarPage.querySelector("[data-event-quote]");
+  const eventBreadcrumbCurrent = calendarPage.querySelector(
+    "[data-event-breadcrumb-current]"
+  );
   const filterDropdown = calendarPage.querySelector("[data-calendar-filter-dropdown]");
   const filterDropdownRoot = calendarPage.querySelector(
     ".calendar-page__filter-dropdown"
@@ -1234,6 +1288,66 @@ if (calendarPage) {
 
   const formatBadgeDay = (dateValue) =>
     String(new Date(dateValue).getDate()).padStart(2, "0");
+
+  const getEventDetailHref = (event) =>
+    `casperin-kalendar.html?event=${encodeURIComponent(event.slug)}`;
+
+  const showEventDetail = (event) => {
+    if (!eventDetail) {
+      return;
+    }
+
+    calendarListSections.forEach((section) => {
+      section.hidden = true;
+    });
+    eventDetail.hidden = false;
+
+    if (eventTitle) {
+      eventTitle.textContent = event.title;
+    }
+
+    if (eventBreadcrumbCurrent) {
+      eventBreadcrumbCurrent.textContent = event.title;
+    }
+
+    if (eventHeroImage) {
+      eventHeroImage.src = event.image;
+      eventHeroImage.alt = `Vizual dogaÄ‘aja ${event.title}`;
+    }
+
+    if (eventDate) {
+      eventDate.dateTime = event.startDate;
+      eventDate.textContent = formatEventDate(event.startDate);
+    }
+
+    if (eventLocation) {
+      eventLocation.textContent = event.location;
+    }
+
+    if (eventBody) {
+      const eventParagraphs = event.body?.length ? event.body : [event.excerpt];
+      eventBody.innerHTML = eventParagraphs
+        .map((paragraph) => `<p>${paragraph}</p>`)
+        .join("");
+    }
+
+    if (eventQuote) {
+      eventQuote.textContent = event.quote ?? "";
+      eventQuote.hidden = !event.quote;
+    }
+
+    document.title = `Caspera | ${event.title}`;
+  };
+
+  const showCalendarList = () => {
+    calendarListSections.forEach((section) => {
+      section.hidden = false;
+    });
+
+    if (eventDetail) {
+      eventDetail.hidden = true;
+    }
+  };
 
   const isUpcomingEvent = (eventDate) => {
     const today = new Date();
@@ -1304,19 +1418,11 @@ if (calendarPage) {
     calendarList.innerHTML = normalizeMojibakeText(
       events
         .map((event) => {
-        const eventDate = new Date(event.startDate);
-        const eventMailSubject = encodeURIComponent(
-          `Upit za dogaÄ‘aj: ${event.title}`
-        );
-        const eventMailBody = encodeURIComponent(
-          `Pozdrav,%0D%0A%0D%0AZanima me viÅ¡e informacija o dogaÄ‘aju "${event.title}" (${formatEventDate(
-            event.startDate
-          )}).`
-        );
+          const eventDate = new Date(event.startDate);
 
           return `
           <article class="calendar-page__card">
-            <a class="calendar-page__card-link" href="mailto:info@caspera.hr?subject=${eventMailSubject}&body=${eventMailBody}">
+            <a class="calendar-page__card-link" href="${getEventDetailHref(event)}" aria-label="Otvori dogaÄ‘aj ${event.title}">
               <div class="calendar-page__card-media">
                 <img class="calendar-page__card-image" src="${event.image}" alt="Vizual dogaÄ‘aja ${event.title}" />
                 <div class="calendar-page__date-badge" aria-label="${formatEventDate(event.startDate)}">
@@ -1379,7 +1485,274 @@ if (calendarPage) {
     }
   });
 
-  renderEvents();
+  const selectedEventSlug = new URLSearchParams(window.location.search).get("event");
+  const selectedEvent = calendarEvents.find(
+    (event) => event.slug === selectedEventSlug
+  );
+
+  if (selectedEvent) {
+    showEventDetail(selectedEvent);
+  } else {
+    showCalendarList();
+    renderEvents();
+  }
+}
+
+if (projectsPage) {
+  const projects = normalizeMojibakeData([
+    {
+      title: "Tu smo",
+      slug: "tu-smo",
+      publishDate: "2026-05-14",
+      excerpt:
+        "Projekt podrÅ¡ke i vidljivosti koji Å¾enama i njihovim obiteljima pribliÅ¾ava informacije, iskustva i zajednicu koja ostaje dostupna i nakon prvog kontakta.",
+      body: [
+        "Projekt Tu smo okuplja aktivnosti kojima Caspera Å¾enama i njihovim obiteljima pribliÅ¾ava podrÅ¡ku, informacije i osjeÄ‡aj zajedniÅ¡tva.",
+        "Kroz javne materijale, susrete i komunikacijske aktivnosti projekt pomaÅ¾e da se vaÅ¾ne teme ne zadrÅ¾e samo u ordinacijama, nego postanu dostupne i razumljive u svakodnevnom Å¾ivotu.",
+      ],
+      quote: "PodrÅ¡ka je najkorisnija kada je vidljiva, jasna i dovoljno blizu.",
+      image: "../assets/images/tu_smo.png",
+    },
+    {
+      title: "Bokun butige",
+      slug: "bokun-butige",
+      publishDate: "2026-04-22",
+      excerpt:
+        "Humanitarna inicijativa kroz koju donacije, proizvodi i male geste podrÅ¡ke postaju konkretna pomoÄ‡ za rad udruge i programe namijenjene Älanicama.",
+      body: [
+        "Bokun butige povezuje humanitarnu podrÅ¡ku i rad udruge kroz proizvode, donacije i male geste koje imaju konkretan uÄinak.",
+        "Sredstva i vidljivost prikupljeni kroz ovu inicijativu usmjeravaju se prema programima podrÅ¡ke, edukacije i aktivnostima koje Älanicama olakÅ¡avaju svakodnevicu.",
+      ],
+      quote: "I mali doprinos moÅ¾e postati dio veÄ‡e podrÅ¡ke kada je usmjeren ondje gdje je potreban.",
+      image: "../assets/images/bokun_butige.jpg",
+    },
+    {
+      title: "SavjetovaliÅ¡te Caspere",
+      slug: "savjetovaliste-caspere",
+      publishDate: "2026-03-18",
+      excerpt:
+        "Program struÄne podrÅ¡ke koji povezuje Älanice sa savjetodavateljima iz podruÄja onkologije, prehrane, fizikalne terapije, dermatologije i drugih vaÅ¾nih tema.",
+      body: [
+        "SavjetovaliÅ¡te Caspere razvija dostupnu struÄnu podrÅ¡ku za pitanja koja se Äesto pojave tijekom lijeÄenja, oporavka i povratka svakodnevnom ritmu.",
+        "Program povezuje Älanice sa savjetodavateljima iz viÅ¡e podruÄja kako bi odgovori bili jasniji, praktiÄniji i prilagoÄ‘eni stvarnim potrebama Å¾ena.",
+      ],
+      quote: "Pravo pitanje u pravom trenutku moÅ¾e smanjiti strah i otvoriti put prema jasnijoj odluci.",
+      image: "../assets/images/podrska_strucni.png",
+    },
+    {
+      title: "Moja priÄa",
+      slug: "moja-prica",
+      publishDate: "2026-02-12",
+      excerpt:
+        "Prostor za osobna iskustva, iskrene tekstove i glasove Å¾ena koje dijele ono Å¡to im je pomoglo, promijenilo svakodnevicu ili vratilo osjeÄ‡aj snage.",
+      body: [
+        "Moja priÄa otvara prostor za iskustva Å¾ena koje Å¾ele podijeliti dio svog puta, bez uljepÅ¡avanja i bez pritiska da sve mora zvuÄati jednostavno.",
+        "Projekt prikuplja glasove koji mogu ohrabriti druge, dati jezik onome Å¡to je teÅ¡ko izgovoriti i pokazati da se u iskustvu bolesti ne mora biti sama.",
+      ],
+      quote: "Osobna priÄa moÅ¾e biti podrÅ¡ka Å¾eni koja je tek poÄela traÅ¾iti vlastite rijeÄi.",
+      image: "../assets/images/story_img.jpeg",
+    },
+  ]);
+
+  const projectsList = projectsPage.querySelector("[data-projects-list]");
+  const projectsListSections = [
+    ...projectsPage.querySelectorAll("[data-projects-list-section]"),
+  ];
+  const projectDetail = projectsPage.querySelector("[data-project-detail]");
+  const projectTitle = projectsPage.querySelector("[data-project-title]");
+  const projectHeroImage = projectsPage.querySelector("[data-project-hero-image]");
+  const projectDate = projectsPage.querySelector("[data-project-date]");
+  const projectBody = projectsPage.querySelector("[data-project-body]");
+  const projectQuote = projectsPage.querySelector("[data-project-quote]");
+  const projectBreadcrumbCurrent = projectsPage.querySelector(
+    "[data-project-breadcrumb-current]"
+  );
+  const projectsSortDropdown = projectsPage.querySelector(
+    "[data-projects-sort-dropdown]"
+  );
+  const projectsSortDropdownRoot = projectsPage.querySelector(
+    ".calendar-page__filter-dropdown"
+  );
+  const projectsSortToggle = projectsPage.querySelector("[data-projects-sort-toggle]");
+  const projectsSortLabel = projectsPage.querySelector("[data-projects-sort-label]");
+  const projectsSortOptions = [
+    ...projectsPage.querySelectorAll("[data-projects-sort-value]"),
+  ];
+  const projectSortLabels = normalizeMojibakeData({
+    newest: "Najnoviji",
+    oldest: "Najstariji",
+  });
+  let selectedProjectsSort = "newest";
+
+  const formatProjectDate = (dateValue) =>
+    new Intl.DateTimeFormat("hr-HR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(dateValue));
+
+  const getProjectDetailHref = (project) =>
+    `nasi-projekti.html?project=${encodeURIComponent(project.slug)}`;
+
+  const closeProjectsSortDropdown = () => {
+    projectsSortDropdownRoot?.classList.remove("is-open");
+    projectsSortToggle?.setAttribute("aria-expanded", "false");
+  };
+
+  const openProjectsSortDropdown = () => {
+    projectsSortDropdownRoot?.classList.add("is-open");
+    projectsSortToggle?.setAttribute("aria-expanded", "true");
+  };
+
+  const getSortedProjects = () =>
+    [...projects].sort((firstProject, secondProject) => {
+      const firstTime = new Date(firstProject.publishDate).getTime();
+      const secondTime = new Date(secondProject.publishDate).getTime();
+
+      if (selectedProjectsSort === "oldest") {
+        return firstTime - secondTime;
+      }
+
+      return secondTime - firstTime;
+    });
+
+  const showProjectDetail = (project) => {
+    if (!projectDetail) {
+      return;
+    }
+
+    projectsListSections.forEach((section) => {
+      section.hidden = true;
+    });
+    projectDetail.hidden = false;
+
+    if (projectTitle) {
+      projectTitle.textContent = project.title;
+    }
+
+    if (projectBreadcrumbCurrent) {
+      projectBreadcrumbCurrent.textContent = project.title;
+    }
+
+    if (projectHeroImage) {
+      projectHeroImage.src = project.image;
+      projectHeroImage.alt = `Vizual projekta ${project.title}`;
+    }
+
+    if (projectDate) {
+      projectDate.textContent = formatProjectDate(project.publishDate);
+    }
+
+    if (projectBody) {
+      projectBody.innerHTML = project.body
+        .map((paragraph) => `<p>${paragraph}</p>`)
+        .join("");
+    }
+
+    if (projectQuote) {
+      projectQuote.textContent = project.quote ?? "";
+      projectQuote.hidden = !project.quote;
+    }
+
+    document.title = `Caspera | ${project.title}`;
+  };
+
+  const showProjectsList = () => {
+    projectsListSections.forEach((section) => {
+      section.hidden = false;
+    });
+
+    if (projectDetail) {
+      projectDetail.hidden = true;
+    }
+  };
+
+  const renderProjects = () => {
+    if (!projectsList) {
+      return;
+    }
+
+    if (projectsSortLabel) {
+      projectsSortLabel.textContent = projectSortLabels[selectedProjectsSort];
+    }
+
+    projectsSortOptions.forEach((option) => {
+      option.setAttribute(
+        "aria-selected",
+        String(option.dataset.projectsSortValue === selectedProjectsSort)
+      );
+    });
+
+    projectsList.innerHTML = normalizeMojibakeText(
+      getSortedProjects()
+        .map(
+          (project) => `
+            <article class="calendar-page__card projects-page__card">
+              <a class="calendar-page__card-link" href="${getProjectDetailHref(project)}" aria-label="Otvori projekt ${project.title}">
+                <div class="calendar-page__card-media">
+                  <img class="calendar-page__card-image" src="${project.image}" alt="Vizual projekta ${project.title}" />
+                </div>
+                <div class="calendar-page__card-content">
+                  <div class="calendar-page__card-meta">
+                    <span class="calendar-page__meta-item calendar-page__meta-item--date">
+                      ${formatProjectDate(project.publishDate)}
+                    </span>
+                  </div>
+                  <h2 class="calendar-page__card-title">${project.title}</h2>
+                  <p class="calendar-page__card-excerpt">${project.excerpt}</p>
+                  <span class="calendar-page__card-cta">Saznaj viÅ¡e</span>
+                </div>
+              </a>
+            </article>
+          `
+        )
+        .join("")
+    );
+  };
+
+  projectsSortToggle?.addEventListener("click", () => {
+    const isOpen = projectsSortDropdownRoot?.classList.contains("is-open");
+
+    if (isOpen) {
+      closeProjectsSortDropdown();
+      return;
+    }
+
+    openProjectsSortDropdown();
+  });
+
+  projectsSortOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+      selectedProjectsSort = option.dataset.projectsSortValue ?? "newest";
+      closeProjectsSortDropdown();
+      renderProjects();
+      projectsSortToggle?.focus();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!projectsSortDropdown?.contains(event.target)) {
+      closeProjectsSortDropdown();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeProjectsSortDropdown();
+    }
+  });
+
+  const selectedProjectSlug = new URLSearchParams(window.location.search).get("project");
+  const selectedProject = projects.find(
+    (project) => project.slug === selectedProjectSlug
+  );
+
+  if (selectedProject) {
+    showProjectDetail(selectedProject);
+  } else {
+    showProjectsList();
+    renderProjects();
+  }
 }
 
 const storyDetailPage = document.querySelector("[data-story-detail-page]");

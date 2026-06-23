@@ -1,7 +1,8 @@
 @use "sass:color";
 @use "abstracts" as *;
 
-.stranica-casperin-kalendar {
+.stranica-casperin-kalendar,
+.stranica-nasi-projekti {
   min-height: 100vh;
   background:
     radial-gradient(circle at top left, rgba($white, 0.92), transparent 34%),
@@ -409,6 +410,10 @@
         center / contain no-repeat;
   }
 
+  &__meta-item--date::before {
+    background: url("../assets/icons/calendar-date.svg") center / contain no-repeat;
+  }
+
   &__meta-item--location::before {
     background:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 21s6-4.35 6-10a6 6 0 1 0-12 0c0 5.65 6 10 6 10Z' stroke='%23d896bf' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='11' r='2.5' stroke='%23d896bf' stroke-width='2'/%3E%3C/svg%3E")
@@ -513,5 +518,42 @@
     &__card-content {
       padding: 1.45rem;
     }
+  }
+}
+
+.projects-page {
+  .calendar-page__card-content {
+    justify-content: center;
+  }
+}
+
+.event-detail,
+.project-detail {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.event-meta,
+.project-meta {
+  gap: 0.9rem 1rem;
+
+  .story-meta__date,
+  &__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__location::before {
+    content: "";
+    width: 0.95rem;
+    height: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  &__location::before {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 21s6-4.35 6-10a6 6 0 1 0-12 0c0 5.65 6 10 6 10Z' stroke='%23d896bf' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='11' r='2.5' stroke='%23d896bf' stroke-width='2'/%3E%3C/svg%3E")
+        center / contain no-repeat;
   }
 }

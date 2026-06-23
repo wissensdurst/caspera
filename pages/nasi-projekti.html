@@ -6,13 +6,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../styles/main.css" />
-    <title>Caspera | Casperin kalendar</title>
+    <title>Caspera | Naši projekti</title>
   </head>
-  <body class="stranica-casperin-kalendar" data-calendar-page>
+  <body class="stranica-nasi-projekti" data-projects-page>
     <header class="header">
       <nav class="navbar" aria-label="Glavna navigacija">
         <a class="navbar__logo" href="../index.html">
@@ -141,8 +141,8 @@
               </button>
               <div class="navbar__panel" id="navbar-panel-news">
                 <ul class="navbar__sublist">
-                  <li><a class="navbar__sublink" href="#">Naši projekti</a></li>
-                  <li><a class="navbar__sublink" href="#">Galerija</a></li>
+                  <li><a class="navbar__sublink" href="nasi-projekti.html">Naši projekti</a></li>
+                  <li><a class="navbar__sublink" href="galerija.html">Galerija</a></li>
                   <li><a class="navbar__sublink" href="casperin-kalendar.html">Casperin kalendar</a></li>
                 </ul>
               </div>
@@ -153,72 +153,71 @@
       </nav>
     </header>
 
-    <main class="calendar-page">
-      <section class="event-detail story-detail" data-event-detail hidden>
+    <main class="calendar-page projects-page">
+      <section class="project-detail story-detail" data-project-detail hidden>
         <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
           <ol class="story-detail__breadcrumb-list">
             <li class="story-detail__breadcrumb-item"><a href="../index.html">Početna</a></li>
             <li class="story-detail__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
-            <li class="story-detail__breadcrumb-item"><a href="casperin-kalendar.html">Casperin kalendar</a></li>
-            <li class="story-detail__breadcrumb-item" aria-current="page" data-event-breadcrumb-current>Pojedini događaj</li>
+            <li class="story-detail__breadcrumb-item"><a href="nasi-projekti.html">Naši projekti</a></li>
+            <li class="story-detail__breadcrumb-item" aria-current="page" data-project-breadcrumb-current>Pojedini projekt</li>
           </ol>
         </nav>
 
-        <article class="story-article event-article">
+        <article class="story-article project-article">
           <figure class="story-article__media">
-            <img class="story-hero-image" src="../assets/images/story_img.jpeg" alt="" data-event-hero-image />
+            <img class="story-hero-image" src="../assets/images/tu_smo.png" alt="" data-project-hero-image />
           </figure>
 
           <div class="story-content">
             <header class="story-content__header">
-              <h1 class="story-title" data-event-title></h1>
+              <h1 class="story-title" data-project-title></h1>
 
-              <div class="story-meta event-meta">
-                <time class="story-meta__date" datetime="" data-event-date></time>
-                <span class="event-meta__location" data-event-location></span>
+              <div class="story-meta project-meta">
+                <span class="story-meta__date" data-project-date></span>
               </div>
             </header>
 
-            <div class="story-body" data-event-body></div>
+            <div class="story-body" data-project-body></div>
 
-            <blockquote class="story-quote" data-event-quote></blockquote>
+            <blockquote class="story-quote" data-project-quote></blockquote>
           </div>
         </article>
       </section>
 
-      <section class="calendar-page__hero" aria-labelledby="calendar-page-title" data-calendar-list-section>
+      <section class="calendar-page__hero" aria-labelledby="projects-page-title" data-projects-list-section>
         <div class="calendar-page__inner">
           <div class="calendar-page__hero-copy">
             <nav class="calendar-page__breadcrumbs" aria-label="Breadcrumb">
               <ol class="calendar-page__breadcrumb-list">
                 <li class="calendar-page__breadcrumb-item"><a href="../index.html">Početna</a></li>
                 <li class="calendar-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
-                <li class="calendar-page__breadcrumb-item" aria-current="page">Casperin kalendar</li>
+                <li class="calendar-page__breadcrumb-item" aria-current="page">Naši projekti</li>
               </ol>
             </nav>
-            <h1 class="calendar-page__title" id="calendar-page-title">Casperin kalendar</h1>
+            <h1 class="calendar-page__title" id="projects-page-title">Naši projekti</h1>
             <p class="calendar-page__intro">
-              Pregled radionica, susreta, javnih akcija i trenutaka okupljanja u kojima Caspera ostaje blizu ženama i njihovim obiteljima.
+              Programi, inicijative i suradnje kroz koje Caspera razvija podršku, edukaciju i vidljivost za žene i njihove obitelji.
             </p>
           </div>
         </div>
       </section>
 
-      <section class="calendar-page__directory" data-calendar-list-section>
+      <section class="calendar-page__directory" aria-label="Popis projekata" data-projects-list-section>
         <div class="calendar-page__inner">
           <div class="calendar-page__toolbar">
-            <div class="calendar-page__filter" data-calendar-filter-dropdown>
-              <span class="calendar-page__filter-label">Prikaži:</span>
+            <div class="calendar-page__filter" data-projects-sort-dropdown>
+              <span class="calendar-page__filter-label">Poredaj:</span>
               <div class="calendar-page__filter-dropdown">
                 <button
                   class="calendar-page__filter-toggle"
                   type="button"
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  aria-controls="calendar-filter-options"
-                  data-calendar-filter-toggle
+                  aria-controls="projects-sort-options"
+                  data-projects-sort-toggle
                 >
-                  <span data-calendar-filter-label>Svi</span>
+                  <span data-projects-sort-label>Najnoviji</span>
                   <span class="calendar-page__filter-arrow" aria-hidden="true">
                     <svg viewBox="0 0 16 16" fill="none">
                       <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -227,20 +226,20 @@
                 </button>
                 <ul
                   class="calendar-page__filter-menu"
-                  id="calendar-filter-options"
+                  id="projects-sort-options"
                   role="listbox"
-                  aria-label="Filtriranje događaja"
-                  data-calendar-filter-menu
+                  aria-label="Poredak projekata"
+                  data-projects-sort-menu
                 >
                   <li>
                     <button
                       class="calendar-page__filter-option"
                       type="button"
                       role="option"
-                      data-calendar-filter-value="all"
+                      data-projects-sort-value="newest"
                       aria-selected="true"
                     >
-                      <span>Svi</span>
+                      <span>Najnoviji</span>
                       <span class="calendar-page__filter-check" aria-hidden="true">✓</span>
                     </button>
                   </li>
@@ -249,22 +248,10 @@
                       class="calendar-page__filter-option"
                       type="button"
                       role="option"
-                      data-calendar-filter-value="upcoming"
+                      data-projects-sort-value="oldest"
                       aria-selected="false"
                     >
-                      <span>Nadolazeći</span>
-                      <span class="calendar-page__filter-check" aria-hidden="true">✓</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="calendar-page__filter-option"
-                      type="button"
-                      role="option"
-                      data-calendar-filter-value="past"
-                      aria-selected="false"
-                    >
-                      <span>Prošli</span>
+                      <span>Najstariji</span>
                       <span class="calendar-page__filter-check" aria-hidden="true">✓</span>
                     </button>
                   </li>
@@ -273,7 +260,7 @@
             </div>
           </div>
 
-          <div class="calendar-page__list" data-calendar-list></div>
+          <div class="calendar-page__list" data-projects-list></div>
         </div>
       </section>
     </main>
