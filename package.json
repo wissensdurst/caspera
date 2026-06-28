@@ -7,11 +7,24 @@
   "type": "commonjs",
   "main": "js/main.js",
   "scripts": {
+    "prepare:public": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path public/assets) { Remove-Item public/assets -Recurse -Force }; Copy-Item assets public/assets -Recurse\"",
+    "dev": "npm run prepare:public && powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro dev\"",
+    "build": "npm run sass && npm run prepare:public && powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro build\"",
+    "preview": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro preview\"",
     "sass": "sass --load-path=styles styles/main.scss styles/main.css",
     "sass:watch": "sass --watch --load-path=styles styles/main.scss:styles/main.css --style=expanded",
     "sass:build": "sass --load-path=styles styles/main.scss styles/main.css --style=compressed"
   },
   "devDependencies": {
+    "@astrojs/sitemap": "^3.5.1",
+    "astro": "^5.15.6",
     "sass": "^1.93.3"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.11.2",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "sanity": "^4.13.0",
+    "styled-components": "^6.4.2"
   }
 }

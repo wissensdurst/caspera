@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PortableContent from "../../components/PortableContent.astro";
+import { fallbackEvents } from "../../lib/fallbackContent";
+import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+
+export async function getStaticPaths() {
+  const events = await fetchSanity(
+    `*[_type == "event"] { "slug": slug.current }`,
+    {},
+    fallbackEvents.map((event) => ({ slug: event.slug }))
+  );
+
+  return events.map((event) => ({ params: { slug: event.slug } }));
+}
+
+const { slug } = Astro.params;
+const fallbackEvent = fallbackEvents.find((event) => event.slug === slug) ?? fallbackEvents[0];
+const event = await fetchSanity(
+  `*[_type == "event" && slug.current == $slug][0] {
+    title,
+    "slug": slug.current,
+    dateTime,
+    location,
+    description,
+    coverImage { asset->{url} }
+  }`,
+  { slug },
+  fallbackEvent
+);
+---
+
+<BaseLayout title={`Caspera | ${event.title}`} bodyClass="stranica-casperin-kalendar">
+  <main class="calendar-page">
+    <section class="event-detail story-detail">
+      <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
+        <ol class="story-detail__breadcrumb-list">
+          <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
+          <li class="story-detail__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
+          <li class="story-detail__breadcrumb-item"><a href="/casperin-kalendar">Casperin kalendar</a></li>
+          <li class="story-detail__breadcrumb-item" aria-current="page">{event.title}</li>
+        </ol>
+      </nav>
+
+      <article class="story-article event-article">
+        <figure class="story-article__media">
+          <img class="story-hero-image" src={imageUrl(event.coverImage)} alt={`Vizual događaja ${event.title}`} />
+        </figure>
+
+        <div class="story-content">
+          <header class="story-content__header">
+            <h1 class="story-title">{event.title}</h1>
+            <div class="story-meta event-meta">
+              <time class="story-meta__date" datetime={event.dateTime}>{formatDate(event.dateTime)}</time>
+              <span class="event-meta__location">{event.location}</span>
+            </div>
+          </header>
+
+          <div class="story-body">
+            <PortableContent value={event.description} />
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</BaseLayout>

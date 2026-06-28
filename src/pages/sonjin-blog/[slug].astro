@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PortableContent from "../../components/PortableContent.astro";
+import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+
+export async function getStaticPaths() {
+  const posts = await fetchSanity(
+    `*[_type == "blogPost"] { "slug": slug.current }`,
+    {},
+    []
+  );
+
+  return posts.map((post) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const blogAuthor = await fetchSanity(
+  `*[_type == "blogAuthor"][0] {
+    name,
+    title,
+    description,
+    photo { asset->{url} }
+  }`,
+  {},
+  null
+);
+const post = await fetchSanity(
+  `*[_type == "blogPost" && slug.current == $slug][0] {
+    title,
+    "slug": slug.current,
+    date,
+    content,
+    coverImage { asset->{url} }
+  }`,
+  { slug },
+  null
+);
+
+if (!post) {
+  return Astro.redirect("/sonjin-blog");
+}
+
+const authorPhoto = imageUrl(blogAuthor?.photo);
+---
+
+<BaseLayout title={`Caspera | ${post.title}`} bodyClass="stranica-pojedina-prica">
+  <main class="story-detail">
+    <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
+      <ol class="story-detail__breadcrumb-list">
+        <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
+        <li class="story-detail__breadcrumb-item"><a href="/sonjin-blog">Sonjin blog</a></li>
+        <li class="story-detail__breadcrumb-item" aria-current="page">{post.title}</li>
+      </ol>
+    </nav>
+
+    <article class="story-article">
+      <figure class="story-article__media">
+        <img class="story-hero-image" src={imageUrl(post.coverImage)} alt={`Naslovna fotografija blog objave ${post.title}`} />
+      </figure>
+
+      <div class="story-content">
+        <header class="story-content__header">
+          <h1 class="story-title">{post.title}</h1>
+          <div class="story-meta">
+            {
+              blogAuthor && (
+                <span class="story-meta__author">
+                  {authorPhoto && (
+                    <span class="story-meta__avatar" aria-hidden="true">
+                      <img src={authorPhoto} alt="" />
+                    </span>
+                  )}
+                  <span>{blogAuthor.name}</span>
+                </span>
+              )
+            }
+            <time class="story-meta__date" datetime={post.date}>{formatDate(post.date)}</time>
+          </div>
+        </header>
+
+        <div class="story-body">
+          <PortableContent value={post.content} />
+        </div>
+      </div>
+    </article>
+  </main>
+</BaseLayout>

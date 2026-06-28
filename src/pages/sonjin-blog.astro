@@ -1,0 +1,241 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogCard from "../components/BlogCard.astro";
+import PortableContent from "../components/PortableContent.astro";
+import { fetchSanity, imageUrl } from "../lib/sanity";
+
+const blogAuthor = await fetchSanity(
+  `*[_type == "blogAuthor"][0] {
+    name,
+    title,
+    description,
+    photo { asset->{url} }
+  }`,
+  {},
+  null
+);
+const blogAuthorPhoto = imageUrl(blogAuthor?.photo);
+const blogAuthorDescription = Array.isArray(blogAuthor?.description)
+  ? blogAuthor.description
+  : blogAuthor?.description
+    ? [{ children: [{ text: blogAuthor.description }] }]
+    : [];
+
+const posts = await fetchSanity(
+  `*[_type == "blogPost"] | order(date desc) {
+    title,
+    "slug": slug.current,
+    date,
+    content,
+    coverImage { asset->{url} }
+  }`,
+  {},
+  []
+);
+---
+
+<BaseLayout title="Caspera | Sonjin blog" bodyClass="stranica-sonjin-blog">
+  <main class="stories-page stories-page--blog">
+    <section class="stories-page__hero" aria-labelledby="blog-page-title">
+      <div class="stories-page__inner stories-page__hero-layout">
+        <div class="stories-page__hero-copy">
+          <nav class="stories-page__breadcrumbs" aria-label="Breadcrumb">
+            <ol class="stories-page__breadcrumb-list">
+              <li class="stories-page__breadcrumb-item"><a href="/">Početna</a></li>
+              <li class="stories-page__breadcrumb-item"><a href="#">Zajednica</a></li>
+              <li class="stories-page__breadcrumb-item" aria-current="page">Sonjin blog</li>
+            </ol>
+          </nav>
+          <h1 class="stories-page__title" id="blog-page-title">Sonjin blog</h1>
+          <p class="stories-page__intro">
+            Osobni zapisi predsjednice udruge Caspera o iskustvu, podršci, zagovaranju i svakodnevnim trenucima koji oblikuju zajednicu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stories-page__directory">
+      <div class="stories-page__inner">
+        {
+          blogAuthor && (
+            <section class="stories-page__featured-author stories-page__featured-author--blog" aria-labelledby="blog-author-name">
+              <div class="stories-page__featured-author-content">
+                {blogAuthorPhoto && (
+                  <img class="stories-page__featured-author-image" src={blogAuthorPhoto} alt={`Portret autorice bloga ${blogAuthor.name}`} />
+                )}
+                <h2 class="stories-page__featured-author-name" id="blog-author-name">{blogAuthor.name}</h2>
+                <p class="stories-page__featured-author-role">{blogAuthor.title}</p>
+                <div class="stories-page__featured-author-text">
+                  <PortableContent value={blogAuthorDescription} />
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <div class="stories-page__toolbar">
+          <div class="stories-page__sort" data-blog-sort-dropdown>
+            <span class="stories-page__sort-label">Prikaži:</span>
+            <div class="stories-page__sort-dropdown">
+              <button
+                class="stories-page__sort-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="blog-sort-options"
+                data-blog-sort-toggle
+              >
+                <span data-blog-sort-label>Najnovije</span>
+                <span class="stories-page__sort-arrow" aria-hidden="true">
+                  <img src="/assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <ul class="stories-page__sort-menu" id="blog-sort-options" role="listbox" aria-label="Sortiranje blog objava" data-blog-sort-menu>
+                <li>
+                  <button class="stories-page__sort-option" type="button" role="option" data-blog-sort-value="newest" aria-selected="true">
+                    <span>Najnovije</span>
+                    <span class="stories-page__sort-check" aria-hidden="true">&#10003;</span>
+                  </button>
+                </li>
+                <li>
+                  <button class="stories-page__sort-option" type="button" role="option" data-blog-sort-value="oldest" aria-selected="false">
+                    <span>Najstarije</span>
+                    <span class="stories-page__sort-check" aria-hidden="true">&#10003;</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="stories-page__list" data-blog-list>
+          {posts.map((post) => <BlogCard post={post} author={blogAuthor} />)}
+        </div>
+
+        <p class="stories-page__empty" data-blog-empty hidden>Trenutno nema objavljenih blog objava.</p>
+        <nav class="stories-page__pagination" aria-label="Paginacija blog objava" data-blog-pagination></nav>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const blogList = document.querySelector("[data-blog-list]");
+
+    if (blogList) {
+      const cards = [...document.querySelectorAll("[data-blog-card]")];
+      const pagination = document.querySelector("[data-blog-pagination]");
+      const sortDropdown = document.querySelector("[data-blog-sort-dropdown]");
+      const sortDropdownRoot = sortDropdown?.querySelector(".stories-page__sort-dropdown");
+      const sortToggle = sortDropdown?.querySelector("[data-blog-sort-toggle]");
+      const sortLabel = sortDropdown?.querySelector("[data-blog-sort-label]");
+      const sortOptions = [...document.querySelectorAll("[data-blog-sort-value]")];
+      const emptyMessage = document.querySelector("[data-blog-empty]");
+      const labels = { newest: "Najnovije", oldest: "Najstarije" };
+      const perPage = 6;
+
+      let selectedSort = "newest";
+      let currentPage = 1;
+
+      const closeSortDropdown = () => {
+        sortDropdownRoot?.classList.remove("is-open");
+        sortToggle?.setAttribute("aria-expanded", "false");
+      };
+
+      const sortedCards = () =>
+        [...cards].sort((first, second) => {
+          const firstDate = new Date(first.dataset.blogDate ?? "").getTime();
+          const secondDate = new Date(second.dataset.blogDate ?? "").getTime();
+          return selectedSort === "newest" ? secondDate - firstDate : firstDate - secondDate;
+        });
+
+      const renderPagination = (pageCount) => {
+        if (!pagination) {
+          return;
+        }
+
+        pagination.innerHTML = "";
+
+        if (pageCount <= 1) {
+          return;
+        }
+
+        for (let index = 1; index <= pageCount; index += 1) {
+          const button = document.createElement("button");
+          button.className = "stories-page__page-button";
+          button.type = "button";
+          button.textContent = String(index);
+          button.setAttribute("aria-label", `Idi na stranicu ${index}`);
+
+          if (index === currentPage) {
+            button.setAttribute("aria-current", "page");
+          }
+
+          button.addEventListener("click", () => {
+            currentPage = index;
+            applyBlogPosts();
+          });
+
+          pagination.append(button);
+        }
+      };
+
+      const applyBlogPosts = () => {
+        const visibleCards = sortedCards();
+        const pageCount = Math.max(1, Math.ceil(visibleCards.length / perPage));
+        currentPage = Math.min(currentPage, pageCount);
+        const start = (currentPage - 1) * perPage;
+        const pageCards = new Set(visibleCards.slice(start, start + perPage));
+
+        cards.forEach((card) => {
+          card.hidden = !pageCards.has(card);
+        });
+
+        visibleCards.forEach((card) => blogList.append(card));
+
+        sortOptions.forEach((option) => {
+          option.setAttribute("aria-selected", String(option.dataset.blogSortValue === selectedSort));
+        });
+
+        if (sortLabel) {
+          sortLabel.textContent = labels[selectedSort];
+        }
+
+        if (emptyMessage) {
+          emptyMessage.hidden = visibleCards.length > 0;
+        }
+
+        renderPagination(pageCount);
+      };
+
+      sortToggle?.addEventListener("click", () => {
+        const isOpen = sortDropdownRoot?.classList.contains("is-open");
+        sortDropdownRoot?.classList.toggle("is-open", !isOpen);
+        sortToggle.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      sortOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          selectedSort = option.dataset.blogSortValue ?? "newest";
+          currentPage = 1;
+          applyBlogPosts();
+          closeSortDropdown();
+          sortToggle?.focus();
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (sortDropdown && !sortDropdown.contains(event.target)) {
+          closeSortDropdown();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeSortDropdown();
+        }
+      });
+
+      applyBlogPosts();
+    }
+  </script>
+</BaseLayout>

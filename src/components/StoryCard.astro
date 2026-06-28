@@ -1,0 +1,37 @@
+---
+import { formatDate, imageUrl } from "../lib/sanity";
+
+const { story } = Astro.props;
+const author = typeof story.author === "string" ? { name: story.author } : story.author;
+const authorName = author?.name ?? "Autorica";
+const authorPhoto = imageUrl(author?.photo) || "/assets/images/placeholder.png";
+const authorKey = authorName
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-|-$/g, "");
+const excerpt = story.content?.[0]?.children?.[0]?.text ?? "";
+---
+
+<article class="stories-page__story-card" data-story-card data-story-date={story.date} data-story-author={authorKey}>
+  <a class="stories-page__story-link" href={`/moja-prica/${story.slug}`}>
+    <div class="stories-page__story-media">
+      <img class="stories-page__story-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija price ${story.title}`} />
+    </div>
+    <div class="stories-page__story-content">
+      <div class="stories-page__story-meta">
+        <span class="stories-page__story-author">
+          <span class="stories-page__story-author-avatar" aria-hidden="true">
+            <img src={authorPhoto} alt="" />
+          </span>
+          <span>{authorName}</span>
+        </span>
+        <time class="stories-page__story-date" datetime={story.date}>{formatDate(story.date)}</time>
+      </div>
+      <h2 class="stories-page__story-title">{story.title}</h2>
+      <p class="stories-page__story-excerpt">{excerpt}</p>
+      <span class="stories-page__story-cta">Procitaj pricu</span>
+    </div>
+  </a>
+</article>

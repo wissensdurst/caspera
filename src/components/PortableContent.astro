@@ -1,0 +1,14 @@
+---
+interface Props {
+  value?: Array<{ children?: Array<{ text?: string }> }>;
+}
+
+const { value = [] } = Astro.props;
+---
+
+{
+  value.map((block) => {
+    const text = block.children?.map((child) => child.text ?? "").join("") ?? "";
+    return text ? <p>{text}</p> : null;
+  })
+}

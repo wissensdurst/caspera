@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { fallbackProjects } from "../lib/fallbackContent";
+import { fetchSanity } from "../lib/sanity";
+
+const fetchedProjects = await fetchSanity(
+  `*[_type == "project"] | order(date desc) {
+    title,
+    "slug": slug.current,
+    date,
+    location,
+    description,
+    coverImage { asset->{url} }
+  }`,
+  {},
+  []
+);
+const projects = fetchedProjects.length > 0 ? fetchedProjects : fallbackProjects;
+---
+
+<BaseLayout title="Caspera | Naši projekti" bodyClass="stranica-nasi-projekti">
+  <main class="calendar-page projects-page">
+    <section class="calendar-page__hero" aria-labelledby="projects-page-title">
+      <div class="calendar-page__inner">
+        <div class="calendar-page__hero-copy">
+          <nav class="calendar-page__breadcrumbs" aria-label="Breadcrumb">
+            <ol class="calendar-page__breadcrumb-list">
+              <li class="calendar-page__breadcrumb-item"><a href="/">Pocetna</a></li>
+              <li class="calendar-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
+              <li class="calendar-page__breadcrumb-item" aria-current="page">Naši projekti</li>
+            </ol>
+          </nav>
+          <h1 class="calendar-page__title" id="projects-page-title">Naši projekti</h1>
+          <p class="calendar-page__intro">
+            Programi, inicijative i suradnje kroz koje Caspera razvija podrsku, edukaciju i vidljivost za zene i njihove obitelji.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar-page__directory" aria-label="Popis projekata">
+      <div class="calendar-page__inner">
+        <div class="calendar-page__toolbar">
+          <div class="calendar-page__filter" data-projects-sort-dropdown>
+            <span class="calendar-page__filter-label">Poredaj:</span>
+            <div class="calendar-page__filter-dropdown">
+              <button
+                class="calendar-page__filter-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="projects-sort-options"
+                data-projects-sort-toggle
+              >
+                <span data-projects-sort-label>Najnoviji</span>
+                <span class="calendar-page__filter-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none">
+                    <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+              <ul
+                class="calendar-page__filter-menu"
+                id="projects-sort-options"
+                role="listbox"
+                aria-label="Poredak projekata"
+                data-projects-sort-menu
+              >
+                <li>
+                  <button class="calendar-page__filter-option" type="button" role="option" data-projects-sort-value="newest" aria-selected="true">
+                    <span>Najnoviji</span>
+                    <span class="calendar-page__filter-check" aria-hidden="true">&#10003;</span>
+                  </button>
+                </li>
+                <li>
+                  <button class="calendar-page__filter-option" type="button" role="option" data-projects-sort-value="oldest" aria-selected="false">
+                    <span>Najstariji</span>
+                    <span class="calendar-page__filter-check" aria-hidden="true">&#10003;</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-page__list" data-projects-list>
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const projectsSort = document.querySelector("[data-projects-sort-dropdown]");
+
+    if (projectsSort) {
+      const dropdown = projectsSort.querySelector(".calendar-page__filter-dropdown");
+      const toggle = projectsSort.querySelector("[data-projects-sort-toggle]");
+      const label = projectsSort.querySelector("[data-projects-sort-label]");
+      const options = [...projectsSort.querySelectorAll("[data-projects-sort-value]")];
+      const list = document.querySelector("[data-projects-list]");
+      const labels = { newest: "Najnoviji", oldest: "Najstariji" };
+      let selectedSort = "newest";
+
+      const closeDropdown = () => {
+        dropdown?.classList.remove("is-open");
+        toggle?.setAttribute("aria-expanded", "false");
+      };
+
+      const applySort = () => {
+        const cards = [...document.querySelectorAll("[data-project-card]")];
+        cards
+          .sort((first, second) => {
+            const firstDate = new Date(first.dataset.projectDate ?? "").getTime();
+            const secondDate = new Date(second.dataset.projectDate ?? "").getTime();
+            return selectedSort === "newest" ? secondDate - firstDate : firstDate - secondDate;
+          })
+          .forEach((card) => list?.append(card));
+
+        if (label) {
+          label.textContent = labels[selectedSort];
+        }
+
+        options.forEach((option) => {
+          option.setAttribute("aria-selected", String(option.dataset.projectsSortValue === selectedSort));
+        });
+      };
+
+      toggle?.addEventListener("click", () => {
+        const isOpen = dropdown?.classList.contains("is-open");
+        dropdown?.classList.toggle("is-open", !isOpen);
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      options.forEach((option) => {
+        option.addEventListener("click", () => {
+          selectedSort = option.dataset.projectsSortValue ?? "newest";
+          applySort();
+          closeDropdown();
+          toggle?.focus();
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!projectsSort.contains(event.target)) {
+          closeDropdown();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeDropdown();
+        }
+      });
+
+      applySort();
+    }
+  </script>
+</BaseLayout>

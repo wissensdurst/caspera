@@ -1,0 +1,196 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fallbackTeamMembers } from "../lib/fallbackContent";
+import { fetchSanity, imageUrl } from "../lib/sanity";
+
+const teamMembers = await fetchSanity(
+  `*[_type == "teamMember"] | order(displayOrder asc) {
+    name,
+    title,
+    photo { asset->{url} },
+    shortBio,
+    displayOrder
+  }`,
+  {},
+  fallbackTeamMembers
+);
+
+const escapeHtml = (value = "") =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const memberCards = teamMembers.map((member) => {
+  const photo = imageUrl(member.photo) || "/assets/images/placeholder.png";
+  const bio = member.shortBio ? `<p>${escapeHtml(member.shortBio)}</p>` : "";
+
+  return {
+    ...member,
+    photo,
+    bio,
+  };
+});
+---
+
+<BaseLayout title="Caspera | Naša ekipa" bodyClass="stranica-nasa-ekipa">
+  <main>
+    <section class="tim tim--centred-cards" aria-label="Naša ekipa">
+      <div class="tim__unutarnji">
+        <header class="tim__uvod">
+          <h1 class="tim__naslov">Naša ekipa</h1>
+          <div class="tim__tekstovi">
+            <p class="tim__tekst">Naša ekipa je u najmanju ruku čudesna.</p>
+            <p class="tim__tekst">
+              Okupili smo tim mladih, stručnih i nadasve empatičnih ljudi.
+            </p>
+            <p class="tim__tekst">
+              Oni koji su uz sve svoje obaveze odlučili odvojiti dio svog vremena i pokloniti ga nama.
+            </p>
+            <p class="tim__tekst">
+              Njihova ljubav i energija prema poslu kojeg rade je naprosto zarazna.
+            </p>
+            <p class="tim__tekst">
+              Nas su osvojili velikim srcem i željom da pomognu.
+            </p>
+            <p class="tim__tekst">Upoznajte ih i vi!</p>
+          </div>
+        </header>
+
+        <section class="tim__mreza" aria-label="Profili članova Casperine ekipe">
+          {
+            memberCards.map((member) => (
+              <button
+                class="kartica-tima"
+                type="button"
+                data-team-card
+                data-name={member.name}
+                data-role={member.title}
+                data-image={member.photo}
+                data-image-alt={`Profilna fotografija člana tima ${member.name}`}
+                data-bio-html={member.bio}
+                aria-label={`Otvori profil člana tima ${member.name}`}
+              >
+                <div class="kartica-tima__slika-okvir">
+                  <img
+                    class="kartica-tima__slika"
+                    src={member.photo}
+                    alt={`Profilna fotografija člana tima ${member.name}`}
+                  />
+                </div>
+                <div class="kartica-tima__sadrzaj">
+                  <h2 class="kartica-tima__ime">{member.name}</h2>
+                  <p class="kartica-tima__uloga">{member.title}</p>
+                </div>
+              </button>
+            ))
+          }
+        </section>
+
+        <div class="modal-clan-tima" data-team-modal hidden>
+          <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+          <section
+            class="modal-clan-tima__prozor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-clan-tima-naslov"
+          >
+            <button
+              class="modal-clan-tima__zatvori"
+              type="button"
+              data-team-modal-close
+              aria-label="Zatvori prozor"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-clan-tima__raspored">
+              <div class="modal-clan-tima__slika-okvir">
+                <img
+                  class="modal-clan-tima__slika"
+                  data-team-modal-image
+                  src="/assets/images/placeholder.png"
+                  alt="Profilna fotografija člana tima"
+                />
+              </div>
+              <div class="modal-clan-tima__sadrzaj">
+                <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>
+                  Ime člana tima
+                </h2>
+                <p class="modal-clan-tima__uloga" data-team-modal-role>Uloga</p>
+                <div class="modal-clan-tima__opis" data-team-modal-bio>
+                  <p>Opis člana tima.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const teamModal = document.querySelector("[data-team-modal]");
+
+    if (teamModal) {
+      const teamCards = [...document.querySelectorAll("[data-team-card]")];
+      const modalName = teamModal.querySelector("[data-team-modal-name]");
+      const modalRole = teamModal.querySelector("[data-team-modal-role]");
+      const modalBio = teamModal.querySelector("[data-team-modal-bio]");
+      const modalImage = teamModal.querySelector("[data-team-modal-image]");
+      const modalCloseControls = [...teamModal.querySelectorAll("[data-team-modal-close]")];
+      const pageBody = document.body;
+      let lastFocusedCard = null;
+
+      const closeTeamModal = () => {
+        teamModal.hidden = true;
+        pageBody.classList.remove("modal-open");
+        lastFocusedCard?.focus();
+      };
+
+      const openTeamModal = (card) => {
+        lastFocusedCard = card;
+
+        if (modalName) {
+          modalName.textContent = card.dataset.name ?? "";
+        }
+
+        if (modalRole) {
+          const role = card.dataset.role ?? "";
+          modalRole.textContent = role;
+          modalRole.hidden = role.trim().length === 0;
+        }
+
+        if (modalBio) {
+          modalBio.innerHTML = card.dataset.bioHtml || card.dataset.bio || "";
+        }
+
+        if (modalImage) {
+          modalImage.src = card.dataset.image ?? modalImage.src;
+          modalImage.alt = card.dataset.imageAlt ?? "";
+        }
+
+        teamModal.hidden = false;
+        pageBody.classList.add("modal-open");
+        teamModal.querySelector("[data-team-modal-close]")?.focus();
+      };
+
+      teamCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          openTeamModal(card);
+        });
+      });
+
+      modalCloseControls.forEach((control) => {
+        control.addEventListener("click", closeTeamModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !teamModal.hidden) {
+          closeTeamModal();
+        }
+      });
+    }
+  </script>
+</BaseLayout>

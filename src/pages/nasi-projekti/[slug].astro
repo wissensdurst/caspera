@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PortableContent from "../../components/PortableContent.astro";
+import { fallbackProjects } from "../../lib/fallbackContent";
+import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+
+export async function getStaticPaths() {
+  const fetchedProjects = await fetchSanity(
+    `*[_type == "project"] { "slug": slug.current }`,
+    {},
+    []
+  );
+  const projects = fetchedProjects.length > 0 ? fetchedProjects : fallbackProjects.map((project) => ({ slug: project.slug }));
+
+  return projects.map((project) => ({ params: { slug: project.slug } }));
+}
+
+const { slug } = Astro.params;
+const fallbackProject = fallbackProjects.find((project) => project.slug === slug) ?? fallbackProjects[0];
+const fetchedProject = await fetchSanity(
+  `*[_type == "project" && slug.current == $slug][0] {
+    title,
+    "slug": slug.current,
+    date,
+    location,
+    description,
+    coverImage { asset->{url} }
+  }`,
+  { slug },
+  fallbackProject
+);
+const project = fetchedProject ?? fallbackProject;
+---
+
+<BaseLayout title={`Caspera | ${project.title}`} bodyClass="stranica-nasi-projekti">
+  <main class="calendar-page projects-page">
+    <section class="project-detail story-detail">
+      <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
+        <ol class="story-detail__breadcrumb-list">
+          <li class="story-detail__breadcrumb-item"><a href="/">Pocetna</a></li>
+          <li class="story-detail__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
+          <li class="story-detail__breadcrumb-item"><a href="/nasi-projekti">Naši projekti</a></li>
+          <li class="story-detail__breadcrumb-item" aria-current="page">{project.title}</li>
+        </ol>
+      </nav>
+
+      <article class="story-article project-article">
+        <figure class="story-article__media">
+          <img class="story-hero-image" src={imageUrl(project.coverImage)} alt={`Vizual projekta ${project.title}`} />
+        </figure>
+
+        <div class="story-content">
+          <header class="story-content__header">
+            <h1 class="story-title">{project.title}</h1>
+            <div class="story-meta project-meta">
+              <time class="story-meta__date" datetime={project.date}>{formatDate(project.date)}</time>
+              <span class="project-meta__location">{project.location}</span>
+            </div>
+          </header>
+
+          <div class="story-body">
+            <PortableContent value={project.description} />
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import { formatDate, imageUrl } from "../lib/sanity";
+
+const { project } = Astro.props;
+const excerpt = project.description?.[0]?.children?.[0]?.text ?? "";
+---
+
+<article class="calendar-page__card projects-page__card" data-project-card data-project-date={project.date}>
+  <a class="calendar-page__card-link" href={`/nasi-projekti/${project.slug}`} aria-label={`Otvori projekt ${project.title}`}>
+    <div class="calendar-page__card-media">
+      <img class="calendar-page__card-image" src={imageUrl(project.coverImage)} alt={`Vizual projekta ${project.title}`} />
+    </div>
+    <div class="calendar-page__card-content">
+      <div class="calendar-page__card-meta">
+        <time class="calendar-page__meta-item calendar-page__meta-item--date" datetime={project.date}>{formatDate(project.date)}</time>
+        <span class="calendar-page__meta-item calendar-page__meta-item--location">{project.location}</span>
+      </div>
+      <h2 class="calendar-page__card-title">{project.title}</h2>
+      <p class="calendar-page__card-excerpt">{excerpt}</p>
+      <span class="calendar-page__card-cta">Saznaj vise</span>
+    </div>
+  </a>
+</article>

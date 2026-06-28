@@ -1,0 +1,206 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EventCard from "../components/EventCard.astro";
+import { fallbackEvents } from "../lib/fallbackContent";
+import { fetchSanity } from "../lib/sanity";
+
+const events = await fetchSanity(
+  `*[_type == "event"] | order(dateTime asc) {
+    title,
+    "slug": slug.current,
+    dateTime,
+    location,
+    description,
+    coverImage { asset->{url} }
+  }`,
+  {},
+  fallbackEvents
+);
+---
+
+<BaseLayout title="Caspera | Casperin kalendar" bodyClass="stranica-casperin-kalendar">
+  <main class="calendar-page">
+    <section class="calendar-page__hero" aria-labelledby="calendar-page-title">
+      <div class="calendar-page__inner">
+        <div class="calendar-page__hero-copy">
+          <nav class="calendar-page__breadcrumbs" aria-label="Breadcrumb">
+            <ol class="calendar-page__breadcrumb-list">
+              <li class="calendar-page__breadcrumb-item"><a href="/">Početna</a></li>
+              <li class="calendar-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
+              <li class="calendar-page__breadcrumb-item" aria-current="page">Casperin kalendar</li>
+            </ol>
+          </nav>
+          <h1 class="calendar-page__title" id="calendar-page-title">Casperin kalendar</h1>
+          <p class="calendar-page__intro">
+            Pregled radionica, susreta, javnih akcija i trenutaka okupljanja u kojima Caspera ostaje blizu ženama i njihovim obiteljima.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar-page__directory">
+      <div class="calendar-page__inner">
+        <div class="calendar-page__toolbar">
+          <div class="calendar-page__filter" data-calendar-filter-dropdown>
+            <span class="calendar-page__filter-label">Prikaži:</span>
+            <div class="calendar-page__filter-dropdown">
+              <button
+                class="calendar-page__filter-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="calendar-filter-options"
+                data-calendar-filter-toggle
+              >
+                <span data-calendar-filter-label>Svi</span>
+                <span class="calendar-page__filter-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none">
+                    <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+              <ul
+                class="calendar-page__filter-menu"
+                id="calendar-filter-options"
+                role="listbox"
+                aria-label="Filtriranje događaja"
+                data-calendar-filter-menu
+              >
+                <li>
+                  <button
+                    class="calendar-page__filter-option"
+                    type="button"
+                    role="option"
+                    data-calendar-filter-value="all"
+                    aria-selected="true"
+                  >
+                    <span>Svi</span>
+                    <span class="calendar-page__filter-check" aria-hidden="true">✓</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="calendar-page__filter-option"
+                    type="button"
+                    role="option"
+                    data-calendar-filter-value="upcoming"
+                    aria-selected="false"
+                  >
+                    <span>Nadolazeći</span>
+                    <span class="calendar-page__filter-check" aria-hidden="true">✓</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="calendar-page__filter-option"
+                    type="button"
+                    role="option"
+                    data-calendar-filter-value="past"
+                    aria-selected="false"
+                  >
+                    <span>Prošli</span>
+                    <span class="calendar-page__filter-check" aria-hidden="true">✓</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-page__list" data-calendar-list>
+          {events.map((event) => <EventCard event={event} />)}
+        </div>
+        <p class="calendar-page__empty" data-calendar-empty hidden>
+          Trenutačno nema događaja u odabranoj skupini. Pokušajte s drugim filtrom.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const calendarFilter = document.querySelector("[data-calendar-filter-dropdown]");
+
+    if (calendarFilter) {
+      const dropdown = calendarFilter.querySelector(".calendar-page__filter-dropdown");
+      const toggle = calendarFilter.querySelector("[data-calendar-filter-toggle]");
+      const label = calendarFilter.querySelector("[data-calendar-filter-label]");
+      const options = [...calendarFilter.querySelectorAll("[data-calendar-filter-value]")];
+      const cards = [...document.querySelectorAll("[data-calendar-event-card]")];
+      const emptyMessage = document.querySelector("[data-calendar-empty]");
+      const labels = {
+        all: "Svi",
+        upcoming: "Nadolazeći",
+        past: "Prošli",
+      };
+
+      let selectedFilter = "all";
+
+      const closeDropdown = () => {
+        dropdown?.classList.remove("is-open");
+        toggle?.setAttribute("aria-expanded", "false");
+      };
+
+      const applyFilter = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const eventDate = new Date(card.dataset.eventDate ?? "");
+          const isPast = eventDate < today;
+          const shouldShow =
+            selectedFilter === "all" ||
+            (selectedFilter === "upcoming" && !isPast) ||
+            (selectedFilter === "past" && isPast);
+
+          card.hidden = !shouldShow;
+
+          if (shouldShow) {
+            visibleCount += 1;
+          }
+        });
+
+        if (label) {
+          label.textContent = labels[selectedFilter];
+        }
+
+        options.forEach((option) => {
+          option.setAttribute("aria-selected", String(option.dataset.calendarFilterValue === selectedFilter));
+        });
+
+        if (emptyMessage) {
+          emptyMessage.hidden = visibleCount > 0;
+        }
+      };
+
+      toggle?.addEventListener("click", () => {
+        const isOpen = dropdown?.classList.contains("is-open");
+        dropdown?.classList.toggle("is-open", !isOpen);
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      options.forEach((option) => {
+        option.addEventListener("click", () => {
+          selectedFilter = option.dataset.calendarFilterValue ?? "all";
+          applyFilter();
+          closeDropdown();
+          toggle?.focus();
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!calendarFilter.contains(event.target)) {
+          closeDropdown();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeDropdown();
+        }
+      });
+
+      applyFilter();
+    }
+  </script>
+</BaseLayout>

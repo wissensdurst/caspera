@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchSanity, imageUrl } from "../lib/sanity";
+
+const authors = await fetchSanity(
+  `*[_type == "author"] | order(displayOrder asc) {
+    name,
+    photo { asset->{url} },
+    shortBio,
+    displayOrder
+  }`,
+  {},
+  []
+);
+
+const escapeHtml = (value = "") =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const authorCards = authors.map((author) => {
+  const photo = imageUrl(author.photo) || "/assets/images/placeholder.png";
+  const bio = author.shortBio ? `<p>${escapeHtml(author.shortBio)}</p>` : "";
+
+  return {
+    ...author,
+    photo,
+    bio,
+  };
+});
+---
+
+<BaseLayout title="Caspera | O autoricama" bodyClass="stranica-savjetodavatelji">
+  <main>
+    <section class="tim tim--centred-cards" aria-labelledby="naslov-popisa-autorica">
+      <div class="tim__unutarnji">
+        <header class="tim__uvod">
+          <h1 class="tim__naslov" id="naslov-popisa-autorica">O autoricama</h1>
+          <div class="tim__tekstovi">
+            <p class="tim__tekst">
+              Autorice koje dijele osobna iskustva, oporavak i trenutke podrske kroz Casperinu rubriku Moja prica.
+            </p>
+          </div>
+        </header>
+
+        <section class="tim__mreza" aria-label="Popis autorica">
+          {
+            authorCards.map((author) => (
+              <button
+                class="kartica-tima"
+                type="button"
+                data-team-card
+                data-name={author.name}
+                data-image={author.photo}
+                data-image-alt={`Profilna fotografija autorice ${author.name}`}
+                data-bio-html={author.bio}
+                aria-label={`Otvori profil autorice ${author.name}`}
+              >
+                <div class="kartica-tima__slika-okvir">
+                  <img class="kartica-tima__slika" src={author.photo} alt={`Profilna fotografija autorice ${author.name}`} />
+                </div>
+                <div class="kartica-tima__sadrzaj">
+                  <h2 class="kartica-tima__ime">{author.name}</h2>
+                </div>
+              </button>
+            ))
+          }
+        </section>
+        {
+          authorCards.length === 0 && (
+            <p class="tim__tekst">Trenutno nema objavljenih autorica.</p>
+          )
+        }
+
+        {authorCards.length > 0 && <div class="modal-clan-tima" data-team-modal hidden>
+          <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+          <section class="modal-clan-tima__prozor" role="dialog" aria-modal="true" aria-labelledby="modal-clan-tima-naslov">
+            <button class="modal-clan-tima__zatvori" type="button" data-team-modal-close aria-label="Zatvori prozor">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-clan-tima__raspored">
+              <div class="modal-clan-tima__slika-okvir">
+                <img class="modal-clan-tima__slika" data-team-modal-image src="/assets/images/placeholder.png" alt="Profilna fotografija autorice" />
+              </div>
+              <div class="modal-clan-tima__sadrzaj">
+                <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>Ime autorice</h2>
+                <div class="modal-clan-tima__opis" data-team-modal-bio>
+                  <p>Opis autorice.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>}
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const teamModal = document.querySelector("[data-team-modal]");
+
+    if (teamModal) {
+      const teamCards = [...document.querySelectorAll("[data-team-card]")];
+      const modalName = teamModal.querySelector("[data-team-modal-name]");
+      const modalBio = teamModal.querySelector("[data-team-modal-bio]");
+      const modalImage = teamModal.querySelector("[data-team-modal-image]");
+      const modalCloseControls = [...teamModal.querySelectorAll("[data-team-modal-close]")];
+      const pageBody = document.body;
+      let lastFocusedCard = null;
+
+      const closeTeamModal = () => {
+        teamModal.hidden = true;
+        pageBody.classList.remove("modal-open");
+        lastFocusedCard?.focus();
+      };
+
+      const openTeamModal = (card) => {
+        lastFocusedCard = card;
+        modalName.textContent = card.dataset.name ?? "";
+        modalBio.innerHTML = card.dataset.bioHtml || card.dataset.bio || "";
+        modalImage.src = card.dataset.image ?? modalImage.src;
+        modalImage.alt = card.dataset.imageAlt ?? "";
+        teamModal.hidden = false;
+        pageBody.classList.add("modal-open");
+        teamModal.querySelector("[data-team-modal-close]")?.focus();
+      };
+
+      teamCards.forEach((card) => {
+        card.addEventListener("click", () => openTeamModal(card));
+      });
+
+      modalCloseControls.forEach((control) => {
+        control.addEventListener("click", closeTeamModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !teamModal.hidden) {
+          closeTeamModal();
+        }
+      });
+    }
+  </script>
+</BaseLayout>

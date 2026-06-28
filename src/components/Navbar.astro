@@ -1,0 +1,136 @@
+---
+const navGroups = [
+  {
+    label: "O nama",
+    panelId: "navbar-panel-about",
+    links: [
+      ["Tko je Caspera", "/tko-je-caspera"],
+      ["Naša ekipa", "/nasa-ekipa"],
+      ["Caspera u medijima", "/caspera-u-medijima"],
+      ["Statut", "/statut"],
+      ["Izvješće o radu", "/izvjesce-o-radu"],
+      ["Plan rada i financijski plan", "/plan-rada-i-financijski-plan"],
+    ],
+  },
+  {
+    label: "Podrška",
+    panelId: "navbar-panel-support",
+    links: [
+      ["Naši savjetodavatelji", "/savjetodavatelji"],
+      ["Pitaj onkologa", "/pitaj-onkologa"],
+      ["Pitaj nutricionista", "/pitaj-nutricionista"],
+      ["Pitaj dermatologa", "/pitaj-dermatologa"],
+      ["Pitaj patologa", "/pitaj-patologa"],
+      ["Pitaj fizioterapeuta", "/pitaj-fizioterapeuta"],
+    ],
+  },
+  {
+    label: "Informacije",
+    panelId: "navbar-panel-info",
+    links: [
+      ["Socijalna prava", "/socijalna-prava"],
+      ["Ortopedska pomagala", "/ortopedska-pomagala"],
+      ["Putni trošak", "/putni-trosak"],
+    ],
+  },
+  {
+    label: "Zajednica",
+    panelId: "navbar-panel-community",
+    links: [
+      ["Sonjin blog", "/sonjin-blog"],
+      ["Moja priča", "/moja-prica"],
+      ["O autoricama", "/o-autoricama"],
+      ["Bokun butige", "/bokun-butige"],
+      ["Postani član", "/postani-clan"],
+    ],
+  },
+  {
+    label: "Caspera u akciji",
+    panelId: "navbar-panel-news",
+    links: [
+      ["Naši projekti", "/nasi-projekti"],
+      ["Galerija", "/galerija"],
+      ["Casperin kalendar", "/casperin-kalendar"],
+    ],
+  },
+];
+---
+
+<header class="header">
+  <nav class="navbar" aria-label="Glavna navigacija">
+    <a class="navbar__logo" href="/">
+      <img src="/assets/images/logo_main.png" alt="Logo udruge Caspera" />
+    </a>
+    <button
+      class="navbar__menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="navbar-menu"
+      aria-label="Otvori navigaciju"
+    >
+      <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+      <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+      <span class="navbar__menu-toggle-line" aria-hidden="true"></span>
+    </button>
+    <div class="navbar__menu" id="navbar-menu">
+      <ul class="navbar__list">
+        <li class="navbar__item navbar__item--mobile-only">
+          <a class="navbar__link" href="/">Početna</a>
+        </li>
+        {
+          navGroups.map((group) => (
+            <li class="navbar__item navbar__item--has-children">
+              <button
+                class="navbar__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls={group.panelId}
+                aria-haspopup="true"
+              >
+                <span class="navbar__label">{group.label}</span>
+                <span class="navbar__arrow" aria-hidden="true">
+                  <img src="/assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <div class="navbar__panel" id={group.panelId}>
+                <ul class="navbar__sublist">
+                  {group.links.map(([label, href]) => (
+                    <li><a class="navbar__sublink" href={href}>{label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="navbar__cta button__main" href="/doniraj">Doniraj</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const navbar = document.querySelector(".navbar");
+  const menuToggle = navbar?.querySelector(".navbar__menu-toggle");
+  const menu = navbar?.querySelector(".navbar__menu");
+
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = navbar?.classList.toggle("menu-open");
+    menuToggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
+  });
+
+  menu?.addEventListener("click", (event) => {
+    const toggle = event.target.closest?.(".navbar__toggle");
+
+    if (!toggle) {
+      return;
+    }
+
+    const item = toggle.closest(".navbar__item--has-children");
+    const isOpen = item?.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
+  });
+
+  window.addEventListener("scroll", () => {
+    navbar?.classList.toggle("scrolled", window.scrollY > 8);
+  }, { passive: true });
+</script>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fallbackGalleryAlbums } from "../lib/fallbackContent";
+import { fetchSanity, formatDate, imageUrl } from "../lib/sanity";
+
+const albums = await fetchSanity(
+  `*[_type == "galleryAlbum"] | order(date desc) {
+    title,
+    "slug": slug.current,
+    date,
+    coverImage { asset->{url} }
+  }`,
+  {},
+  fallbackGalleryAlbums
+);
+---
+
+<BaseLayout title="Caspera | Galerija" bodyClass="stranica-galerija">
+  <main class="gallery-page">
+    <div class="gallery-page__inner">
+      <section class="gallery-page__hero" aria-labelledby="gallery-page-title">
+        <div class="gallery-page__hero-copy">
+          <nav class="gallery-page__breadcrumbs" aria-label="Breadcrumb">
+            <ol class="gallery-page__breadcrumb-list">
+              <li class="gallery-page__breadcrumb-item"><a href="/">Početna</a></li>
+              <li class="gallery-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
+              <li class="gallery-page__breadcrumb-item" aria-current="page">Galerija</li>
+            </ol>
+          </nav>
+          <h1 class="gallery-page__title" id="gallery-page-title">Galerija</h1>
+          <p class="gallery-page__intro">
+            Albumi fotografija iz Casperinih aktivnosti, susreta i projekata.
+          </p>
+        </div>
+      </section>
+
+      <div class="gallery-page__album-grid">
+        {
+          albums.map((album) => (
+            <article class="stories-page__story-card gallery-page__album-card">
+              <a class="stories-page__story-link gallery-page__album-button" href={`/galerija/${album.slug}`}>
+                <div class="stories-page__story-media gallery-page__album-media">
+                  <img class="stories-page__story-image" src={imageUrl(album.coverImage)} alt={`Naslovna fotografija albuma ${album.title}`} />
+                </div>
+                <div class="stories-page__story-content gallery-page__album-content">
+                  <h2 class="stories-page__story-title gallery-page__album-title">{album.title}</h2>
+                  <time class="stories-page__story-date gallery-page__album-date" datetime={album.date}>{formatDate(album.date)}</time>
+                </div>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</BaseLayout>

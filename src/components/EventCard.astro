@@ -1,0 +1,33 @@
+---
+import { formatDate, imageUrl } from "../lib/sanity";
+
+const { event } = Astro.props;
+const date = new Date(event.dateTime);
+const day = String(date.getDate()).padStart(2, "0");
+const month = new Intl.DateTimeFormat("hr-HR", { month: "short" }).format(date).replace(".", "").toUpperCase();
+---
+
+<article class="calendar-page__card" data-calendar-event-card data-event-date={event.dateTime}>
+  <a class="calendar-page__card-link" href={`/casperin-kalendar/${event.slug}`}>
+    <div class="calendar-page__card-media">
+      <img class="calendar-page__card-image" src={imageUrl(event.coverImage)} alt={`Vizual događaja ${event.title}`} />
+      <div class="calendar-page__date-badge" aria-label={formatDate(event.dateTime)}>
+        <span class="calendar-page__date-day">{day}</span>
+        <span class="calendar-page__date-month">{month}</span>
+        <span class="calendar-page__date-divider" aria-hidden="true"></span>
+        <span class="calendar-page__date-year">{date.getFullYear()}.</span>
+      </div>
+    </div>
+    <div class="calendar-page__card-content">
+      <div class="calendar-page__card-meta">
+        <span class="calendar-page__meta-item calendar-page__meta-item--time">
+          {new Intl.DateTimeFormat("hr-HR", { hour: "2-digit", minute: "2-digit" }).format(date)}
+        </span>
+        <span class="calendar-page__meta-item calendar-page__meta-item--location">{event.location}</span>
+      </div>
+      <h2 class="calendar-page__card-title">{event.title}</h2>
+      <p class="calendar-page__card-excerpt">{event.description?.[0]?.children?.[0]?.text}</p>
+      <span class="calendar-page__card-cta">Saznaj više</span>
+    </div>
+  </a>
+</article>

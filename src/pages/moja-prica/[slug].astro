@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PortableContent from "../../components/PortableContent.astro";
+import { fallbackStories } from "../../lib/fallbackContent";
+import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+
+export async function getStaticPaths() {
+  const stories = await fetchSanity(
+    `*[_type == "story"] { "slug": slug.current }`,
+    {},
+    fallbackStories.map((story) => ({ slug: story.slug }))
+  );
+
+  return stories.map((story) => ({ params: { slug: story.slug } }));
+}
+
+const { slug } = Astro.params;
+const fallbackStory = fallbackStories.find((story) => story.slug === slug) ?? fallbackStories[0];
+const fetchedStory = await fetchSanity(
+  `*[_type == "story" && slug.current == $slug][0] {
+    title,
+    "slug": slug.current,
+    "author": select(
+      defined(author._ref) => author->{ name, photo { asset->{url} }, shortBio, displayOrder },
+      defined(author) => { "name": author, "photo": authorPhoto { asset->{url} }, "shortBio": "" }
+    ),
+    date,
+    content,
+    coverImage { asset->{url} }
+  }`,
+  { slug },
+  fallbackStory
+);
+const story = fetchedStory ?? fallbackStory;
+
+const author = typeof story.author === "string" ? { name: story.author } : story.author;
+const authorName = author?.name ?? "Autorica";
+const authorPhoto = imageUrl(author?.photo) || "/assets/images/placeholder.png";
+const authorBio = author?.shortBio ?? "";
+---
+
+<BaseLayout title={`Caspera | ${story.title}`} bodyClass="stranica-pojedina-prica">
+  <main class="story-detail">
+    <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
+      <ol class="story-detail__breadcrumb-list">
+        <li class="story-detail__breadcrumb-item"><a href="/">Pocetna</a></li>
+        <li class="story-detail__breadcrumb-item"><a href="/moja-prica">Moja prica</a></li>
+        <li class="story-detail__breadcrumb-item" aria-current="page">{story.title}</li>
+      </ol>
+    </nav>
+
+    <article class="story-article">
+      <figure class="story-article__media">
+        <img class="story-hero-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija price ${story.title}`} />
+      </figure>
+
+      <div class="story-content">
+        <header class="story-content__header">
+          <h1 class="story-title">{story.title}</h1>
+          <div class="story-meta">
+            <span class="story-meta__author">
+              <span class="story-meta__avatar" aria-hidden="true">
+                <img src={authorPhoto} alt="" />
+              </span>
+              <span>{authorName}</span>
+            </span>
+            <time class="story-meta__date" datetime={story.date}>{formatDate(story.date)}</time>
+          </div>
+        </header>
+
+        <div class="story-body">
+          <PortableContent value={story.content} />
+        </div>
+      </div>
+    </article>
+  </main>
+</BaseLayout>

@@ -279,6 +279,8 @@
   display: grid;
   place-items: center;
   padding: clamp(1.25rem, 4vw, 2.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
   &[hidden] {
     display: none;
@@ -295,6 +297,8 @@
     position: relative;
     z-index: 1;
     width: min(70rem, 100%);
+    max-width: calc(100vw - 1.5rem);
+    max-height: min(52rem, calc(100dvh - 2rem));
     border: 1px solid rgba($white, 0.74);
     border-radius: clamp(2rem, 3vw, 2.4rem);
     background:
@@ -302,7 +306,8 @@
     box-shadow:
       0 2rem 4rem rgba($hero-shadow-soft, 0.22),
       0 1rem 2rem rgba($hero-shadow-soft, 0.12);
-    overflow: hidden;
+    overflow: auto;
+    scrollbar-gutter: stable;
   }
 
   &__zatvori {
@@ -345,6 +350,7 @@
     gap: clamp(2rem, 4vw, 3.25rem);
     align-items: start;
     padding: clamp(2.25rem, 4vw, 3rem);
+    min-height: 0;
   }
 
   &__slika-okvir {
@@ -365,6 +371,7 @@
 
   &__sadrzaj {
     padding-top: 0;
+    min-width: 0;
   }
 
   &__ime {
@@ -402,7 +409,13 @@
   }
 
   @media (max-width: $hero-mobile-breakpoint) {
+    padding: 0.75rem;
+    place-items: start center;
+
     &__prozor {
+      width: 100%;
+      max-width: calc(100vw - 1.5rem);
+      max-height: calc(100dvh - 1.5rem);
       border-radius: 1.6rem;
     }
 
@@ -421,15 +434,26 @@
     &__raspored {
       grid-template-columns: 1fr;
       gap: 1.5rem;
-      padding: 1.35rem 1.2rem 1.4rem;
+      padding: 4.75rem 1.2rem 1.4rem;
     }
 
     &__slika-okvir {
-      max-width: 14rem;
+      width: min(100%, 14rem);
+      max-height: 32dvh;
+      justify-self: center;
+      overflow: hidden;
+    }
+
+    &__slika {
+      max-height: calc(32dvh - 1rem);
     }
 
     &__sadrzaj {
       padding-top: 0;
     }
+  }
+
+  @media (max-height: 680px) {
+    place-items: start center;
   }
 }

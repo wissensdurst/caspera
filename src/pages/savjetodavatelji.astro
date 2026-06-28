@@ -1,0 +1,175 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fallbackAdvisors } from "../lib/fallbackContent";
+import { fetchSanity, imageUrl } from "../lib/sanity";
+
+const advisors = await fetchSanity(
+  `*[_type == "advisor"] | order(displayOrder asc) {
+    name,
+    photo { asset->{url} },
+    shortBio,
+    displayOrder
+  }`,
+  {},
+  fallbackAdvisors
+);
+
+const escapeHtml = (value = "") =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const advisorCards = advisors.map((advisor) => {
+  const photo = imageUrl(advisor.photo) || "/assets/images/placeholder.png";
+  const bio = advisor.shortBio ? `<p>${escapeHtml(advisor.shortBio)}</p>` : "";
+
+  return {
+    ...advisor,
+    photo,
+    bio,
+  };
+});
+---
+
+<BaseLayout title="Caspera | Naši savjetodavatelji" bodyClass="stranica-savjetodavatelji">
+  <main>
+    <section class="tim tim--centred-cards" aria-labelledby="naslov-popisa-savjetodavatelja">
+      <div class="tim__unutarnji">
+        <header class="tim__uvod">
+          <h1 class="tim__naslov" id="naslov-popisa-savjetodavatelja">Naši savjetodavatelji</h1>
+          <div class="tim__tekstovi">
+            <p class="tim__tekst">
+              Stručnjaci i suradnici udruge Caspera pružaju odgovore, usmjerenje i podršku
+              ženama koje prolaze kroz liječenje i oporavak.
+            </p>
+          </div>
+        </header>
+
+        <section class="tim__mreza" aria-label="Popis savjetodavatelja udruge Caspera">
+          {
+            advisorCards.map((advisor) => (
+              <button
+                class="kartica-tima"
+                type="button"
+                data-team-card
+                data-name={advisor.name}
+                data-image={advisor.photo}
+                data-image-alt={`Profilna fotografija savjetodavatelja ${advisor.name}`}
+                data-bio-html={advisor.bio}
+                aria-label={`Otvori profil savjetodavatelja ${advisor.name}`}
+              >
+                <div class="kartica-tima__slika-okvir">
+                  <img
+                    class="kartica-tima__slika"
+                    src={advisor.photo}
+                    alt={`Profilna fotografija savjetodavatelja ${advisor.name}`}
+                  />
+                </div>
+                <div class="kartica-tima__sadrzaj">
+                  <h2 class="kartica-tima__ime">{advisor.name}</h2>
+                </div>
+              </button>
+            ))
+          }
+        </section>
+
+        <div class="modal-clan-tima" data-team-modal hidden>
+          <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+          <section
+            class="modal-clan-tima__prozor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-clan-tima-naslov"
+          >
+            <button
+              class="modal-clan-tima__zatvori"
+              type="button"
+              data-team-modal-close
+              aria-label="Zatvori prozor"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-clan-tima__raspored">
+              <div class="modal-clan-tima__slika-okvir">
+                <img
+                  class="modal-clan-tima__slika"
+                  data-team-modal-image
+                  src="/assets/images/placeholder.png"
+                  alt="Profilna fotografija savjetodavatelja"
+                />
+              </div>
+              <div class="modal-clan-tima__sadrzaj">
+                <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>
+                  Ime savjetodavatelja
+                </h2>
+                <div class="modal-clan-tima__opis" data-team-modal-bio>
+                  <p>Opis savjetodavatelja.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const teamModal = document.querySelector("[data-team-modal]");
+
+    if (teamModal) {
+      const teamCards = [...document.querySelectorAll("[data-team-card]")];
+      const modalName = teamModal.querySelector("[data-team-modal-name]");
+      const modalBio = teamModal.querySelector("[data-team-modal-bio]");
+      const modalImage = teamModal.querySelector("[data-team-modal-image]");
+      const modalCloseControls = [...teamModal.querySelectorAll("[data-team-modal-close]")];
+      const pageBody = document.body;
+      let lastFocusedCard = null;
+
+      const closeTeamModal = () => {
+        teamModal.hidden = true;
+        pageBody.classList.remove("modal-open");
+        lastFocusedCard?.focus();
+      };
+
+      const openTeamModal = (card) => {
+        lastFocusedCard = card;
+
+        if (modalName) {
+          modalName.textContent = card.dataset.name ?? "";
+        }
+
+        if (modalBio) {
+          modalBio.innerHTML = card.dataset.bioHtml || card.dataset.bio || "";
+        }
+
+        if (modalImage) {
+          modalImage.src = card.dataset.image ?? modalImage.src;
+          modalImage.alt = card.dataset.imageAlt ?? "";
+        }
+
+        teamModal.hidden = false;
+        pageBody.classList.add("modal-open");
+        teamModal.querySelector("[data-team-modal-close]")?.focus();
+      };
+
+      teamCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          openTeamModal(card);
+        });
+      });
+
+      modalCloseControls.forEach((control) => {
+        control.addEventListener("click", closeTeamModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !teamModal.hidden) {
+          closeTeamModal();
+        }
+      });
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { fallbackGalleryAlbums } from "../../lib/fallbackContent";
+import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+
+export async function getStaticPaths() {
+  const albums = await fetchSanity(
+    `*[_type == "galleryAlbum"] { "slug": slug.current }`,
+    {},
+    fallbackGalleryAlbums.map((album) => ({ slug: album.slug }))
+  );
+
+  return albums.map((album) => ({ params: { slug: album.slug } }));
+}
+
+const { slug } = Astro.params;
+const fallbackAlbum = fallbackGalleryAlbums.find((album) => album.slug === slug) ?? fallbackGalleryAlbums[0];
+const album = await fetchSanity(
+  `*[_type == "galleryAlbum" && slug.current == $slug][0] {
+    title,
+    "slug": slug.current,
+    date,
+    coverImage { asset->{url} },
+    images[] { image { asset->{url} } }
+  }`,
+  { slug },
+  fallbackAlbum
+);
+
+const galleryImages =
+  album.images
+    ?.map((item, index) => ({
+      src: imageUrl(item.image),
+      alt: `Fotografija ${index + 1} iz albuma ${album.title}`,
+    }))
+    .filter((item) => item.src) ?? [];
+---
+
+<BaseLayout title={`Caspera | ${album.title}`} bodyClass="stranica-galerija">
+  <main class="gallery-page" data-gallery-lightbox>
+    <div class="gallery-page__inner">
+      <section class="gallery-page__hero" aria-labelledby="gallery-album-title">
+        <div class="gallery-page__hero-copy">
+          <nav class="gallery-page__breadcrumbs" aria-label="Breadcrumb">
+            <ol class="gallery-page__breadcrumb-list">
+              <li class="gallery-page__breadcrumb-item"><a href="/">Početna</a></li>
+              <li class="gallery-page__breadcrumb-item"><a href="/galerija">Galerija</a></li>
+              <li class="gallery-page__breadcrumb-item" aria-current="page">{album.title}</li>
+            </ol>
+          </nav>
+          <h1 class="gallery-page__title" id="gallery-album-title">{album.title}</h1>
+          <time class="stories-page__story-date gallery-page__album-date" datetime={album.date}>{formatDate(album.date)}</time>
+        </div>
+      </section>
+
+      <div class="gallery-page__photo-grid">
+        {
+          galleryImages.map((item, index) => (
+            <figure class="gallery-page__photo">
+              <button
+                class="gallery-page__photo-button"
+                type="button"
+                data-lightbox-trigger
+                data-lightbox-index={index}
+                aria-label={`Otvori fotografiju ${index + 1} iz albuma ${album.title}`}
+              >
+                <img src={item.src} alt={item.alt} loading={index > 2 ? "lazy" : "eager"} />
+              </button>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+
+  <div class="gallery-lightbox" data-lightbox hidden>
+    <button class="gallery-lightbox__backdrop" type="button" aria-label="Zatvori fotografiju" data-lightbox-close></button>
+    <div class="gallery-lightbox__dialog" role="dialog" aria-modal="true" aria-label={`Fotografije albuma ${album.title}`}>
+      <button class="gallery-lightbox__close" type="button" aria-label="Zatvori fotografiju" data-lightbox-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button class="gallery-lightbox__control gallery-lightbox__control--prev" type="button" aria-label="Prethodna fotografija" data-lightbox-prev>
+        <span aria-hidden="true">&#8249;</span>
+      </button>
+      <img class="gallery-lightbox__image" src="" alt="" data-lightbox-image />
+      <button class="gallery-lightbox__control gallery-lightbox__control--next" type="button" aria-label="Sljedeća fotografija" data-lightbox-next>
+        <span aria-hidden="true">&#8250;</span>
+      </button>
+      <p class="gallery-lightbox__counter" aria-live="polite" data-lightbox-counter></p>
+    </div>
+  </div>
+
+  <script define:vars={{ galleryImages }}>
+    const lightboxRoot = document.querySelector("[data-lightbox]");
+    const lightboxImage = lightboxRoot?.querySelector("[data-lightbox-image]");
+    const lightboxCounter = lightboxRoot?.querySelector("[data-lightbox-counter]");
+    const triggers = [...document.querySelectorAll("[data-lightbox-trigger]")];
+    const closeControls = [...(lightboxRoot?.querySelectorAll("[data-lightbox-close]") ?? [])];
+    const previousControl = lightboxRoot?.querySelector("[data-lightbox-prev]");
+    const nextControl = lightboxRoot?.querySelector("[data-lightbox-next]");
+
+    let activeIndex = 0;
+    let lastTrigger = null;
+
+    const showImage = (index) => {
+      if (!lightboxImage || !lightboxCounter || galleryImages.length === 0) {
+        return;
+      }
+
+      activeIndex = (index + galleryImages.length) % galleryImages.length;
+      const image = galleryImages[activeIndex];
+
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+      lightboxCounter.textContent = `${activeIndex + 1} / ${galleryImages.length}`;
+    };
+
+    const openLightbox = (index, trigger) => {
+      if (!lightboxRoot) {
+        return;
+      }
+
+      lastTrigger = trigger;
+      showImage(index);
+      lightboxRoot.hidden = false;
+      document.body.classList.add("modal-open");
+      lightboxRoot.querySelector("[data-lightbox-close]")?.focus();
+    };
+
+    const closeLightbox = () => {
+      if (!lightboxRoot || lightboxRoot.hidden) {
+        return;
+      }
+
+      lightboxRoot.hidden = true;
+      document.body.classList.remove("modal-open");
+      lastTrigger?.focus();
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        openLightbox(Number(trigger.dataset.lightboxIndex), trigger);
+      });
+    });
+
+    previousControl?.addEventListener("click", () => showImage(activeIndex - 1));
+    nextControl?.addEventListener("click", () => showImage(activeIndex + 1));
+    closeControls.forEach((control) => control.addEventListener("click", closeLightbox));
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightboxRoot || lightboxRoot.hidden) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showImage(activeIndex - 1);
+      }
+
+      if (event.key === "ArrowRight") {
+        showImage(activeIndex + 1);
+      }
+    });
+  </script>
+</BaseLayout>

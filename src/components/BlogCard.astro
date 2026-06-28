@@ -1,0 +1,35 @@
+---
+import { formatDate, imageUrl } from "../lib/sanity";
+
+const { post, author } = Astro.props;
+const excerpt = post.content?.[0]?.children?.[0]?.text ?? "";
+const authorPhoto = imageUrl(author?.photo);
+---
+
+<article class="stories-page__story-card" data-blog-card data-blog-date={post.date}>
+  <a class="stories-page__story-link" href={`/sonjin-blog/${post.slug}`}>
+    <div class="stories-page__story-media">
+      <img class="stories-page__story-image" src={imageUrl(post.coverImage)} alt={`Naslovna fotografija blog objave ${post.title}`} />
+    </div>
+    <div class="stories-page__story-content">
+      <div class="stories-page__story-meta">
+        {
+          author && (
+            <span class="stories-page__story-author">
+              {authorPhoto && (
+                <span class="stories-page__story-author-avatar" aria-hidden="true">
+                  <img src={authorPhoto} alt="" />
+                </span>
+              )}
+              <span>{author.name}</span>
+            </span>
+          )
+        }
+        <time class="stories-page__story-date" datetime={post.date}>{formatDate(post.date)}</time>
+      </div>
+      <h2 class="stories-page__story-title">{post.title}</h2>
+      <p class="stories-page__story-excerpt">{excerpt}</p>
+      <span class="stories-page__story-cta">Procitaj objavu</span>
+    </div>
+  </a>
+</article>

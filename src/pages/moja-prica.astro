@@ -1,0 +1,333 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StoryCard from "../components/StoryCard.astro";
+import { fallbackStories } from "../lib/fallbackContent";
+import { fetchSanity, imageUrl } from "../lib/sanity";
+
+const authorKey = (name = "") =>
+  name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const shortAuthorName = (name = "") => {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+
+  if (parts.length < 2) {
+    return name;
+  }
+
+  return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
+};
+
+const authors = await fetchSanity(
+  `*[_type == "author"] | order(displayOrder asc) {
+    name,
+    photo { asset->{url} },
+    shortBio,
+    displayOrder
+  }`,
+  {},
+  []
+);
+
+const stories = await fetchSanity(
+  `*[_type == "story"] | order(date desc) {
+    title,
+    "slug": slug.current,
+    "author": select(
+      defined(author._ref) => author->{ name, photo { asset->{url} }, shortBio, displayOrder },
+      defined(author) => { "name": author, "photo": authorPhoto { asset->{url} }, "shortBio": "" }
+    ),
+    date,
+    content,
+    coverImage { asset->{url} }
+  }`,
+  {},
+  fallbackStories
+);
+
+const authorChips = authors.map((author) => ({
+  ...author,
+  key: authorKey(author.name),
+  label: shortAuthorName(author.name),
+  photo: imageUrl(author.photo) || "/assets/images/placeholder.png",
+}));
+---
+
+<BaseLayout title="Caspera | Moja prica" bodyClass="stranica-moja-prica">
+  <main class="stories-page">
+    <section class="stories-page__hero" aria-labelledby="stories-page-title">
+      <div class="stories-page__inner stories-page__hero-layout">
+        <div class="stories-page__hero-copy">
+          <nav class="stories-page__breadcrumbs" aria-label="Breadcrumb">
+            <ol class="stories-page__breadcrumb-list">
+              <li class="stories-page__breadcrumb-item"><a href="/">Pocetna</a></li>
+              <li class="stories-page__breadcrumb-item"><a href="#">Price</a></li>
+              <li class="stories-page__breadcrumb-item" aria-current="page">Moja prica</li>
+            </ol>
+          </nav>
+          <h1 class="stories-page__title" id="stories-page-title">Moja prica</h1>
+          <p class="stories-page__intro">
+            Mjesto gdje dijelimo osobna iskustva, izazove, pobjede i korake koji nas vode prema oporavku i novom zivotu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stories-page__directory">
+      <div class="stories-page__inner">
+        <div class="stories-page__author-slider" data-author-slider>
+          <div class="stories-page__author-track" data-author-track role="tablist" aria-label="Autorice prica">
+            <button class="stories-page__author-chip" type="button" role="tab" aria-selected="true" data-author-filter="all">
+              <span class="stories-page__author-chip-circle">
+                <img class="stories-page__author-chip-avatar" src="/assets/images/sve_price.png" alt="" />
+              </span>
+              <span class="stories-page__author-chip-label">Sve</span>
+            </button>
+            {
+              authorChips.map((author) => (
+                <button
+                  class="stories-page__author-chip"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-author-filter={author.key}
+                >
+                  <span class="stories-page__author-chip-circle">
+                    <img class="stories-page__author-chip-avatar" src={author.photo} alt={`Profilna fotografija autorice ${author.name}`} />
+                  </span>
+                  <span class="stories-page__author-chip-label">{author.label}</span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="stories-page__author-scrollbar" data-author-scrollbar hidden>
+          <input
+            class="stories-page__author-scrollbar-input"
+            type="range"
+            min="0"
+            max="0"
+            value="0"
+            step="1"
+            aria-label="Pomak author slidera"
+            data-author-scrollbar-input
+          />
+        </div>
+
+        <p class="stories-page__authors-helper" data-authors-helper hidden>Povucite za vise autorica</p>
+
+        <div class="stories-page__toolbar">
+          <div class="stories-page__sort" data-stories-sort-dropdown>
+            <span class="stories-page__sort-label">Prikazi:</span>
+            <div class="stories-page__sort-dropdown">
+              <button
+                class="stories-page__sort-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="stories-sort-options"
+                data-stories-sort-toggle
+              >
+                <span data-stories-sort-label>Najnovije</span>
+                <span class="stories-page__sort-arrow" aria-hidden="true">
+                  <img src="/assets/icons/dropdown-arrow.svg" alt="" />
+                </span>
+              </button>
+              <ul class="stories-page__sort-menu" id="stories-sort-options" role="listbox" aria-label="Sortiranje prica" data-stories-sort-menu>
+                <li>
+                  <button class="stories-page__sort-option" type="button" role="option" data-sort-value="newest" aria-selected="true">
+                    <span>Najnovije</span>
+                    <span class="stories-page__sort-check" aria-hidden="true">&#10003;</span>
+                  </button>
+                </li>
+                <li>
+                  <button class="stories-page__sort-option" type="button" role="option" data-sort-value="oldest" aria-selected="false">
+                    <span>Najstarije</span>
+                    <span class="stories-page__sort-check" aria-hidden="true">&#10003;</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="stories-page__list" data-stories-list>
+          {stories.map((story) => <StoryCard story={story} />)}
+        </div>
+
+        <p class="stories-page__empty" data-stories-empty hidden>Trenutno nema prica za odabranu autoricu.</p>
+        <nav class="stories-page__pagination" aria-label="Paginacija prica" data-stories-pagination></nav>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const storiesList = document.querySelector("[data-stories-list]");
+
+    if (storiesList) {
+      const cards = [...document.querySelectorAll("[data-story-card]")];
+      const authorButtons = [...document.querySelectorAll("[data-author-filter]")];
+      const sortDropdown = document.querySelector("[data-stories-sort-dropdown]");
+      const sortDropdownRoot = sortDropdown?.querySelector(".stories-page__sort-dropdown");
+      const sortToggle = sortDropdown?.querySelector("[data-stories-sort-toggle]");
+      const sortLabel = sortDropdown?.querySelector("[data-stories-sort-label]");
+      const sortOptions = [...document.querySelectorAll("[data-sort-value]")];
+      const emptyMessage = document.querySelector("[data-stories-empty]");
+      const pagination = document.querySelector("[data-stories-pagination]");
+      const authorTrack = document.querySelector("[data-author-track]");
+      const scrollbar = document.querySelector("[data-author-scrollbar]");
+      const scrollbarInput = document.querySelector("[data-author-scrollbar-input]");
+      const authorsHelper = document.querySelector("[data-authors-helper]");
+      const labels = { newest: "Najnovije", oldest: "Najstarije" };
+      const perPage = 6;
+
+      let selectedAuthor = "all";
+      let selectedSort = "newest";
+      let currentPage = 1;
+
+      const closeSortDropdown = () => {
+        sortDropdownRoot?.classList.remove("is-open");
+        sortToggle?.setAttribute("aria-expanded", "false");
+      };
+
+      const matchingCards = () =>
+        cards
+          .filter((card) => selectedAuthor === "all" || card.dataset.storyAuthor === selectedAuthor)
+          .sort((first, second) => {
+            const firstDate = new Date(first.dataset.storyDate ?? "").getTime();
+            const secondDate = new Date(second.dataset.storyDate ?? "").getTime();
+            return selectedSort === "newest" ? secondDate - firstDate : firstDate - secondDate;
+          });
+
+      const renderPagination = (pageCount) => {
+        if (!pagination) {
+          return;
+        }
+
+        pagination.innerHTML = "";
+
+        if (pageCount <= 1) {
+          return;
+        }
+
+        for (let index = 1; index <= pageCount; index += 1) {
+          const button = document.createElement("button");
+          button.className = "stories-page__page-button";
+          button.type = "button";
+          button.textContent = String(index);
+          button.setAttribute("aria-label", `Idi na stranicu ${index}`);
+
+          if (index === currentPage) {
+            button.setAttribute("aria-current", "page");
+          }
+
+          button.addEventListener("click", () => {
+            currentPage = index;
+            applyStories();
+          });
+
+          pagination.append(button);
+        }
+      };
+
+      const applyStories = () => {
+        const visibleCards = matchingCards();
+        const pageCount = Math.max(1, Math.ceil(visibleCards.length / perPage));
+        currentPage = Math.min(currentPage, pageCount);
+        const start = (currentPage - 1) * perPage;
+        const pageCards = new Set(visibleCards.slice(start, start + perPage));
+
+        cards.forEach((card) => {
+          card.hidden = !pageCards.has(card);
+        });
+
+        visibleCards.forEach((card) => storiesList.append(card));
+
+        authorButtons.forEach((button) => {
+          button.setAttribute("aria-selected", String(button.dataset.authorFilter === selectedAuthor));
+        });
+
+        sortOptions.forEach((option) => {
+          option.setAttribute("aria-selected", String(option.dataset.sortValue === selectedSort));
+        });
+
+        if (sortLabel) {
+          sortLabel.textContent = labels[selectedSort];
+        }
+
+        if (emptyMessage) {
+          emptyMessage.hidden = visibleCards.length > 0;
+        }
+
+        renderPagination(pageCount);
+      };
+
+      const updateAuthorScrollbar = () => {
+        if (!authorTrack || !scrollbar || !scrollbarInput) {
+          return;
+        }
+
+        const maxScroll = Math.max(0, authorTrack.scrollWidth - authorTrack.clientWidth);
+        scrollbar.hidden = maxScroll <= 4;
+
+        if (authorsHelper) {
+          authorsHelper.hidden = maxScroll <= 4;
+        }
+
+        scrollbarInput.max = String(Math.ceil(maxScroll));
+        scrollbarInput.value = String(Math.ceil(authorTrack.scrollLeft));
+      };
+
+      authorButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedAuthor = button.dataset.authorFilter ?? "all";
+          currentPage = 1;
+          applyStories();
+        });
+      });
+
+      sortToggle?.addEventListener("click", () => {
+        const isOpen = sortDropdownRoot?.classList.contains("is-open");
+        sortDropdownRoot?.classList.toggle("is-open", !isOpen);
+        sortToggle.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      sortOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          selectedSort = option.dataset.sortValue ?? "newest";
+          currentPage = 1;
+          applyStories();
+          closeSortDropdown();
+          sortToggle?.focus();
+        });
+      });
+
+      scrollbarInput?.addEventListener("input", () => {
+        authorTrack.scrollLeft = Number(scrollbarInput.value);
+      });
+
+      authorTrack?.addEventListener("scroll", updateAuthorScrollbar, { passive: true });
+      window.addEventListener("resize", updateAuthorScrollbar);
+
+      document.addEventListener("click", (event) => {
+        if (sortDropdown && !sortDropdown.contains(event.target)) {
+          closeSortDropdown();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeSortDropdown();
+        }
+      });
+
+      applyStories();
+      updateAuthorScrollbar();
+    }
+  </script>
+</BaseLayout>
