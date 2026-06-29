@@ -45,3 +45,18 @@ export function formatDate(dateValue: string): string {
     year: "numeric",
   }).format(new Date(dateValue));
 }
+
+type PortableTextBlock = {
+  children?: Array<{ text?: string }>;
+};
+
+export function portableTextToPlainText(value?: PortableTextBlock[]): string {
+  if (!Array.isArray(value)) {
+    return "";
+  }
+
+  return value
+    .map((block) => block.children?.map((child) => child.text ?? "").join("") ?? "")
+    .filter(Boolean)
+    .join(" ");
+}

@@ -731,6 +731,9 @@ if (storiesPage) {
       year: "numeric",
     }).format(new Date(dateValue));
 
+  const getStoryCardExcerpt = (story) =>
+    [story.excerpt, ...(story.body ?? [])].filter(Boolean).join(" ");
+
   const getStoriesColumns = () => {
     if (window.innerWidth <= 900) {
       return 1;
@@ -929,7 +932,7 @@ if (storiesPage) {
                   <time class="stories-page__story-date" datetime="${story.publishDate}">${formatDate(story.publishDate)}</time>
                 </div>
                 <h2 class="stories-page__story-title">${story.title}</h2>
-                <p class="stories-page__story-excerpt">${story.excerpt}</p>
+                <p class="stories-page__story-excerpt">${getStoryCardExcerpt(story)}</p>
                 <span class="stories-page__story-cta">ProÄitaj priÄu</span>
               </div>
             </a>
@@ -1289,6 +1292,9 @@ if (calendarPage) {
   const formatBadgeDay = (dateValue) =>
     String(new Date(dateValue).getDate()).padStart(2, "0");
 
+  const getEventCardExcerpt = (event) =>
+    [event.excerpt, ...(event.body ?? [])].filter(Boolean).join(" ");
+
   const getEventDetailHref = (event) =>
     `casperin-kalendar.html?event=${encodeURIComponent(event.slug)}`;
 
@@ -1442,7 +1448,7 @@ if (calendarPage) {
                   </span>
                 </div>
                 <h2 class="calendar-page__card-title">${event.title}</h2>
-                <p class="calendar-page__card-excerpt">${event.excerpt}</p>
+                <p class="calendar-page__card-excerpt">${getEventCardExcerpt(event)}</p>
                 <span class="calendar-page__card-cta">Saznaj viÅ¡e</span>
               </div>
             </a>
@@ -1499,60 +1505,7 @@ if (calendarPage) {
 }
 
 if (projectsPage) {
-  const projects = normalizeMojibakeData([
-    {
-      title: "Tu smo",
-      slug: "tu-smo",
-      publishDate: "2026-05-14",
-      excerpt:
-        "Projekt podrÅ¡ke i vidljivosti koji Å¾enama i njihovim obiteljima pribliÅ¾ava informacije, iskustva i zajednicu koja ostaje dostupna i nakon prvog kontakta.",
-      body: [
-        "Projekt Tu smo okuplja aktivnosti kojima Caspera Å¾enama i njihovim obiteljima pribliÅ¾ava podrÅ¡ku, informacije i osjeÄ‡aj zajedniÅ¡tva.",
-        "Kroz javne materijale, susrete i komunikacijske aktivnosti projekt pomaÅ¾e da se vaÅ¾ne teme ne zadrÅ¾e samo u ordinacijama, nego postanu dostupne i razumljive u svakodnevnom Å¾ivotu.",
-      ],
-      quote: "PodrÅ¡ka je najkorisnija kada je vidljiva, jasna i dovoljno blizu.",
-      image: "../assets/images/tu_smo.png",
-    },
-    {
-      title: "Bokun butige",
-      slug: "bokun-butige",
-      publishDate: "2026-04-22",
-      excerpt:
-        "Humanitarna inicijativa kroz koju donacije, proizvodi i male geste podrÅ¡ke postaju konkretna pomoÄ‡ za rad udruge i programe namijenjene Älanicama.",
-      body: [
-        "Bokun butige povezuje humanitarnu podrÅ¡ku i rad udruge kroz proizvode, donacije i male geste koje imaju konkretan uÄinak.",
-        "Sredstva i vidljivost prikupljeni kroz ovu inicijativu usmjeravaju se prema programima podrÅ¡ke, edukacije i aktivnostima koje Älanicama olakÅ¡avaju svakodnevicu.",
-      ],
-      quote: "I mali doprinos moÅ¾e postati dio veÄ‡e podrÅ¡ke kada je usmjeren ondje gdje je potreban.",
-      image: "../assets/images/bokun_butige.jpg",
-    },
-    {
-      title: "SavjetovaliÅ¡te Caspere",
-      slug: "savjetovaliste-caspere",
-      publishDate: "2026-03-18",
-      excerpt:
-        "Program struÄne podrÅ¡ke koji povezuje Älanice sa savjetodavateljima iz podruÄja onkologije, prehrane, fizikalne terapije, dermatologije i drugih vaÅ¾nih tema.",
-      body: [
-        "SavjetovaliÅ¡te Caspere razvija dostupnu struÄnu podrÅ¡ku za pitanja koja se Äesto pojave tijekom lijeÄenja, oporavka i povratka svakodnevnom ritmu.",
-        "Program povezuje Älanice sa savjetodavateljima iz viÅ¡e podruÄja kako bi odgovori bili jasniji, praktiÄniji i prilagoÄ‘eni stvarnim potrebama Å¾ena.",
-      ],
-      quote: "Pravo pitanje u pravom trenutku moÅ¾e smanjiti strah i otvoriti put prema jasnijoj odluci.",
-      image: "../assets/images/podrska_strucni.png",
-    },
-    {
-      title: "Moja priÄa",
-      slug: "moja-prica",
-      publishDate: "2026-02-12",
-      excerpt:
-        "Prostor za osobna iskustva, iskrene tekstove i glasove Å¾ena koje dijele ono Å¡to im je pomoglo, promijenilo svakodnevicu ili vratilo osjeÄ‡aj snage.",
-      body: [
-        "Moja priÄa otvara prostor za iskustva Å¾ena koje Å¾ele podijeliti dio svog puta, bez uljepÅ¡avanja i bez pritiska da sve mora zvuÄati jednostavno.",
-        "Projekt prikuplja glasove koji mogu ohrabriti druge, dati jezik onome Å¡to je teÅ¡ko izgovoriti i pokazati da se u iskustvu bolesti ne mora biti sama.",
-      ],
-      quote: "Osobna priÄa moÅ¾e biti podrÅ¡ka Å¾eni koja je tek poÄela traÅ¾iti vlastite rijeÄi.",
-      image: "../assets/images/story_img.jpeg",
-    },
-  ]);
+  const projects = [];
 
   const projectsList = projectsPage.querySelector("[data-projects-list]");
   const projectsListSections = [
@@ -1682,6 +1635,13 @@ if (projectsPage) {
         String(option.dataset.projectsSortValue === selectedProjectsSort)
       );
     });
+
+    if (projects.length === 0) {
+      projectsList.innerHTML = normalizeMojibakeText(
+        '<p class="calendar-page__empty">Trenutno nema objavljenih projekata.</p>'
+      );
+      return;
+    }
 
     projectsList.innerHTML = normalizeMojibakeText(
       getSortedProjects()
@@ -1932,6 +1892,9 @@ if (blogPage) {
       year: "numeric",
     }).format(new Date(dateValue));
 
+  const getBlogCardExcerpt = (post) =>
+    [post.excerpt, ...(post.body ?? [])].filter(Boolean).join(" ");
+
   const getStoriesColumns = () => {
     if (window.innerWidth <= 900) {
       return 1;
@@ -2065,7 +2028,7 @@ if (blogPage) {
                   <time class="stories-page__story-date" datetime="${post.publishDate}">${formatDate(post.publishDate)}</time>
                 </div>
                 <h2 class="stories-page__story-title">${post.title}</h2>
-                <p class="stories-page__story-excerpt">${post.excerpt}</p>
+                <p class="stories-page__story-excerpt">${getBlogCardExcerpt(post)}</p>
                 <span class="stories-page__story-cta">ProÄitaj objavu</span>
               </div>
             </a>

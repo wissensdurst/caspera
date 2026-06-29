@@ -111,6 +111,25 @@ export const fallbackTeamMembers = [
   },
 ];
 
+export const fallbackCasperaPeople = [
+  {
+    name: "Sonja Grgat",
+    title: "Predsjednica",
+    photo: "/assets/images/sonja_grgat.jpg",
+    shortBio:
+      "Upoznajte našu predsjednicu, Sonju.\n\nMnogi već poznaju Sonju jer otkada se razboljela intenzivno piše, priča i širi svijest o karcinomu. Pisanje joj je, kako kaže, psihoterapija i prostor u kojem svoje iskustvo pretvara u podršku drugima.\n\nSvoje iskustvo, znanje i skupljene mrvice odlučila je iskoristiti tako da promijeni svijet, ili barem jedan njegov dio, pa je s dragim ljudima osnovala Udrugu Caspera.",
+    displayOrder: 10,
+  },
+  {
+    name: "Ivana Frapporti",
+    title: "Suosnivačica",
+    photo: "/assets/images/ivana_frapporti.jpg",
+    shortBio:
+      "Upoznajte Ivanu, vlasnicu ogromnog optimizma, neiscrpne energije, praktičarku i sistematičarku Caspere.\n\nPo godinama mlada, iskustvom zrela. Ivana je spremna za promjene, a energijom koju posjeduje pokreće sve oko sebe.\n\nIvanina upornost i dosljednost pomogle su joj tijekom oporavaka, a Casperi donosi jasne smjernice, praktičnost i energiju osobe koja kaže i napravi.",
+    displayOrder: 20,
+  },
+];
+
 export const fallbackStories = [
   {
     title: "Kad sam sebe ponovno stavila na prvo mjesto",
@@ -132,29 +151,5 @@ export const fallbackStories = [
       { children: [{ text: "Nekad sam mislila da se iz najtežih trenutaka ne može izaći. Danas znam da je svaki korak, ma koliko malen, korak prema slobodi." }] },
     ],
     coverImage: "/assets/images/sandra_zekic_tomas.jpg",
-  },
-];
-
-export const fallbackProjects = [
-  {
-    title: "Tu smo",
-    slug: "tu-smo",
-    date: "2024-04-03",
-    location: "Split",
-    description: [
-      { children: [{ text: "Projekt usmjeren na dostupniju podrsku zenama oboljelima i lijecenima od karcinoma kroz susrete, edukacije i razgovor." }] },
-      { children: [{ text: "Kroz program Caspera povezuje clanice, strucnjake i zajednicu oko konkretnih potreba tijekom lijecenja i oporavka." }] },
-    ],
-    coverImage: "/assets/images/tu_smo.png",
-  },
-  {
-    title: "Bokun butige",
-    slug: "bokun-butige",
-    date: "2024-05-12",
-    location: "Split",
-    description: [
-      { children: [{ text: "Humanitarna inicijativa koja povezuje lokalnu zajednicu i rad udruge kroz vidljivu, toplu i prakticnu podrsku." }] },
-    ],
-    coverImage: "/assets/images/bokun_butige.jpg",
   },
 ];

@@ -1,8 +1,8 @@
 ---
-import { formatDate, imageUrl } from "../lib/sanity";
+import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
 
 const { post, author } = Astro.props;
-const excerpt = post.content?.[0]?.children?.[0]?.text ?? "";
+const excerpt = portableTextToPlainText(post.content);
 const authorPhoto = imageUrl(author?.photo);
 ---
 

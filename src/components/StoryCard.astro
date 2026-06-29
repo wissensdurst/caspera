@@ -1,5 +1,5 @@
 ---
-import { formatDate, imageUrl } from "../lib/sanity";
+import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
 
 const { story } = Astro.props;
 const author = typeof story.author === "string" ? { name: story.author } : story.author;
@@ -11,7 +11,7 @@ const authorKey = authorName
   .replace(/[\u0300-\u036f]/g, "")
   .replace(/[^a-z0-9]+/g, "-")
   .replace(/^-|-$/g, "");
-const excerpt = story.content?.[0]?.children?.[0]?.text ?? "";
+const excerpt = portableTextToPlainText(story.content);
 ---
 
 <article class="stories-page__story-card" data-story-card data-story-date={story.date} data-story-author={authorKey}>

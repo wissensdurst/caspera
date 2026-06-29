@@ -1,0 +1,203 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fallbackCasperaPeople } from "../lib/fallbackContent";
+import { fetchSanity, imageUrl } from "../lib/sanity";
+
+const fetchedPeople = await fetchSanity(
+  `*[_type == "casperaPerson"] | order(displayOrder asc) {
+    name,
+    title,
+    photo { asset->{url} },
+    shortBio,
+    displayOrder
+  }`,
+  {},
+  fallbackCasperaPeople
+);
+
+const casperaPeople = fetchedPeople.length > 0 ? fetchedPeople : fallbackCasperaPeople;
+
+const escapeHtml = (value = "") =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const bioToHtml = (value = "") =>
+  value
+    .split(/\r?\n+/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("");
+
+const personCards = casperaPeople.map((person) => {
+  const photo = imageUrl(person.photo) || "/assets/images/placeholder.png";
+  const bio = bioToHtml(person.shortBio);
+
+  return {
+    ...person,
+    photo,
+    bio,
+  };
+});
+---
+
+<BaseLayout title="Caspera | Tko je Caspera" bodyClass="stranica-nasa-ekipa">
+  <main>
+    <section class="tim tim--centred-cards" aria-label="Tko je Caspera">
+      <div class="tim__unutarnji">
+        <header class="tim__uvod">
+          <h1 class="tim__naslov">Tko je Caspera</h1>
+          <div class="tim__tekstovi">
+            <p class="tim__tekst">
+              Udruga kao takva ne znači ništa, jer je to samo mrtvo slovo na papiru.
+            </p>
+            <p class="tim__tekst">
+              Kada tom slovu dodate prave ljude koji će potom sve začiniti ljubavlju, iskustvom,
+              dobrom voljom i najboljim idejama dobit ćemo nešto što se zove udruga CASPERA.
+            </p>
+            <p class="tim__tekst">
+              Svaka osoba u našoj priči, itekako, doprinosi radu udruge.
+            </p>
+            <p class="tim__tekst">Stoga, dopustite da vam predstavimo uzdanice Udruge:</p>
+          </div>
+        </header>
+
+        <section class="tim__mreza" aria-label="Profili uzdanica udruge Caspera">
+          {
+            personCards.map((person) => (
+              <button
+                class="kartica-tima"
+                type="button"
+                data-team-card
+                data-name={person.name}
+                data-role={person.title}
+                data-image={person.photo}
+                data-image-alt={`Profilna fotografija ${person.name}`}
+                data-bio-html={person.bio}
+                aria-label={`Otvori profil osobe ${person.name}`}
+              >
+                <div class="kartica-tima__slika-okvir">
+                  <img
+                    class="kartica-tima__slika"
+                    src={person.photo}
+                    alt={`Profilna fotografija ${person.name}`}
+                  />
+                </div>
+                <div class="kartica-tima__sadrzaj">
+                  <h2 class="kartica-tima__ime">{person.name}</h2>
+                  <p class="kartica-tima__uloga">{person.title}</p>
+                </div>
+              </button>
+            ))
+          }
+        </section>
+
+        <div class="modal-clan-tima" data-team-modal hidden>
+          <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
+          <section
+            class="modal-clan-tima__prozor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-clan-tima-naslov"
+          >
+            <button
+              class="modal-clan-tima__zatvori"
+              type="button"
+              data-team-modal-close
+              aria-label="Zatvori prozor"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-clan-tima__raspored">
+              <div class="modal-clan-tima__slika-okvir">
+                <img
+                  class="modal-clan-tima__slika"
+                  data-team-modal-image
+                  src="/assets/images/placeholder.png"
+                  alt="Profilna fotografija osobe"
+                />
+              </div>
+              <div class="modal-clan-tima__sadrzaj">
+                <h2 class="modal-clan-tima__ime" id="modal-clan-tima-naslov" data-team-modal-name>
+                  Ime osobe
+                </h2>
+                <p class="modal-clan-tima__uloga" data-team-modal-role>Uloga</p>
+                <div class="modal-clan-tima__opis" data-team-modal-bio>
+                  <p>Opis osobe.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const teamModal = document.querySelector("[data-team-modal]");
+
+    if (teamModal) {
+      const teamCards = [...document.querySelectorAll("[data-team-card]")];
+      const modalName = teamModal.querySelector("[data-team-modal-name]");
+      const modalRole = teamModal.querySelector("[data-team-modal-role]");
+      const modalBio = teamModal.querySelector("[data-team-modal-bio]");
+      const modalImage = teamModal.querySelector("[data-team-modal-image]");
+      const modalCloseControls = [...teamModal.querySelectorAll("[data-team-modal-close]")];
+      const pageBody = document.body;
+      let lastFocusedCard = null;
+
+      const closeTeamModal = () => {
+        teamModal.hidden = true;
+        pageBody.classList.remove("modal-open");
+        lastFocusedCard?.focus();
+      };
+
+      const openTeamModal = (card) => {
+        lastFocusedCard = card;
+
+        if (modalName) {
+          modalName.textContent = card.dataset.name ?? "";
+        }
+
+        if (modalRole) {
+          const role = card.dataset.role ?? "";
+          modalRole.textContent = role;
+          modalRole.hidden = role.trim().length === 0;
+        }
+
+        if (modalBio) {
+          modalBio.innerHTML = card.dataset.bioHtml || card.dataset.bio || "";
+        }
+
+        if (modalImage) {
+          modalImage.src = card.dataset.image ?? modalImage.src;
+          modalImage.alt = card.dataset.imageAlt ?? "";
+        }
+
+        teamModal.hidden = false;
+        pageBody.classList.add("modal-open");
+        teamModal.querySelector("[data-team-modal-close]")?.focus();
+      };
+
+      teamCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          openTeamModal(card);
+        });
+      });
+
+      modalCloseControls.forEach((control) => {
+        control.addEventListener("click", closeTeamModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !teamModal.hidden) {
+          closeTeamModal();
+        }
+      });
+    }
+  </script>
+</BaseLayout>

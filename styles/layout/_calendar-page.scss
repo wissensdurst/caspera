@@ -376,6 +376,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
+    min-height: 0;
     padding: clamp(1.7rem, 3vw, 2.4rem);
   }
 
@@ -431,11 +432,21 @@
   }
 
   &__card-excerpt {
+    --calendar-card-excerpt-lines: 5;
+
+    display: -webkit-box;
+    min-height: calc(var(--calendar-card-excerpt-lines) * 1em * 1.75);
+    max-height: calc(var(--calendar-card-excerpt-lines) * 1em * 1.75);
     margin: 0;
+    overflow: hidden;
     color: $cool-gray;
     font-family: $font-ui;
     font-size: clamp(1rem, 1.45vw, 1.12rem);
     line-height: 1.75;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--calendar-card-excerpt-lines);
+    line-clamp: var(--calendar-card-excerpt-lines);
   }
 
   &__card-cta {
@@ -517,6 +528,10 @@
 
     &__card-content {
       padding: 1.45rem;
+    }
+
+    &__card-excerpt {
+      --calendar-card-excerpt-lines: 4;
     }
   }
 }

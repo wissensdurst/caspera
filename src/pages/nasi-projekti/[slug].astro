@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
-import { fallbackProjects } from "../../lib/fallbackContent";
 import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
 
 export async function getStaticPaths() {
@@ -10,14 +9,12 @@ export async function getStaticPaths() {
     {},
     []
   );
-  const projects = fetchedProjects.length > 0 ? fetchedProjects : fallbackProjects.map((project) => ({ slug: project.slug }));
 
-  return projects.map((project) => ({ params: { slug: project.slug } }));
+  return fetchedProjects.map((project) => ({ params: { slug: project.slug } }));
 }
 
 const { slug } = Astro.params;
-const fallbackProject = fallbackProjects.find((project) => project.slug === slug) ?? fallbackProjects[0];
-const fetchedProject = await fetchSanity(
+const project = await fetchSanity(
   `*[_type == "project" && slug.current == $slug][0] {
     title,
     "slug": slug.current,
@@ -27,9 +24,12 @@ const fetchedProject = await fetchSanity(
     coverImage { asset->{url} }
   }`,
   { slug },
-  fallbackProject
+  null
 );
-const project = fetchedProject ?? fallbackProject;
+
+if (!project) {
+  return Astro.redirect("/nasi-projekti");
+}
 ---
 
 <BaseLayout title={`Caspera | ${project.title}`} bodyClass="stranica-nasi-projekti">

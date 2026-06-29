@@ -1,10 +1,11 @@
 ---
-import { formatDate, imageUrl } from "../lib/sanity";
+import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
 
 const { event } = Astro.props;
 const date = new Date(event.dateTime);
 const day = String(date.getDate()).padStart(2, "0");
 const month = new Intl.DateTimeFormat("hr-HR", { month: "short" }).format(date).replace(".", "").toUpperCase();
+const excerpt = portableTextToPlainText(event.description);
 ---
 
 <article class="calendar-page__card" data-calendar-event-card data-event-date={event.dateTime}>
@@ -26,7 +27,7 @@ const month = new Intl.DateTimeFormat("hr-HR", { month: "short" }).format(date).
         <span class="calendar-page__meta-item calendar-page__meta-item--location">{event.location}</span>
       </div>
       <h2 class="calendar-page__card-title">{event.title}</h2>
-      <p class="calendar-page__card-excerpt">{event.description?.[0]?.children?.[0]?.text}</p>
+      <p class="calendar-page__card-excerpt">{excerpt}</p>
       <span class="calendar-page__card-cta">Saznaj više</span>
     </div>
   </a>

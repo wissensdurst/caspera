@@ -1,8 +1,8 @@
 ---
-import { formatDate, imageUrl } from "../lib/sanity";
+import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
 
 const { project } = Astro.props;
-const excerpt = project.description?.[0]?.children?.[0]?.text ?? "";
+const excerpt = portableTextToPlainText(project.description);
 ---
 
 <article class="calendar-page__card projects-page__card" data-project-card data-project-date={project.date}>

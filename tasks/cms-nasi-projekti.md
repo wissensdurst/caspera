@@ -79,10 +79,4 @@ Keep these in code:
 
 
 
-## Implementation instructions
 
-- inspect current project structure
-- identify existing pages/components
-- propose schema files
-- propose Astro routes
-- do not modify files yet

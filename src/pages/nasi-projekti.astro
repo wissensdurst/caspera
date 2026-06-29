@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { fallbackProjects } from "../lib/fallbackContent";
 import { fetchSanity } from "../lib/sanity";
 
 const fetchedProjects = await fetchSanity(
@@ -16,7 +15,7 @@ const fetchedProjects = await fetchSanity(
   {},
   []
 );
-const projects = fetchedProjects.length > 0 ? fetchedProjects : fallbackProjects;
+const projects = fetchedProjects;
 ---
 
 <BaseLayout title="Caspera | Naši projekti" bodyClass="stranica-nasi-projekti">
@@ -85,7 +84,13 @@ const projects = fetchedProjects.length > 0 ? fetchedProjects : fallbackProjects
         </div>
 
         <div class="calendar-page__list" data-projects-list>
-          {projects.map((project) => <ProjectCard project={project} />)}
+          {
+            projects.length > 0 ? (
+              projects.map((project) => <ProjectCard project={project} />)
+            ) : (
+              <p class="calendar-page__empty">Trenutno nema objavljenih projekata.</p>
+            )
+          }
         </div>
       </div>
     </section>
