@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fetchSanity, imageUrl } from "../lib/sanity";
+import { fetchSanity, imageUrl, portableTextToHtml } from "../lib/sanity";
 
 const authors = await fetchSanity(
   `*[_type == "author"] | order(displayOrder asc) {
@@ -13,17 +13,9 @@ const authors = await fetchSanity(
   []
 );
 
-const escapeHtml = (value = "") =>
-  value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
 const authorCards = authors.map((author) => {
   const photo = imageUrl(author.photo) || "/assets/images/placeholder.png";
-  const bio = author.shortBio ? `<p>${escapeHtml(author.shortBio)}</p>` : "";
+  const bio = portableTextToHtml(author.shortBio);
 
   return {
     ...author,
@@ -41,7 +33,7 @@ const authorCards = authors.map((author) => {
           <h1 class="tim__naslov" id="naslov-popisa-autorica">O autoricama</h1>
           <div class="tim__tekstovi">
             <p class="tim__tekst">
-              Autorice koje dijele osobna iskustva, oporavak i trenutke podrske kroz Casperinu rubriku Moja prica.
+              Autorice koje dijele osobna iskustva, oporavak i trenutke podrške kroz Casperinu rubriku Moja priča.
             </p>
           </div>
         </header>

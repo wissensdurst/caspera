@@ -1,0 +1,12 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AccordionScript from "../components/AccordionScript.astro";
+import content from "../static-pages/pravila-privatnosti.html?raw";
+
+const hasAccordion = content.includes("data-accordion");
+---
+
+<BaseLayout title="Caspera | Pravila privatnosti" bodyClass="stranica-pravila-privatnosti">
+  <Fragment set:html={content} />
+  {hasAccordion && <AccordionScript />}
+</BaseLayout>

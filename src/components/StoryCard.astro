@@ -17,7 +17,7 @@ const excerpt = portableTextToPlainText(story.content);
 <article class="stories-page__story-card" data-story-card data-story-date={story.date} data-story-author={authorKey}>
   <a class="stories-page__story-link" href={`/moja-prica/${story.slug}`}>
     <div class="stories-page__story-media">
-      <img class="stories-page__story-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija price ${story.title}`} />
+      <img class="stories-page__story-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija priče ${story.title}`} />
     </div>
     <div class="stories-page__story-content">
       <div class="stories-page__story-meta">
@@ -31,7 +31,7 @@ const excerpt = portableTextToPlainText(story.content);
       </div>
       <h2 class="stories-page__story-title">{story.title}</h2>
       <p class="stories-page__story-excerpt">{excerpt}</p>
-      <span class="stories-page__story-cta">Procitaj pricu</span>
+      <span class="stories-page__story-cta">Pročitaj priču</span>
     </div>
   </a>
 </article>

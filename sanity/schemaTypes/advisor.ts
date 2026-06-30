@@ -7,7 +7,13 @@ export const advisor = defineType({
   fields: [
     defineField({ name: "name", title: "Ime i prezime", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "photo", title: "Fotografija", type: "image", options: { hotspot: true }, validation: (Rule) => Rule.required() }),
-    defineField({ name: "shortBio", title: "Kratka biografija", type: "text", rows: 5, validation: (Rule) => Rule.required() }),
+    defineField({
+      name: "shortBio",
+      title: "Kratka biografija",
+      type: "array",
+      of: [{ type: "block" }],
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({ name: "displayOrder", title: "Redoslijed prikaza", type: "number", initialValue: 100 }),
   ],
   orderings: [

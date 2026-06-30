@@ -39,6 +39,10 @@
     align-items: stretch;
   }
 
+  &__featured {
+    height: clamp(31rem, 34vw, 37rem);
+  }
+
   &__featured,
   &__card {
     position: relative;
@@ -172,6 +176,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    min-width: 0;
+    min-height: 0;
     padding: clamp(2rem, 3vw, 2.75rem);
   }
 
@@ -194,7 +200,8 @@
 
   &__author-name,
   &__date,
-  &__featured-excerpt {
+  &__featured-excerpt,
+  &__card-excerpt {
     color: $cool-gray;
   }
 
@@ -251,8 +258,25 @@
     line-height: 1.12;
   }
 
+  &__featured-excerpt,
+  &__card-excerpt {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--stories-home-excerpt-lines);
+    line-clamp: var(--stories-home-excerpt-lines);
+  }
+
   &__featured-excerpt {
-    max-width: 30rem;
+    --stories-home-excerpt-lines: 6;
+
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    max-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.72);
+    max-width: none;
     font-family: $font-ui;
     font-size: clamp(1.1rem, 1.5vw, 1.35rem);
     font-weight: $font-weight-regular;
@@ -261,6 +285,7 @@
 
   &__stack {
     display: grid;
+    grid-auto-rows: minmax(0, 1fr);
     gap: 1rem;
     margin: 0;
     padding: 0;
@@ -276,12 +301,24 @@
     flex-direction: column;
     gap: 1.1rem;
     min-height: 100%;
+    overflow: hidden;
     padding: 1.6rem 1.5rem;
   }
 
   &__card-title {
     font-size: clamp(1.45rem, 1.5vw, 1.75rem);
     line-height: 1.35;
+  }
+
+  &__card-excerpt {
+    --stories-home-excerpt-lines: 2;
+
+    min-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.55);
+    max-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.55);
+    font-family: $font-ui;
+    font-size: 0.98rem;
+    font-weight: $font-weight-regular;
+    line-height: 1.55;
   }
 
   &__cta,
@@ -346,6 +383,11 @@
       grid-template-columns: 1fr;
     }
 
+    &__featured {
+      height: auto;
+      min-height: 32rem;
+    }
+
     &__stack {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -368,8 +410,16 @@
       max-height: 28rem;
     }
 
+    &__featured-content {
+      gap: 1.25rem;
+    }
+
     &__stack {
       grid-template-columns: 1fr;
+    }
+
+    &__card-excerpt {
+      --stories-home-excerpt-lines: 3;
     }
 
     &__featured-meta,

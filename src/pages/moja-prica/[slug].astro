@@ -33,37 +33,46 @@ const fetchedStory = await fetchSanity(
 );
 const story = fetchedStory ?? fallbackStory;
 
+const authorKey = (name = "") =>
+  name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
 const author = typeof story.author === "string" ? { name: story.author } : story.author;
 const authorName = author?.name ?? "Autorica";
 const authorPhoto = imageUrl(author?.photo) || "/assets/images/placeholder.png";
 const authorBio = author?.shortBio ?? "";
+const authorStoriesHref = `/moja-prica?author=${encodeURIComponent(authorKey(authorName))}`;
 ---
 
 <BaseLayout title={`Caspera | ${story.title}`} bodyClass="stranica-pojedina-prica">
   <main class="story-detail">
     <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
       <ol class="story-detail__breadcrumb-list">
-        <li class="story-detail__breadcrumb-item"><a href="/">Pocetna</a></li>
-        <li class="story-detail__breadcrumb-item"><a href="/moja-prica">Moja prica</a></li>
+        <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
+        <li class="story-detail__breadcrumb-item"><a href="/moja-prica">Moja priča</a></li>
         <li class="story-detail__breadcrumb-item" aria-current="page">{story.title}</li>
       </ol>
     </nav>
 
     <article class="story-article">
       <figure class="story-article__media">
-        <img class="story-hero-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija price ${story.title}`} />
+        <img class="story-hero-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija priče ${story.title}`} />
       </figure>
 
       <div class="story-content">
         <header class="story-content__header">
           <h1 class="story-title">{story.title}</h1>
           <div class="story-meta">
-            <span class="story-meta__author">
+            <a class="story-meta__author" href={authorStoriesHref} aria-label={`Prikaži sve priče autorice ${authorName}`}>
               <span class="story-meta__avatar" aria-hidden="true">
                 <img src={authorPhoto} alt="" />
               </span>
               <span>{authorName}</span>
-            </span>
+            </a>
             <time class="story-meta__date" datetime={story.date}>{formatDate(story.date)}</time>
           </div>
         </header>

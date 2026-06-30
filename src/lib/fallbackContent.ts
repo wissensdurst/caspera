@@ -76,7 +76,7 @@ export const fallbackAuthors = [
   {
     name: "Ivana K.",
     photo: "/assets/images/ivana_juric.jpg",
-    shortBio: "Svoju pricu dijeli kako bi podrzala druge zene koje prolaze kroz slican put.",
+    shortBio: "Svoju priču dijeli kako bi podržala druge žene koje prolaze kroz sličan put.",
     displayOrder: 10,
   },
   {
@@ -108,25 +108,6 @@ export const fallbackTeamMembers = [
     photo: "/assets/images/ivana_juric.jpg",
     shortBio: "Magistrirala je fizioterapiju na Sveučilišnom odjelu zdravstvenih studija u Splitu.",
     displayOrder: 30,
-  },
-];
-
-export const fallbackCasperaPeople = [
-  {
-    name: "Sonja Grgat",
-    title: "Predsjednica",
-    photo: "/assets/images/sonja_grgat.jpg",
-    shortBio:
-      "Upoznajte našu predsjednicu, Sonju.\n\nMnogi već poznaju Sonju jer otkada se razboljela intenzivno piše, priča i širi svijest o karcinomu. Pisanje joj je, kako kaže, psihoterapija i prostor u kojem svoje iskustvo pretvara u podršku drugima.\n\nSvoje iskustvo, znanje i skupljene mrvice odlučila je iskoristiti tako da promijeni svijet, ili barem jedan njegov dio, pa je s dragim ljudima osnovala Udrugu Caspera.",
-    displayOrder: 10,
-  },
-  {
-    name: "Ivana Frapporti",
-    title: "Suosnivačica",
-    photo: "/assets/images/ivana_frapporti.jpg",
-    shortBio:
-      "Upoznajte Ivanu, vlasnicu ogromnog optimizma, neiscrpne energije, praktičarku i sistematičarku Caspere.\n\nPo godinama mlada, iskustvom zrela. Ivana je spremna za promjene, a energijom koju posjeduje pokreće sve oko sebe.\n\nIvanina upornost i dosljednost pomogle su joj tijekom oporavaka, a Casperi donosi jasne smjernice, praktičnost i energiju osobe koja kaže i napravi.",
-    displayOrder: 20,
   },
 ];
 

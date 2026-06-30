@@ -50,7 +50,11 @@ type PortableTextBlock = {
   children?: Array<{ text?: string }>;
 };
 
-export function portableTextToPlainText(value?: PortableTextBlock[]): string {
+export function portableTextToPlainText(value?: PortableTextBlock[] | string): string {
+  if (typeof value === "string") {
+    return value;
+  }
+
   if (!Array.isArray(value)) {
     return "";
   }
@@ -59,4 +63,34 @@ export function portableTextToPlainText(value?: PortableTextBlock[]): string {
     .map((block) => block.children?.map((child) => child.text ?? "").join("") ?? "")
     .filter(Boolean)
     .join(" ");
+}
+
+const escapeHtml = (value = "") =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+export function portableTextToHtml(value?: PortableTextBlock[] | string): string {
+  if (typeof value === "string") {
+    return value
+      .split(/\r?\n+/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean)
+      .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+      .join("");
+  }
+
+  if (!Array.isArray(value)) {
+    return "";
+  }
+
+  return value
+    .map((block) => block.children?.map((child) => child.text ?? "").join("") ?? "")
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("");
 }

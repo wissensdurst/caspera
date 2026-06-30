@@ -125,7 +125,16 @@
     position: relative;
     padding-right: 1rem;
     margin-right: 0.1rem;
+    color: inherit;
     font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  &__author:hover,
+  &__author:focus-visible {
+    color: $section-title-accent;
+    outline: none;
   }
 
   &__author::after {

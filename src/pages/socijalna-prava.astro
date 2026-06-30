@@ -1,0 +1,12 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AccordionScript from "../components/AccordionScript.astro";
+import content from "../static-pages/socijalna-prava.html?raw";
+
+const hasAccordion = content.includes("data-accordion");
+---
+
+<BaseLayout title="Caspera | Socijalna prava" bodyClass="stranica-socijalna-prava">
+  <Fragment set:html={content} />
+  {hasAccordion && <AccordionScript />}
+</BaseLayout>

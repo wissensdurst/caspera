@@ -1,0 +1,234 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchSanity, formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
+
+const stories = await fetchSanity(
+  `*[_type == "story"] | order(date desc)[0...4] {
+    title,
+    "slug": slug.current,
+    "author": author->{ name, photo { asset->{url} } },
+    date,
+    content,
+    coverImage { asset->{url} }
+  }`,
+  {},
+  []
+);
+
+const featuredStory = stories[0];
+const sideStories = stories.slice(1, 4);
+
+const getAuthorName = (story) => story?.author?.name ?? "Autorica";
+const getAuthorPhoto = (story) => imageUrl(story?.author?.photo) || "/assets/images/placeholder.png";
+const getStoryCover = (story) => imageUrl(story?.coverImage) || getAuthorPhoto(story);
+const getStoryHref = (story) => `/moja-prica/${story.slug}`;
+const getStoryExcerpt = (story) => portableTextToPlainText(story.content);
+---
+
+<BaseLayout title="Caspera">
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__content">
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__title-main">U krugu žena koje razumiju,</span>
+          <span class="hero__title-accent">nijedna borba nije usamljena!</span>
+        </h1>
+        <p class="hero__text">
+          Caspera je neprofitna organizacija osnovana 2020. godine s ciljem pružanja podrške ženama oboljelim i
+          liječenim od karcinoma. Kad je najteže, važno je imati nekoga tko sluša i razumije. Mjesto gdje možeš stati,
+          udahnuti i biti ono što jesi.
+          <br />
+          Tu smo.
+        </p>
+        <a class="hero__button" href="/tko-je-caspera">Saznaj više</a>
+      </div>
+      <div class="hero__media">
+        <img
+          class="hero__ribbon"
+          src="/assets/images/tu_smo.png"
+          alt="Ilustracija podrške i zajedništva udruge Caspera"
+        />
+      </div>
+    </section>
+
+    <section class="support" aria-labelledby="support-title">
+      <div class="support__inner">
+        <div class="support__intro">
+          <h2 class="support__title" id="support-title">Tu smo za vas</h2>
+          <p class="support__text">Pronađite podršku, savjet i korisne informacije koje vam mogu pomoći na vašem putu.</p>
+        </div>
+
+        <ul class="support__cards" aria-label="Mogućnosti podrške">
+          <li class="support__item">
+            <article class="support__card">
+              <a class="support__card-link" href="/savjetodavatelji">
+                <span class="support__card-visual">
+                  <img
+                    class="support__card-icon"
+                    src="/assets/images/podrska_upoznaj.png"
+                    alt="Ilustracija savjetodavatelja Caspere"
+                  />
+                </span>
+                <h3 class="support__card-title">Naši savjetodavatelji</h3>
+                <span class="support__card-divider" aria-hidden="true"></span>
+                <p class="support__card-description">
+                  Upoznajte naše stručne savjetodavatelje koji su ovdje kako bi vam pružili podršku i razumijevanje.
+                </p>
+              </a>
+            </article>
+          </li>
+          <li class="support__item">
+            <article class="support__card">
+              <a class="support__card-link" href="/pitaj-onkologa">
+                <span class="support__card-visual">
+                  <img
+                    class="support__card-icon"
+                    src="/assets/images/podrska_strucni.png"
+                    alt="Ilustracija stručnog savjeta"
+                  />
+                </span>
+                <h3 class="support__card-title">Stručni savjet</h3>
+                <span class="support__card-divider" aria-hidden="true"></span>
+                <p class="support__card-description">
+                  Stručni medicinski i psihološki savjeti koji vam mogu pomoći u donošenju važnih odluka.
+                </p>
+              </a>
+            </article>
+          </li>
+          <li class="support__item">
+            <article class="support__card">
+              <a class="support__card-link" href="/socijalna-prava">
+                <span class="support__card-visual">
+                  <img
+                    class="support__card-icon"
+                    src="/assets/images/podrska_info.png"
+                    alt="Ilustracija korisnih informacija"
+                  />
+                </span>
+                <h3 class="support__card-title">Dobro je znati</h3>
+                <span class="support__card-divider" aria-hidden="true"></span>
+                <p class="support__card-description">
+                  Korisne informacije, vodiči i savjeti za lakše snalaženje tijekom liječenja i oporavka.
+                </p>
+              </a>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="stories" aria-labelledby="stories-title">
+      <div class="stories__inner">
+        <header class="stories__header">
+          <h2 class="stories__title" id="stories-title">Moja priča</h2>
+          <p class="stories__subtitle">
+            Pročitajte osobne priče naših članica i njihova iskustva na putu prema oporavku.
+          </p>
+        </header>
+
+        {
+          featuredStory ? (
+            <div class="stories__grid">
+              <article class="stories__featured">
+                <a class="stories__featured-link" href={getStoryHref(featuredStory)}>
+                  <div class="stories__featured-media">
+                    <img
+                      class="stories__featured-image"
+                      src={getStoryCover(featuredStory)}
+                      alt={`Naslovna fotografija priče ${featuredStory.title}`}
+                    />
+                  </div>
+                  <div class="stories__featured-content" data-featured-story-content>
+                    <div class="stories__featured-meta">
+                      <img
+                        class="stories__avatar"
+                        src={getAuthorPhoto(featuredStory)}
+                        alt={`Profilna fotografija autorice ${getAuthorName(featuredStory)}`}
+                      />
+                      <span class="stories__author-name">{getAuthorName(featuredStory)}</span>
+                      <time class="stories__date" datetime={featuredStory.date}>{formatDate(featuredStory.date)}</time>
+                    </div>
+                    <h3 class="stories__featured-title">{featuredStory.title}</h3>
+                    <p class="stories__featured-excerpt" data-featured-story-excerpt>{getStoryExcerpt(featuredStory)}</p>
+                    <span class="stories__cta">Pročitaj priču</span>
+                  </div>
+                </a>
+              </article>
+
+              {sideStories.length > 0 && (
+                <ul class="stories__stack" aria-label="Istaknute priče članica">
+                  {sideStories.map((story) => (
+                    <li class="stories__stack-item">
+                      <article class="stories__card">
+                        <a class="stories__card-link" href={getStoryHref(story)}>
+                          <div class="stories__card-meta">
+                            <img
+                              class="stories__avatar"
+                              src={getAuthorPhoto(story)}
+                              alt={`Profilna fotografija autorice ${getAuthorName(story)}`}
+                            />
+                            <span class="stories__author-name">{getAuthorName(story)}</span>
+                            <time class="stories__date" datetime={story.date}>{formatDate(story.date)}</time>
+                          </div>
+                          <h3 class="stories__card-title">{story.title}</h3>
+                          <p class="stories__card-excerpt">{getStoryExcerpt(story)}</p>
+                          <span class="stories__cta">Pročitaj priču</span>
+                        </a>
+                      </article>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ) : (
+            <p class="stories-page__empty">Trenutno nema objavljenih priča.</p>
+          )
+        }
+
+        <div class="stories__footer">
+          <span class="stories__footer-line"></span>
+          <a class="stories__footer-link" href="/moja-prica">Pogledaj sve priče</a>
+          <span class="stories__footer-line"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const featuredStoryContent = document.querySelector("[data-featured-story-content]");
+    const featuredStoryExcerpt = document.querySelector("[data-featured-story-excerpt]");
+
+    if (featuredStoryContent && featuredStoryExcerpt) {
+      const updateFeaturedStoryExcerptLines = () => {
+        const contentStyle = window.getComputedStyle(featuredStoryContent);
+        const excerptStyle = window.getComputedStyle(featuredStoryExcerpt);
+        const lineHeight = Number.parseFloat(excerptStyle.lineHeight);
+
+        if (!lineHeight) {
+          return;
+        }
+
+        const blockGap = Number.parseFloat(contentStyle.rowGap || contentStyle.gap) || 0;
+        const paddingBlock =
+          (Number.parseFloat(contentStyle.paddingTop) || 0) +
+          (Number.parseFloat(contentStyle.paddingBottom) || 0);
+        const siblingsHeight = [...featuredStoryContent.children]
+          .filter((child) => child !== featuredStoryExcerpt)
+          .reduce((height, child) => height + child.getBoundingClientRect().height, 0);
+        const gapsHeight = Math.max(featuredStoryContent.children.length - 1, 0) * blockGap;
+        const availableHeight = featuredStoryContent.clientHeight - paddingBlock - siblingsHeight - gapsHeight;
+        const visibleLines = Math.max(2, Math.floor(availableHeight / lineHeight));
+
+        featuredStoryExcerpt.style.setProperty("--stories-home-excerpt-lines", String(visibleLines));
+      };
+
+      updateFeaturedStoryExcerptLines();
+      window.addEventListener("resize", updateFeaturedStoryExcerptLines, { passive: true });
+
+      if ("ResizeObserver" in window) {
+        const featuredStoryResizeObserver = new ResizeObserver(updateFeaturedStoryExcerptLines);
+        featuredStoryResizeObserver.observe(featuredStoryContent);
+      }
+    }
+  </script>
+</BaseLayout>

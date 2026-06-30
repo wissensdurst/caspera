@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fallbackCasperaPeople } from "../lib/fallbackContent";
-import { fetchSanity, imageUrl } from "../lib/sanity";
+import { fetchSanity, imageUrl, portableTextToHtml } from "../lib/sanity";
 
 const fetchedPeople = await fetchSanity(
   `*[_type == "casperaPerson"] | order(displayOrder asc) {
@@ -12,30 +11,14 @@ const fetchedPeople = await fetchSanity(
     displayOrder
   }`,
   {},
-  fallbackCasperaPeople
+  []
 );
 
-const casperaPeople = fetchedPeople.length > 0 ? fetchedPeople : fallbackCasperaPeople;
-
-const escapeHtml = (value = "") =>
-  value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
-const bioToHtml = (value = "") =>
-  value
-    .split(/\r?\n+/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean)
-    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
-    .join("");
+const casperaPeople = fetchedPeople;
 
 const personCards = casperaPeople.map((person) => {
   const photo = imageUrl(person.photo) || "/assets/images/placeholder.png";
-  const bio = bioToHtml(person.shortBio);
+  const bio = portableTextToHtml(person.shortBio);
 
   return {
     ...person,
@@ -68,7 +51,8 @@ const personCards = casperaPeople.map((person) => {
 
         <section class="tim__mreza" aria-label="Profili uzdanica udruge Caspera">
           {
-            personCards.map((person) => (
+            personCards.length > 0 ? (
+              personCards.map((person) => (
               <button
                 class="kartica-tima"
                 type="button"
@@ -92,11 +76,14 @@ const personCards = casperaPeople.map((person) => {
                   <p class="kartica-tima__uloga">{person.title}</p>
                 </div>
               </button>
-            ))
+              ))
+            ) : (
+              <p class="tim__tekst">Trenutno nema objavljenih profila.</p>
+            )
           }
         </section>
 
-        <div class="modal-clan-tima" data-team-modal hidden>
+        {personCards.length > 0 && <div class="modal-clan-tima" data-team-modal hidden>
           <div class="modal-clan-tima__pozadina" data-team-modal-close></div>
           <section
             class="modal-clan-tima__prozor"
@@ -132,7 +119,7 @@ const personCards = casperaPeople.map((person) => {
               </div>
             </div>
           </section>
-        </div>
+        </div>}
       </div>
     </section>
   </main>

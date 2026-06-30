@@ -57,21 +57,21 @@ const authorChips = authors.map((author) => ({
 }));
 ---
 
-<BaseLayout title="Caspera | Moja prica" bodyClass="stranica-moja-prica">
+<BaseLayout title="Caspera | Moja priča" bodyClass="stranica-moja-prica">
   <main class="stories-page">
     <section class="stories-page__hero" aria-labelledby="stories-page-title">
       <div class="stories-page__inner stories-page__hero-layout">
         <div class="stories-page__hero-copy">
           <nav class="stories-page__breadcrumbs" aria-label="Breadcrumb">
             <ol class="stories-page__breadcrumb-list">
-              <li class="stories-page__breadcrumb-item"><a href="/">Pocetna</a></li>
-              <li class="stories-page__breadcrumb-item"><a href="#">Price</a></li>
-              <li class="stories-page__breadcrumb-item" aria-current="page">Moja prica</li>
+              <li class="stories-page__breadcrumb-item"><a href="/">Početna</a></li>
+              <li class="stories-page__breadcrumb-item"><a href="#">Priče</a></li>
+              <li class="stories-page__breadcrumb-item" aria-current="page">Moja priča</li>
             </ol>
           </nav>
-          <h1 class="stories-page__title" id="stories-page-title">Moja prica</h1>
+          <h1 class="stories-page__title" id="stories-page-title">Moja priča</h1>
           <p class="stories-page__intro">
-            Mjesto gdje dijelimo osobna iskustva, izazove, pobjede i korake koji nas vode prema oporavku i novom zivotu.
+            Mjesto gdje dijelimo osobna iskustva, izazove, pobjede i korake koji nas vode prema oporavku i novom životu.
           </p>
         </div>
       </div>
@@ -80,7 +80,7 @@ const authorChips = authors.map((author) => ({
     <section class="stories-page__directory">
       <div class="stories-page__inner">
         <div class="stories-page__author-slider" data-author-slider>
-          <div class="stories-page__author-track" data-author-track role="tablist" aria-label="Autorice prica">
+          <div class="stories-page__author-track" data-author-track role="tablist" aria-label="Autorice priča">
             <button class="stories-page__author-chip" type="button" role="tab" aria-selected="true" data-author-filter="all">
               <span class="stories-page__author-chip-circle">
                 <img class="stories-page__author-chip-avatar" src="/assets/images/sve_price.png" alt="" />
@@ -114,16 +114,16 @@ const authorChips = authors.map((author) => ({
             max="0"
             value="0"
             step="1"
-            aria-label="Pomak author slidera"
+            aria-label="Pomak klizača autorica"
             data-author-scrollbar-input
           />
         </div>
 
-        <p class="stories-page__authors-helper" data-authors-helper hidden>Povucite za vise autorica</p>
+        <p class="stories-page__authors-helper" data-authors-helper hidden>Povucite za više autorica</p>
 
         <div class="stories-page__toolbar">
           <div class="stories-page__sort" data-stories-sort-dropdown>
-            <span class="stories-page__sort-label">Prikazi:</span>
+            <span class="stories-page__sort-label">Prikaži:</span>
             <div class="stories-page__sort-dropdown">
               <button
                 class="stories-page__sort-toggle"
@@ -138,7 +138,7 @@ const authorChips = authors.map((author) => ({
                   <img src="/assets/icons/dropdown-arrow.svg" alt="" />
                 </span>
               </button>
-              <ul class="stories-page__sort-menu" id="stories-sort-options" role="listbox" aria-label="Sortiranje prica" data-stories-sort-menu>
+              <ul class="stories-page__sort-menu" id="stories-sort-options" role="listbox" aria-label="Sortiranje priča" data-stories-sort-menu>
                 <li>
                   <button class="stories-page__sort-option" type="button" role="option" data-sort-value="newest" aria-selected="true">
                     <span>Najnovije</span>
@@ -160,8 +160,8 @@ const authorChips = authors.map((author) => ({
           {stories.map((story) => <StoryCard story={story} />)}
         </div>
 
-        <p class="stories-page__empty" data-stories-empty hidden>Trenutno nema prica za odabranu autoricu.</p>
-        <nav class="stories-page__pagination" aria-label="Paginacija prica" data-stories-pagination></nav>
+        <p class="stories-page__empty" data-stories-empty hidden>Trenutno nema priča za odabranu autoricu.</p>
+        <nav class="stories-page__pagination" aria-label="Paginacija priča" data-stories-pagination></nav>
       </div>
     </section>
   </main>
@@ -186,7 +186,8 @@ const authorChips = authors.map((author) => ({
       const labels = { newest: "Najnovije", oldest: "Najstarije" };
       const perPage = 6;
 
-      let selectedAuthor = "all";
+      const initialAuthor = new URLSearchParams(window.location.search).get("author") ?? "all";
+      let selectedAuthor = cards.some((card) => card.dataset.storyAuthor === initialAuthor) ? initialAuthor : "all";
       let selectedSort = "newest";
       let currentPage = 1;
 
@@ -267,6 +268,18 @@ const authorChips = authors.map((author) => ({
         renderPagination(pageCount);
       };
 
+      const updateAuthorUrl = () => {
+        const url = new URL(window.location.href);
+
+        if (selectedAuthor === "all") {
+          url.searchParams.delete("author");
+        } else {
+          url.searchParams.set("author", selectedAuthor);
+        }
+
+        window.history.replaceState({}, "", url);
+      };
+
       const updateAuthorScrollbar = () => {
         if (!authorTrack || !scrollbar || !scrollbarInput) {
           return;
@@ -287,6 +300,7 @@ const authorChips = authors.map((author) => ({
         button.addEventListener("click", () => {
           selectedAuthor = button.dataset.authorFilter ?? "all";
           currentPage = 1;
+          updateAuthorUrl();
           applyStories();
         });
       });
