@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { seoFields } from "./seoFields";
 
 export const galleryAlbum = defineType({
   name: "galleryAlbum",
@@ -30,5 +31,6 @@ export const galleryAlbum = defineType({
         },
       ],
     }),
+    ...seoFields,
   ],
 });

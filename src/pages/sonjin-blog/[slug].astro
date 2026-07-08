@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
-import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
   const posts = await fetchSanity(
@@ -30,7 +30,11 @@ const post = await fetchSanity(
     "slug": slug.current,
     date,
     content,
-    coverImage { asset->{url} }
+    coverImage { asset->{url} },
+    metaTitle,
+    metaDescription,
+    socialImage { asset->{url} },
+    noIndex
   }`,
   { slug },
   null
@@ -41,9 +45,20 @@ if (!post) {
 }
 
 const authorPhoto = imageUrl(blogAuthor?.photo);
+const seoDescription = truncateText(post.metaDescription || portableTextToPlainText(post.content));
+const seoImage = imageUrl(post.socialImage || post.coverImage, { width: 1200, height: 630, fit: "crop" });
 ---
 
-<BaseLayout title={`Caspera | ${post.title}`} bodyClass="stranica-pojedina-prica">
+<BaseLayout
+  title={post.metaTitle || `Caspera | ${post.title}`}
+  description={seoDescription}
+  canonicalUrl={`/sonjin-blog/${post.slug}`}
+  ogTitle={post.metaTitle || post.title}
+  ogDescription={seoDescription}
+  ogImage={seoImage}
+  noIndex={post.noIndex}
+  bodyClass="stranica-pojedina-prica"
+>
   <main class="story-detail">
     <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
       <ol class="story-detail__breadcrumb-list">

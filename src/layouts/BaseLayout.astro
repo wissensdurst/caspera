@@ -2,12 +2,61 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
+type TwitterCard = "summary" | "summary_large_image";
+
 interface Props {
   title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  twitterCard?: TwitterCard;
+  noIndex?: boolean;
   bodyClass?: string;
 }
 
-const { title, bodyClass = "" } = Astro.props;
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  twitterCard = "summary_large_image",
+  noIndex = false,
+  bodyClass = "",
+} = Astro.props;
+
+const siteName = "Caspera";
+const defaultDescription =
+  "Udruga Caspera pruža podršku ženama oboljelima i liječenima od raka kroz informacije, savjetovanje, zajednicu i događanja.";
+const defaultSocialImage = "/assets/images/logo_main.png";
+const siteUrl = new URL(Astro.site ?? "https://caspera.hr");
+const toAbsoluteUrl = (value: string) => new URL(value, siteUrl).toString();
+
+const pageDescription = description || defaultDescription;
+const pageCanonical = canonicalUrl ? toAbsoluteUrl(canonicalUrl) : toAbsoluteUrl(Astro.url.pathname);
+const pageOgTitle = ogTitle || title;
+const pageOgDescription = ogDescription || pageDescription;
+const pageOgImage = toAbsoluteUrl(ogImage || defaultSocialImage);
+const robotsContent = noIndex ? "noindex, nofollow" : "index, follow";
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: siteUrl.toString(),
+  logo: toAbsoluteUrl(defaultSocialImage),
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: siteUrl.toString(),
+  inLanguage: "hr",
+};
 ---
 
 <!doctype html>
@@ -23,6 +72,22 @@ const { title, bodyClass = "" } = Astro.props;
     />
     <link rel="stylesheet" href="/styles/main.css" />
     <title>{title}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={pageCanonical} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="hr_HR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageOgTitle} />
+    <meta property="og:description" content={pageOgDescription} />
+    <meta property="og:url" content={pageCanonical} />
+    <meta property="og:image" content={pageOgImage} />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={pageOgTitle} />
+    <meta name="twitter:description" content={pageOgDescription} />
+    <meta name="twitter:image" content={pageOgImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
   </head>
   <body class={bodyClass}>
     <Navbar />

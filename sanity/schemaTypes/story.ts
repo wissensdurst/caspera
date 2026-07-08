@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { seoFields } from "./seoFields";
 
 export const story = defineType({
   name: "story",
@@ -17,5 +18,6 @@ export const story = defineType({
     defineField({ name: "date", title: "Datum", type: "date", validation: (Rule) => Rule.required() }),
     defineField({ name: "content", title: "Sadržaj priče", type: "array", of: [{ type: "block" }], validation: (Rule) => Rule.required() }),
     defineField({ name: "coverImage", title: "Naslovna slika", type: "image", options: { hotspot: true }, validation: (Rule) => Rule.required() }),
+    ...seoFields,
   ],
 });

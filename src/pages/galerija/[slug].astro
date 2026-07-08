@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { fallbackGalleryAlbums } from "../../lib/fallbackContent";
-import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
   const albums = await fetchSanity(
@@ -21,7 +21,11 @@ const album = await fetchSanity(
     "slug": slug.current,
     date,
     coverImage { asset->{url} },
-    images[] { image { asset->{url} } }
+    images[] { image { asset->{url} } },
+    metaTitle,
+    metaDescription,
+    socialImage { asset->{url} },
+    noIndex
   }`,
   { slug },
   fallbackAlbum
@@ -34,9 +38,20 @@ const galleryImages =
       alt: `Fotografija ${index + 1} iz albuma ${album.title}`,
     }))
     .filter((item) => item.src) ?? [];
+const seoDescription = truncateText(album.metaDescription || `Fotografije iz albuma ${album.title}.`);
+const seoImage = imageUrl(album.socialImage || album.coverImage, { width: 1200, height: 630, fit: "crop" });
 ---
 
-<BaseLayout title={`Caspera | ${album.title}`} bodyClass="stranica-galerija">
+<BaseLayout
+  title={album.metaTitle || `Caspera | ${album.title}`}
+  description={seoDescription}
+  canonicalUrl={`/galerija/${album.slug}`}
+  ogTitle={album.metaTitle || album.title}
+  ogDescription={seoDescription}
+  ogImage={seoImage}
+  noIndex={album.noIndex}
+  bodyClass="stranica-galerija"
+>
   <main class="gallery-page" data-gallery-lightbox>
     <div class="gallery-page__inner">
       <section class="gallery-page__hero" aria-labelledby="gallery-album-title">

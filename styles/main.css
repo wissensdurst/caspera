@@ -841,12 +841,15 @@ img {
   padding: 1.6rem 1.5rem;
 }
 .stories__card-title {
+  flex: 0 0 auto;
+  margin: 0;
   font-size: clamp(1.45rem, 1.5vw, 1.75rem);
   line-height: 1.35;
 }
 .stories__card-excerpt {
   --stories-home-excerpt-lines: 2;
-  min-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.55);
+  flex: 1 1 auto;
+  min-height: 0;
   max-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.55);
   font-family: "Inter", sans-serif;
   font-size: 0.98rem;
@@ -1527,24 +1530,21 @@ img {
   transform: translateY(-50%);
 }
 .stories-page__story-title {
-  display: -webkit-box;
+  flex: 0 0 auto;
   margin: 0;
-  overflow: hidden;
+  overflow: visible;
   color: #815a79;
   font-family: "Playfair Display", serif;
   font-size: clamp(1.55rem, 1.8vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.2;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
 }
 .stories-page__story-excerpt {
   --stories-card-excerpt-lines: 5;
   display: -webkit-box;
-  min-height: calc(var(--stories-card-excerpt-lines) * 1em * 1.7);
+  flex: 1 1 auto;
+  min-height: 0;
   max-height: calc(var(--stories-card-excerpt-lines) * 1em * 1.7);
   margin: 0;
   overflow: hidden;

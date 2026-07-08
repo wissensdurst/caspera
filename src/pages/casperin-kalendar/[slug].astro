@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
 import { fallbackEvents } from "../../lib/fallbackContent";
-import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
   const events = await fetchSanity(
@@ -23,14 +23,29 @@ const event = await fetchSanity(
     dateTime,
     location,
     description,
-    coverImage { asset->{url} }
+    coverImage { asset->{url} },
+    metaTitle,
+    metaDescription,
+    socialImage { asset->{url} },
+    noIndex
   }`,
   { slug },
   fallbackEvent
 );
+const seoDescription = truncateText(event.metaDescription || portableTextToPlainText(event.description));
+const seoImage = imageUrl(event.socialImage || event.coverImage, { width: 1200, height: 630, fit: "crop" });
 ---
 
-<BaseLayout title={`Caspera | ${event.title}`} bodyClass="stranica-casperin-kalendar">
+<BaseLayout
+  title={event.metaTitle || `Caspera | ${event.title}`}
+  description={seoDescription}
+  canonicalUrl={`/casperin-kalendar/${event.slug}`}
+  ogTitle={event.metaTitle || event.title}
+  ogDescription={seoDescription}
+  ogImage={seoImage}
+  noIndex={event.noIndex}
+  bodyClass="stranica-casperin-kalendar"
+>
   <main class="calendar-page">
     <section class="event-detail story-detail">
       <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">

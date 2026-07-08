@@ -26,16 +26,36 @@ export async function fetchSanity<T>(query: string, params: Record<string, unkno
   }
 }
 
-export function imageUrl(source?: { asset?: { url?: string } } | string): string {
+type ImageUrlOptions = {
+  width?: number;
+  height?: number;
+  fit?: "crop" | "max";
+};
+
+export function imageUrl(source?: { asset?: { url?: string } } | string, options: ImageUrlOptions = {}): string {
   if (!source) {
     return "";
   }
 
-  if (typeof source === "string") {
-    return source;
+  const rawUrl = typeof source === "string" ? source : source.asset?.url ?? "";
+
+  if (!rawUrl || !rawUrl.includes("cdn.sanity.io")) {
+    return rawUrl;
   }
 
-  return source.asset?.url ?? "";
+  const url = new URL(rawUrl);
+  url.searchParams.set("auto", "format");
+  url.searchParams.set("fit", options.fit ?? "max");
+
+  if (options.width) {
+    url.searchParams.set("w", String(options.width));
+  }
+
+  if (options.height) {
+    url.searchParams.set("h", String(options.height));
+  }
+
+  return url.toString();
 }
 
 export function formatDate(dateValue: string): string {
@@ -63,6 +83,16 @@ export function portableTextToPlainText(value?: PortableTextBlock[] | string): s
     .map((block) => block.children?.map((child) => child.text ?? "").join("") ?? "")
     .filter(Boolean)
     .join(" ");
+}
+
+export function truncateText(value = "", maxLength = 155): string {
+  const normalized = value.replace(/\s+/g, " ").trim();
+
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+
+  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`;
 }
 
 const escapeHtml = (value = "") =>

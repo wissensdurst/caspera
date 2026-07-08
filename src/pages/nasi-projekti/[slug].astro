@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
-import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
   const fetchedProjects = await fetchSanity(
@@ -21,7 +21,11 @@ const project = await fetchSanity(
     date,
     location,
     description,
-    coverImage { asset->{url} }
+    coverImage { asset->{url} },
+    metaTitle,
+    metaDescription,
+    socialImage { asset->{url} },
+    noIndex
   }`,
   { slug },
   null
@@ -30,9 +34,21 @@ const project = await fetchSanity(
 if (!project) {
   return Astro.redirect("/nasi-projekti");
 }
+
+const seoDescription = truncateText(project.metaDescription || portableTextToPlainText(project.description));
+const seoImage = imageUrl(project.socialImage || project.coverImage, { width: 1200, height: 630, fit: "crop" });
 ---
 
-<BaseLayout title={`Caspera | ${project.title}`} bodyClass="stranica-nasi-projekti">
+<BaseLayout
+  title={project.metaTitle || `Caspera | ${project.title}`}
+  description={seoDescription}
+  canonicalUrl={`/nasi-projekti/${project.slug}`}
+  ogTitle={project.metaTitle || project.title}
+  ogDescription={seoDescription}
+  ogImage={seoImage}
+  noIndex={project.noIndex}
+  bodyClass="stranica-nasi-projekti"
+>
   <main class="calendar-page projects-page">
     <section class="project-detail story-detail">
       <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">

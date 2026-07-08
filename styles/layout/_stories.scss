@@ -306,6 +306,8 @@
   }
 
   &__card-title {
+    flex: 0 0 auto;
+    margin: 0;
     font-size: clamp(1.45rem, 1.5vw, 1.75rem);
     line-height: 1.35;
   }
@@ -313,7 +315,8 @@
   &__card-excerpt {
     --stories-home-excerpt-lines: 2;
 
-    min-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.55);
+    flex: 1 1 auto;
+    min-height: 0;
     max-height: calc(var(--stories-home-excerpt-lines) * 1em * 1.55);
     font-family: $font-ui;
     font-size: 0.98rem;

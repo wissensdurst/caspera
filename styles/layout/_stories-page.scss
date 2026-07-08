@@ -725,26 +725,23 @@
   }
 
   &__story-title {
-    display: -webkit-box;
+    flex: 0 0 auto;
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     color: $section-title-accent;
     font-family: $font-display;
     font-size: clamp(1.55rem, 1.8vw, 2rem);
     font-weight: $font-weight-bold;
     letter-spacing: $letter-spacing-tight;
     line-height: 1.2;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
   }
 
   &__story-excerpt {
     --stories-card-excerpt-lines: 5;
 
     display: -webkit-box;
-    min-height: calc(var(--stories-card-excerpt-lines) * 1em * 1.7);
+    flex: 1 1 auto;
+    min-height: 0;
     max-height: calc(var(--stories-card-excerpt-lines) * 1em * 1.7);
     margin: 0;
     overflow: hidden;

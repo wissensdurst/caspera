@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
 import { fallbackStories } from "../../lib/fallbackContent";
-import { fetchSanity, formatDate, imageUrl } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
   const stories = await fetchSanity(
@@ -26,7 +26,11 @@ const fetchedStory = await fetchSanity(
     ),
     date,
     content,
-    coverImage { asset->{url} }
+    coverImage { asset->{url} },
+    metaTitle,
+    metaDescription,
+    socialImage { asset->{url} },
+    noIndex
   }`,
   { slug },
   fallbackStory
@@ -46,9 +50,20 @@ const authorName = author?.name ?? "Autorica";
 const authorPhoto = imageUrl(author?.photo) || "/assets/images/placeholder.png";
 const authorBio = author?.shortBio ?? "";
 const authorStoriesHref = `/moja-prica?author=${encodeURIComponent(authorKey(authorName))}`;
+const seoDescription = truncateText(story.metaDescription || portableTextToPlainText(story.content));
+const seoImage = imageUrl(story.socialImage || story.coverImage, { width: 1200, height: 630, fit: "crop" });
 ---
 
-<BaseLayout title={`Caspera | ${story.title}`} bodyClass="stranica-pojedina-prica">
+<BaseLayout
+  title={story.metaTitle || `Caspera | ${story.title}`}
+  description={seoDescription}
+  canonicalUrl={`/moja-prica/${story.slug}`}
+  ogTitle={story.metaTitle || story.title}
+  ogDescription={seoDescription}
+  ogImage={seoImage}
+  noIndex={story.noIndex}
+  bodyClass="stranica-pojedina-prica"
+>
   <main class="story-detail">
     <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
       <ol class="story-detail__breadcrumb-list">
