@@ -1,18 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fallbackGalleryAlbums } from "../lib/fallbackContent";
 import { fetchSanity, formatDate, imageUrl } from "../lib/sanity";
 
-const albums = await fetchSanity(
+const albums =
+  (await fetchSanity(
   `*[_type == "galleryAlbum"] | order(date desc) {
     title,
     "slug": slug.current,
     date,
     coverImage { asset->{url} }
-  }`,
-  {},
-  fallbackGalleryAlbums
-);
+  }`)) ?? [];
 ---
 
 <BaseLayout title="Caspera | Galerija" bodyClass="stranica-galerija">

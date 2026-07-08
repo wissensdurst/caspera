@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
+import ShareActions from "../../components/ShareActions.astro";
 import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
@@ -47,6 +48,7 @@ if (!post) {
 const authorPhoto = imageUrl(blogAuthor?.photo);
 const seoDescription = truncateText(post.metaDescription || portableTextToPlainText(post.content));
 const seoImage = imageUrl(post.socialImage || post.coverImage, { width: 1200, height: 630, fit: "crop" });
+const shareUrl = new URL(`/sonjin-blog/${post.slug}`, Astro.site ?? Astro.url).toString();
 ---
 
 <BaseLayout
@@ -96,6 +98,8 @@ const seoImage = imageUrl(post.socialImage || post.coverImage, { width: 1200, he
         <div class="story-body">
           <PortableContent value={post.content} />
         </div>
+
+        <ShareActions title="Podijeli objavu" shareUrl={shareUrl} shareTitle={post.title} />
       </div>
     </article>
   </main>

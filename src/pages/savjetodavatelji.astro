@@ -1,18 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fallbackAdvisors } from "../lib/fallbackContent";
 import { fetchSanity, imageUrl, portableTextToHtml } from "../lib/sanity";
 
-const advisors = await fetchSanity(
+const advisors =
+  (await fetchSanity(
   `*[_type == "advisor"] | order(displayOrder asc) {
     name,
     photo { asset->{url} },
     shortBio,
     displayOrder
-  }`,
-  {},
-  fallbackAdvisors
-);
+  }`)) ?? [];
 
 const advisorCards = advisors.map((advisor) => {
   const photo = imageUrl(advisor.photo) || "/assets/images/placeholder.png";

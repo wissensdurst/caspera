@@ -1,0 +1,68 @@
+---
+interface Props {
+  title?: string;
+  shareUrl: string;
+  shareTitle: string;
+}
+
+const { title = "Podijeli", shareUrl, shareTitle } = Astro.props;
+
+const encodedUrl = encodeURIComponent(shareUrl);
+const encodedTitle = encodeURIComponent(shareTitle);
+const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+const twitterHref = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+---
+
+<section class="story-share" aria-labelledby="story-share-title">
+  <h2 class="story-share__title" id="story-share-title">{title}</h2>
+  <div class="story-share__actions">
+    <a
+      class="story-share__link story-share__link--facebook"
+      href={facebookHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Podijeli na Facebooku"
+      title="Podijeli na Facebooku"
+    >
+      <span aria-hidden="true">Fb</span>
+    </a>
+    <a
+      class="story-share__link story-share__link--twitter"
+      href={twitterHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Podijeli na X-u"
+      title="Podijeli na X-u"
+    >
+      <span aria-hidden="true">X</span>
+    </a>
+    <button
+      class="story-share__link story-share__link--instagram story-share__link--button"
+      type="button"
+      aria-label="Kopiraj poveznicu za Instagram"
+      title="Kopiraj poveznicu za Instagram"
+      data-share-instagram
+      data-share-url={shareUrl}
+    >
+      <span aria-hidden="true">Ig</span>
+    </button>
+  </div>
+</section>
+
+<script is:inline>
+  const instagramShareButtons = [...document.querySelectorAll("[data-share-instagram]")];
+
+  instagramShareButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const shareUrl = button.getAttribute("data-share-url") ?? window.location.href;
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(shareUrl);
+        }
+      } catch {}
+
+      window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+    });
+  });
+</script>

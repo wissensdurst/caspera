@@ -1,28 +1,38 @@
 import { createClient } from "@sanity/client";
 
-export const hasSanityConfig = Boolean(
-  import.meta.env.SANITY_PROJECT_ID && import.meta.env.SANITY_DATASET
-);
+const defaultProjectId = "nuwdwps7";
+const defaultDataset = "production";
+
+const projectId = import.meta.env.SANITY_PROJECT_ID || defaultProjectId;
+const dataset = import.meta.env.SANITY_DATASET || defaultDataset;
+
+export const hasSanityConfig = Boolean(projectId && dataset);
 
 export const sanityClient = hasSanityConfig
   ? createClient({
-      projectId: import.meta.env.SANITY_PROJECT_ID,
-      dataset: import.meta.env.SANITY_DATASET,
+      projectId,
+      dataset,
       apiVersion: "2026-06-23",
       useCdn: import.meta.env.PROD,
     })
   : null;
 
-export async function fetchSanity<T>(query: string, params: Record<string, unknown> = {}, fallback: T): Promise<T> {
+export async function fetchSanity<T>(query: string, params: Record<string, unknown> = {}, fallbackValue: T): Promise<T>;
+export async function fetchSanity<T>(query: string, params?: Record<string, unknown>): Promise<T | null>;
+export async function fetchSanity<T>(
+  query: string,
+  params: Record<string, unknown> = {},
+  fallbackValue?: T
+): Promise<T | null> {
   if (!sanityClient) {
-    return fallback;
+    return fallbackValue ?? null;
   }
 
   try {
     return await sanityClient.fetch<T>(query, params);
   } catch (error) {
-    console.warn("Sanity fetch failed. Rendering fallback content.", error);
-    return fallback;
+    console.warn("Sanity fetch failed.", error);
+    return fallbackValue ?? null;
   }
 }
 

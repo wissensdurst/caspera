@@ -1,22 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
-import { fallbackStories } from "../../lib/fallbackContent";
+import ShareActions from "../../components/ShareActions.astro";
 import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
-  const stories = await fetchSanity(
-    `*[_type == "story"] { "slug": slug.current }`,
-    {},
-    fallbackStories.map((story) => ({ slug: story.slug }))
-  );
+  const stories = (await fetchSanity(`*[_type == "story" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
 
   return stories.map((story) => ({ params: { slug: story.slug } }));
 }
 
 const { slug } = Astro.params;
-const fallbackStory = fallbackStories.find((story) => story.slug === slug) ?? fallbackStories[0];
-const fetchedStory = await fetchSanity(
+const story = await fetchSanity(
   `*[_type == "story" && slug.current == $slug][0] {
     title,
     "slug": slug.current,
@@ -32,10 +27,12 @@ const fetchedStory = await fetchSanity(
     socialImage { asset->{url} },
     noIndex
   }`,
-  { slug },
-  fallbackStory
+  { slug }
 );
-const story = fetchedStory ?? fallbackStory;
+
+if (!story) {
+  return Astro.redirect("/moja-prica");
+}
 
 const authorKey = (name = "") =>
   name
@@ -52,6 +49,7 @@ const authorBio = author?.shortBio ?? "";
 const authorStoriesHref = `/moja-prica?author=${encodeURIComponent(authorKey(authorName))}`;
 const seoDescription = truncateText(story.metaDescription || portableTextToPlainText(story.content));
 const seoImage = imageUrl(story.socialImage || story.coverImage, { width: 1200, height: 630, fit: "crop" });
+const shareUrl = new URL(`/moja-prica/${story.slug}`, Astro.site ?? Astro.url).toString();
 ---
 
 <BaseLayout
@@ -95,6 +93,8 @@ const seoImage = imageUrl(story.socialImage || story.coverImage, { width: 1200, 
         <div class="story-body">
           <PortableContent value={story.content} />
         </div>
+
+        <ShareActions title="Podijeli priču" shareUrl={shareUrl} shareTitle={story.title} />
       </div>
     </article>
   </main>

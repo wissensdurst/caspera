@@ -1,20 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { fallbackGalleryAlbums } from "../../lib/fallbackContent";
 import { fetchSanity, formatDate, imageUrl, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
-  const albums = await fetchSanity(
-    `*[_type == "galleryAlbum"] { "slug": slug.current }`,
-    {},
-    fallbackGalleryAlbums.map((album) => ({ slug: album.slug }))
-  );
+  const albums = (await fetchSanity(`*[_type == "galleryAlbum" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
 
   return albums.map((album) => ({ params: { slug: album.slug } }));
 }
 
 const { slug } = Astro.params;
-const fallbackAlbum = fallbackGalleryAlbums.find((album) => album.slug === slug) ?? fallbackGalleryAlbums[0];
 const album = await fetchSanity(
   `*[_type == "galleryAlbum" && slug.current == $slug][0] {
     title,
@@ -27,9 +21,12 @@ const album = await fetchSanity(
     socialImage { asset->{url} },
     noIndex
   }`,
-  { slug },
-  fallbackAlbum
+  { slug }
 );
+
+if (!album) {
+  return Astro.redirect("/galerija");
+}
 
 const galleryImages =
   album.images

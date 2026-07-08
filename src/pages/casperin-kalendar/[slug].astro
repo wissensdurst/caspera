@@ -1,21 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableContent from "../../components/PortableContent.astro";
-import { fallbackEvents } from "../../lib/fallbackContent";
+import ShareActions from "../../components/ShareActions.astro";
 import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
 
 export async function getStaticPaths() {
-  const events = await fetchSanity(
-    `*[_type == "event"] { "slug": slug.current }`,
-    {},
-    fallbackEvents.map((event) => ({ slug: event.slug }))
-  );
+  const events = (await fetchSanity(`*[_type == "event" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
 
   return events.map((event) => ({ params: { slug: event.slug } }));
 }
 
 const { slug } = Astro.params;
-const fallbackEvent = fallbackEvents.find((event) => event.slug === slug) ?? fallbackEvents[0];
 const event = await fetchSanity(
   `*[_type == "event" && slug.current == $slug][0] {
     title,
@@ -29,11 +24,16 @@ const event = await fetchSanity(
     socialImage { asset->{url} },
     noIndex
   }`,
-  { slug },
-  fallbackEvent
+  { slug }
 );
+
+if (!event) {
+  return Astro.redirect("/casperin-kalendar");
+}
+
 const seoDescription = truncateText(event.metaDescription || portableTextToPlainText(event.description));
 const seoImage = imageUrl(event.socialImage || event.coverImage, { width: 1200, height: 630, fit: "crop" });
+const shareUrl = new URL(`/casperin-kalendar/${event.slug}`, Astro.site ?? Astro.url).toString();
 ---
 
 <BaseLayout
@@ -74,6 +74,8 @@ const seoImage = imageUrl(event.socialImage || event.coverImage, { width: 1200, 
           <div class="story-body">
             <PortableContent value={event.description} />
           </div>
+
+          <ShareActions title="Podijeli događaj" shareUrl={shareUrl} shareTitle={event.title} />
         </div>
       </article>
     </section>

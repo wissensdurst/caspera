@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import EventCard from "../components/EventCard.astro";
-import { fallbackEvents } from "../lib/fallbackContent";
 import { fetchSanity } from "../lib/sanity";
 
-const events = await fetchSanity(
+const events =
+  (await fetchSanity(
   `*[_type == "event"] | order(dateTime asc) {
     title,
     "slug": slug.current,
@@ -12,10 +12,7 @@ const events = await fetchSanity(
     location,
     description,
     coverImage { asset->{url} }
-  }`,
-  {},
-  fallbackEvents
-);
+  }`)) ?? [];
 ---
 
 <BaseLayout title="Caspera | Casperin kalendar" bodyClass="stranica-casperin-kalendar">

@@ -1819,14 +1819,35 @@ img {
   outline: 2px solid rgba(231, 170, 200, 0.58);
   outline-offset: 0.3rem;
 }
+.gallery-page__album-card {
+  height: 29rem;
+}
+.gallery-page__album-media {
+  flex: 0 0 20rem;
+}
 .gallery-page__album-content {
-  gap: 0.85rem;
+  display: grid;
+  grid-template-rows: minmax(2.4em, auto) auto;
+  align-content: start;
+  gap: 0.7rem;
+  flex: 0 0 9rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 .gallery-page__album-title {
+  display: -webkit-box;
+  margin: 0;
+  min-height: 2.4em;
+  overflow: hidden;
   font-size: clamp(1.5rem, 1.8vw, 1.9rem);
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 .gallery-page__album-date {
-  margin-top: auto;
+  margin-top: 0;
 }
 .gallery-page__photo-grid {
   display: grid;
@@ -1879,6 +1900,15 @@ img {
   }
   .gallery-page__album-grid {
     grid-template-columns: 1fr;
+  }
+  .gallery-page__album-card {
+    height: 27rem;
+  }
+  .gallery-page__album-media {
+    flex-basis: 18rem;
+  }
+  .gallery-page__album-content {
+    flex-basis: 8.5rem;
   }
   .gallery-page__photo-grid {
     grid-template-columns: 1fr;
@@ -2349,32 +2379,38 @@ img {
 .story-share__actions {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
 }
 .story-share__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 3.25rem;
-  height: 3.25rem;
-  padding: 0 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.84);
+  width: 3.2rem;
+  min-width: 3.2rem;
+  height: 3.2rem;
+  min-height: 3.2rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.92);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 0.75rem 1.5rem rgba(147, 121, 140, 0.12);
+  background: rgba(231, 170, 200, 0.16);
+  box-shadow: 0 0.55rem 1.3rem rgba(147, 121, 140, 0.09);
   color: #815a79;
   font-family: "Inter", sans-serif;
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 .story-share__link:hover, .story-share__link:focus-visible {
-  background: rgba(231, 170, 200, 0.18);
-  box-shadow: 0 0.95rem 1.8rem rgba(147, 121, 140, 0.16);
+  color: #756a72;
+  background: rgba(255, 255, 255, 0.94);
   outline: none;
-  transform: translateY(-1px);
+  box-shadow: 0 0.55rem 1.3rem rgba(147, 121, 140, 0.09);
+}
+.story-share__link--button {
+  appearance: none;
+  cursor: pointer;
 }
 
 .author-card {
@@ -3234,11 +3270,28 @@ img {
   display: grid;
   place-items: center;
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  overflow-y: auto;
+  overflow: hidden;
   overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(231, 170, 200, 0.42) transparent;
 }
 .modal-clan-tima[hidden] {
   display: none;
+}
+.modal-clan-tima::-webkit-scrollbar {
+  width: 0.75rem;
+}
+.modal-clan-tima::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-clan-tima::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(216, 150, 191, 0.78) 0%, rgba(203, 134, 176, 0.88) 100%) padding-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34), 0 0.3rem 0.8rem rgba(147, 121, 140, 0.12);
+}
+.modal-clan-tima::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(129, 90, 121, 0.84) 0%, rgba(203, 134, 176, 0.94) 100%) padding-box;
 }
 .modal-clan-tima__pozadina {
   position: absolute;
@@ -3258,6 +3311,25 @@ img {
   box-shadow: 0 2rem 4rem rgba(147, 121, 140, 0.22), 0 1rem 2rem rgba(147, 121, 140, 0.12);
   overflow: auto;
   scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(231, 170, 200, 0.48) rgba(231, 170, 200, 0.1);
+}
+.modal-clan-tima__prozor::-webkit-scrollbar {
+  width: 0.7rem;
+}
+.modal-clan-tima__prozor::-webkit-scrollbar-track {
+  margin: 2.6rem 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(231, 170, 200, 0.08) 0%, rgba(231, 170, 200, 0.16) 100%);
+}
+.modal-clan-tima__prozor::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(216, 150, 191, 0.82) 0%, rgba(203, 134, 176, 0.92) 100%) padding-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), 0 0.35rem 0.8rem rgba(147, 121, 140, 0.14);
+}
+.modal-clan-tima__prozor::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(129, 90, 121, 0.88) 0%, rgba(203, 134, 176, 0.96) 100%) padding-box;
 }
 .modal-clan-tima__zatvori {
   position: absolute;
@@ -3346,6 +3418,7 @@ img {
   .modal-clan-tima {
     padding: 0.75rem;
     place-items: start center;
+    overflow-y: auto;
   }
   .modal-clan-tima__prozor {
     width: 100%;

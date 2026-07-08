@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StoryCard from "../components/StoryCard.astro";
-import { fallbackStories } from "../lib/fallbackContent";
 import { fetchSanity, imageUrl } from "../lib/sanity";
 
 const authorKey = (name = "") =>
@@ -33,7 +32,8 @@ const authors = await fetchSanity(
   []
 );
 
-const stories = await fetchSanity(
+const stories =
+  (await fetchSanity(
   `*[_type == "story"] | order(date desc) {
     title,
     "slug": slug.current,
@@ -44,10 +44,7 @@ const stories = await fetchSanity(
     date,
     content,
     coverImage { asset->{url} }
-  }`,
-  {},
-  fallbackStories
-);
+  }`)) ?? [];
 
 const authorChips = authors.map((author) => ({
   ...author,
