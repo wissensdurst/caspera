@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { fetchSanity, formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
+import type { StoryRecord } from "../lib/content-types";
 
-const stories = await fetchSanity(
+const stories = await fetchSanity<StoryRecord[]>(
   `*[_type == "story"] | order(date desc)[0...4] {
     title,
     "slug": slug.current,
@@ -18,11 +19,12 @@ const stories = await fetchSanity(
 const featuredStory = stories[0];
 const sideStories = stories.slice(1, 4);
 
-const getAuthorName = (story) => story?.author?.name ?? "Autorica";
-const getAuthorPhoto = (story) => imageUrl(story?.author?.photo) || "/assets/images/placeholder.png";
-const getStoryCover = (story) => imageUrl(story?.coverImage) || getAuthorPhoto(story);
-const getStoryHref = (story) => `/moja-prica/${story.slug}`;
-const getStoryExcerpt = (story) => portableTextToPlainText(story.content);
+const getAuthorName = (story: StoryRecord) => (typeof story.author === "string" ? story.author : story.author?.name) ?? "Autorica";
+const getAuthorPhoto = (story: StoryRecord) =>
+  imageUrl(typeof story.author === "string" ? undefined : story.author?.photo) || "/assets/images/placeholder.png";
+const getStoryCover = (story: StoryRecord) => imageUrl(story?.coverImage) || getAuthorPhoto(story);
+const getStoryHref = (story: StoryRecord) => `/moja-prica/${story.slug}`;
+const getStoryExcerpt = (story: StoryRecord) => portableTextToPlainText(story.content);
 ---
 
 <BaseLayout title="Caspera">
@@ -194,7 +196,7 @@ const getStoryExcerpt = (story) => portableTextToPlainText(story.content);
     </section>
   </main>
 
-  <script>
+  <script is:inline>
     const featuredStoryContent = document.querySelector("[data-featured-story-content]");
     const featuredStoryExcerpt = document.querySelector("[data-featured-story-excerpt]");
 

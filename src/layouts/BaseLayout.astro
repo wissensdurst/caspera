@@ -86,8 +86,8 @@ const websiteJsonLd = {
     <meta name="twitter:title" content={pageOgTitle} />
     <meta name="twitter:description" content={pageOgDescription} />
     <meta name="twitter:image" content={pageOgImage} />
-    <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
-    <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
   </head>
   <body class={bodyClass}>
     <Navbar />

@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import StoryCard from "../components/StoryCard.astro";
 import { fetchSanity, imageUrl } from "../lib/sanity";
+import type { AuthorRecord, StoryRecord } from "../lib/content-types";
 
 const authorKey = (name = "") =>
   name
@@ -21,7 +23,7 @@ const shortAuthorName = (name = "") => {
   return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
 };
 
-const authors = await fetchSanity(
+const authors = await fetchSanity<AuthorRecord[]>(
   `*[_type == "author"] | order(displayOrder asc) {
     name,
     photo { asset->{url} },
@@ -33,7 +35,7 @@ const authors = await fetchSanity(
 );
 
 const stories =
-  (await fetchSanity(
+  (await fetchSanity<StoryRecord[]>(
   `*[_type == "story"] | order(date desc) {
     title,
     "slug": slug.current,
@@ -46,7 +48,7 @@ const stories =
     coverImage { asset->{url} }
   }`)) ?? [];
 
-const authorChips = authors.map((author) => ({
+const authorChips = authors.map((author: AuthorRecord) => ({
   ...author,
   key: authorKey(author.name),
   label: shortAuthorName(author.name),
@@ -59,13 +61,7 @@ const authorChips = authors.map((author) => ({
     <section class="stories-page__hero" aria-labelledby="stories-page-title">
       <div class="stories-page__inner stories-page__hero-layout">
         <div class="stories-page__hero-copy">
-          <nav class="stories-page__breadcrumbs" aria-label="Breadcrumb">
-            <ol class="stories-page__breadcrumb-list">
-              <li class="stories-page__breadcrumb-item"><a href="/">Početna</a></li>
-              <li class="stories-page__breadcrumb-item"><a href="#">Priče</a></li>
-              <li class="stories-page__breadcrumb-item" aria-current="page">Moja priča</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Moja priča" }]} />
           <h1 class="stories-page__title" id="stories-page-title">Moja priča</h1>
           <p class="stories-page__intro">
             Mjesto gdje dijelimo osobna iskustva, izazove, pobjede i korake koji nas vode prema oporavku i novom životu.

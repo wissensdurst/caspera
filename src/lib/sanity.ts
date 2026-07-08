@@ -1,4 +1,5 @@
 import { createClient } from "@sanity/client";
+import type { PortableTextBlock, PortableTextValue, SanityImage } from "./content-types";
 
 const defaultProjectId = "nuwdwps7";
 const defaultDataset = "production";
@@ -42,7 +43,7 @@ type ImageUrlOptions = {
   fit?: "crop" | "max";
 };
 
-export function imageUrl(source?: { asset?: { url?: string } } | string, options: ImageUrlOptions = {}): string {
+export function imageUrl(source?: SanityImage, options: ImageUrlOptions = {}): string {
   if (!source) {
     return "";
   }
@@ -68,6 +69,14 @@ export function imageUrl(source?: { asset?: { url?: string } } | string, options
   return url.toString();
 }
 
+export function imageUrlOrFallback(
+  source?: SanityImage,
+  fallback = "/assets/images/placeholder.png",
+  options: ImageUrlOptions = {}
+): string {
+  return imageUrl(source, options) || fallback;
+}
+
 export function formatDate(dateValue: string): string {
   return new Intl.DateTimeFormat("hr-HR", {
     day: "numeric",
@@ -76,11 +85,7 @@ export function formatDate(dateValue: string): string {
   }).format(new Date(dateValue));
 }
 
-type PortableTextBlock = {
-  children?: Array<{ text?: string }>;
-};
-
-export function portableTextToPlainText(value?: PortableTextBlock[] | string): string {
+export function portableTextToPlainText(value?: PortableTextValue): string {
   if (typeof value === "string") {
     return value;
   }
@@ -113,7 +118,7 @@ const escapeHtml = (value = "") =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-export function portableTextToHtml(value?: PortableTextBlock[] | string): string {
+export function portableTextToHtml(value?: PortableTextValue): string {
   if (typeof value === "string") {
     return value
       .split(/\r?\n+/)

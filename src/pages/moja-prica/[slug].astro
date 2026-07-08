@@ -1,17 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PortableContent from "../../components/PortableContent.astro";
 import ShareActions from "../../components/ShareActions.astro";
-import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, imageUrlOrFallback, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import type { AuthorRecord, SlugRecord, StoryRecord } from "../../lib/content-types";
 
 export async function getStaticPaths() {
-  const stories = (await fetchSanity(`*[_type == "story" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
+  const stories = (await fetchSanity<SlugRecord[]>(`*[_type == "story" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
 
   return stories.map((story) => ({ params: { slug: story.slug } }));
 }
 
 const { slug } = Astro.params;
-const story = await fetchSanity(
+const story = await fetchSanity<StoryRecord | null>(
   `*[_type == "story" && slug.current == $slug][0] {
     title,
     "slug": slug.current,
@@ -42,10 +44,11 @@ const authorKey = (name = "") =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-const author = typeof story.author === "string" ? { name: story.author } : story.author;
+const author: AuthorRecord | { name: string } | undefined =
+  typeof story.author === "string" ? { name: story.author } : story.author;
 const authorName = author?.name ?? "Autorica";
-const authorPhoto = imageUrl(author?.photo) || "/assets/images/placeholder.png";
-const authorBio = author?.shortBio ?? "";
+const authorPhotoSource = author && "photo" in author ? author.photo : undefined;
+const authorPhoto = imageUrlOrFallback(authorPhotoSource);
 const authorStoriesHref = `/moja-prica?author=${encodeURIComponent(authorKey(authorName))}`;
 const seoDescription = truncateText(story.metaDescription || portableTextToPlainText(story.content));
 const seoImage = imageUrl(story.socialImage || story.coverImage, { width: 1200, height: 630, fit: "crop" });
@@ -63,17 +66,11 @@ const shareUrl = new URL(`/moja-prica/${story.slug}`, Astro.site ?? Astro.url).t
   bodyClass="stranica-pojedina-prica"
 >
   <main class="story-detail">
-    <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
-      <ol class="story-detail__breadcrumb-list">
-        <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
-        <li class="story-detail__breadcrumb-item"><a href="/moja-prica">Moja priča</a></li>
-        <li class="story-detail__breadcrumb-item" aria-current="page">{story.title}</li>
-      </ol>
-    </nav>
+    <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Moja priča", href: "/moja-prica" }, { label: story.title }]} />
 
     <article class="story-article">
       <figure class="story-article__media">
-        <img class="story-hero-image" src={imageUrl(story.coverImage)} alt={`Naslovna fotografija priče ${story.title}`} />
+        <img class="story-hero-image" src={imageUrlOrFallback(story.coverImage, authorPhoto)} alt={`Naslovna fotografija priče ${story.title}`} />
       </figure>
 
       <div class="story-content">

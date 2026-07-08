@@ -106,8 +106,21 @@
     color: $section-title-accent;
     font-weight: $font-weight-semibold;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.22em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  &__blok a:visited {
+    color: $section-title-accent;
+  }
+
+  &__blok a:hover,
+  &__blok a:focus-visible {
+    color: $section-title-accent;
+    text-decoration-color: currentColor;
   }
 
   &__blok a:focus-visible {
@@ -228,8 +241,21 @@
     color: $section-title-accent;
     font-weight: $font-weight-semibold;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.22em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  &__odgovor a:visited {
+    color: $section-title-accent;
+  }
+
+  &__odgovor a:hover,
+  &__odgovor a:focus-visible {
+    color: $section-title-accent;
+    text-decoration-color: currentColor;
   }
 
   &__odgovor a:focus-visible {
@@ -434,8 +460,21 @@
     color: $section-title-accent;
     font-weight: $font-weight-semibold;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.22em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  &__link:visited {
+    color: $section-title-accent;
+  }
+
+  &__link:hover,
+  &__link:focus-visible {
+    color: $section-title-accent;
+    text-decoration-color: currentColor;
   }
 
   &__link:focus-visible {
@@ -598,8 +637,21 @@
     font-size: 1rem;
     font-weight: $font-weight-semibold;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.22em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  &__download:visited {
+    color: $section-title-accent;
+  }
+
+  &__download:hover,
+  &__download:focus-visible {
+    color: $section-title-accent;
+    text-decoration-color: currentColor;
   }
 
   &__download:focus-visible {

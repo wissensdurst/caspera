@@ -1,5 +1,10 @@
 ---
-import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
+import { formatDate, imageUrlOrFallback, portableTextToPlainText } from "../lib/sanity";
+import type { ProjectRecord } from "../lib/content-types";
+
+interface Props {
+  project: ProjectRecord;
+}
 
 const { project } = Astro.props;
 const excerpt = portableTextToPlainText(project.description);
@@ -8,7 +13,7 @@ const excerpt = portableTextToPlainText(project.description);
 <article class="calendar-page__card projects-page__card" data-project-card data-project-date={project.date}>
   <a class="calendar-page__card-link" href={`/nasi-projekti/${project.slug}`} aria-label={`Otvori projekt ${project.title}`}>
     <div class="calendar-page__card-media">
-      <img class="calendar-page__card-image" src={imageUrl(project.coverImage)} alt={`Vizual projekta ${project.title}`} />
+      <img class="calendar-page__card-image" src={imageUrlOrFallback(project.coverImage)} alt={`Vizual projekta ${project.title}`} />
     </div>
     <div class="calendar-page__card-content">
       <div class="calendar-page__card-meta">

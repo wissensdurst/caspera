@@ -1,5 +1,10 @@
 ---
 import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
+import type { StoryRecord } from "../lib/content-types";
+
+interface Props {
+  story: StoryRecord;
+}
 
 const { story } = Astro.props;
 const author = typeof story.author === "string" ? { name: story.author } : story.author;

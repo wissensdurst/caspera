@@ -1,5 +1,10 @@
 ---
-import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
+import { formatDate, imageUrlOrFallback, portableTextToPlainText } from "../lib/sanity";
+import type { EventRecord } from "../lib/content-types";
+
+interface Props {
+  event: EventRecord;
+}
 
 const { event } = Astro.props;
 const date = new Date(event.dateTime);
@@ -11,7 +16,7 @@ const excerpt = portableTextToPlainText(event.description);
 <article class="calendar-page__card" data-calendar-event-card data-event-date={event.dateTime}>
   <a class="calendar-page__card-link" href={`/casperin-kalendar/${event.slug}`}>
     <div class="calendar-page__card-media">
-      <img class="calendar-page__card-image" src={imageUrl(event.coverImage)} alt={`Vizual događaja ${event.title}`} />
+      <img class="calendar-page__card-image" src={imageUrlOrFallback(event.coverImage)} alt={`Vizual događaja ${event.title}`} />
       <div class="calendar-page__date-badge" aria-label={formatDate(event.dateTime)}>
         <span class="calendar-page__date-day">{day}</span>
         <span class="calendar-page__date-month">{month}</span>

@@ -1,12 +1,14 @@
 ﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AccordionScript from "../components/AccordionScript.astro";
+import { injectBreadcrumbHtml } from "../lib/breadcrumbs";
 import content from "../static-pages/pravila-privatnosti.html?raw";
 
 const hasAccordion = content.includes("data-accordion");
+const processedContent = injectBreadcrumbHtml(content, [{ label: "Početna", href: "/" }, { label: "Pravila privatnosti" }]);
 ---
 
 <BaseLayout title="Caspera | Pravila privatnosti" bodyClass="stranica-pravila-privatnosti">
-  <Fragment set:html={content} />
+  <Fragment set:html={processedContent} />
   {hasAccordion && <AccordionScript />}
 </BaseLayout>

@@ -191,6 +191,29 @@
   line-height: 1.85;
 }
 
+.story-body a,
+.story-body a:visited,
+.author-card__bio a,
+.author-card__bio a:visited {
+  color: $section-title-accent;
+  font-weight: $font-weight-semibold;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.story-body a:hover,
+.story-body a:focus-visible,
+.author-card__bio a:hover,
+.author-card__bio a:focus-visible {
+  color: $section-title-accent;
+  text-decoration-color: currentColor;
+  outline: none;
+}
+
 .story-quote {
   max-width: 40rem;
   margin: 3rem 0;

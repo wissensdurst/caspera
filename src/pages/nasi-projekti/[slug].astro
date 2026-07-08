@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PortableContent from "../../components/PortableContent.astro";
-import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, imageUrlOrFallback, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import type { ProjectRecord, SlugRecord } from "../../lib/content-types";
 
 export async function getStaticPaths() {
-  const fetchedProjects = await fetchSanity(
+  const fetchedProjects = await fetchSanity<SlugRecord[]>(
     `*[_type == "project"] { "slug": slug.current }`,
     {},
     []
@@ -14,7 +16,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const project = await fetchSanity(
+const project = await fetchSanity<ProjectRecord | null>(
   `*[_type == "project" && slug.current == $slug][0] {
     title,
     "slug": slug.current,
@@ -51,18 +53,11 @@ const seoImage = imageUrl(project.socialImage || project.coverImage, { width: 12
 >
   <main class="calendar-page projects-page">
     <section class="project-detail story-detail">
-      <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
-        <ol class="story-detail__breadcrumb-list">
-          <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
-          <li class="story-detail__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
-          <li class="story-detail__breadcrumb-item"><a href="/nasi-projekti">Naši projekti</a></li>
-          <li class="story-detail__breadcrumb-item" aria-current="page">{project.title}</li>
-        </ol>
-      </nav>
+      <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Naši projekti", href: "/nasi-projekti" }, { label: project.title }]} />
 
       <article class="story-article project-article">
         <figure class="story-article__media">
-          <img class="story-hero-image" src={imageUrl(project.coverImage)} alt={`Vizual projekta ${project.title}`} />
+          <img class="story-hero-image" src={imageUrlOrFallback(project.coverImage)} alt={`Vizual projekta ${project.title}`} />
         </figure>
 
         <div class="story-content">

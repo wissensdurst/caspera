@@ -1,15 +1,21 @@
 ---
-import { formatDate, imageUrl, portableTextToPlainText } from "../lib/sanity";
+import { formatDate, imageUrlOrFallback, portableTextToPlainText } from "../lib/sanity";
+import type { BlogAuthorRecord, BlogPostRecord } from "../lib/content-types";
+
+interface Props {
+  post: BlogPostRecord;
+  author?: BlogAuthorRecord | null;
+}
 
 const { post, author } = Astro.props;
 const excerpt = portableTextToPlainText(post.content);
-const authorPhoto = imageUrl(author?.photo);
+const authorPhoto = imageUrlOrFallback(author?.photo);
 ---
 
 <article class="stories-page__story-card" data-blog-card data-blog-date={post.date}>
   <a class="stories-page__story-link" href={`/sonjin-blog/${post.slug}`}>
     <div class="stories-page__story-media">
-      <img class="stories-page__story-image" src={imageUrl(post.coverImage)} alt={`Naslovna fotografija blog objave ${post.title}`} />
+      <img class="stories-page__story-image" src={imageUrlOrFallback(post.coverImage)} alt={`Naslovna fotografija blog objave ${post.title}`} />
     </div>
     <div class="stories-page__story-content">
       <div class="stories-page__story-meta">

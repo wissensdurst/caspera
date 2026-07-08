@@ -1,14 +1,128 @@
 ---
+import type { PortableTextBlock, PortableTextChild, PortableTextMarkDef, PortableTextValue } from "../lib/content-types";
+
 interface Props {
-  value?: Array<{ children?: Array<{ text?: string }> }>;
+  value?: PortableTextValue;
 }
 
 const { value = [] } = Astro.props;
+
+const escapeHtml = (input = "") =>
+  input
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const renderChildren = (block: PortableTextBlock) => {
+  const markDefinitions = new Map<string, PortableTextMarkDef>(
+    (block.markDefs ?? [])
+      .filter((definition): definition is PortableTextMarkDef & { _key: string } => Boolean(definition._key))
+      .map((definition) => [definition._key, definition])
+  );
+
+  return (block.children ?? [])
+    .map((child: PortableTextChild) => {
+      let text = escapeHtml(child.text ?? "");
+
+      (child.marks ?? []).forEach((mark: string) => {
+        if (mark === "strong") {
+          text = `<strong>${text}</strong>`;
+          return;
+        }
+
+        if (mark === "em") {
+          text = `<em>${text}</em>`;
+          return;
+        }
+
+        if (mark === "code") {
+          text = `<code>${text}</code>`;
+          return;
+        }
+
+        const definition = markDefinitions.get(mark);
+
+        if (definition?._type === "link" && definition.href) {
+          const isExternal = /^https?:\/\//i.test(definition.href);
+          const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
+          text = `<a href="${escapeHtml(definition.href)}"${target}>${text}</a>`;
+        }
+      });
+
+      return text;
+    })
+    .join("");
+};
+
+const renderBlock = (block: PortableTextBlock) => {
+  const content = renderChildren(block);
+
+  if (!content.trim()) {
+    return "";
+  }
+
+  switch (block.style) {
+    case "h2":
+      return `<h2>${content}</h2>`;
+    case "h3":
+      return `<h3>${content}</h3>`;
+    case "h4":
+      return `<h4>${content}</h4>`;
+    case "blockquote":
+      return `<blockquote>${content}</blockquote>`;
+    default:
+      return `<p>${content}</p>`;
+  }
+};
+
+const html =
+  typeof value === "string"
+    ? value
+        .split(/\r?\n+/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+        .join("")
+    : (() => {
+        let output = "";
+        let activeList = "";
+
+        value.forEach((block) => {
+          const listType = block.listItem === "number" ? "ol" : block.listItem ? "ul" : "";
+          const content = renderChildren(block);
+
+          if (listType !== activeList) {
+            if (activeList) {
+              output += `</${activeList}>`;
+            }
+
+            if (listType) {
+              output += `<${listType}>`;
+            }
+
+            activeList = listType;
+          }
+
+          if (!content.trim()) {
+            return;
+          }
+
+          if (listType) {
+            output += `<li>${content}</li>`;
+            return;
+          }
+
+          output += renderBlock(block);
+        });
+
+        if (activeList) {
+          output += `</${activeList}>`;
+        }
+
+        return output;
+      })();
 ---
 
-{
-  value.map((block) => {
-    const text = block.children?.map((child) => child.text ?? "").join("") ?? "";
-    return text ? <p>{text}</p> : null;
-  })
-}
+<Fragment set:html={html} />

@@ -1,17 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PortableContent from "../../components/PortableContent.astro";
 import ShareActions from "../../components/ShareActions.astro";
-import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, imageUrlOrFallback, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import type { EventRecord, SlugRecord } from "../../lib/content-types";
 
 export async function getStaticPaths() {
-  const events = (await fetchSanity(`*[_type == "event" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
+  const events = (await fetchSanity<SlugRecord[]>(`*[_type == "event" && defined(slug.current)] { "slug": slug.current }`)) ?? [];
 
   return events.map((event) => ({ params: { slug: event.slug } }));
 }
 
 const { slug } = Astro.params;
-const event = await fetchSanity(
+const event = await fetchSanity<EventRecord | null>(
   `*[_type == "event" && slug.current == $slug][0] {
     title,
     "slug": slug.current,
@@ -48,18 +50,11 @@ const shareUrl = new URL(`/casperin-kalendar/${event.slug}`, Astro.site ?? Astro
 >
   <main class="calendar-page">
     <section class="event-detail story-detail">
-      <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
-        <ol class="story-detail__breadcrumb-list">
-          <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
-          <li class="story-detail__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
-          <li class="story-detail__breadcrumb-item"><a href="/casperin-kalendar">Casperin kalendar</a></li>
-          <li class="story-detail__breadcrumb-item" aria-current="page">{event.title}</li>
-        </ol>
-      </nav>
+      <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Casperin kalendar", href: "/casperin-kalendar" }, { label: event.title }]} />
 
       <article class="story-article event-article">
         <figure class="story-article__media">
-          <img class="story-hero-image" src={imageUrl(event.coverImage)} alt={`Vizual događaja ${event.title}`} />
+          <img class="story-hero-image" src={imageUrlOrFallback(event.coverImage)} alt={`Vizual događaja ${event.title}`} />
         </figure>
 
         <div class="story-content">

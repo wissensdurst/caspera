@@ -1,11 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PortableContent from "../../components/PortableContent.astro";
 import ShareActions from "../../components/ShareActions.astro";
-import { fetchSanity, formatDate, imageUrl, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import { fetchSanity, formatDate, imageUrl, imageUrlOrFallback, portableTextToPlainText, truncateText } from "../../lib/sanity";
+import type { BlogAuthorRecord, BlogPostRecord, SlugRecord } from "../../lib/content-types";
 
 export async function getStaticPaths() {
-  const posts = await fetchSanity(
+  const posts = await fetchSanity<SlugRecord[]>(
     `*[_type == "blogPost"] { "slug": slug.current }`,
     {},
     []
@@ -15,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const blogAuthor = await fetchSanity(
+const blogAuthor = await fetchSanity<BlogAuthorRecord | null>(
   `*[_type == "blogAuthor"][0] {
     name,
     title,
@@ -25,7 +27,7 @@ const blogAuthor = await fetchSanity(
   {},
   null
 );
-const post = await fetchSanity(
+const post = await fetchSanity<BlogPostRecord | null>(
   `*[_type == "blogPost" && slug.current == $slug][0] {
     title,
     "slug": slug.current,
@@ -62,17 +64,11 @@ const shareUrl = new URL(`/sonjin-blog/${post.slug}`, Astro.site ?? Astro.url).t
   bodyClass="stranica-pojedina-prica"
 >
   <main class="story-detail">
-    <nav class="story-detail__breadcrumbs" aria-label="Breadcrumb">
-      <ol class="story-detail__breadcrumb-list">
-        <li class="story-detail__breadcrumb-item"><a href="/">Početna</a></li>
-        <li class="story-detail__breadcrumb-item"><a href="/sonjin-blog">Sonjin blog</a></li>
-        <li class="story-detail__breadcrumb-item" aria-current="page">{post.title}</li>
-      </ol>
-    </nav>
+    <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Sonjin blog", href: "/sonjin-blog" }, { label: post.title }]} />
 
     <article class="story-article">
       <figure class="story-article__media">
-        <img class="story-hero-image" src={imageUrl(post.coverImage)} alt={`Naslovna fotografija blog objave ${post.title}`} />
+        <img class="story-hero-image" src={imageUrlOrFallback(post.coverImage)} alt={`Naslovna fotografija blog objave ${post.title}`} />
       </figure>
 
       <div class="story-content">

@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fetchSanity, formatDate, imageUrl } from "../lib/sanity";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { fetchSanity, formatDate, imageUrlOrFallback } from "../lib/sanity";
+import type { GalleryAlbumRecord } from "../lib/content-types";
 
 const albums =
-  (await fetchSanity(
+  (await fetchSanity<GalleryAlbumRecord[]>(
   `*[_type == "galleryAlbum"] | order(date desc) {
     title,
     "slug": slug.current,
@@ -17,13 +19,7 @@ const albums =
     <div class="gallery-page__inner">
       <section class="gallery-page__hero" aria-labelledby="gallery-page-title">
         <div class="gallery-page__hero-copy">
-          <nav class="gallery-page__breadcrumbs" aria-label="Breadcrumb">
-            <ol class="gallery-page__breadcrumb-list">
-              <li class="gallery-page__breadcrumb-item"><a href="/">Početna</a></li>
-              <li class="gallery-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
-              <li class="gallery-page__breadcrumb-item" aria-current="page">Galerija</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Galerija" }]} />
           <h1 class="gallery-page__title" id="gallery-page-title">Galerija</h1>
           <p class="gallery-page__intro">
             Albumi fotografija iz Casperinih aktivnosti, susreta i projekata.
@@ -37,7 +33,7 @@ const albums =
             <article class="stories-page__story-card gallery-page__album-card">
               <a class="stories-page__story-link gallery-page__album-button" href={`/galerija/${album.slug}`}>
                 <div class="stories-page__story-media gallery-page__album-media">
-                  <img class="stories-page__story-image" src={imageUrl(album.coverImage)} alt={`Naslovna fotografija albuma ${album.title}`} />
+                  <img class="stories-page__story-image" src={imageUrlOrFallback(album.coverImage)} alt={`Naslovna fotografija albuma ${album.title}`} />
                 </div>
                 <div class="stories-page__story-content gallery-page__album-content">
                   <h2 class="stories-page__story-title gallery-page__album-title">{album.title}</h2>

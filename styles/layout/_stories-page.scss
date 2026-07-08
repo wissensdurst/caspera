@@ -191,6 +191,25 @@
     line-height: 1.8;
   }
 
+  &__featured-author-text a,
+  &__featured-author-text a:visited {
+    color: $section-title-accent;
+    font-weight: $font-weight-semibold;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.22em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  &__featured-author-text a:hover,
+  &__featured-author-text a:focus-visible {
+    color: color.adjust($section-title-accent, $lightness: -8%);
+    text-decoration-color: currentColor;
+    outline: none;
+  }
+
   &__featured-author-text p {
     margin: 0 0 1em;
   }

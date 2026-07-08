@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import EventCard from "../components/EventCard.astro";
 import { fetchSanity } from "../lib/sanity";
+import type { EventRecord } from "../lib/content-types";
 
 const events =
-  (await fetchSanity(
+  (await fetchSanity<EventRecord[]>(
   `*[_type == "event"] | order(dateTime asc) {
     title,
     "slug": slug.current,
@@ -20,13 +22,7 @@ const events =
     <section class="calendar-page__hero" aria-labelledby="calendar-page-title">
       <div class="calendar-page__inner">
         <div class="calendar-page__hero-copy">
-          <nav class="calendar-page__breadcrumbs" aria-label="Breadcrumb">
-            <ol class="calendar-page__breadcrumb-list">
-              <li class="calendar-page__breadcrumb-item"><a href="/">Početna</a></li>
-              <li class="calendar-page__breadcrumb-item"><a href="#">Caspera u akciji</a></li>
-              <li class="calendar-page__breadcrumb-item" aria-current="page">Casperin kalendar</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Casperin kalendar" }]} />
           <h1 class="calendar-page__title" id="calendar-page-title">Casperin kalendar</h1>
           <p class="calendar-page__intro">
             Pregled radionica, susreta, javnih akcija i trenutaka okupljanja u kojima Caspera ostaje blizu ženama i njihovim obiteljima.

@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { fetchSanity, imageUrl, portableTextToHtml } from "../lib/sanity";
+import type { PersonRecord } from "../lib/content-types";
 
 const teamMembers =
-  (await fetchSanity(
+  (await fetchSanity<PersonRecord[]>(
   `*[_type == "teamMember"] | order(displayOrder asc) {
     name,
     title,
@@ -12,7 +14,7 @@ const teamMembers =
     displayOrder
   }`)) ?? [];
 
-const memberCards = teamMembers.map((member) => {
+const memberCards = teamMembers.map((member: PersonRecord) => {
   const photo = imageUrl(member.photo) || "/assets/images/placeholder.png";
   const bio = portableTextToHtml(member.shortBio);
 
@@ -28,6 +30,7 @@ const memberCards = teamMembers.map((member) => {
   <main>
     <section class="tim tim--centred-cards" aria-label="Naša ekipa">
       <div class="tim__unutarnji">
+        <Breadcrumbs items={[{ label: "Početna", href: "/" }, { label: "Naša ekipa" }]} />
         <header class="tim__uvod">
           <h1 class="tim__naslov">Naša ekipa</h1>
           <div class="tim__tekstovi">
@@ -131,6 +134,10 @@ const memberCards = teamMembers.map((member) => {
       const modalCloseControls = [...teamModal.querySelectorAll("[data-team-modal-close]")];
       const pageBody = document.body;
       let lastFocusedCard = null;
+      const getFocusableElements = () =>
+        [...teamModal.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')].filter(
+          (element) => !element.hasAttribute("hidden") && element.getAttribute("aria-hidden") !== "true"
+        );
 
       const closeTeamModal = () => {
         teamModal.hidden = true;
@@ -176,6 +183,22 @@ const memberCards = teamMembers.map((member) => {
       });
 
       document.addEventListener("keydown", (event) => {
+        if (!teamModal.hidden && event.key === "Tab") {
+          const focusableElements = getFocusableElements();
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (!firstElement || !lastElement) {
+            event.preventDefault();
+          } else if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+          } else if (!event.shiftKey && document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+
         if (event.key === "Escape" && !teamModal.hidden) {
           closeTeamModal();
         }

@@ -1,0 +1,10 @@
+
+> caspera@1.0.0 preview
+> powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro preview" --host 127.0.0.1
+
+Port 4321 is in use, trying another one...
+
+[42m[1m astro [22m[49m [32mv5.18.2[39m [2mready in[22m 36 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://127.0.0.1:4322/[39m
+

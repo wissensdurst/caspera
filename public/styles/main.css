@@ -1106,6 +1106,19 @@ img {
   font-size: 1rem;
   line-height: 1.8;
 }
+.stories-page__featured-author-text a, .stories-page__featured-author-text a:visited {
+  color: #815a79;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.stories-page__featured-author-text a:hover, .stories-page__featured-author-text a:focus-visible {
+  color: rgb(104.9671232877, 73.2328767123, 98.4575342466);
+  text-decoration-color: currentColor;
+  outline: none;
+}
 .stories-page__featured-author-text p {
   margin: 0 0 1em;
 }
@@ -2349,6 +2362,27 @@ img {
   line-height: 1.85;
 }
 
+.story-body a,
+.story-body a:visited,
+.author-card__bio a,
+.author-card__bio a:visited {
+  color: #815a79;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.story-body a:hover,
+.story-body a:focus-visible,
+.author-card__bio a:hover,
+.author-card__bio a:focus-visible {
+  color: #815a79;
+  text-decoration-color: currentColor;
+  outline: none;
+}
+
 .story-quote {
   max-width: 40rem;
   margin: 3rem 0;
@@ -3558,8 +3592,16 @@ img {
   color: #815a79;
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.informativni-sadrzaj__blok a:visited {
+  color: #815a79;
+}
+.informativni-sadrzaj__blok a:hover, .informativni-sadrzaj__blok a:focus-visible {
+  color: #815a79;
+  text-decoration-color: currentColor;
 }
 .informativni-sadrzaj__blok a:focus-visible {
   outline: 2px solid rgba(231, 170, 200, 0.65);
@@ -3656,8 +3698,16 @@ img {
   color: #815a79;
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.strucna-pitanja__odgovor a:visited {
+  color: #815a79;
+}
+.strucna-pitanja__odgovor a:hover, .strucna-pitanja__odgovor a:focus-visible {
+  color: #815a79;
+  text-decoration-color: currentColor;
 }
 .strucna-pitanja__odgovor a:focus-visible {
   outline: 2px solid rgba(231, 170, 200, 0.65);
@@ -3820,8 +3870,16 @@ img {
   color: #815a79;
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.clanstvo-stranica__link:visited {
+  color: #815a79;
+}
+.clanstvo-stranica__link:hover, .clanstvo-stranica__link:focus-visible {
+  color: #815a79;
+  text-decoration-color: currentColor;
 }
 .clanstvo-stranica__link:focus-visible {
   outline: 2px solid rgba(231, 170, 200, 0.65);
@@ -3959,8 +4017,16 @@ img {
   font-size: 1rem;
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.statut-stranica__download:visited {
+  color: #815a79;
+}
+.statut-stranica__download:hover, .statut-stranica__download:focus-visible {
+  color: #815a79;
+  text-decoration-color: currentColor;
 }
 .statut-stranica__download:focus-visible {
   outline: 2px solid rgba(231, 170, 200, 0.65);

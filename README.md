@@ -1,33 +1,47 @@
 # Caspera
 
-Website for caspera association.
+Astro + Sanity website for Udruga Caspera.
 
-## Features
+## Stack
 
-- Responsive marketing website
-- Blog with CMS content management
-- Event calendar managed through CMS
-- Contact form
-
-## Tech Stack
-
-- HTML
+- Astro
+- Sanity Studio
 - SCSS
-- JavaScript
-- CMS for blog and events
+- Vanilla JavaScript
 
 ## Project Structure
 
-pages/ -> HTML pages
-components/ -> reusable UI partials
-styles/ -> SCSS source and compiled CSS
-js/ -> site JavaScript
-assets/ -> website images and icons
-design/ -> design materials and mockups
-tasks/ -> development tasks for AI / development workflow
+- `src/pages/` Astro routes
+- `src/components/` reusable UI and client-side helpers
+- `src/layouts/` shared page layout
+- `src/static-pages/` legacy static content embedded into Astro wrappers
+- `styles/` SCSS source and compiled CSS
+- `assets/` images, icons, and other static media
+- `sanity/` Sanity schema definitions
+- `public/` publish-time static assets such as `robots.txt`
+- `tasks/` project tasks and audit notes
 
-## Development
+## Environment Variables
 
-The website is structured with reusable components and accessible HTML.
+Create a local `.env` file before running the site or Studio.
 
-Content for the blog and event calendar will be managed through the CMS.
+- `PUBLIC_SITE_URL` canonical site URL used for SEO metadata and sitemap generation
+- `SANITY_PROJECT_ID` Sanity project ID used by the Astro frontend
+- `SANITY_DATASET` Sanity dataset used by the Astro frontend
+- `SANITY_STUDIO_PROJECT_ID` optional Studio override, falls back to `SANITY_PROJECT_ID`
+- `SANITY_STUDIO_DATASET` optional Studio override, falls back to `SANITY_DATASET`
+
+See `.env.example` for the expected variable names.
+
+## Scripts
+
+- `npm run dev` build SCSS, sync public assets, and start Astro dev server
+- `npm run build` build SCSS, sync public assets, and generate the static site
+- `npm run preview` preview the built site locally
+- `npm run sass` compile `styles/main.scss` to `styles/main.css`
+
+## Notes
+
+- Blog, story, gallery, event, project, and team content is powered by Sanity.
+- Some informational pages still render from legacy HTML files in `src/static-pages/`.
+- `dist/`, `node_modules/`, `.astro/`, `public/assets/`, and `.env` are ignored in git.
