@@ -7,10 +7,10 @@
   "type": "commonjs",
   "main": "js/main.js",
   "scripts": {
-    "prepare:public": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path public/assets) { Remove-Item public/assets -Recurse -Force }; Copy-Item assets public/assets -Recurse; if (!(Test-Path public/styles)) { New-Item -ItemType Directory public/styles | Out-Null }; Copy-Item styles/main.css public/styles/main.css -Force\"",
-    "dev": "npm run sass && npm run prepare:public && powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro dev\"",
-    "build": "npm run sass && npm run prepare:public && powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro build\"",
-    "preview": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:ASTRO_TELEMETRY_DISABLED='1'; npx astro preview\"",
+    "prepare:public": "node ./scripts/prepare-public.mjs",
+    "dev": "npm run sass && npm run prepare:public && npx astro dev",
+    "build": "npm run sass && npm run prepare:public && npx astro build",
+    "preview": "npx astro preview",
     "sass": "sass --load-path=styles styles/main.scss styles/main.css",
     "sass:watch": "sass --watch --load-path=styles styles/main.scss:styles/main.css --style=expanded",
     "sass:build": "sass --load-path=styles styles/main.scss styles/main.css --style=compressed"
