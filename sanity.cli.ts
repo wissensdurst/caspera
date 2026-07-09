@@ -5,4 +5,7 @@ export default defineCliConfig({
     projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? process.env.SANITY_PROJECT_ID ?? "nuwdwps7",
     dataset: process.env.SANITY_STUDIO_DATASET ?? process.env.SANITY_DATASET ?? "production",
   },
+  deployment: {
+    appId: "aj1w7qk0l0dsix34c7kichxa",
+  },
 });
