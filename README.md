@@ -38,7 +38,19 @@ See `.env.example` for the expected variable names.
 - `npm run dev` build SCSS, sync public assets, and start Astro dev server
 - `npm run build` build SCSS, sync public assets, and generate the static site
 - `npm run preview` preview the built site locally
+- `npm run studio:dev` start the Sanity Studio locally
+- `npm run studio:deploy` deploy the Sanity Studio
 - `npm run sass` compile `styles/main.scss` to `styles/main.css`
+
+## Sanity Studio on Windows
+
+PowerShell can block the `npm` and `npx` `.ps1` shims with an execution policy error. If that happens, use the `.cmd` entry points instead:
+
+- `npm.cmd install`
+- `npm.cmd run studio:dev`
+- `npm.cmd run studio:deploy`
+
+If the terminal window closes immediately after an error, open a fresh PowerShell window in the project folder and rerun the command there so the actual error stays visible.
 
 ## Independent Publishing
 

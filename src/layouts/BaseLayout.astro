@@ -14,6 +14,8 @@ interface Props {
   twitterCard?: TwitterCard;
   noIndex?: boolean;
   bodyClass?: string;
+  showNavbar?: boolean;
+  showFooter?: boolean;
 }
 
 const {
@@ -26,6 +28,8 @@ const {
   twitterCard = "summary_large_image",
   noIndex = false,
   bodyClass = "",
+  showNavbar = true,
+  showFooter = true,
 } = Astro.props;
 
 const siteName = "Caspera";
@@ -96,8 +100,8 @@ const websiteJsonLd = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
   </head>
   <body class={bodyClass}>
-    <Navbar />
+    {showNavbar && <Navbar />}
     <slot />
-    <Footer />
+    {showFooter && <Footer />}
   </body>
 </html>

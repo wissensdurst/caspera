@@ -11,6 +11,8 @@
     "dev": "npm run sass && npm run prepare:public && npx astro dev",
     "build": "npm run sass && npm run prepare:public && npx astro build",
     "preview": "npx astro preview",
+    "studio:dev": "sanity dev",
+    "studio:deploy": "sanity deploy",
     "sass": "sass --load-path=styles styles/main.scss styles/main.css",
     "sass:watch": "sass --watch --load-path=styles styles/main.scss:styles/main.css --style=expanded",
     "sass:build": "sass --load-path=styles styles/main.scss styles/main.css --style=compressed"
